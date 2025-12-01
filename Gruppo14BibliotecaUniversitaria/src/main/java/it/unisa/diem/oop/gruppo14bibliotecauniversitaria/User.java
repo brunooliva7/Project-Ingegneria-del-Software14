@@ -14,7 +14,7 @@ public class User {
     private final String name;
     private final String surname;
     private final String numberId; //matricola
-    private final String email;
+    private final String email; 
     
     
 }
