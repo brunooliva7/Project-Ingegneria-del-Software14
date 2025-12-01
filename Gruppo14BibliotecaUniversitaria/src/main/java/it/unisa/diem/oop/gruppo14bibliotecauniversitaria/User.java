@@ -5,25 +5,45 @@
  * and open the template in the editor.
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria;
-
+import java.util.*;
 /**
  *
  * @author elisa 
  */
-public class User {
+public class User   implements Comparable<User> {
     private  String name;
     private  String surname;
     private  String numberId; //matricola
     private  String email; 
-    private  Book [] books= new Book[3];
+    private  Book [] books;
     
-    public User(String name,String surname,String numberId,String email) implements Comparable<Book>{
-     }
-    public void  setName(String name);
-    public void setSurname(String surname);
-    public void setNumberId(String number);
-    public void setEmail(String email);
-    public void setBooks(Book[] books);
+    public User(String name,String surname,String numberId,String email){
+     this.name=name; 
+     this.surname=surname;
+     this.numberId=numberId;
+     this.email=email;
+     this.books=new Book[3];
+    }
+    public void  setName(String name){
+        this.name=name;
+    }
+    public void setSurname(String surname){
+        this.surname=surname;
+    }
+    public void setNumberId(String numberId){
+        this.numberId=numberId;
+    }
+    public void setEmail(String email){
+        this.email=email;
+    }
+    public void setBooks(Book[] books){
+        if(books!=null){  //controllo specifico su null,per gestire meglio 
+            this.books=books;
+        }
+        else {
+            this.books=null;
+        }
+    }
     
     public Book[] getBooks(){
         return books;
@@ -39,6 +59,17 @@ public class User {
     }
     public String getEmail(){
         return email;
+    }
+    @Override
+    public int hashCode(){
+    }
+    @Override 
+    public boolean  equals(Object obj){
+        //SERVIRA' PER LA RICERCA IN BASE AL COGNOME O MATRICOLA
+    }
+    @Override
+    public int compareTo(User other){
+         //servirà per ordinare l'elenco 
     }
     
 }
