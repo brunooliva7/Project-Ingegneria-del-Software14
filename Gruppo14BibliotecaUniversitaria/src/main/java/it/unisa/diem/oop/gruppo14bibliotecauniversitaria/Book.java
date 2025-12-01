@@ -12,6 +12,5 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria;
 public class Book {
     
     
-    // prova push
     
 }

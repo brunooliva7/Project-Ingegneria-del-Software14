@@ -8,8 +8,10 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria;
 
 /**
  *
- * @author bruno
+ * @author elisa 
  */
 public class User {
-    
+    private final String name;
+    private final String surname;
+    private final String 
 }
