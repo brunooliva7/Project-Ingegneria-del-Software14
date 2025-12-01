@@ -32,9 +32,5 @@ public class LoanManagement implements Functionality,Comparable<Loan>{
     }
     public Loan search(Loan l){
         
-    }
-    
-    @Override
-    public int compareTo(Loan other){       
-    }
+    }  
 }
