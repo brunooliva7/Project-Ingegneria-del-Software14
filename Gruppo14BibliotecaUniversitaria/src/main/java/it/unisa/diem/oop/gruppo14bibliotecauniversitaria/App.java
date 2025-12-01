@@ -14,8 +14,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        String javaVersion = SystemInfo.javaVersion();
-        String javafxVersion = SystemInfo.javafxVersion();
 
         Label label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
         Scene scene = new Scene(new StackPane(label), 640, 480);
