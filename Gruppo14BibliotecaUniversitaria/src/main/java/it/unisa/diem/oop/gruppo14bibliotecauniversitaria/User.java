@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,7 +8,7 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria;
 
 /**
  *
- * @author maramariano
+ * @author bruno
  */
 public class User {
     
