@@ -20,7 +20,7 @@ public interface Functionality <T> {
     
     void update(T entity);
     
-     Set<T> viewSorted(Comparator<T> comparator);
+    void viewSorted();
      
-     T search(T entity);
+    T search(T entity);
 }
