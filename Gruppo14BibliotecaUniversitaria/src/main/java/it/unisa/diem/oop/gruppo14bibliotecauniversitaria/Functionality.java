@@ -5,11 +5,22 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria;
 
+import java.util.Comparator;
+import java.util.*;
+
 /**
  *
  * @author maramariano
  */
-public interface Functionality {
+public interface Functionality <T> {
     
-    public void aggiungi();
+    void add(T entity);
+    
+    void remove(T entity);
+    
+    void update(T entity);
+    
+     Set<T> viewSorted(Comparator<T> comparator);
+     
+     T search(T entity);
 }
