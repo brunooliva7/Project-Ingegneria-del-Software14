@@ -19,7 +19,7 @@ public class Librarian {
     public boolean checkCredentials(String usernameInput, String passwordInput){   
     }
     
-    public void modifyCredentials(String usernameChanged, String passwordChanged){
+    public void modifyCredentials(String newUsername, String newPassword){
     }
 
     public String getUsername() {
