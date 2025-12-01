@@ -11,4 +11,22 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria;
  */
 public class Librarian {
     
+    private String Username;
+    private String Password;
+    private final String filepath = "credentials.txt";
+
+    
+    public boolean checkCredentials(String usernameInput, String passwordInput){   
+    }
+    
+    public void modifyCredentials(String newUsername, String newPassword){
+    }
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public String getPassword() {
+        return Password;
+    }   
 }
