@@ -11,4 +11,5 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria;
  */
 public interface Functionality {
     
+    public void aggiungi();
 }
