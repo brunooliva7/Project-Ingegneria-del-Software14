@@ -11,26 +11,36 @@ import java.time.LocalDate;
  *
  * @author bruno
  */
-public class LoanManagement implements Functionality,Comparable<Loan>{
+public class LoanManagement implements Functionality<Loan>{
     Set <Loan> Loan;
     
     public LoanManagement(){
         Loan = new TreeSet<>();
     }
     
-    public void add(Loan l){
-    }
-    
-    public void remove(Loan l)
-    {
+    @Override
+    public boolean add(Loan l){
         
     }
     
-    public void viewSorted()
+    @Override
+    public boolean remove(Loan l)
     {
+       
+    }
+    
+    public boolean update(Loan l){
         
     }
+
+    @Override
+    public void viewSorted(){
+        
+    }
+    
+    @Override
     public Loan search(Loan l){
-        
-    }  
+       
+    }
+
 }

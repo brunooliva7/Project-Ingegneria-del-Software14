@@ -11,14 +11,15 @@ import java.util.*;
 /**
  *
  * @author maramariano
+ * @param <T>
  */
 public interface Functionality <T> {
     
-    void add(T entity);
+    boolean add(T entity);
     
-    void remove(T entity);
+    boolean remove(T entity);
     
-    void update(T entity);
+    boolean update(T entity);
     
     void viewSorted();
      
