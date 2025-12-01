@@ -13,5 +13,8 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria;
 public class User {
     private final String name;
     private final String surname;
-    private final String 
+    private final String numberId; //matricola
+    private final String email;
+    
+    
 }
