@@ -11,7 +11,7 @@ import java.time.LocalDate;
  *
  * @author maramariano
  */
-public class Loan{
+public class Loan implements Comparable<Loan>{
     
     private Book book;
     private User user;
@@ -33,5 +33,9 @@ public class Loan{
 
     public LocalDate getDueDate() {
         return dueDate;
+    }
+    
+    @Override
+    public int compareTo(Loan other){       
     }
 }
