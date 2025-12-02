@@ -38,4 +38,16 @@ public class Loan implements Comparable<Loan>{
     @Override
     public int compareTo(Loan other){       
     }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
 }
