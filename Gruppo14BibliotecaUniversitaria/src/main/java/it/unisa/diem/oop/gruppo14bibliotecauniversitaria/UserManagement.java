@@ -9,7 +9,7 @@ import java.util.*;
  *
  * @author maramariano
  */
-public class UserManagement {
+public class UserManagement implements Functionality<User>{
     private Set<User> list; //la mia lista di iscritti
     public UserManagement(){
         list=new TreeSet<>(); //uso il treeSet così in automatico mel ordina con l'ordine definito da compareTo()
@@ -39,5 +39,5 @@ public class UserManagement {
     public User search(String s){
         //metodo per cercare un utente tra la lista in base a se la stringa passata è il cognome o matricola 
     }
-    
+
 }
