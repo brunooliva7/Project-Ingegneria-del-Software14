@@ -19,17 +19,17 @@ public class BookManagement implements Functionality {
     }
     
     @Override
-    public void add(Book b) {
+    public boolean add(Book b) {
         
     }
     
     @Override
-    public void remove(Book b) {
+    public boolean remove(Book b) {
         
     }
     
     @Override
-    public void update(Book b){
+    public boolean update(Book b){
         
     }
     
