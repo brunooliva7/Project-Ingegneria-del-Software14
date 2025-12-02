@@ -10,9 +10,9 @@ import java.util.*;
  * @author maramariano
  */
 public class UserManagement {
-    private Set <User> list; //la mia lista di iscritti
+    private Set<User> list; //la mia lista di iscritti
     public UserManagement(){
-        this.list=new TreeSet<>(); //uso il tree set così in automatico mel ordina con l'ordine definito da compareTo()
+        list=new TreeSet<>(); //uso il treeSet così in automatico mel ordina con l'ordine definito da compareTo()
     }
     
     @Override
@@ -36,8 +36,8 @@ public class UserManagement {
     }
     
     @Override
-    public User search(User u ){
-        //metodo per cercare un utente tra la lista 
+    public User search(String s){
+        //metodo per cercare un utente tra la lista in base a se la stringa passata è il cognome o matricola 
     }
     
 }

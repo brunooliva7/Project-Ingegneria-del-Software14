@@ -60,13 +60,7 @@ public class User   implements Comparable<User> {
     public String getEmail(){
         return email;
     }
-    @Override
-    public int hashCode(){
-    }
-    @Override 
-    public boolean  equals(Object obj){
-        //SERVIRA' PER LA RICERCA IN BASE AL COGNOME O MATRICOLA
-    }
+    
     @Override
     public int compareTo(User other){
          //servirà per ordinare l'elenco 
