@@ -5,6 +5,7 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria;
 
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -12,7 +13,7 @@ import java.util.TreeSet;
  * @author maramariano
  */
 public class BookManagement implements Functionality {
-    private TreeSet<Book> catalog;
+    private Set <Book> catalog;
     
     public BookManagement() {
         this.catalog = new TreeSet<>();
