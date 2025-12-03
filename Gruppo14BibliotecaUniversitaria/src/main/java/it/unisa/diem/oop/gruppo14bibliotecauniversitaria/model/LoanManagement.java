@@ -22,8 +22,8 @@ public class LoanManagement implements Functionality<Loan>{
     
     @Override
     public boolean add(Loan l){
-        
-    }
+         //NEL MOMENTO IN CUI SI AGGIUNGE UN PRESTITO VA VERIFICATO IL NUMERO DI LIBRI POSSEDUTI DA UN UTENTE,LA DISPONIBILITA' DI COPIE 
+    } 
     
     @Override
     public boolean remove(Loan l)
@@ -32,7 +32,7 @@ public class LoanManagement implements Functionality<Loan>{
     }
     
     public boolean update(Loan l){
-        
+         // AGGIORNARE I DATI DELL'UTENTE E DEL LIBRO NEL MOMENTO IN CUI VIENE RIMOSSO O AGGIUNTO UN PRESTITO 
     }
 
     @Override
