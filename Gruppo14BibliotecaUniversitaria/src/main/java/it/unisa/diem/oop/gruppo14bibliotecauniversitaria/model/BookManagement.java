@@ -15,10 +15,10 @@ import java.util.TreeSet;
  * @author maramariano
  */
 public class BookManagement implements Functionality {
-    private Set <Book> catalog;
+    private Set <Book> catalogue;
     
     public BookManagement() {
-        this.catalog = new TreeSet<>();
+        this.catalogue = new TreeSet<>();
     }
     
     @Override

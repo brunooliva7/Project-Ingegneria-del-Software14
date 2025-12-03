@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model;
-
+import java.time.LocalDate;
+        
 /**
  *
  * @author maramariano
@@ -13,8 +14,19 @@ public class Book implements Comparable<Book> {
     
     private String title;
     private String authors;
-    private int publicationYear;
+    private LocalDate publicationYear;
+    private String ISBN;
+    private int availableCopies;
+    
+    public Book(String title, String authors, LocalDate publicationYear, String ISBN, int availableCopies) {
+        this.title = title;
+        this.authors = authors;
+        this.publicationYear = publicationYear;
+        this.ISBN = ISBN;
+        this.availableCopies = availableCopies;
+    }
 
+    
     public void setTitle(String title) {
         this.title = title;
     }
@@ -23,7 +35,7 @@ public class Book implements Comparable<Book> {
         this.authors = authors;
     }
 
-    public void setPublicationYear(int publicationYear) {
+    public void setPublicationYear(LocalDate publicationYear) {
         this.publicationYear = publicationYear;
     }
 
@@ -34,17 +46,9 @@ public class Book implements Comparable<Book> {
     public void setAvailableCopies(int availableCopies) {
         this.availableCopies = availableCopies;
     }
-    private String ISBN;
-    private int availableCopies;
-    
-    public Book(String title, String authors, int publicationYear, String ISBN, int availableCopies) {
-        this.title = title;
-        this.authors = authors;
-        this.publicationYear = publicationYear;
-        this.ISBN = ISBN;
-        this.availableCopies = availableCopies;
-    }
 
+    
+    
     public String getTitle() {
         return title;
     }
