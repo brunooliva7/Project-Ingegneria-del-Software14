@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Functionality;
+package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.User;
 import java.util.*;
 /**

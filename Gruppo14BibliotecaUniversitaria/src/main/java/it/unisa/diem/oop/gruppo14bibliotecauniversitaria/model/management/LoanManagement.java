@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model;
+package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Functionality;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Loan;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Loan;
 import java.util.*;
 import java.time.LocalDate;

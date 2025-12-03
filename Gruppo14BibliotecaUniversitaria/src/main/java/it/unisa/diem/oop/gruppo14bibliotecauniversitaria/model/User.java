@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Book;
 import java.util.*;
 import java.time.LocalDate;
