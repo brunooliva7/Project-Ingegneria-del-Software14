@@ -1,4 +1,4 @@
-package it.unisa.diem.oop.gruppo14bibliotecauniversitaria;
+package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
