@@ -31,6 +31,7 @@ public class UserManagement implements Functionality<User>{
     /**
      *  @brief Metodo che aggiunge un user all'elenco 
      *  @param u L'utente da aggiungere all'elenco 
+     *  @pre u != null
      *  @post L'user è correttamente inserito nel TreeSet
      */
     
@@ -42,6 +43,7 @@ public class UserManagement implements Functionality<User>{
     /**
      *  @brief Metodo che rimuove un user dall'elenco 
      *  @param u L'utente da eliminare dall'elenco 
+     *  @pre u != null
      *  @post L'user è correttamente eliminato dal TreeSet
      */
     @Override
@@ -51,6 +53,7 @@ public class UserManagement implements Functionality<User>{
     /**
      *  @brief Metodo che permette di aggiornare i dati di un utente
      *  @param u L'utente di cui bisogna modificare i dati 
+     *  @pre u != null
      *  @post I dati dell'utente u sono correttamente aggiornati 
      */
     @Override
@@ -69,7 +72,7 @@ public class UserManagement implements Functionality<User>{
     /**
      *  @brief Metodo che permette di cercare un utente nell'elenco tramite cognome o matricola
      *  @param s  Dato utilizzato dal bibliotecario per cercare l'utente 
-     *  @pre L'utente esiste nell'elenco
+     *  @pre s != null
      *  @post L'utente viene mostrato 
      *  @return L'utente trovato
      */
