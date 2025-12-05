@@ -28,3 +28,5 @@ public class Controller{
       //metodo che gestisce gli eventi causati dall'interazione tra utente e view
     public void initHandler(){}
 }
+
+///ehoi
