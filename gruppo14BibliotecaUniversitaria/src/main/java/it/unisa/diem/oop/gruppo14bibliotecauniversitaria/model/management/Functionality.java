@@ -21,7 +21,7 @@ public interface Functionality <T> {
     
     boolean update(T entity);
     
-    void viewSorted(); //func 
+    void viewSorted();
      
     T search(T entity);
 }
