@@ -5,20 +5,34 @@
  * and open the template in the editor.
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Book;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement;
 import java.util.*;
-import java.time.LocalDate;
+import java.time.LocalDate;  ////
 /**
  *
  * @author elisa 
+ * @class User 
+ * @brief  User è un utente generico che interagisce col bibliotecario e al quale dobbiamo mettere a disposizione servizi
+ *la classe contiene le informazioni principali da memorizzare per un utente quindi nome,cognome,matricola,email e lista dei libri in prestito con relativa data di restituzione 
+ * 
  */
 public class User   implements Comparable<User> {
-    private  String name;
-    private  String surname;
-    private  String numberId; //matricola
-    private  String email; 
-    private  Map<Book,LocalDate> booksOnloan; //lista dei libri in prestito  con data di restituzione per ogni utente 
+    private  String name; //@brief Nome dell'utente
+    private  String surname; //@brief Cognome dell'utente
+    private String numberId;  //@brief Matricola dell'utente
+    private  String email;  //@brief Email dell'utente 
+    private  Map<Book,LocalDate> booksOnloan; //@brief Mappa che mantiene al proprio interno una lista di  libri in prestito  con data di restituzione associata  per utente 
+    
+    /**
+     * @brief costruttore User 
+     * @param name Nome utente
+     * @param surname Cognome utente 
+     * @param numberId Matricola utente 
+     * @param email Email utente 
+     * @post L'User è correttamente inizializzato 
+     */
+    
     
     public User(String name,String surname,String numberId,String email){
      this.name=name; 
@@ -27,43 +41,91 @@ public class User   implements Comparable<User> {
      this.email=email;
      booksOnloan=new TreeMap<>(); //così la lista sarà ordinata in base all'ordinamento scelto nella classe Loan
     }
+    /**
+      * @brief Imposta il nome dell'utente
+      * @param name Nuovo nome da impostare 
+      * @post Il nome è correttamente aggiornato 
+    */
     public void  setName(String name){
         this.name=name;
     }
+    /**
+      * @brief Imposta il cognome dell'utente
+      * @param surname Nuovo cognome da impostare 
+      * @post Il cognome è correttamente aggiornato
+    */
     public void setSurname(String surname){
         this.surname=surname;
     }
-    public void setNumberId(String numberId){
-        this.numberId=numberId;
-    }
+    /**
+     * @brief Imposta l'email dell'utente
+     * @param email Nuova email da impostare 
+     * @post L'email è correttamente aggiornata
+    */
+    
     public void setEmail(String email){
         this.email=email;
     }
-     public void setEsami(TreeMap<Book, LocalDate> newMap) {
+    /**
+     * @brief Imposta la mappa di libri-dataRestituzione dell'utente
+     * @param newMap Nuova mappa da impostare
+     * @post BooksOnLoan è correttamente aggiornato 
+    */
+     public void setBooksOnLoan (TreeMap<Book, LocalDate> newMap) {
         this.booksOnloan= newMap;
     }
-    
+     /**
+      * @brief Restituisce la mappa di libri-dataRestituzione dell'utente
+      * @return  Mappa libri-dataRestituzione dell'utente
+    */
     public Map<Book,LocalDate> getBooksOnloan(){
         return booksOnloan;
     }
+     /**
+      * @brief Restituisce il nome dell'utente
+      * @return  Nome dell'utente 
+    */
     public String getName(){
         return name;
     }
+     /**
+      * @brief Restituisce il cognome dell'utente
+      * @return   Cognome dell'utente 
+    */
     public String getSurname(){
         return surname;
     }
+    /**
+     * @brief Restituisce la matricola  dell'utente
+     * @return  Matricola  dell'utente 
+    */
     public String getNumberId(){
         return numberId;
     }
+    /** 
+     * @brief Restituisce l'email  dell'utente
+     * @return  Email dell'utente 
+    */
     public String getEmail(){
         return email;
     }
-    
+     /**
+      * @brief Servirà nell'elenco di utenti per ordinarlo in base a cognome e nome degli utenti ,dato che è un TreeSet questo metodo
+               verrà chiamato in automatico nel momento in cui viene creato l'elenco
+      * @param  other altro utente con cui comparare quello corrente per l'ordinamento 
+      * @return  Valore negativo,valore positivo o 0 in base all'ordinamento
+     */
     @Override
     public int compareTo(User other){
-         //servirà per ordinare l'elenco 
+         
     }
-    public Map<Book,LocalDate> finddLoans(LoanManagement l){
-        //servirà a cercare dall'elenco definito nella classe prestito i prestiti appartenenti all'utente tramite matricola 
+    /**
+      * @brief  Servirà a cercare nell'elenco definito nella classe LoanManagement i prestiti appartenenti all'utente,cercando  tramite matricola
+                così da poter riempire la mappa attributo  booksOnLoan  
+      * @param  l L'elenco tra cui dovrò cercare i prestiti associati all'utente
+      * @param  s La matricola dell'utente di cui dovrò cercare i prestiti
+      * @return Mappa dei libri-dataRestituzione riferita ai prestiti dell'utente
+    */
+    public Map<Book,LocalDate> findLoans(LoanManagement l,String s ){
     }
 }
