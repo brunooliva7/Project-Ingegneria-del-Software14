@@ -8,7 +8,7 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Book;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement;
 import java.util.*;
-import java.time.LocalDate;  ////
+import java.time.LocalDate;  //ciao
 /**
  *
  * @author elisa 
