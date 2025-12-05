@@ -16,9 +16,9 @@ import java.time.LocalDate;
  */
 public class Loan implements Comparable<Loan>{
     
-    private Book book; //Libro oggetto del prestito 
-    private User user; //Utente che ha preso in prestito il libro
-    private LocalDate dueDate; //data di restituzione
+    private Book book; ///<Libro oggetto del prestito 
+    private User user; ///<Utente che ha preso in prestito il libro
+    private LocalDate dueDate; ///<data di restituzione
     
     /**
      * @brief Costruttore della classe Loan.
@@ -30,9 +30,9 @@ public class Loan implements Comparable<Loan>{
      * @post loan è inizializzato
      */
     public Loan(Book book, User user, LocalDate dueDate) {
-        this.book = book; ///< Libro oggetto del prestito 
-        this.user = user; ///< Utente per cui si deve registrare il prestito 
-        this.dueDate = dueDate; ///< data di scadenza del prestito 
+        this.book = book; 
+        this.user = user;  
+        this.dueDate = dueDate; 
     }
     
     /**
