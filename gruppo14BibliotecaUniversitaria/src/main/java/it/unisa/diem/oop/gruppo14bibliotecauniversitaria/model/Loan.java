@@ -9,8 +9,12 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Book;
 import java.time.LocalDate;
 
 /**
+ * @class Loan
+ * @brief Rappresenta un prestito di un libro da parte di un utente.
  *
- * @author maramariano
+ * La classe Loan associa un libro ad un utente e ne registra la data di restituzione.
+ * Implementa l'interfaccia Comparable per consentire l'ordinamento dei prestiti
+ * secondo un criterio definito (ad esempio per data di scadenza).
  */
 public class Loan implements Comparable<Loan>{
     
