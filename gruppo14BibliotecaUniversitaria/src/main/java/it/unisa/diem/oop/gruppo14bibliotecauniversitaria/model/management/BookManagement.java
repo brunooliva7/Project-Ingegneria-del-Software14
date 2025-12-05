@@ -33,8 +33,8 @@ import java.util.TreeSet;
  * @see Functionality
  * 
  */
-public class BookManagement implements Functionality {
-    private Set <Book> catalogue; //Catalogo dei libri gestito come un insieme ordinato in cui non sono permessi duplicati
+public class BookManagement implements Functionality<Book> {
+    private Set <Book> catalogue; ///< Catalogo dei libri gestito come un insieme ordinato in cui non sono permessi duplicati
     
     /**
     * @brief Costruttore della classe BookManagement

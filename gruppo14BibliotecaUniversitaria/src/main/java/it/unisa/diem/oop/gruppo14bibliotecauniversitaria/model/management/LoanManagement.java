@@ -19,7 +19,7 @@ import java.time.LocalDate;
  */
 
 public class LoanManagement implements Functionality<Loan>{
-    Set <Loan> Loan; // insieme dei prestiti da gestire 2
+    Set <Loan> Loan; ///< insieme dei prestiti da gestire 2
     
     
     /**

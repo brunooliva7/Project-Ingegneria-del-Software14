@@ -17,7 +17,7 @@ import java.util.*;
  * 
  */
 public class UserManagement implements Functionality<User>{
-    private Set<User> list; //@brief  Lista di iscritti
+    private Set<User> list; ///< @brief  Lista di iscritti
     /**
      *  @brief Costruttore UserManagement 
      * 
