@@ -88,7 +88,7 @@ public class LoanManagement implements Functionality<Loan>{
         
     }
     
-        /**
+    /**
      * @brief Cerca un prestito nell'insieme.
      * @param l Prestito da cercare (non deve essere null)
      * @return Il prestito trovato, oppure null se non presente

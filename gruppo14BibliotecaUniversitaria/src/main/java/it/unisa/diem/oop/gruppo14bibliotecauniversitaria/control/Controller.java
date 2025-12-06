@@ -62,5 +62,5 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.*;
      */
     public void initHandler(){
      //metodo che gestisce gli eventi causati dall'interazione tra utente e view}
-}
+    }
 }
