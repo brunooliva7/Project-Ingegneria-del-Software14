@@ -1,0 +1,26 @@
+@startuml
+title REGISTRAZIONE RESTITUZIONE
+
+actor Bibliotecario
+participant View
+participant Controller
+participant LoanManagement
+participant FileManager
+participant Book
+participant User
+
+Bibliotecario -> View: Seleziona "Restituzione"
+View -> Controller: Richiesta restituzione prestito
+Controller -> LoanManagement: Ricerca prestito attivo
+
+alt Prestito trovato
+    LoanManagement -> Book: Incrementa copie disponibili
+    LoanManagement -> User: Aggiorna lista prestiti utente
+    LoanManagement -> FileManager: Aggiorna archivio prestiti (scrittura su file)
+    Controller -> View: Conferma restituzione registrata
+    View -> Bibliotecario: Restituzione completata
+else Prestito non trovato
+    Controller -> View: Mostra messaggio di errore
+    View -> Bibliotecario: Restituzione non consentita
+end
+@enduml

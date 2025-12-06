@@ -1,0 +1,28 @@
+@startuml
+title RICERCA UTENTE
+
+actor Bibliotecario
+participant View
+participant UserManagement
+participant User
+ 
+Bibliotecario -> View: Accede al menù utente
+View -> Bibliotecario: Mostra opzioni disponibili
+ 
+Bibliotecario -> View: Seleziona "Ricerca Utente"
+ 
+View -> Bibliotecario: Richiesta inserimento matricola/cognome
+Bibliotecario -> View: Inserisce criteri di ricerca
+ 
+View -> UserManagement:  search(String s)
+activate UserManagement
+ 
+alt Utente non esistente
+	UserManagement --> ViewI: Errore: Utente non trovato
+	View--> Bibliotecario: Notifica errore
+else Utente trovato
+ 	View--> Bibliotecario: Visualizza dati utente
+end
+deactivate UserManagement
+@enduml
+

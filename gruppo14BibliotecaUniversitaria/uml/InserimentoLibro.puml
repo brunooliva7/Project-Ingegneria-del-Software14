@@ -1,0 +1,16 @@
+@startuml
+title INSERIMENTO LIBRO
+
+Actor Bibliotecario
+Bibliotecario -> View : Inserisce dati del libro
+Bibliotecario -> View : Conferma
+View -> Controller : Invia dati Libro
+Controller -> BookManagement : add(Book b)
+BookManagement -> FileManager : writeToTextFileObject(Book b,String Filename) 
+BookManagement --> Controller : returnValue
+alt [returnValue==false]
+Controller -> View : ErrorView("Errore nell'Inserimento")
+else [returnValue==true]
+Controller -> View : addSuccess("Libro Inserito")
+end
+@enduml

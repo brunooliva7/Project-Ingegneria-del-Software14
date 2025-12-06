@@ -1,0 +1,17 @@
+@startuml
+title VISULIZZA LISTA UTENTI
+
+actor Bibliotecario
+participant View
+participant UserManagement
+participant User
+ 
+Bibliotecario -> View: Accede al menù utente
+View -> Bibliotecario: Mostra opzioni disponibili
+ 
+Bibliotecario -> View: Seleziona "Visualizzazione lista utenti "
+View-> UserManagement:viewSorted()
+ 
+View -> Bibliotecario: Fa vedere l'elenco ordinato degli utenti iscritti
+
+@enduml

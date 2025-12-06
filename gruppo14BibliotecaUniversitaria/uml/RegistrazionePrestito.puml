@@ -1,0 +1,26 @@
+@startuml
+title REGISTRAZIONE PRESTITO
+
+actor Bibliotecario
+participant View
+participant Controller
+participant LoanManagement
+participant FileManager
+participant Book
+participant User
+
+Bibliotecario -> View: Seleziona "Nuovo Prestito"
+View -> Controller: Richiesta registrazione prestito
+Controller -> LoanManagement: Verifica condizioni (limite prestiti, copie disponibili)
+
+alt Condizioni rispettate
+    LoanManagement -> Book: Decrementa copie disponibili
+    LoanManagement -> User: Aggiorna lista prestiti utente
+    LoanManagement -> FileManager: Aggiorna archivio prestiti (scrittura su file)
+    Controller -> View: Conferma prestito registrato
+    View -> Bibliotecario: Prestito registrato con successo
+else Condizioni non rispettate
+    Controller -> View: Mostra messaggio di errore
+    View -> Bibliotecario: Prestito non consentito
+end
+@enduml

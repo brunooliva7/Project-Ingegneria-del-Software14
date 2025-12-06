@@ -1,0 +1,37 @@
+@startuml
+title ELIMINAZIONE UTENTE
+
+actor Bibliotecario
+participant View
+participant UserManagement
+participant User
+participant  FileManager
+Bibliotecario -> View: Accede al menù utente
+View -> Bibliotecario: Mostra opzioni disponibili
+Bibliotecario -> View: Seleziona "Elimina Utente"
+ 
+View -> Bibliotecario: Richiesta inserimento matricola
+Bibliotecario -> View: Inserisce matricola
+ 
+View-> UserManagement: remove(User u )
+activate UserManagement
+ 
+UserManagement -> UserManagement : search(String s)
+UserManagement --> UserManagement: esito
+ 
+alt Utente NON esistente
+	UserManagement --> View: errore:UtenteNonTrovato
+	View --> Bibliotecario: Mostra errore
+ 
+else Utente esistente
+	UserManagement -> UserManagement: remove(User u)
+	UserManagement --> UserManagement: confermaRimozione
+	UserManagement --> View: confermaEliminazione
+	View --> Bibliotecario: Utente eliminato con successo
+ 
+	UserManagement -> FileManager: updateFileObject()
+	deactivate FileManager
+ 
+end
+deactivate UserManagement
+@enduml

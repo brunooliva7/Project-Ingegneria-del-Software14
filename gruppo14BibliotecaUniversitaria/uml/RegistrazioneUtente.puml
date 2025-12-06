@@ -1,0 +1,32 @@
+@startuml
+title REGISTRAZIONE UTENTE
+
+actor Bibliotecario
+participant View
+participant UserManagement
+participant User
+participant FileManager
+ 
+Bibliotecario -> View: Accede al menù utente
+View -> Bibliotecario: Mostra opzioni disponibili
+Bibliotecario -> View: Seleziona "Registrazione Utente"
+ 
+View -> UserManagement: add(User u)
+
+ 
+alt Utente già esistente
+	UserManagement --> View: Errore: Utente già registrato
+                  View  --> Bibliotecario: Notifica errore
+else Nuova registrazione
+	UserManagement -> User: User(String name, String surname, String numberId, String email)
+	User --> UserManagement: conferma creazione
+	UserManagement --> View: Conferma iscrizione
+	View --> Bibliotecario: Utente registrato con successo
+	UserManagement -> FileManager: updateFileObject()
+	deactivate FileManager
+ 
+end
+deactivate UserManagement
+@enduml
+ 
+

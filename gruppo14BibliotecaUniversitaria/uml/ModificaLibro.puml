@@ -1,0 +1,33 @@
+@startuml
+title MODIFICA DATI LIBRO
+
+actor Bibliotecario
+
+Bibliotecario -> View: Inserisci dati libro
+Bibliotecario -> View: Conferma
+
+ref over Controller, BookManagement
+  Search
+end ref
+
+ref over View,Controller,BookManagement
+ ViewOrdered
+end
+
+Bibliotecario -> View : Inserisci dati da modificare
+Bibliotecario -> View : Conferma
+
+View -> Controller : Invia dati da modificare
+Controller -> BookManagement : update(Book b)
+
+BookManagement -> FileManager: updateFileObject(Book B,String Filename)
+BookManagement --> Controller: returnValue
+
+alt returnValue == false
+  Controller -> View: ErrorView("Errore nella ricerca")
+else returnValue == true
+  Controller -> View: updateSuccess("Modifica avvenuta con successo")
+end
+
+@enduml
+

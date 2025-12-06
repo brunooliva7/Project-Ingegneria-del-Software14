@@ -1,0 +1,15 @@
+@startuml
+title RICERCA LIBRO
+
+Actor Bibliotecario
+Bibliotecario -> View : Inserisce dati del libro da cercare
+Bibliotecario -> View : Conferma
+View -> Controller : Invia dati Libro
+Controller -> BookManagement : search(Book b)
+BookManagement --> Controller : returnBook
+alt [returnValue==null]
+Controller -> View : ErrorView("Errore nella ricerca")
+else [returnValue==Book]
+Controller -> View : Book
+end
+@enduml

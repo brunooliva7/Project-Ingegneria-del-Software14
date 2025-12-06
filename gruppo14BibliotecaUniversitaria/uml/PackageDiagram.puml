@@ -1,0 +1,48 @@
+@startuml
+skinparam packageStyle rectangle
+left to right direction
+
+
+package "src"{  
+  package "model" {
+    package "data" {
+    class Book
+    class User
+    class Loan
+    }
+    
+    package "management" {
+      interface Functionality
+      class BookManagement
+      class UserManagement
+      class LoanManagement
+    }
+
+    package "auth" {
+      class Librarian
+    }
+
+    package "storage" {
+      class FileManager
+    }
+  }
+
+  package "view" {
+    class View
+  }
+
+  package "control" {
+    class Controller
+  }
+  
+' Relazioni MVC
+view ..> control
+control ..> model
+
+' Relazioni interne al package model
+management ..> data
+management ..> storage
+auth ..> data
+auth ..> storage
+auth ..> management
+@enduml

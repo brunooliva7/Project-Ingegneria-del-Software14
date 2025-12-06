@@ -1,0 +1,24 @@
+@startuml
+title VISUALIZZAZIONE PRESTITI ATTIVI
+
+actor Bibliotecario
+participant View
+participant Controller
+participant LoanManagement
+participant FileManager
+
+Bibliotecario -> View: Seleziona "Visualizza prestiti attivi"
+View -> Controller: Richiesta elenco prestiti
+Controller -> LoanManagement: Recupera prestiti attivi
+LoanManagement -> FileManager: Lettura archivio prestiti
+FileManager --> LoanManagement: Restituisce dati prestiti
+LoanManagement --> Controller: Elenco prestiti ordinato per data restituzione
+
+alt Prestiti attivi presenti
+    Controller -> View: Mostra elenco prestiti (con evidenza ritardi)
+    View -> Bibliotecario: Visualizza elenco prestiti
+else Nessun prestito attivo
+    Controller -> View: Mostra messaggio "Nessun prestito attivo"
+    View -> Bibliotecario: Visualizza avviso
+end
+@enduml

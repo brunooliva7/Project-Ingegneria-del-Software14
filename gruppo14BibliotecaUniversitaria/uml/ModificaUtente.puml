@@ -1,0 +1,44 @@
+@startuml
+title MODIFICA DATI UTENTE
+
+actor Bibliotecario
+participant View
+participant UserManagement
+participant User
+participant FileManager
+ 
+Bibliotecario -> View: Accede al menù utente
+View -> Bibliotecario: Mostra opzioni disponibili
+ 
+Bibliotecario -> View: Seleziona "Modifica dati"
+View-> UserManagement: update(User u)
+ 
+View-> Bibliotecario: Richiesta inserimento matricola
+Bibliotecario -> View: Inserisce matricola
+ 
+View -> UserManagement: search(matricola)
+activate UserManagement
+ 
+alt Utente non trovato
+	UserManagement --> View: erroreUtenteNonTrovato
+	View --> Bibliotecario: Mostra errore
+ 
+else Utente trovato
+	UserManagement --> View: utente presente tra l'elenco
+	UserManagement --> UserManagement: remove(User u)
+ 
+	View -> Bibliotecario: Mostra form nuovi dati
+	Bibliotecario -> View: Invia dati aggiornati
+	
+	View -> User: User(String name, String surname, String numberId, String email)
+	User --> UserManagement: confermaCreazione
+ 
+	UserManagement --> UserManagement: add(User u)
+	UserManagement --> View: confermaModifica
+	View --> Bibliotecario: Modifica completata con successo
+	UserManagement -> FileManager: updateFileObject()
+	deactivate FileManager
+ 
+end
+deactivate UserManagement
+@enduml
