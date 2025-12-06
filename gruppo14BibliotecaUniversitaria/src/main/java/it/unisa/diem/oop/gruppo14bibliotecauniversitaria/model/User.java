@@ -8,7 +8,7 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Book;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement;
 import java.util.*;
-import java.time.LocalDate;  //ciao
+import java.time.LocalDate;  
 /**
  *
  * @author elisa 
@@ -18,11 +18,11 @@ import java.time.LocalDate;  //ciao
  * 
  */
 public class User   implements Comparable<User> {
-    private  String name; //@brief Nome dell'utente
-    private  String surname; //@brief Cognome dell'utente
-    private String numberId;  //@brief Matricola dell'utente
-    private  String email;  //@brief Email dell'utente 
-    private  Map<Book,LocalDate> booksOnloan; //@brief Mappa che mantiene al proprio interno una lista di  libri in prestito  con data di restituzione associata  per utente 
+    private  String name; /// < @brief Nome dell'utente
+    private  String surname; ///< @brief Cognome dell'utente
+    private String numberId;  ///< @brief Matricola dell'utente
+    private  String email;  ///< @brief Email dell'utente 
+    private  Map<Book,LocalDate> booksOnloan; ///< @brief Mappa che mantiene al proprio interno una lista di  libri in prestito  con data di restituzione associata  per utente 
     
     /**
      * @brief costruttore User 

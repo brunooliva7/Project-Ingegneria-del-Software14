@@ -16,9 +16,9 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.auth;
 
 public class Librarian {
     
-    private String username; //nome utente del bibliotecario
-    private String password;// password del bibliotecario
-    private final String filepath = "credentials.txt"; //file esterno.22
+    private String username; ///< nome utente del bibliotecario
+    private String password;///< password del bibliotecario
+    private final String filepath = "credentials.txt"; ///< file esterno
 
         /**
      * @brief Verifica le credenziali inserite.

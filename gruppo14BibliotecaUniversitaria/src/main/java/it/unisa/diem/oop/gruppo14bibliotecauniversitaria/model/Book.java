@@ -28,11 +28,11 @@ import java.time.LocalDate;
  */
 public class Book implements Comparable<Book> {
     
-    private String title; /// Titolo del libro
-    private String authors; /// Autore/i
-    private LocalDate publicationYear; /// Anno di pubblicazione
-    private String ISBN; /// Codice identificativo univoco
-    private int availableCopies; /// Numero di copie disponibili
+    private String title; ///< Titolo del libro
+    private String authors; ///< Autore/i
+    private LocalDate publicationYear; ///< Anno di pubblicazione
+    private String ISBN; ///< Codice identificativo univoco
+    private int availableCopies; ///< Numero di copie disponibili
     
     /**
     * @brief Costruttore della classe Book
