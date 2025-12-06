@@ -15,8 +15,8 @@
 
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Book;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Book;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import java.util.Set;
 import java.util.TreeSet;
 

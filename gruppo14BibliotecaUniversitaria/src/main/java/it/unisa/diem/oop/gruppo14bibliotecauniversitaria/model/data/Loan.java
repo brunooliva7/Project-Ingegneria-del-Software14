@@ -1,9 +1,11 @@
+package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Book;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import java.time.LocalDate;
 
 /**

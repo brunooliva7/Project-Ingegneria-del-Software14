@@ -5,8 +5,8 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.Functionality;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.User;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.User;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import java.util.*;
 /**
  *

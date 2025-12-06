@@ -12,7 +12,7 @@
  * @version 1.0
  *  
  */
-package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model;
+package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data;
 import java.time.LocalDate;
         
 /**
