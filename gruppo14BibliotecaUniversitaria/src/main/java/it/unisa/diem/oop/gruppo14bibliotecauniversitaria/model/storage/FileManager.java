@@ -21,19 +21,20 @@ import java.io.Serializable;
 public class FileManager <T extends Serializable>{
     
     /**
-     * @brief Legge tutti gli oggetti serializzati da un file.
+     * @brief Elimina l'oggetto dal file
      *
      * @param filename Nome del file da cui leggere
+     * @param object oggetto di tipo T da eliminare
      * 
-     * @return Lista di oggetti letti dal file.
+     * 
      * @throws IOException Se si verifica un errore di I/O.
      * @throws ClassNotFoundException Se la classe degli oggetti non viene trovata.
      * 
-     * @pre filename valido 
-     * @post il file è stato letto correttamente 
+     * @pre filename valido e object != null
+     * @post l'oggetto è stato cancellato correttamente e il file aggiornato
      */
 
-    public static readFromTextFileObject(String filename){       
+    public static removeFromTextFileObject(T object, String filename){       
     }
     
     

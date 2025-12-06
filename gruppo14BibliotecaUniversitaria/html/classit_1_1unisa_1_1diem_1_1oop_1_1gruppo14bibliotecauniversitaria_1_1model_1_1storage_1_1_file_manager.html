@@ -97,8 +97,8 @@ $(function(){initNavTree('classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecau
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aef702bf5871ed8716ad7983cdfd9154c" id="r_aef702bf5871ed8716ad7983cdfd9154c"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef702bf5871ed8716ad7983cdfd9154c">readFromTextFileObject</a> (String filename)</td></tr>
-<tr class="memdesc:aef702bf5871ed8716ad7983cdfd9154c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legge tutti gli oggetti serializzati da un file.  <br /></td></tr>
+<tr class="memitem:a182829049ae01323829b21b5d023b79d" id="r_a182829049ae01323829b21b5d023b79d"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a182829049ae01323829b21b5d023b79d">removeFromTextFileObject</a> (T object, String filename)</td></tr>
+<tr class="memdesc:a182829049ae01323829b21b5d023b79d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elimina l'oggetto dal file.  <br /></td></tr>
 <tr class="memitem:ac29fe30bb5acb46cc763c9a409dc92c0" id="r_ac29fe30bb5acb46cc763c9a409dc92c0"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac29fe30bb5acb46cc763c9a409dc92c0">writeToTextFileObject</a> (T object, String filename)</td></tr>
 <tr class="memdesc:ac29fe30bb5acb46cc763c9a409dc92c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scrive un oggetto serializzabile su file.  <br /></td></tr>
 <tr class="memitem:a6ab82a16b326f6aa3ca24cc3b2a309cd" id="r_a6ab82a16b326f6aa3ca24cc3b2a309cd"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ab82a16b326f6aa3ca24cc3b2a309cd">updateFileObject</a> (T newObject, String filename)</td></tr>
@@ -123,49 +123,6 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="aef702bf5871ed8716ad7983cdfd9154c" name="aef702bf5871ed8716ad7983cdfd9154c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef702bf5871ed8716ad7983cdfd9154c">&#9670;&#160;</a></span>readFromTextFileObject()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager.html">it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager</a>&lt; T extends Serializable &gt;.readFromTextFileObject </td>
-          <td>(</td>
-          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filename</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Legge tutti gli oggetti serializzati da un file. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>Nome del file da cui leggere</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Lista di oggetti letti dal file. </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">IOException</td><td>Se si verifica un errore di I/O. </td></tr>
-    <tr><td class="paramname">ClassNotFoundException</td><td>Se la classe degli oggetti non viene trovata.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section pre"><dt>Precondition</dt><dd>filename valido </dd></dl>
-<dl class="section post"><dt>Postcondition</dt><dd>il file è stato letto correttamente </dd></dl>
-
-</div>
-</div>
 <a id="ac50f99be33561cad1a85366411772f80" name="ac50f99be33561cad1a85366411772f80"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac50f99be33561cad1a85366411772f80">&#9670;&#160;</a></span>readLine()</h2>
 
@@ -204,6 +161,53 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section pre"><dt>Precondition</dt><dd>filename valido </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>lettura avvenuta correttamente </dd></dl>
+
+</div>
+</div>
+<a id="a182829049ae01323829b21b5d023b79d" name="a182829049ae01323829b21b5d023b79d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a182829049ae01323829b21b5d023b79d">&#9670;&#160;</a></span>removeFromTextFileObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager.html">it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager</a>&lt; T extends Serializable &gt;.removeFromTextFileObject </td>
+          <td>(</td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>object</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Elimina l'oggetto dal file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Nome del file da cui leggere </td></tr>
+    <tr><td class="paramname">object</td><td>oggetto di tipo T da eliminare</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">IOException</td><td>Se si verifica un errore di I/O. </td></tr>
+    <tr><td class="paramname">ClassNotFoundException</td><td>Se la classe degli oggetti non viene trovata.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>filename valido e object != null </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>l'oggetto è stato cancellato correttamente e il file aggiornato </dd></dl>
 
 </div>
 </div>
