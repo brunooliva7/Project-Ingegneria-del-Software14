@@ -30,7 +30,7 @@ import java.time.LocalDate;
  */
 
 public class LoanManagement implements Functionality<Loan>,Serializable{
-    Set <Loan> Loan; ///< insieme dei prestiti da gestire 2
+    Set <Loan> loans; ///< insieme dei prestiti da gestire 
     
     
     /**
@@ -41,7 +41,7 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
      */
 
     public LoanManagement(){
-        Loan = new TreeSet<>();
+        loans = new TreeSet<>();
     }
     
     
