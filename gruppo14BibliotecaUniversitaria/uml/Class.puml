@@ -145,39 +145,39 @@ class FileManager<T> {
   + updateLine(line: String, filename: String): void{static}
 }
 
-Controller --> Model
-Controller --> View
+' === Ereditarietà e implementazione ===
 View --|> Application
-
-Model --> BookManagement
-Model --> LoanManagement
-Model --> UserManagement
-Model --> Librarian
-
-User --> Book
-User --> LoanManagement
-User ..|> Comparable
-
-Book ..|> Comparable
-
-
-Loan --> Book
-Loan --> User
-Loan ..|> Comparable
-
-
+User --|> Serializable
+Book --|> Serializable
+Loan --|> Serializable
+Librarian --|> Serializable
+Book --|> Comparable
+Loan --|> Comparable
 BookManagement ..|> Functionality
-BookManagement ..|> Serializable
-BookManagement ..> Book
-
 LoanManagement ..|> Functionality
-LoanManagement ..|> Serializable
-LoanManagement ..> Loan
-
 UserManagement ..|> Functionality
-UserManagement ..|> Serializable
-UserManagement ..> User
 
-FileManager ..|> Serializable
+' === Composizione ===
+Model *-- BookManagement
+Model *-- LoanManagement
+Model *-- UserManagement
+Model *-- Librarian
+
+' === Associazioni ===
+Loan --> Book : book [1]
+Loan --> User : user [1]
+User --> Book : books [0..*]
+BookManagement --> Book : catalog [0..*]
+LoanManagement --> Loan : loan [0..*]
+UserManagement --> User : list [0..*]
+
+' === Dipendenze ===
+Controller ..> Model : uses
+Controller ..> View : uses
+Model ..> FileManager : uses
+BookManagement ..> FileManager : uses
+LoanManagement ..> FileManager : uses
+UserManagement ..> FileManager : uses
+Librarian ..> FileManager : uses
 
 @enduml
