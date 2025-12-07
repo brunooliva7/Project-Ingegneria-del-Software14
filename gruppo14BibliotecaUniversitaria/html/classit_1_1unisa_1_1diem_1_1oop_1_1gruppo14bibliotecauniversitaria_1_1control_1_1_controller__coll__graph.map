@@ -1,0 +1,9 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.Controller" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.Controller">
+<area shape="rect" id="Node000001" title="Gestisce l&#39;interazione tra il modello (FileManager) e la view grafica (View)." alt="" coords="595,33,945,74"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1_model.html" title="Gestisce i vari manager del sistema biblioteca." alt="" coords="150,5,495,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="510,35,597,43,592,43,510,40"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html" title="Classe che rappresenta la vista dell&#39;applicazione." alt="" coords="140,70,504,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="520,69,571,66,592,67,598,67,572,71,520,75"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,70,91,96"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="106,80,142,83,137,83,107,86"/>
+</map>

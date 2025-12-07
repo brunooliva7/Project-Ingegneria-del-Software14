@@ -14,6 +14,7 @@
 
 
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.auth.Librarian;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.*;
 
 
@@ -27,6 +28,7 @@ public class Model {
     private BookManagement bookManagement;   ///< Gestore dei libri
     private UserManagement userManagement;   ///< Gestore degli utenti
     private LoanManagement loanManagement;   ///< Gestore dei prestiti
+    private Librarian librarian;             ///< Bibliotecario                                                                         
 
     /**
      * @brief Costruttore della classe Model
@@ -36,21 +38,48 @@ public class Model {
      * @param bookManagement Oggetto BookManagement che gestisce i libri
      * @param userManagement Oggetto UserManagement che gestisce gli utenti
      * @param loanManagement Oggetto LoanManagement che gestisce i prestiti
+     * @param librarian Oggetto Librarian responsabile del sistema
      *
      * @pre bookManagement != null && userManagement != null && loanManagement != null
      * @post Oggetto pronto all'uso
      */
-    public Model(BookManagement bookManagement, UserManagement userManagement, LoanManagement loanManagement) {
+    public Model(BookManagement bookManagement, UserManagement userManagement, LoanManagement loanManagement, Librarian librarian) {
         this.bookManagement = bookManagement;
         this.userManagement = userManagement;
         this.loanManagement = loanManagement;
+        this.librarian = librarian;
     }
 
     //Getter e Setter
+    
+    /**
+     * @brief Restituisce il bibliotecario responsabile del sistema
+     * @return Oggetto Librarian
+     *
+     * @pre Il bibliotecario deve essere stato inizializzato
+     * @post Restituisce il riferimento al bibliotecario
+     */
+    public Librarian getLibrarian() {
+        return librarian;
+    }
+
+    /**
+     * @brief Imposta un nuovo bibliotecario responsabile del sistema
+     * @param librarian Nuovo oggetto Librarian
+     *
+     * @pre librarian != null
+     * @post Il bibliotecario è aggiornato con il nuovo valore
+     */
+    public void setLibrarian(Librarian librarian) {
+        this.librarian = librarian;
+    }
 
     /**
      * @brief Restituisce il gestore dei libri
      * @return Oggetto BookManagement
+     * 
+     * @pre  Il modello deve essere stato inizializzato
+     * @post Restituisce il riferimento al gestore dei libri
      */
     public BookManagement getBookManagement() {
         return bookManagement;
@@ -61,7 +90,7 @@ public class Model {
      * @param bookManagement Nuovo oggetto BookManagement
      *
      * @pre bookManagement != null
-     * @post Il gestore dei ibri è aggiornata 
+     * @post Il gestore dei libri è aggiornata 
      */
     public void setBookManagement(BookManagement bookManagement) {
         this.bookManagement = bookManagement;
@@ -70,6 +99,9 @@ public class Model {
     /**
      * @brief Restituisce il gestore degli utenti
      * @return Oggetto UserManagement
+     * 
+     * @pre  Il modello deve essere stato inizializzato
+     * @post Restituisce il riferimento al gestore degli utenti
      */
     public UserManagement getUserManagement() {
         return userManagement;
@@ -89,6 +121,9 @@ public class Model {
     /**
      * @brief Restituisce il gestore dei prestiti
      * @return Oggetto LoanManagement
+     * 
+     * @pre  Il modello deve essere stato inizializzato
+     * @post Restituisce il riferimento al gestore dei prestiti
      */
     public LoanManagement getLoanManagement() {
         return loanManagement;
