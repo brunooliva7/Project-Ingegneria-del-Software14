@@ -14,6 +14,8 @@
  */
 
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
+
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.*;
 /**
@@ -26,9 +28,9 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.*;
  * 
  * Segue il pattern MVC (Model-View-Controller).
  */
-    public class Controller{
+    public class Controller {
     //IL CONTROLLER HA COME ATTRIBUTI IL MODEL E IL VIEW DEL PROGETTO COSI' DA POTER COERENTEMENTE COLLEGARE IL TUTTO AL FINE UNICO DEL FUNZIONAMENTO
-    View  model;  ///< Modello dell'applicazione che contiene tutta la parte del progetto riguardante la logica  e i dati 
+    Model  model;  ///< Modello dell'applicazione che contiene tutta la parte del progetto riguardante la logica  e i dati 
     View view;          ///< View dell'applicazione che contiene tutta la parte del progetto che si occupa dell'interfaccia utente
     
     
@@ -38,27 +40,28 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.*;
      * Inizializza il controller collegando il modello e la vista, e richiama i metodi
      * per impostare tutti i  binding e i gestori degli eventi.
      *
-     * @param model Il modello dell'applicazione (View)
+     * @param model Il modello dell'applicazione (Model)
      * @param view La view associata all'interfaccia grafica (View)
      * @post I metodi initBindings() e initHandler() sono correttamente invocati
      */
-     public Controller(View  model,View view){
-         this.model=model;
-         this.view=view;
-         initBindings();
-         initHandler();
+    public Controller(Model  model,View view){
+        this.model=model;
+        this.view=view;
+        initBindings();
+        initHandler();
      }
-      /**
+    /**
      * @brief Permette di collegare view (View) e model (FileManager) tramite i binding
      *
      * Questo metodo si occupa di sincronizzare i componenti grafici della view
      * (es. textfield, label, selettori) con i dati contenuti nel modello,
      * in questo modo eventuali dati inseriti tramite elementi grafici dell'interfaccia,aggiornano i campi corrispondenti nel model,e viceversa
      */
-      public void initBindings(){
+    public void initBindings(){
      
-      }
-     /**
+    }
+     
+    /**
      * @brief Inizializza i metodi che gestiscono  gli eventi generati dall'interazione dell'utente con l'interfaccia 
      *
      * Si occupa di collegare bottoni, menu e tutti gli altri componenti di tipo grafico contenuti nella View ai metodi
