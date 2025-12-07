@@ -1,5 +1,5 @@
 @startuml
-title VISULIZZA LISTA UTENTI
+title VISULIZZAZIONE LISTA UTENTI
 
 actor Bibliotecario
 participant View
