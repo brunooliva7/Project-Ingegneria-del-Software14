@@ -25,7 +25,9 @@ package "src"{
     package "storage" {
       class FileManager
     }
-  }
+
+    class Model
+}
 
   package "view" {
     class View

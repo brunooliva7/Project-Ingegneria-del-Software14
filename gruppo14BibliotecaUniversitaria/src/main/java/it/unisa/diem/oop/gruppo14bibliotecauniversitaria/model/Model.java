@@ -40,7 +40,7 @@ public class Model {
      * @param loanManagement Oggetto LoanManagement che gestisce i prestiti
      * @param librarian Oggetto Librarian responsabile del sistema
      *
-     * @pre bookManagement != null && userManagement != null && loanManagement != null
+     * @pre bookManagement != null && userManagement != null && loanManagement != null && librarian != null
      * @post Oggetto pronto all'uso
      */
     public Model(BookManagement bookManagement, UserManagement userManagement, LoanManagement loanManagement, Librarian librarian) {
@@ -90,7 +90,7 @@ public class Model {
      * @param bookManagement Nuovo oggetto BookManagement
      *
      * @pre bookManagement != null
-     * @post Il gestore dei libri è aggiornata 
+     * @post Il gestore dei libri è aggiornato
      */
     public void setBookManagement(BookManagement bookManagement) {
         this.bookManagement = bookManagement;
@@ -111,7 +111,7 @@ public class Model {
      * @brief Imposta un nuovo gestore degli utenti
      * @param userManagement Nuovo oggetto UserManagement
      *
-     * @pre bookManagement != null
+     * @pre userManagement != null
      * @post Il gestore degli utenti è aggiornato
      */
     public void setUserManagement(UserManagement userManagement) {
@@ -134,7 +134,7 @@ public class Model {
      * @param loanManagement Nuovo oggetto LoanManagement
      *
      * @pre loanManagement != null
-     * @post Il gestore dei prestiti è aggiornata
+     * @post Il gestore dei prestiti è aggiornato
      */
     public void setLoanManagement(LoanManagement loanManagement) {
         this.loanManagement = loanManagement;

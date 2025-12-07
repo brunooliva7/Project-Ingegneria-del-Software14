@@ -2,7 +2,7 @@
 
 <ClassDiagram name="Class">
   <ClassDiagramComponents>
-    <Class name="Book" package="" visibility="public" xPosition="912.0" yPosition="51.0">
+    <Class name="Book" package="" visibility="public" xPosition="550.0" yPosition="1554.0">
       <Fields>
         <Field name="title" type="String" visibility="private"/>
         <Field name="authors" type="String" visibility="private"/>
@@ -45,7 +45,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Loan" package="" visibility="public" xPosition="556.0" yPosition="204.0">
+    <Class name="Loan" package="" visibility="public" xPosition="159.0" yPosition="1707.0">
       <Fields>
         <Field name="book" type="Book" visibility="private"/>
         <Field name="user" type="User" visibility="private"/>
@@ -67,7 +67,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="User" package="" visibility="public" xPosition="99.0" yPosition="68.0">
+    <Class name="User" package="" visibility="public" xPosition="415.0" yPosition="1243.0">
       <Fields>
         <Field name="name" type="String" visibility="private"/>
         <Field name="surname" type="String" visibility="private"/>
@@ -106,7 +106,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="BookManagement" package="" visibility="public" xPosition="1090.0" yPosition="470.0">
+    <Class name="BookManagement" package="" visibility="public" xPosition="525.0" yPosition="1966.0">
       <Fields>
         <Field name="catalog" type="Set&lt;Book&gt;" visibility="private"/>
       </Fields>
@@ -129,7 +129,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="UserManagement" package="" visibility="public" xPosition="222.0" yPosition="470.0">
+    <Class name="UserManagement" package="" visibility="public" xPosition="1052.0" yPosition="1885.0">
       <Fields>
         <Field name="list" type="Set&lt;User&gt;" visibility="private"/>
       </Fields>
@@ -152,7 +152,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="LoanManagement" package="" visibility="public" xPosition="445.0" yPosition="470.0">
+    <Class name="LoanManagement" package="" visibility="public" xPosition="-53.0" yPosition="1724.0">
       <Fields>
         <Field name="Loan" type="Set&lt;Loan&gt;" visibility="private"/>
       </Fields>
@@ -175,7 +175,71 @@
         </Method>
       </Methods>
     </Class>
-    <Interface name="Functionally &lt;T&gt;" package="" visibility="public" xPosition="622.0" yPosition="11.0">
+    <Class name="Librarian" package="" visibility="public" xPosition="905.0" yPosition="104.0">
+      <Fields>
+        <Field name="username" type="String" visibility="private"/>
+        <Field name="password" type="String" visibility="private"/>
+        <Field name="filepath" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getUsername" returnType="String" visibility="public"/>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="checkCredentials" returnType="String" visibility="public">
+          <Argument type="String" name="usernameInput"/>
+          <Argument type="String" name="passwordInput"/>
+        </Method>
+        <Method name="modifyCredentials" returnType="String" visibility="public">
+          <Argument type="String" name="newUsername"/>
+          <Argument type="String" name="newPassword"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Controller" package="" visibility="public" xPosition="1822.0" yPosition="1366.0">
+      <Fields>
+        <Field name="model" type="Model" visibility="private"/>
+        <Field name="view" type="View" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="Controller" returnType="View" visibility="public">
+          <Argument type="Model" name="model"/>
+          <Argument type="View" name="view"/>
+        </Method>
+        <Method name="initBindings" returnType="void" visibility="public"/>
+        <Method name="initHandler" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="FileManager&lt;T&gt;" package="" visibility="public" xPosition="1822.0" yPosition="633.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="removeFromTextFileObject" returnType="String" visibility="public">
+          <Argument type="T" name="object"/>
+          <Argument type="String" name="filename"/>
+        </Method>
+        <Method name="writeToTextFileObject" returnType="String" visibility="public">
+          <Argument type="T" name="object"/>
+          <Argument type="String" name="filename"/>
+        </Method>
+        <Method name="updateFileObject" returnType="String" visibility="public">
+          <Argument type="T" name="newObject"/>
+          <Argument type="String" name="filename"/>
+        </Method>
+        <Method name="readLine" returnType="String" visibility="public">
+          <Argument type="String" name="filename"/>
+        </Method>
+        <Method name="writeLine" returnType="String" visibility="public">
+          <Argument type="String" name="line"/>
+          <Argument type="String" name="filename"/>
+        </Method>
+        <Method name="updateLine" returnType="String" visibility="public">
+          <Argument type="String" name="line"/>
+          <Argument type="String" name="filename"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="Functionality &lt;T&gt;" package="" visibility="public" xPosition="9.0" yPosition="1966.0">
       <Methods>
         <Method name="add" returnType="T" visibility="public">
           <Argument type="T" name="entity"/>
@@ -192,41 +256,84 @@
         </Method>
       </Methods>
     </Interface>
-    <Class name="View" package="" visibility="public" xPosition="843.0" yPosition="470.0">
-      <Fields/>
-      <Constructors/>
-      <Methods/>
-    </Class>
-    <Class name="Librarian" package="" visibility="public" xPosition="648.0" yPosition="442.0">
+    <Class name="Model" package="" visibility="public" xPosition="707.0" yPosition="418.0">
       <Fields>
-        <Field name="username" type="String" visibility="private"/>
-        <Field name="password" type="String" visibility="private"/>
-        <Field name="filepath" type="String" visibility="private"/>
+        <Field name="bookManagement" type="BookManagement" visibility="private"/>
+        <Field name="userManagement" type="UserManagement" visibility="private"/>
+        <Field name="loanManagement" type="LoanManagement" visibility="private"/>
+        <Field name="librarian" type="Librarian" visibility="private"/>
       </Fields>
-      <Constructors/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="BookManagement" name="bookManagement"/>
+          <Argument type="UserManagemnt" name="userManagement"/>
+          <Argument type="LoanManagement" name="loanManagement"/>
+          <Argument type="Librarian" name="librarian"/>
+        </Constructor>
+      </Constructors>
       <Methods>
-        <Method name="getUsername" returnType="String" visibility="public"/>
-        <Method name="getPassword" returnType="String" visibility="public"/>
-        <Method name="checkCredentials" returnType="boolean" visibility="public">
-          <Argument type="String" name="usernameInput"/>
-          <Argument type="String" name="passwordInput"/>
+        <Method name="getBookManagement" returnType="BookManagement" visibility="public"/>
+        <Method name="setBookManagement" returnType="BookManagement" visibility="public">
+          <Argument type="BookManagement" name="bookManagement"/>
         </Method>
-        <Method name="modifyCredentials" returnType="void" visibility="public">
-          <Argument type="String" name="newUsername"/>
-          <Argument type="String" name="newPassword"/>
+        <Method name="getUserManagement" returnType="UserManagement" visibility="public"/>
+        <Method name="setUserManagement" returnType="UserManagement" visibility="public">
+          <Argument type="UserManagement" name="userManagement"/>
+        </Method>
+        <Method name="getLoanManagement" returnType="LoanManagement" visibility="public"/>
+        <Method name="setLoanManagement" returnType="LoanManagement" visibility="public">
+          <Argument type="LoanManagement" name="loanManagement"/>
+        </Method>
+        <Method name="getLibrarian" returnType="Librarian" visibility="public"/>
+        <Method name="setLibraraian" returnType="Librarian" visibility="public">
+          <Argument type="Librarian" name="librarian"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="Controller" package="" visibility="public" xPosition="648.0" yPosition="668.0">
+    <Interface name="Serializable" package="" visibility="public" xPosition="9.0" yPosition="1430.0">
+      <Methods/>
+    </Interface>
+    <Interface name="Comparable" package="" visibility="public" xPosition="228.0" yPosition="2026.0">
+      <Methods/>
+    </Interface>
+    <Class name="View" package="" visibility="public" xPosition="1253.0" yPosition="1594.0">
       <Fields/>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="start" returnType="Stage" visibility="public">
+          <Argument type="Stage" name="stage"/>
+        </Method>
+        <Method name="main" returnType="String[]" visibility="public">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
     </Class>
-    <Class name="FileManager" package="" visibility="public" xPosition="866.0" yPosition="684.0">
+    <Class name="Application" package="" visibility="public" xPosition="1278.0" yPosition="1855.0">
       <Fields/>
       <Constructors/>
       <Methods/>
     </Class>
   </ClassDiagramComponents>
-  <ClassDiagramRelations/>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Book" target="Comparable"/>
+    <HasRelation name="loans" source="LoanManagement" target="Loan" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="t"/>
+    <HasRelation name="book" source="Loan" target="Book" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="list" source="UserManagement" target="User" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="Set"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Book" target="Serializable"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Loan" target="Comparable"/>
+    <HasRelation name="userManagement" source="Model" target="UserManagement" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="catalog" source="BookManagement" target="Book" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="Set"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="BookManagement" target="Functionality &lt;T&gt;"/>
+    <HasRelation name="bookManagement" source="Model" target="BookManagement" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Loan" target="Serializable"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="LoanManagement" target="Functionality &lt;T&gt;"/>
+    <HasRelation name="books" source="User" target="Book" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="User" target="Serializable"/>
+    <IsRelation name="is" source="View" target="Application"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="UserManagement" target="Functionality &lt;T&gt;"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="User" target="Comparable"/>
+    <HasRelation name="librarian" source="Model" target="Librarian" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="user" source="Loan" target="User" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="loanManagement" source="Model" target="LoanManagement" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
 </ClassDiagram>

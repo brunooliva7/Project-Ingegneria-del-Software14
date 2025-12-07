@@ -20,10 +20,10 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManag
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.*;
 /**
  * @class Controller
- * @brief Gestisce l'interazione tra il modello (FileManager) e la view grafica  (View).
+ * @brief Gestisce l'interazione tra il modello (Model) e la view grafica  (View).
  * 
  * La classe Controller si occupa di:
- * - inizializzare i collegamenti (binding) tra FileManager e View ;
+ * - inizializzare i collegamenti (binding) tra Model e View ;
  * - gestire gli eventi generati dall'interazione dell'utente con l'interfaccia grafica.
  * 
  * Segue il pattern MVC (Model-View-Controller).
@@ -51,7 +51,7 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.*;
         initHandler();
      }
     /**
-     * @brief Permette di collegare view (View) e model (FileManager) tramite i binding
+     * @brief Permette di collegare view (View) e model (Model) tramite i binding
      *
      * Questo metodo si occupa di sincronizzare i componenti grafici della view
      * (es. textfield, label, selettori) con i dati contenuti nel modello,
@@ -65,7 +65,7 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.*;
      * @brief Inizializza i metodi che gestiscono  gli eventi generati dall'interazione dell'utente con l'interfaccia 
      *
      * Si occupa di collegare bottoni, menu e tutti gli altri componenti di tipo grafico contenuti nella View ai metodi
-     * del FileManager tramite listener o lambda expression.
+     * del Model tramite listener o lambda expression.
      *
      * @post Gli eventi scatenati della View sono correttamente associati alle azioni definite nel model
      */
