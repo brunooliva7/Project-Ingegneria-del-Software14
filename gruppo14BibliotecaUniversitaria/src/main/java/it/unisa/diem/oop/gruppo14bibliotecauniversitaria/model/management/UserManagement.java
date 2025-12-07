@@ -14,6 +14,7 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
+import java.io.Serializable;
 import java.util.*;
 /**
  *
@@ -22,7 +23,7 @@ import java.util.*;
  * 
  * 
  */
-public class UserManagement implements Functionality<User>{
+public class UserManagement implements Functionality<User>,Serializable{
     private Set<User> list; ///<  Lista di iscritti
     /**
      *  @brief Costruttore UserManagement 

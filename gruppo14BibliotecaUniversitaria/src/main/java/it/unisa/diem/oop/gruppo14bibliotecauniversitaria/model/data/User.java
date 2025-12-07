@@ -15,6 +15,7 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement;
+import java.io.Serializable;
 import java.util.*;
 import java.time.LocalDate;  
 /**
@@ -25,7 +26,7 @@ import java.time.LocalDate;
  *la classe contiene le informazioni principali da memorizzare per un utente quindi nome,cognome,matricola,email e lista dei libri in prestito con relativa data di restituzione 
  * 
  */
-public class User   implements Comparable<User> {
+public class User   implements Comparable<User>,Serializable{
     private  String name; /// < @brief Nome dell'utente
     private  String surname; ///< @brief Cognome dell'utente
     private String numberId;  ///< @brief Matricola dell'utente

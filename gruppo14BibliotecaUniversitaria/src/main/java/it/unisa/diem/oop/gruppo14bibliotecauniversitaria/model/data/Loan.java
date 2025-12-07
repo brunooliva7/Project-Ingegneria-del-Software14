@@ -15,6 +15,7 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -27,7 +28,7 @@ import java.time.LocalDate;
  * @see Comparable
  * 
  */
-public class Loan implements Comparable<Loan>{
+public class Loan implements Comparable<Loan>,Serializable {
     
     private Book book; ///< Libro oggetto del prestito 
     private User user; ///< Utente che ha preso in prestito il libro
