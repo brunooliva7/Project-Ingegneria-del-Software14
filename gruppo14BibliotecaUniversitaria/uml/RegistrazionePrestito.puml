@@ -9,14 +9,18 @@ participant FileManager
 participant Book
 participant User
 
+Bibliotecario -> View: Accede al menu pretiti
+View -> Controller: Mostra operazioni disponibili
 Bibliotecario -> View: Seleziona "Nuovo Prestito"
 View -> Controller: Richiesta registrazione prestito
 Controller -> LoanManagement: Verifica condizioni (limite prestiti, copie disponibili)
 
 alt Condizioni rispettate
+    LoanManagement -> Controller: Condizioni rispettate
+    Controller -> LoanManagement: add(Loan l)
     LoanManagement -> Book: Decrementa copie disponibili
     LoanManagement -> User: Aggiorna lista prestiti utente
-    LoanManagement -> FileManager: Aggiorna archivio prestiti (scrittura su file)
+    LoanManagement -> FileManager: updateFileObject(Loan l, String filename)
     Controller -> View: Conferma prestito registrato
     View -> Bibliotecario: Prestito registrato con successo
 else Condizioni non rispettate
@@ -24,3 +28,4 @@ else Condizioni non rispettate
     View -> Bibliotecario: Prestito non consentito
 end
 @enduml
+

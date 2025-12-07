@@ -1,5 +1,14 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view;
 
+/**
+ * @file View.java
+ * 
+ * @author bruno
+ * @date 04-12-2025
+ * @version 1.0
+ *  
+ */
+
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Scene;

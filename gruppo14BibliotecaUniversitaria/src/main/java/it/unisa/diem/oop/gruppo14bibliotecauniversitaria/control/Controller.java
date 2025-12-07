@@ -3,13 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/**
+ * @file Controller.java
+ * 
+ * @author elisa
+ * @date 04-12-2025
+ * @version 1.0
+ *  
+ */
+
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.*;
-/**
- *
- * @author elisa
- */
 /**
  * @class Controller
  * @brief Gestisce l'interazione tra il modello (FileManager) e la view grafica  (View).
@@ -22,8 +28,8 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.*;
  */
     public class Controller{
     //IL CONTROLLER HA COME ATTRIBUTI IL MODEL E IL VIEW DEL PROGETTO COSI' DA POTER COERENTEMENTE COLLEGARE IL TUTTO AL FINE UNICO DEL FUNZIONAMENTO
-    View  model;  //@brief Modello dell'applicazione che contiene tutta la parte del progetto riguardante la logica  e i dati 
-    View view;          //@brief View dell'applicazione che contiene tutta la parte del progetto che si occupa dell'interfaccia utente
+    View  model;  ///< Modello dell'applicazione che contiene tutta la parte del progetto riguardante la logica  e i dati 
+    View view;          ///< View dell'applicazione che contiene tutta la parte del progetto che si occupa dell'interfaccia utente
     
     
      /**

@@ -3,6 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/**
+ * @file Functionality.java
+ * 
+ * @author bruno
+ * @date 04-12-2025
+ * @version 1.0
+ *  
+ */
+
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
 import java.util.Comparator;

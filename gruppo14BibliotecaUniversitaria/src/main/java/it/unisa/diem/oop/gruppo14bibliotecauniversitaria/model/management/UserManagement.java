@@ -3,21 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/**
+ * @file UserManagement.java
+ * 
+ * @author elisa
+ * @date 04-12-2025
+ * @version 1.0
+ *  
+ */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.Functionality;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
+
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import java.util.*;
 /**
  *
- * @author elisa 
  * @class UserManagement 
  * @brief  UserManagement è una classe che si occupa essenzialmente delle funzionalità messe a disposizione per l'elenco degli utenti e di modifica dei dati dei singoli user  
  * 
  * 
  */
 public class UserManagement implements Functionality<User>{
-    private Set<User> list; ///< @brief  Lista di iscritti
+    private Set<User> list; ///<  Lista di iscritti
     /**
      *  @brief Costruttore UserManagement 
      * 

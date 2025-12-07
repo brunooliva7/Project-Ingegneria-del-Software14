@@ -3,11 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/**
+ * @file Librarian.java
+ * 
+ * @author bruno
+ * @date 04-12-2025
+ * @version 1.0
+ *  
+ */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.auth;
 
 /**
  * @class Librarian
- * @brief Rappresenta il bibliotecario del sistema.2
+ * @brief Rappresenta il bibliotecario del sistema
  *
  * La classe Librarian gestisce le credenziali di accesso del bibliotecario,
  * permettendo di verificarle e modificarle. Le credenziali sono salvate
@@ -20,13 +28,13 @@ public class Librarian {
     private String password;///< password del bibliotecario
     private final String filepath = "credentials.txt"; ///< file esterno
 
-        /**
+    /**
      * @brief Verifica le credenziali inserite.
      * @param usernameInput Nome utente da verificare 
      * @param passwordInput Password da verificare 
      * @return true se le credenziali corrispondono, false altrimenti
      *
-     * la funzione legge dal file di testo esterno le credenziali, decodifica la password e le confronta con quelle date in input
+     * La funzione legge dal file di testo esterno le credenziali, decodifica la password e le confronta con quelle date in input
      * 
      * @pre usernameInput != null, passwordInput != null
      * @post Restituisce true se le credenziali sono valide, false altrimenti
@@ -57,7 +65,7 @@ public class Librarian {
      */
 
     public String getUsername() {
-        return Username;
+        return username;
     }
     
     /**
@@ -69,7 +77,7 @@ public class Librarian {
      */
 
     public String getPassword() {
-        return Password;
+        return password;
     }   
 }
 

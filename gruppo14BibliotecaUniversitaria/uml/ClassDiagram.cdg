@@ -106,23 +106,6 @@
         </Method>
       </Methods>
     </Class>
-    <Interface name="Functionally &lt;T&gt;" package="" visibility="public" xPosition="622.0" yPosition="11.0">
-      <Methods>
-        <Method name="add" returnType="boolean" visibility="public">
-          <Argument type="T" name="entity"/>
-        </Method>
-        <Method name="remove" returnType="boolean" visibility="public">
-          <Argument type="T" name="entity"/>
-        </Method>
-        <Method name="update" returnType="boolean" visibility="public">
-          <Argument type="T" name="entity"/>
-        </Method>
-        <Method name="viewSorted" returnType="void" visibility="public"/>
-        <Method name="search" returnType="T" visibility="public">
-          <Argument type="T" name="entity"/>
-        </Method>
-      </Methods>
-    </Interface>
     <Class name="BookManagement" package="" visibility="public" xPosition="1090.0" yPosition="470.0">
       <Fields>
         <Field name="catalog" type="Set&lt;Book&gt;" visibility="private"/>
@@ -169,7 +152,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="LoanManagement" package="" visibility="public" xPosition="632.0" yPosition="470.0">
+    <Class name="LoanManagement" package="" visibility="public" xPosition="445.0" yPosition="470.0">
       <Fields>
         <Field name="Loan" type="Set&lt;Loan&gt;" visibility="private"/>
       </Fields>
@@ -191,6 +174,58 @@
           <Argument type="Loan" name="l"/>
         </Method>
       </Methods>
+    </Class>
+    <Interface name="Functionally &lt;T&gt;" package="" visibility="public" xPosition="622.0" yPosition="11.0">
+      <Methods>
+        <Method name="add" returnType="T" visibility="public">
+          <Argument type="T" name="entity"/>
+        </Method>
+        <Method name="remove" returnType="T" visibility="public">
+          <Argument type="T" name="entity"/>
+        </Method>
+        <Method name="update" returnType="T" visibility="public">
+          <Argument type="T" name="entity"/>
+        </Method>
+        <Method name="viewSorted" returnType="void" visibility="public"/>
+        <Method name="search" returnType="T" visibility="public">
+          <Argument type="T" name="entity"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Class name="View" package="" visibility="public" xPosition="843.0" yPosition="470.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Librarian" package="" visibility="public" xPosition="648.0" yPosition="442.0">
+      <Fields>
+        <Field name="username" type="String" visibility="private"/>
+        <Field name="password" type="String" visibility="private"/>
+        <Field name="filepath" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getUsername" returnType="String" visibility="public"/>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="checkCredentials" returnType="boolean" visibility="public">
+          <Argument type="String" name="usernameInput"/>
+          <Argument type="String" name="passwordInput"/>
+        </Method>
+        <Method name="modifyCredentials" returnType="void" visibility="public">
+          <Argument type="String" name="newUsername"/>
+          <Argument type="String" name="newPassword"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Controller" package="" visibility="public" xPosition="648.0" yPosition="668.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="FileManager" package="" visibility="public" xPosition="866.0" yPosition="684.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations/>

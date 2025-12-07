@@ -3,42 +3,38 @@ title MODIFICA DATI UTENTE
 
 actor Bibliotecario
 participant View
+participant Controller 
 participant UserManagement
 participant User
 participant FileManager
  
 Bibliotecario -> View: Accede al menù utente
-View -> Bibliotecario: Mostra opzioni disponibili
- 
+View --> Bibliotecario: Mostra opzioni disponibili
 Bibliotecario -> View: Seleziona "Modifica dati"
-View-> UserManagement: update(User u)
- 
-View-> Bibliotecario: Richiesta inserimento matricola
+View --> Bibliotecario: Richiesta inserimento matricola
 Bibliotecario -> View: Inserisce matricola
- 
-View -> UserManagement: search(matricola)
-activate UserManagement
+View -> Controller: richiesta modifica dati (matricola)
+Controller -> UserManagement: search(matricola)
  
 alt Utente non trovato
-	UserManagement --> View: erroreUtenteNonTrovato
-	View --> Bibliotecario: Mostra errore
+    UserManagement --> Controller: erroreUtenteNonTrovato
+    Controller -> View: utente non trovato
+    View --> Bibliotecario: Mostra errore
  
 else Utente trovato
-	UserManagement --> View: utente presente tra l'elenco
-	UserManagement --> UserManagement: remove(User u)
- 
-	View -> Bibliotecario: Mostra form nuovi dati
-	Bibliotecario -> View: Invia dati aggiornati
-	
-	View -> User: User(String name, String surname, String numberId, String email)
-	User --> UserManagement: confermaCreazione
- 
-	UserManagement --> UserManagement: add(User u)
-	UserManagement --> View: confermaModifica
-	View --> Bibliotecario: Modifica completata con successo
-	UserManagement -> FileManager: updateFileObject()
-	deactivate FileManager
- 
+    UserManagement --> Controller: utente  u trovato 
+    Controller -->View : inserire i nuovi dati dell'utente
+    View --> Bibliotecario: Mostra form nuovi dati
+    Bibliotecario -> View: Invia dati aggiornati
+    View -> Controller: invia nuovi dati
+    Controller -> UserManagement: update (User u)
+    UserManagement -> User: User(String name, String surname, String numberId, String email)
+    User --> UserManagement: confermaCreazione
+    UserManagement --> UserManagement: add(User u)
+    UserManagement --> Controller: confermaModifica
+    Controller --> View: modifica effettuata
+    View --> Bibliotecario: Modifica completata con successo
+    UserManagement -> FileManager: updateFileObject()
 end
-deactivate UserManagement
 @enduml
+

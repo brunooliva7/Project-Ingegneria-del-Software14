@@ -3,15 +3,19 @@ title VISULIZZA LISTA UTENTI
 
 actor Bibliotecario
 participant View
+participant Controller
 participant UserManagement
 participant User
- 
+
 Bibliotecario -> View: Accede al menù utente
-View -> Bibliotecario: Mostra opzioni disponibili
- 
-Bibliotecario -> View: Seleziona "Visualizzazione lista utenti "
-View-> UserManagement:viewSorted()
- 
-View -> Bibliotecario: Fa vedere l'elenco ordinato degli utenti iscritti
+View --> Bibliotecario: Mostra opzioni disponibili
+Bibliotecario -> View: Seleziona "Visualizzazione lista utenti"
+View -> Controller: richiesta lista utenti
+Controller -> UserManagement: viewSorted()
+UserManagement --> Controller: elenco utenti ordinato
+Controller --> View: elenco utenti ordinato
+View --> Bibliotecario: Mostra elenco utenti iscritti
 
 @enduml
+
+

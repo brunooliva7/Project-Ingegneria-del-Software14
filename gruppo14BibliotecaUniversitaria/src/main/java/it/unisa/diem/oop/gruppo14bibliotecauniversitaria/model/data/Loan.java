@@ -1,35 +1,46 @@
-package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/**
+ * @file Loan.java
+ * 
+ * @author maramariano
+ * @date 04-12-2025
+ * @version 1.0
+ *  
+ */
+package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data;
+
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import java.time.LocalDate;
 
 /**
  * @class Loan
- * @brief Rappresenta un prestito di un libro da parte di un utente.
+ * @brief Gestisce i dati relativi al prestito di un libro ad un utente
  *
- * La classe Loan associa un libro ad un utente e ne registra la data di restituzione.
- * Implementa l'interfaccia Comparable per consentire l'ordinamento dei prestiti
- * secondo un criterio definito (ad esempio per data di scadenza).
+ * La classe Loan associa un libro ad un utente e registra la data di restituzione.
+ * Implementa l'interfaccia Comparable per consentire l'ordinamento dei prestiti per data di scadenza
+ * 
+ * @see Comparable
+ * 
  */
 public class Loan implements Comparable<Loan>{
     
-    private Book book; ///<Libro oggetto del prestito 
-    private User user; ///<Utente che ha preso in prestito il libro
-    private LocalDate dueDate; ///<data di restituzione
+    private Book book; ///< Libro oggetto del prestito 
+    private User user; ///< Utente che ha preso in prestito il libro
+    private LocalDate dueDate; ///< Data di restituzione
     
     /**
-     * @brief Costruttore della classe Loan.
-     * @param  book Libro prestato
+     * @brief Costruttore della classe Loan
+     * @param book Libro prestato
      * @param user Utente che ha preso il libro
      * @param dueDate Data di scadenza del prestito
      * 
-     * @pre i diversi attributi devono essere diversi da zero 
-     * @post loan è inizializzato
+     * @pre book != null && user != null && dueDate != null
+     * @post L'oggetto Loan è inizializzato
      */
     public Loan(Book book, User user, LocalDate dueDate) {
         this.book = book; 
@@ -38,11 +49,11 @@ public class Loan implements Comparable<Loan>{
     }
     
     /**
-     * @brief Restituisce il libro associato al prestito.
+     * @brief Restituisce il libro associato al prestito
      * @return Oggetto Book
      * 
-     * @pre l'oggetto loan deve essere stato inizializzato 
-     * @post restituisce il riferimento al libro associato
+     * @pre L'oggetto loan deve essere stato inizializzato 
+     * @post Restituisce il riferimento al libro associato
      */
     public Book getBook() {
         return book;
@@ -51,8 +62,8 @@ public class Loan implements Comparable<Loan>{
      * @brief Restituisce l'utente associato al prestito.
      * @return Oggetto User
      * 
-     * @pre l'oggetto loan deve essere stato inizializzato
-     * @post restituisce il riferimento all'user associato
+     * @pre L'oggetto loan deve essere stato inizializzato
+     * @post Restituisce il riferimento all'user associato
      */
 
     public User getUser() {
@@ -62,20 +73,20 @@ public class Loan implements Comparable<Loan>{
      * @brief Restituisce l'utente associato al prestito.
      * @return Oggetto User
      * 
-     * @pre l'oggetto loan deve essere stao inizializzato
-     * @post resituisce la data di scadenza
+     * @pre L'oggetto loan deve essere stato inizializzato
+     * @post Resituisce la data di scadenza
      */
 
     public LocalDate getDueDate() {
         return dueDate;
     }
     /**
-     * @brief Confronta il prestito corrente con un altro prestito.
+     * @brief Confronta il prestito corrente con un altro prestito
      * @param other Altro prestito da confrontare
-     * @return Valore intero per l'ordinamento
+     * @return Valore intero: negativo se il titolo di other precede quello corrente; zero, se sono uguali; positivo, se il titolo di other segue quello dell'oggetto corrente
      * 
      * @pre other != null
-     * @post restituisce un valore <0,=0 o >0
+     * @post Restituisce un valore <0, =0 o >0
      */
 
     @Override
@@ -94,7 +105,7 @@ public class Loan implements Comparable<Loan>{
     }
     
      /**
-     * @brief Imposta l'utente associato al prestito.
+     * @brief Imposta l'utente associato al prestito
      * @param user Nuovo utente (non deve essere null)
      *
      * @pre user != null
@@ -106,7 +117,7 @@ public class Loan implements Comparable<Loan>{
     }
     
      /**
-     * @brief Imposta la data di scadenza del prestito.
+     * @brief Imposta la data di scadenza del prestito
      * @param dueDate Nuova data di scadenza (non deve essere null e >= data corrente)
      *
      * @pre dueDate != null

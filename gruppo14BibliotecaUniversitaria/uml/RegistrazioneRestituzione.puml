@@ -9,14 +9,18 @@ participant FileManager
 participant Book
 participant User
 
+Bibliotecario -> View: Accede al menu pretiti
+View -> Controller: Mostra operazioni disponibili
 Bibliotecario -> View: Seleziona "Restituzione"
 View -> Controller: Richiesta restituzione prestito
-Controller -> LoanManagement: Ricerca prestito attivo
+Controller -> LoanManagement: search(Loan l)
 
 alt Prestito trovato
+    LoanManagement -> Controller: Prestito trovato
+    Controller -> LoanManagement: remove(Loan l)
     LoanManagement -> Book: Incrementa copie disponibili
     LoanManagement -> User: Aggiorna lista prestiti utente
-    LoanManagement -> FileManager: Aggiorna archivio prestiti (scrittura su file)
+    LoanManagement -> FileManager: updateFileObject(Loan l, String filename)
     Controller -> View: Conferma restituzione registrata
     View -> Bibliotecario: Restituzione completata
 else Prestito non trovato

@@ -3,6 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/**
+ * @file FileManager.java
+ * 
+ * @author bruno
+ * @date 04-12-2025
+ * @version 1.0
+ *  
+ */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage;
 
 import java.io.Serializable;
@@ -31,7 +39,7 @@ public class FileManager <T extends Serializable>{
      * @throws ClassNotFoundException Se la classe degli oggetti non viene trovata.
      * 
      * @pre filename valido e object != null
-     * @post l'oggetto è stato cancellato correttamente e il file aggiornato
+     * @post L'oggetto è stato cancellato correttamente e il file aggiornato
      */
 
     public static removeFromTextFileObject(T object, String filename){       
@@ -47,7 +55,7 @@ public class FileManager <T extends Serializable>{
      * 
      * 
      * @pre object !=0 , filename valido 
-     * @post il file è stato scritto correttamente 
+     * @post Il file è stato scritto correttamente 
      */
 
     public static writeToTextFileObject(T object, String filename){
@@ -64,7 +72,7 @@ public class FileManager <T extends Serializable>{
      * @throws ClassNotFoundException Se la classe degli oggetti non viene trovata.
      * 
      * @pre newObject !=0 , filename valido 
-     * @post il file è stato aggiornamento correttamente 
+     * @post Il file è stato aggiornamento correttamente 
      */
 
     
@@ -81,7 +89,7 @@ public class FileManager <T extends Serializable>{
      * @throws IOException Se si verifica un errore di I/O.
      * 
      * @pre filename valido 
-     * @post lettura avvenuta correttamente
+     * @post Lettura avvenuta correttamente
      */
 
     public static readLine(String filename){
@@ -92,12 +100,12 @@ public class FileManager <T extends Serializable>{
      * @brief Scrive riga su un file di testo.
      *
      * @param filename Nome del file da cui leggere.
-     * @param line stringa da scrivere nel file
+     * @param line Stringa da scrivere nel file
      * 
      * @throws IOException Se si verifica un errore di I/O.
      * 
      * @pre filename valido, line != null
-     * @post lettura avvenuta correttamente
+     * @post Lettura avvenuta correttamente
      */
     
     public static writeLine(String line,String filename){
@@ -108,12 +116,12 @@ public class FileManager <T extends Serializable>{
      * @brief Scrive riga su un file di testo.
      *
      * @param filename Nome del file da cui leggere.
-     * @param line stringa da scrivere nel file
+     * @param line Stringa da scrivere nel file
      * 
      * @throws IOException Se si verifica un errore di I/O.
      * 
      * @pre filename valido, line != null
-     * @post lettura avvenuta correttamente
+     * @post Lettura avvenuta correttamente
      */
     public static updateLine(String line,String filename){
         

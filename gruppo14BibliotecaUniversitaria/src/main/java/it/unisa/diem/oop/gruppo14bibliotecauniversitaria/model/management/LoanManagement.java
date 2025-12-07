@@ -3,9 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/**
+ * @file LoanManagement.java
+ * 
+ * @author bruno
+ * @date 04-12-2025
+ * @version 1.0
+ *  
+ */
+
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Loan;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan;
 import java.util.*;
 import java.time.LocalDate;
 /**
@@ -73,7 +83,7 @@ public class LoanManagement implements Functionality<Loan>{
      */
 
     public boolean update(Loan l){
-         // AGGIORNARE I DATI DELL'UTENTE E DEL LIBRO NEL MOMENTO IN CUI VIENE RIMOSSO O AGGIUNTO UN PRESTITO 
+         // AGGIORNA I DATI DELL'UTENTE E DEL LIBRO NEL MOMENTO IN CUI VIENE RIMOSSO O AGGIUNTO UN PRESTITO 
     }
     
     /**

@@ -17,9 +17,10 @@ import java.time.LocalDate;
         
 /**
  * @class Book
- * @brief Questa classe si occupa della gestione dei dati dei libri della biblioteca
+ * @brief Gestisce i dati dei libri della biblioteca
  * 
- * La classe gestisce i dati principali di un libro: titolo, autori, anno di pubblicazione, codice ISBN e numero di copie disponibili; implementa l'interfaccia Comparable per l'ordinamento
+ * La classe Book gestisce i dati principali di un libro: titolo, autori, anno di pubblicazione, codice ISBN e numero di copie disponibili
+ * Implementa l'interfaccia Comparable per consentire l'ordinamento per titolo
  * 
  * @invariant availableCopies >= 0
  * 
@@ -36,11 +37,11 @@ public class Book implements Comparable<Book> {
     
     /**
     * @brief Costruttore della classe Book
-    * @param[in] title Titolo del libro
-    * @param[in] authors Autori del libro
-    * @param[in] publicationYear Anno di pubblicazione del libro
-    * @param[in] ISBN Codice ISBN
-    * @param[in] availableCopies Numero di copie disponibili
+    * @param title Titolo del libro
+    * @param authors Autori del libro
+    * @param publicationYear Anno di pubblicazione del libro
+    * @param ISBN Codice ISBN
+    * @param availableCopies Numero di copie disponibili
     * @pre availableCopies >= 0
     * @post L'oggetto Book è correttamente inizializzato
     * 
@@ -55,7 +56,7 @@ public class Book implements Comparable<Book> {
 
     /**
     * @brief Imposta il valore del titolo
-    * @param[in] title Nuovo titolo da assegnare
+    * @param title Nuovo titolo da assegnare
     * @post Il titolo è aggiornato
     * 
     */
@@ -65,7 +66,7 @@ public class Book implements Comparable<Book> {
 
     /**
     * @brief Imposta gli autori del libro
-    * @param[in] authors Nuovi autori da assegnare
+    * @param authors Nuovi autori da assegnare
     * @post Gli autori del libro sono aggiornati
     * 
     */
@@ -75,7 +76,7 @@ public class Book implements Comparable<Book> {
 
     /**
     * @brief Imposta l'anno di pubblicazione del libro
-    * @param[in] publicationYear Nuovo anno da assegnare
+    * @param publicationYear Nuovo anno da assegnare
     * @post La data di pubblicazione è aggiornata
     * 
     */
@@ -85,7 +86,7 @@ public class Book implements Comparable<Book> {
 
     /**
     * @brief Imposta il codice ISBN del libro
-    * @param[in] ISBN Nuovo codice da assegnare
+    * @param ISBN Nuovo codice da assegnare
     * @post Il codice identificativo è aggiornato
     * 
     */
@@ -95,7 +96,7 @@ public class Book implements Comparable<Book> {
 
     /**
     * @brief Imposta il numero di copie disponibili
-    * @param[in] availableCopies Nuovo numero di copie disponibili
+    * @param availableCopies Nuovo numero di copie disponibili
     * @pre availableCopies >= 0
     * @post Il numero di copie disponibili è aggiornato
     * 
@@ -154,7 +155,7 @@ public class Book implements Comparable<Book> {
     * 
     * Questa funzione permette di ordinare i libri alfabeticamente in base al loro titolo, ignorando maiuscole e minuscole
     * 
-    * @param[in] other Altro libro da confrontare con quello corrente
+    * @param other Altro libro da confrontare con quello corrente
     * @return Un valore intero: negativo se il titolo di other precede quello corrente; zero, se sono uguali; positivo, se il titolo di other segue quello dell'oggetto corrente
     * 
     * @pre other != null

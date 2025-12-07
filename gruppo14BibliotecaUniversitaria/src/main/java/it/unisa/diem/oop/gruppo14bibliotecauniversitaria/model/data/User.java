@@ -4,8 +4,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/**
+ * @file User.java
+ * 
+ * @author elisa
+ * @date 04-12-2025
+ * @version 1.0
+ *  
+ */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
+
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement;
 import java.util.*;
 import java.time.LocalDate;  
