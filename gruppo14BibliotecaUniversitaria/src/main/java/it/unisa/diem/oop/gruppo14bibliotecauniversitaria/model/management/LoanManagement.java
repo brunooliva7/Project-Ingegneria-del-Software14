@@ -16,6 +16,7 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan;
+import java.io.Serializable;
 import java.util.*;
 import java.time.LocalDate;
 /**
@@ -28,7 +29,7 @@ import java.time.LocalDate;
  * secondo il criterio definito nella classe Loan.
  */
 
-public class LoanManagement implements Functionality<Loan>{
+public class LoanManagement implements Functionality<Loan>,Serializable{
     Set <Loan> Loan; ///< insieme dei prestiti da gestire 2
     
     

@@ -13,6 +13,7 @@
  *  
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data;
+import java.io.Serializable;
 import java.time.LocalDate;
         
 /**
@@ -27,7 +28,7 @@ import java.time.LocalDate;
  * @see Comparable
  * 
  */
-public class Book implements Comparable<Book> {
+public class Book implements Comparable<Book>,Serializable {
     
     private String title; ///< Titolo del libro
     private String authors; ///< Autore/i
