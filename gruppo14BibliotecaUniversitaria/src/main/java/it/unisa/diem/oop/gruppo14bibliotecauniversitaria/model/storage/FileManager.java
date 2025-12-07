@@ -76,7 +76,7 @@ public class FileManager <T extends Serializable>{
      */
 
     
-    public static updateFileObject(T newObject, String filename){
+    public static void updateFileObject(T newObject, String filename){
         
     }
     
@@ -92,7 +92,7 @@ public class FileManager <T extends Serializable>{
      * @post Lettura avvenuta correttamente
      */
 
-    public static readLine(String filename){
+    public static void readLine(String filename){
         
     }
     
@@ -108,7 +108,7 @@ public class FileManager <T extends Serializable>{
      * @post Lettura avvenuta correttamente
      */
     
-    public static writeLine(String line,String filename){
+    public static void writeLine(String line,String filename){
         
     }
     
@@ -123,7 +123,7 @@ public class FileManager <T extends Serializable>{
      * @pre filename valido, line != null
      * @post Lettura avvenuta correttamente
      */
-    public static updateLine(String line,String filename){
+    public static void updateLine(String line,String filename){
         
     }  
 }
