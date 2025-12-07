@@ -1,0 +1,13 @@
+@startuml
+title LOGOUT BIBLIOTECARIO
+
+actor Bibliotecario
+participant View
+participant Controller
+
+Bibliotecario -> View : Seleziona "Logout"
+View -> Controller : Richiesta Logout
+Controller -> Controller : Chiusura sessione
+Controller -> View : Mostra pagina login
+View -> Bibliotecario : Visualizza pagina di login
+@enduml

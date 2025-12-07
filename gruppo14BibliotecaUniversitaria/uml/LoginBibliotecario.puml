@@ -1,0 +1,24 @@
+@startuml
+title LOGIN BIBLIOTECARIO
+
+actor Bibliotecario
+participant View
+participant Controller
+participant Librarian
+
+Bibliotecario -> View : Accede alla pagina "Login"
+View -> Bibliotecario : Mostra form credenziali
+Bibliotecario -> View : Inserisce username/password
+Bibliotecario -> View : Conferma
+View -> Controller : Invia Credenziali
+Controller -> Librarian : checkCredentials(String usernameInput, String passwordInput)
+Librarian --> Controller : esito
+
+alt [ Credenziali corrette]
+Controller -> View : accessoConcesso()
+View -> Bibliotecario : Accesso al sistema
+else [ Credenziali errate]
+Controller -> View : ErrorView("Credenziali non valide")
+View -> Bibliotecario : Messaggio errore
+end
+@enduml

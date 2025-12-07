@@ -1,7 +1,12 @@
 @startuml
 title VISUALIZZAZIONE LISTA LIBRI
 
-Actor Bibliotecario
+actor Bibliotecario
+participant View
+participant Controller 
+participant BookManagement
+
+
 Bibliotecario -> View : Inserisce dati da ricercare
 Bibliotecario -> View : Conferma
 ref over Controller, BookManagement 
@@ -11,3 +16,4 @@ View -> Controller : VisualizzaDati
 Controller -> BookManagement: viewSorted("Book")
 BookManagement -> View : Mostra lista libri ordinata
 @enduml
+

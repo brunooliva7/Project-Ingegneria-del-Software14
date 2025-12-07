@@ -1,7 +1,12 @@
 @startuml
 title ELIMINAZIONE LIBRO
 
-Actor Bibliotecario
+actor Bibliotecario
+participant View
+participant Controller 
+participant BookManagement
+participant FileManager
+
 Bibliotecario -> View : Inserisce dati libro da eliminare
 Bibliotecario -> View : Conferma
 ref over Controller,BookManagement
@@ -12,9 +17,10 @@ View -> Controller : Invia dati da eliminare
 Controller -> BookManagement : remove(Book b)
 BookManagement -> FileManager : removeFromFileObject(Book b,String filename)
 BookManagement --> Controller : returnValue
-alt [returnValure==false]
-Controller -> View : ErrorView("Errore nella remozione")
-else [returnValue==true]
+alt [Errore_nella_rimozione]
+Controller -> View : ErrorView("Rimozione non avvenuta")
+else [Rimozione_avvenuta]
 Controller -> View : removeSuccess("Eliminazione avvenuta con successo")
 end
 @enduml
+

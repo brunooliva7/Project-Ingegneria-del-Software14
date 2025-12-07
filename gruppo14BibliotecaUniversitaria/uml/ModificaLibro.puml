@@ -2,6 +2,10 @@
 title MODIFICA DATI LIBRO
 
 actor Bibliotecario
+participant View
+participant Controller 
+participant BookManagement
+participant FileManager
 
 Bibliotecario -> View: Inserisci dati libro
 Bibliotecario -> View: Conferma
@@ -23,10 +27,11 @@ Controller -> BookManagement : update(Book b)
 BookManagement -> FileManager: updateFileObject(Book B,String Filename)
 BookManagement --> Controller: returnValue
 
-alt returnValue == false
-  Controller -> View: ErrorView("Errore nella ricerca")
-else returnValue == true
-  Controller -> View: updateSuccess("Modifica avvenuta con successo")
+alt [ Errore nella modifica]
+  Controller -> View: ErrorView("I dati non sono stati aggiornati correttamente")
+
+else [ Modifica avvenuta con successo]
+  Controller -> View: updateSuccess("I dati sono stati aggiornati")
 end
 
 @enduml

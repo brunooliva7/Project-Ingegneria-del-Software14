@@ -1,0 +1,24 @@
+@startuml
+title MODIFICA CREDENZIALI
+
+actor Bibliotecario
+participant View
+participant Controller
+
+Bibliotecario -> View : Seleziona "Modifica credenziali"
+View -> Bibliotecario : Mostra form
+Bibliotecario -> View : modifyCredentials(String newUsername, String newPassword)
+View -> Controller : Richiesta Cambio Password
+Controller -> Controller : Aggiorna Credenziali
+
+alt [ Aggiornamento riuscito]
+Controller -> View : Conferma credenziali aggiornate
+View -> Bibliotecario : Messaggio conferma
+else [ Password inserita errata]
+Controller -> View : ErrorView("Password attuale errata")
+View -> Bibliotecario : Reinserisci password attuale
+else [ Nuova!=conferma]
+Controller -> View : ErrorView("Nuova password non coincide")
+View -> Bibliotecario : Reinserisci nuova password
+end
+@enduml
