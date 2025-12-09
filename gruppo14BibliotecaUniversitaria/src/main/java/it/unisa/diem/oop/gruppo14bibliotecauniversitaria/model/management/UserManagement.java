@@ -35,6 +35,19 @@ public class UserManagement implements Functionality<User>,Serializable{
     public UserManagement(){
         list=new TreeSet<>(); 
     }
+    
+     /**
+     * @brief Getter dell'elenco (list )degli utenti iscritti 
+     *
+     * @pre esiste un elenco list
+     * @return elenco degli utenti
+     */
+    
+    public Set<User> getList() {
+    return list;}
+    
+    
+    
     /**
      *  @brief Metodo che aggiunge un user all'elenco 
      *  @param u L'utente da aggiungere all'elenco 
