@@ -1,4 +1,4 @@
-/*
+f/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -116,6 +116,7 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
         
        if(loan.remove(oldL)){
            loan.add(newL);
+           FileManager.updateFileObject(loan, "damodificare");
            return true;
        }
        
