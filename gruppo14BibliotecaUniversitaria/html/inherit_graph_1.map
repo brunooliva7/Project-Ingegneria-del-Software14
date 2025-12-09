@@ -1,9 +1,21 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,55,97,80"/>
-<area shape="rect" id="Node000001" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html" title="Gestisce i dati dei libri della biblioteca." alt="" coords="145,5,549,31"/>
-<area shape="poly" id="edge2_Node000000_Node000001" title=" " alt="" coords="110,48,144,40,212,30,207,33,145,45,112,53"/>
-<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_loan.html" title="Gestisce i dati relativi al prestito di un libro ad un utente." alt="" coords="146,55,548,80"/>
-<area shape="poly" id="edge3_Node000000_Node000002" title=" " alt="" coords="111,65,148,67,143,68,112,70"/>
-<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html" title="User è un utente generico che interagisce col bibliotecario e al quale dobbiamo mettere a disposizion..." alt="" coords="146,104,548,130"/>
-<area shape="poly" id="edge4_Node000000_Node000003" title=" " alt="" coords="111,82,145,90,212,103,207,104,144,95,111,88"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="172,55,263,80"/>
+<area shape="rect" id="Node000001" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html" title="Gestisce i dati dei libri della biblioteca." alt="" coords="488,5,892,31"/>
+<area shape="poly" id="edge2_Node000000_Node000001" title=" " alt="" coords="278,59,562,30,558,34,279,64"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_loan.html" title="Gestisce i dati relativi al prestito di un libro ad un utente." alt="" coords="489,55,891,80"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="278,65,490,66,486,69,279,70"/>
+<area shape="rect" id="Node000004" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html" title="User è un utente generico che interagisce col bibliotecario e al quale dobbiamo mettere a disposizion..." alt="" coords="489,104,891,130"/>
+<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="279,71,562,102,558,105,279,76"/>
+<area shape="rect" id="Node000006" href="$interfaceit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_functionality.html" title=" " alt="" coords="5,154,430,194"/>
+<area shape="rect" id="Node000005" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html" title="Gestisce l&#39;insieme dei prestiti della biblioteca." alt="" coords="478,154,902,194"/>
+<area shape="poly" id="edge5_Node000006_Node000005" title=" " alt="" coords="445,172,480,174,475,174,446,177"/>
+<area shape="rect" id="Node000008" href="$interfaceit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_functionality.html" title=" " alt="" coords="5,219,430,260"/>
+<area shape="rect" id="Node000007" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_user_management.html" title="UserManagement è una classe che si occupa essenzialmente delle funzionalità messe a disposizione per ..." alt="" coords="478,219,902,260"/>
+<area shape="poly" id="edge6_Node000008_Node000007" title=" " alt="" coords="445,237,480,239,475,240,445,242"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="173,104,262,130"/>
+<area shape="poly" id="edge7_Node000002_Node000001" title=" " alt="" coords="276,118,352,113,391,105,428,91,443,79,451,66,460,52,476,40,505,31,500,33,479,44,464,56,456,69,447,83,431,95,393,110,352,118,277,123"/>
+<area shape="poly" id="edge8_Node000002_Node000003" title=" " alt="" coords="277,108,562,79,559,83,278,113"/>
+<area shape="poly" id="edge9_Node000002_Node000004" title=" " alt="" coords="277,114,491,115,486,118,278,119"/>
+<area shape="poly" id="edge10_Node000002_Node000005" title=" " alt="" coords="277,121,430,140,522,153,517,153,429,145,277,126"/>
+<area shape="poly" id="edge11_Node000002_Node000007" title=" " alt="" coords="277,109,314,110,353,114,393,123,431,140,448,156,456,173,464,189,479,204,505,219,500,218,476,208,459,192,451,175,444,159,428,144,392,129,352,119,313,115,278,115"/>
 </map>

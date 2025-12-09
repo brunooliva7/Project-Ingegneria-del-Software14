@@ -1,5 +1,7 @@
 <map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book">
 <area shape="rect" id="Node000001" title="Gestisce i dati dei libri della biblioteca." alt="" coords="5,79,410,105"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="135,5,280,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,45,210,80,205,77,206,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="64,5,210,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,39,198,79,193,78,158,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="234,5,322,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="258,41,221,81,218,76,253,43"/>
 </map>

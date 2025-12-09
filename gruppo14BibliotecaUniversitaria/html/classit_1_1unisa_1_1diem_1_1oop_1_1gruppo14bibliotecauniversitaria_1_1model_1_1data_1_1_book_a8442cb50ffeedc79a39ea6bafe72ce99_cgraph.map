@@ -1,5 +1,5 @@
 <map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book.compareTo" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book.compareTo">
-<area shape="rect" id="Node000001" title="Confronta i libri per titolo." alt="" coords="5,5,380,46"/>
+<area shape="rect" id="Node000001" title="Confronta due libri per ordinamento alfabetico dei titoli." alt="" coords="5,5,380,46"/>
 <area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#acdad5ebe133bd2a67ea085810f16106d" title="Costruttore della classe Book." alt="" coords="428,5,802,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="380,23,415,26,409,26,380,28"/>
 </map>
