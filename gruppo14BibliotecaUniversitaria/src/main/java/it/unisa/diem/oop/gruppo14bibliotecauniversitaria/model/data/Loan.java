@@ -128,4 +128,41 @@ public class Loan implements Comparable<Loan>,Serializable {
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
+    
+    /**
+    * Restituisce una rappresentazione in formato stringa completa
+    * dell'oggetto Prestito, inclusi la data di restituzione, 
+    * e i dati dettagliati dell'utente e del libro coinvolti.
+    *
+    * Il formato della stringa è strutturato su più righe per chiarezza.
+    * * @return Una stringa contenente la data di restituzione e le 
+    * rappresentazioni in stringa degli oggetti User e Book.
+    */
+    @Override
+    public String toString(){
+        StringBuffer sb = new StringBuffer();
+        sb.append("Data di restituzione: " + this.dueDate);
+        sb.append("\n Dati User : " + user.toString());
+        sb.append("\n Dati Libro : " + book.toString());
+        
+        return sb.toString();
+    }
+    
+    /**
+    * @brief Definisce l'uguaglianza logica tra due oggetti Loan (Prestito).
+    * * Due oggetti Loan sono considerati logicamente uguali se fanno riferimento 
+    * allo stesso Utente (User) e allo stesso Libro (Book).
+    * 
+    * * @param obj L'oggetto da confrontare con l'oggetto corrente.
+    * 
+    * @return true se l'oggetto specificato è logicamente uguale a questo oggetto Loan, 
+    * false altrimenti.
+    */
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) return true;
+        if ( obj == null || getClass() != obj.getClass()) return false;
+        Loan other = (Loan) obj;
+        return this.user.equals(other.user) && this.book.equals(other.book);
+    }
 }

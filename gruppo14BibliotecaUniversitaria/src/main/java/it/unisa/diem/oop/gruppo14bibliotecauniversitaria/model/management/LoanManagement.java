@@ -65,12 +65,12 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
      * @post Il prestito è aggiunto all'insieme se non già presente e se le condizioni
      *       di disponibilità dei libri e del numero massimo consentito per utente sono rispettate
      */
-    public 
+    
     @Override
     public boolean add(Loan l){
         if( l == null ) throw new IllegalArgumentException();
         
-        if(loans.add(l)) {
+        if(loan.add(l)) {
             FileManager.writeToTextFileObject(l, "da definire");
             return true;
         }
@@ -91,9 +91,9 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
     {
        if( l == null ) throw new IllegalArgumentException();
        
-       if(loans.contains(l)){
-           loans.remove(l);
-           FileManager.updateFileObject(this.loans, "Damodificare");
+       if(loan.contains(l)){
+           loan.remove(l);
+           FileManager.updateFileObject(this.loan, "Damodificare");
            return true;
        }
        
@@ -102,16 +102,24 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
     
     /**
      * @brief Aggiorna i dati di un prestito.
-     * @param l Prestito da aggiornare 
+     * @param newL Prestito aggiornato
+     * @param oldL prestito da aggiornare
+     * 
      * @return true se l'aggiornamento è avvenuto con successo, false altrimenti
      *
-     * @pre l != null
+     * @pre oldL != null && newL != null
      * @post I dati dell'utente e del libro associati al prestito sono aggiornati
      */
 
-    public boolean update(Loan l){
-        if( l == null ) throw new IllegalArgumentException();
+    public boolean update(Loan newL, Loan oldL){
+        if( newL == null || oldL == null) throw new IllegalArgumentException();
         
+       if(loan.remove(oldL)){
+           loan.add(newL);
+           return true;
+       }
+       
+       return false;
         
     }
     
@@ -124,9 +132,9 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
 
     @Override
     public void viewSorted(){
-        System.out.println();
-        for(Loan l : loans){
-            System
+        System.out.println("Lista ordinata prestiti");
+        for(Loan l : loan){
+             l.toString();
         }
     }
     
@@ -141,7 +149,14 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
 
     @Override
     public Loan search(Loan l){
+       if( l == null ) throw new IllegalArgumentException();
        
+        for (Loan currentLoan : loan) {
+            if (currentLoan.equals(l)) {
+                return currentLoan; // Prestito trovato
+            }
+        }
+        return null;
     }
 
 }

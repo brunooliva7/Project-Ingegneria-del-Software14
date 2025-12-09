@@ -19,6 +19,8 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import java.util.Set;
 import java.util.TreeSet;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
 
 /**
  * @class BookManagement
