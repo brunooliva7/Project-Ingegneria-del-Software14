@@ -22,6 +22,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,26 +39,6 @@ import java.util.logging.Logger;
  */
 
 public class FileManager <T extends Serializable>{
-    
-    /**
-     * @brief Svuota l'intero file e poi riscrive la collections aggiornata
-     *
-     * @param filename Nome del file da cui leggere
-     * @param tree TreeSet di tipo T 
-     * 
-     * 
-     * @throws IOException Se si verifica un errore di I/O.
-     * @throws ClassNotFoundException Se la classe degli oggetti non viene trovata.
-     * 
-     * @pre filename valido e object != null
-     * @post L'oggetto è stato cancellato correttamente e il file aggiornato
-     */
-    
-
-    public static <T extends Serializable> void removeFromTextFileObject(TreeSet <T> tree, String filename){     
-       //da eliminare secondo me
-        
-    }
     
     
     /**
@@ -98,7 +79,7 @@ public class FileManager <T extends Serializable>{
      */
 
     
-    public static <T extends Serializable> void updateFileObject(TreeSet <T> newTree, String filename){  
+    public static <T extends Serializable> void updateFileObject(Set <T> newTree, String filename){  
          
         if (filename == null || newTree.isEmpty()) {
             throw new IllegalArgumentException("Nome file non valido");
@@ -167,19 +148,5 @@ public class FileManager <T extends Serializable>{
         }
     }
     
-    /**
-     * @brief Scrive riga su un file di testo.
-     *
-     * @param filename Nome del file da cui leggere.
-     * @param line Stringa da scrivere nel file
-     * 
-     * @throws IOException Se si verifica un errore di I/O.
-     * 
-     * @pre filename valido, line != null
-     * @post Lettura avvenuta correttamente
-     */
-    public static void updateLine(String line,String filename){
-        //da eliminare secondo me
-    }  
 }
 
