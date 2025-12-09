@@ -13,7 +13,18 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @class FileManager
@@ -29,10 +40,10 @@ import java.io.Serializable;
 public class FileManager <T extends Serializable>{
     
     /**
-     * @brief Elimina l'oggetto dal file
+     * @brief Svuota l'intero file e poi riscrive la collections aggiornata
      *
      * @param filename Nome del file da cui leggere
-     * @param object oggetto di tipo T da eliminare
+     * @param tree TreeSet di tipo T 
      * 
      * 
      * @throws IOException Se si verifica un errore di I/O.
@@ -41,8 +52,11 @@ public class FileManager <T extends Serializable>{
      * @pre filename valido e object != null
      * @post L'oggetto è stato cancellato correttamente e il file aggiornato
      */
+    
 
-    public static removeFromTextFileObject(T object, String filename){       
+    public static <T extends Serializable> void removeFromTextFileObject(TreeSet <T> tree, String filename){     
+       //da eliminare secondo me
+        
     }
     
     
@@ -58,8 +72,16 @@ public class FileManager <T extends Serializable>{
      * @post Il file è stato scritto correttamente 
      */
 
-    public static writeToTextFileObject(T object, String filename){
-        
+    public static <T extends Serializable> void writeToTextFileObject(T object, String filename){
+         if (object == null || filename == null) {
+            throw new IllegalArgumentException("Oggetto o nome file non valido");
+        }
+        try (ObjectOutputStream write = new ObjectOutputStream((new FileOutputStream(filename)))){
+            write.writeObject(object);
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }
     
     /**
@@ -71,13 +93,31 @@ public class FileManager <T extends Serializable>{
      * @throws IOException Se si verifica un errore di I/O.
      * @throws ClassNotFoundException Se la classe degli oggetti non viene trovata.
      * 
-     * @pre newObject !=0 , filename valido 
+     * @pre newTree non è vuoto, filename valido 
      * @post Il file è stato aggiornamento correttamente 
      */
 
     
-    public static updateFileObject(T newObject, String filename){
+    public static <T extends Serializable> void updateFileObject(TreeSet <T> newTree, String filename){  
+         
+        if (filename == null || newTree.isEmpty()) {
+            throw new IllegalArgumentException("Nome file non valido");
+        }
+
+        // Aprendo in modalità "write" senza append, il file viene svuotato
+        try (FileOutputStream fos = new FileOutputStream(filename)) {
+            // Non scrivo nulla → file vuoto
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        try (ObjectOutputStream write = new ObjectOutputStream((new FileOutputStream(filename)))){
+            write.writeObject(newTree);
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     }
     
     
@@ -92,8 +132,17 @@ public class FileManager <T extends Serializable>{
      * @post Lettura avvenuta correttamente
      */
 
-    public static readLine(String filename){
+    public static void readLine(String filename){
         
+        String line;
+        
+        try(BufferedReader reader = new BufferedReader(new FileReader("filename"))){
+            line = reader.readLine();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
      /**
@@ -108,8 +157,14 @@ public class FileManager <T extends Serializable>{
      * @post Lettura avvenuta correttamente
      */
     
-    public static writeLine(String line,String filename){
+    public static void writeLine(String line,String filename){
         
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("filename"))){
+            writer.write(line);
+            writer.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
@@ -123,8 +178,8 @@ public class FileManager <T extends Serializable>{
      * @pre filename valido, line != null
      * @post Lettura avvenuta correttamente
      */
-    public static updateLine(String line,String filename){
-        
+    public static void updateLine(String line,String filename){
+        //da eliminare secondo me
     }  
 }
 

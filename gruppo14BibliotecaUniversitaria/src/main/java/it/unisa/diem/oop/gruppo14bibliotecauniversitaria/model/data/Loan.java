@@ -7,7 +7,7 @@
 /**
  * @file Loan.java
  * 
- * @author maramariano
+ * @author bruno
  * @date 04-12-2025
  * @version 1.0
  *  
