@@ -152,21 +152,86 @@ public class Book implements Comparable<Book>,Serializable {
     }
     
     /**
-    * @brief Confronta i libri per titolo
+    * @brief Confronta due libri per ordinamento alfabetico dei titoli
     * 
-    * Questa funzione permette di ordinare i libri alfabeticamente in base al loro titolo, ignorando maiuscole e minuscole
+    * L'ordinamento avviene in base al titolo (case-insensitive). 
+    * Se i titoli sono uguali, il confronto viene effettuato sugli autori (case-insensitive)
     * 
     * @param other Altro libro da confrontare con quello corrente
     * @return Un valore intero: negativo se il titolo di other precede quello corrente; zero, se sono uguali; positivo, se il titolo di other segue quello dell'oggetto corrente
     * 
     * @pre other != null
-    * @post Restituisce un valore coerente con l'ordinamento alfabetico dei titoli
+    * @post Restituisce un valore coerente con l'ordinamento alfabetico dei titoli e degli autori
     * 
     * @see Comparable
     * 
     */
     @Override
-    public int compareTo(Book other) {
+    public int compareTo(Book other){
+        int comparing = this.title.compareToIgnoreCase(other.title); 
+        // confronto case-insensitive basato sul titolo
+        if(comparing != 0){  
+            // se i titoli sono diversi ritorno il risultato del confronto
+            return comparing;
+        }
+        else {
+            // se i titoli sono uguali confronto per autori
+            return this.authors.compareToIgnoreCase(other.authors);
+        }
+    }
+    /**
+    * @brief Confronta l'oggetto corrente con un altro per verificarne l'uguaglianza
+    * 
+    * Due oggetti Book sono considerati uguali se hanno lo stesso codice ISBN
+    * 
+    * @param obj Oggetto da confrontare con quello corrente
+    * @return true se i due libri hanno lo stesso codice identificativo, false altrimenti
+    * 
+    * @pre obj può essere null
+    * @post Restituisce un valore booleano coerente con l'identità del libro
+    */
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==null) return false;
+        if (this == obj) return true;
+        if (!(obj instanceof Book)) return false;
+        Book other = (Book) obj;
+        return ISBN != null && ISBN.equals(other.ISBN);
     }
     
+    /**
+    * @brief Restituisce il codice hash dell'oggetto Book
+    * 
+    * Il valore restituito è calcolato in base al codice ISBN, in modo coerente con il metodo equals.
+    * 
+    * @return Valore intero che rappresenta l'hash del libro
+    * 
+    * @post Restituisce 0 se ISBN è null, altrimenti l'hashCode della stringa ISBN
+    */
+    @Override
+    public int hashCode(){
+        return ISBN != null ? ISBN.hashCode() : 0;
+    }
+    
+    /**
+    * @brief Restituisce una rappresentazione testuale dell'oggetto Book
+    * 
+    * La stringa generata include i campi principali che caratterizzano il libro
+    * 
+    * @return Stringa che descrive l'oggetto Book
+    * 
+    * @post Restituisce una stringa non null contenente i dati del libro
+    */
+    @Override 
+    public String toString(){
+        StringBuffer sb = new StringBuffer();  //creo uno StringBuffer per facilitare la creazione dell'output 
+        sb.append("Book{");
+        sb.append("title='").append(title).append('\'');
+        sb.append(", authors='").append(authors).append('\'');
+        sb.append(", publicationYear='").append(publicationYear).append('\'');
+        sb.append(", ISBN='").append(ISBN).append('\'');
+        sb.append(", availableCopies=").append(availableCopies).append('}');
+    
+    }
 }
+
