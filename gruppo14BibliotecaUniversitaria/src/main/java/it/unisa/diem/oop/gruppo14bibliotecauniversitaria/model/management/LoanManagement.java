@@ -1,4 +1,4 @@
-/*
+f/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -16,6 +16,7 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
 import java.io.Serializable;
 import java.util.*;
 import java.time.LocalDate;
@@ -30,7 +31,7 @@ import java.time.LocalDate;
  */
 
 public class LoanManagement implements Functionality<Loan>,Serializable{
-    Set <Loan> loans; ///< insieme dei prestiti da gestire 
+   private Set <Loan> loan; ///< insieme dei prestiti da gestire 2
     
     
     /**
@@ -41,8 +42,18 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
      */
 
     public LoanManagement(){
-        loans = new TreeSet<>();
+        loan = new TreeSet<>();
     }
+      /**
+     * @brief Getter dell'elenco loan 
+     *
+     * @pre esiste un elenco loan
+     * @return elenco dei presiti 
+     */
+    
+    public Set<Loan> getLoan() {
+    return loan;}
+
     
     
     /**
@@ -54,9 +65,16 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
      * @post Il prestito è aggiunto all'insieme se non già presente e se le condizioni
      *       di disponibilità dei libri e del numero massimo consentito per utente sono rispettate
      */
-
+    
     @Override
     public boolean add(Loan l){
+        if( l == null ) throw new IllegalArgumentException();
+        
+        if(loan.add(l)) {
+            FileManager.writeToTextFileObject(l, "da definire");
+            return true;
+        }
+        else return false;
     } 
        
      /**
@@ -71,20 +89,39 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
     @Override
     public boolean remove(Loan l)
     {
+       if( l == null ) throw new IllegalArgumentException();
        
+       if(loan.contains(l)){
+           loan.remove(l);
+           FileManager.updateFileObject(this.loan, "Damodificare");
+           return true;
+       }
+       
+       else return false;
     }
     
     /**
      * @brief Aggiorna i dati di un prestito.
-     * @param l Prestito da aggiornare 
+     * @param newL Prestito aggiornato
+     * @param oldL prestito da aggiornare
+     * 
      * @return true se l'aggiornamento è avvenuto con successo, false altrimenti
      *
-     * @pre l != null
+     * @pre oldL != null && newL != null
      * @post I dati dell'utente e del libro associati al prestito sono aggiornati
      */
 
-    public boolean update(Loan l){
-         // AGGIORNA I DATI DELL'UTENTE E DEL LIBRO NEL MOMENTO IN CUI VIENE RIMOSSO O AGGIUNTO UN PRESTITO 
+    public boolean update(Loan newL, Loan oldL){
+        if( newL == null || oldL == null) throw new IllegalArgumentException();
+        
+       if(loan.remove(oldL)){
+           loan.add(newL);
+           FileManager.updateFileObject(loan, "damodificare");
+           return true;
+       }
+       
+       return false;
+        
     }
     
     /**
@@ -96,7 +133,10 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
 
     @Override
     public void viewSorted(){
-        
+        System.out.println("Lista ordinata prestiti");
+        for(Loan l : loan){
+             l.toString();
+        }
     }
     
     /**
@@ -110,7 +150,14 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
 
     @Override
     public Loan search(Loan l){
+       if( l == null ) throw new IllegalArgumentException();
        
+        for (Loan currentLoan : loan) {
+            if (currentLoan.equals(l)) {
+                return currentLoan; // Prestito trovato
+            }
+        }
+        return null;
     }
 
 }

@@ -27,6 +27,7 @@ import java.time.LocalDate;
  * 
  */
 public class User   implements Comparable<User>,Serializable{
+    
     private  String name; /// < @brief Nome dell'utente
     private  String surname; ///< @brief Cognome dell'utente
     private String numberId;  ///< @brief Matricola dell'utente
@@ -49,6 +50,29 @@ public class User   implements Comparable<User>,Serializable{
      this.numberId=numberId;
      this.email=email;
      booksOnloan=new TreeMap<>(); //così la lista sarà ordinata in base all'ordinamento scelto nella classe Loan
+    }
+    
+      /**
+     * @brief costruttore User 
+     * @param s Stringa usata dal bibliotecario per ricercare l'utente corrispondente 
+     * @post L'User è correttamente inizializzato per quello che ci serve
+     */
+    public User (String s ){  //overload del costruttore,sarà utilizzato solo ai fini della ricerca dell'utente
+        if(Character.isDigit(s.charAt(0))){ //se la stringa passata inizia con un numero è una matricola
+            this.name=null;
+            this.surname=null;
+            this.numberId=s;
+            this.email=null;
+            this.booksOnloan=null;
+        }
+        else { //se la stringa passata non inizia con un numero la ricerca è stata effettuala per cognome 
+            this.name=null;
+            this.surname=s;
+            this.numberId=null;
+            this.email=null;
+             this.booksOnloan=null;
+            
+        }
     }
     /**
       * @brief Imposta il nome dell'utente
@@ -123,18 +147,80 @@ public class User   implements Comparable<User>,Serializable{
                verrà chiamato in automatico nel momento in cui viene creato l'elenco
       * @param  other altro utente con cui comparare quello corrente per l'ordinamento 
       * @return  Valore negativo,valore positivo o 0 in base all'ordinamento
+      * 
      */
     @Override
     public int compareTo(User other){
-         
+         int comparing=this.surname.compareTo(other.surname); //faccio un compare basato sul cognome
+         if(comparing!=0){  //se il comparing è diverso da 0 significa che effettivamente il confronto è stato possibile dato che i cognomi erano diversi
+             return comparing;
+         }
+         else return this.name.compareTo(other.name); //se il compare sul nome ha prodotto 0 significa che hanno lo stesso cognome e il confronto deve essere fatto sulla base del nome
     }
     /**
       * @brief  Servirà a cercare nell'elenco definito nella classe LoanManagement i prestiti appartenenti all'utente,cercando  tramite matricola
                 così da poter riempire la mappa attributo  booksOnLoan  
       * @param  l L'elenco tra cui dovrò cercare i prestiti associati all'utente
       * @param  s La matricola dell'utente di cui dovrò cercare i prestiti
+      * @pre    l,s != null
+      * @post   viene aggiornata la mappa di libri-data ristituzione dell'utente in base all'elenco dei prestiti dell'utente 
       * @return Mappa dei libri-dataRestituzione riferita ai prestiti dell'utente
+      * 
     */
-    public Map<Book,LocalDate> findLoans(LoanManagement l,String s ){
+    public void findLoans(Book b,LocalDate data ){
+      booksOnloan.put(b,data);
+     //aggiorno la lista dei libri-datadirestituzione dell'utente 
+    }
+     /**
+      * @brief  Metodo per controllare se due oggetti della classe User sono uguali sulla base del numeberId
+      * @param  obj altro oggetto da confrontare con quello attuale 
+      * @return Valore boolean che è true se l'oggetto attuale e quello passato come parametro sono uguali,altrimenti dà false
+      * 
+     */
+    
+    @Override
+    public boolean equals(Object obj){
+        if(obj==null) return false;
+        if(this==obj) return true; //hanno lo stesso riferimento sono sicuramente uguali
+        if(obj.getClass()!= User.class) return false; //se non hanno la stessa classe sono sicuramente diversi 
+        User other=(User) obj; //casting esplicito così da poter vedere se hanno il campo numberID uguale (univoco)
+        return this.numberId!= null && this.numberId.equals(other.numberId); //ritorno se sono uguali o no facendo anche un controllo su null così da evitare la NullPointerException
+    }
+    
+    /**
+      * @brief  Metodo che ritorna un numero intero sulla base del numberId coerentemente con il metodo equals
+      * @return Valore intero che è uguale all'hashCode del numberId se questo è diverso da null altrimenti ritorna ovviamente 0 
+      * 
+     */
+    
+    @Override
+    public int hashCode(){
+         return numberId != null ? numberId.hashCode() : 0; 
+
+    }
+    /**
+      * @brief  Metodo per stampare a video un oggetto della classe User
+      * @return Stringa che include tutti i campi della classe User
+      * 
+     */
+    @Override 
+    public String toString(){
+        StringBuffer sb = new StringBuffer();  //creo uno StringBuffer per facilitare la creazione dell'output 
+         sb.append("User{");
+         sb.append("name='").append(name).append('\'');
+         sb.append(", surname='").append(surname).append('\'');
+         sb.append(", numberId='").append(numberId).append('\'');
+         sb.append(", email='").append(email).append('\'');
+         sb.append(", booksOnLoan={");
+
+    if (booksOnloan != null && !booksOnloan.isEmpty()) {   //se la mia mappa non è nulla o vuota stampo ogni sua coppia libro-data 
+        booksOnloan.forEach((book, date) -> 
+            sb.append("\n  ").append(book).append(" -> ").append(date)
+        );
+    }
+
+    sb.append("}}");
+    return sb.toString();
+
     }
 }
