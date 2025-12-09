@@ -46,8 +46,6 @@ public class UserManagement implements Functionality<User>,Serializable{
     public Set<User> getList() {
     return list;}
     
-    
-    
     /**
      *  @brief Metodo che aggiunge un user all'elenco 
      *  @param u L'utente da aggiungere all'elenco 
@@ -56,9 +54,22 @@ public class UserManagement implements Functionality<User>,Serializable{
      */
     
     @Override
-    public void add(User u) {
-         //metodo per inserire user all'interno della nostra lista 
+    public boolean add(User u) {
+         //controllo se l'utente è null 
+         if (u == null) {
+           return false ; // esce senza aggiungere ritornando che non è andato a buon fine l'inserimento
+    } 
+
+    for (User e : list) {
+        if (e.getNumberId().equals(u.getNumberId())) {  //controllo sulla matricola dato che deve essere per forza univoca
+          return false; // esce senza aggiungere duplicato ritornando che non è andato a buon fine l'inserimento
+        }
     }
+
+    list.add(u);
+    return true;
+}
+    
     
     /**
      *  @brief Metodo che rimuove un user dall'elenco 
@@ -67,8 +78,13 @@ public class UserManagement implements Functionality<User>,Serializable{
      *  @post L'user è correttamente eliminato dal TreeSet
      */
     @Override
-    public void remove(User u ) {
-       
+    public boolean remove(User u ) {
+         for(User utente: list){  //scorro tutta la nostra lista 
+             if(utente.equals(u))  //se l'elemento della lista ha matricola uguale a quella dell'utente da rimuovere allora è quello cercato
+             { list.remove(utente);
+               return true; //la rimozione è stata effettuata 
+              }}
+          return false; //se arrivo a questo punto significa che non ho trovato nella lista l'utente da eliminare quindi l'operazione non è andata a buon fine
     }
     /**
      *  @brief Metodo che permette di aggiornare i dati di un utente
@@ -87,7 +103,9 @@ public class UserManagement implements Functionality<User>,Serializable{
     
     @Override
     public void viewSorted(){
-         
+          for(User u:list){
+              System.out.println(u.toString()); //stampo per ogni utente appartenente all'elenco i corrispondenti   dati 
+          }
     }
     /**
      *  @brief Metodo che permette di cercare un utente nell'elenco tramite cognome o matricola
@@ -97,8 +115,26 @@ public class UserManagement implements Functionality<User>,Serializable{
      *  @return L'utente trovato
      */
     @Override
-    public User search(String s){
-     
+    public User search(User u ){
+      if(u.getNumberId()!=null){ //se il campo dell'User u relativo alla matricola è diverso da null significa che la ricerca è stata fatta per matricola
+          for(User us:list){
+              if(us.equals(u)) {  //l'uguaglianza in questo caso deve basarsi sulla matricola quindi posso usare il metodo equals di User
+                  return us;
+              }
+                  
+          }return null; //significa che non ha trovato l'utente cercato per matricola
+      }
+          else  if(u.getSurname()!=null){  //se il campo dell'User u relativo al cognome è diverso da null significa che la ricerca è stata fatta per cognome 
+          for(User us:list){
+              if(us.getSurname().equalsIgnoreCase(u.getSurname())) { //l'uguaglianza ora si base sul campo cognome 
+                  return us;
+              }
+                  
+          }return null; //significa che non ha trovato l'utente cercato per matricola
+                  
+      }  return null;//se la ricerca non è fatta nè per cognome nè per matricola allora ritorna null
+      }
+    
+    
     }
 
-}
