@@ -31,7 +31,7 @@ import java.time.LocalDate;
  */
 
 public class LoanManagement implements Functionality<Loan>,Serializable{
-    Set <Loan> loans; ///< insieme dei prestiti da gestire 
+   private Set <Loan> loan; ///< insieme dei prestiti da gestire 2
     
     
     /**
@@ -42,8 +42,18 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
      */
 
     public LoanManagement(){
-        loans = new TreeSet<>();
+        loan = new TreeSet<>();
     }
+      /**
+     * @brief Getter dell'elenco loan 
+     *
+     * @pre esiste un elenco loan
+     * @return elenco dei presiti 
+     */
+    
+    public Set<Loan> getLoan() {
+    return loan;}
+
     
     
     /**
@@ -55,7 +65,7 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
      * @post Il prestito è aggiunto all'insieme se non già presente e se le condizioni
      *       di disponibilità dei libri e del numero massimo consentito per utente sono rispettate
      */
-
+    public 
     @Override
     public boolean add(Loan l){
         if( l == null ) throw new IllegalArgumentException();

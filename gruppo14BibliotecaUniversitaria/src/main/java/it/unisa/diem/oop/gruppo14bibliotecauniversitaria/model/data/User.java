@@ -27,6 +27,7 @@ import java.time.LocalDate;
  * 
  */
 public class User   implements Comparable<User>,Serializable{
+    
     private  String name; /// < @brief Nome dell'utente
     private  String surname; ///< @brief Cognome dell'utente
     private String numberId;  ///< @brief Matricola dell'utente
@@ -123,18 +124,34 @@ public class User   implements Comparable<User>,Serializable{
                verrà chiamato in automatico nel momento in cui viene creato l'elenco
       * @param  other altro utente con cui comparare quello corrente per l'ordinamento 
       * @return  Valore negativo,valore positivo o 0 in base all'ordinamento
+      * 
      */
     @Override
     public int compareTo(User other){
-         
+         int comparing=this.surname.compareTo(other.surname); //faccio un compare basato sul cognome
+         if(comparing!=0){  //se il comparing è diverso da 0 significa che effettivamente il confronto è stato possibile dato che i cognomi erano diversi
+             return comparing;
+         }
+         else return this.name.compareTo(other.name); //se il compare sul nome ha prodotto 0 significa che hanno lo stesso cognome e il confronto deve essere fatto sulla base del nome
     }
     /**
       * @brief  Servirà a cercare nell'elenco definito nella classe LoanManagement i prestiti appartenenti all'utente,cercando  tramite matricola
                 così da poter riempire la mappa attributo  booksOnLoan  
       * @param  l L'elenco tra cui dovrò cercare i prestiti associati all'utente
       * @param  s La matricola dell'utente di cui dovrò cercare i prestiti
+      * @pre    l,s != null
+      * @post   viene aggiornata la mappa di libri-data ristituzione dell'utente in base all'elenco dei prestiti dell'utente 
       * @return Mappa dei libri-dataRestituzione riferita ai prestiti dell'utente
+      * 
     */
     public Map<Book,LocalDate> findLoans(LoanManagement l,String s ){
+      //scorro l'elenco dei prestiti
+     for(Loan loan: l.getLoan()){
+         //se trovo nell'elenco un user che ha la stessa matricola di quella passata come parametro
+         if(loan.getUser().numberId.equals(s)){
+                 booksOnloan.put(loan.getBook(),loan.getDueDate()); 
+                 }
+     }
+     return booksOnloan;
     }
 }
