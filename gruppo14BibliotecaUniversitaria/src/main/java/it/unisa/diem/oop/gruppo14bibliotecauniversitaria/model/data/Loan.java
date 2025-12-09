@@ -13,8 +13,6 @@
  *  
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data;
-
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -91,7 +89,9 @@ public class Loan implements Comparable<Loan>,Serializable {
      */
 
     @Override
-    public int compareTo(Loan other){       
+    public int compareTo(Loan other){
+        if(other == null || other.dueDate == null) throw new IllegalArgumentException();
+        return this.dueDate.compareTo(other.dueDate);
     }
     /**
      * @brief Imposta il libro associato al prestito.

@@ -22,6 +22,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,7 +79,7 @@ public class FileManager <T extends Serializable>{
      */
 
     
-    public static <T extends Serializable> void updateFileObject(TreeSet <T> newTree, String filename){  
+    public static <T extends Serializable> void updateFileObject(Set <T> newTree, String filename){  
          
         if (filename == null || newTree.isEmpty()) {
             throw new IllegalArgumentException("Nome file non valido");

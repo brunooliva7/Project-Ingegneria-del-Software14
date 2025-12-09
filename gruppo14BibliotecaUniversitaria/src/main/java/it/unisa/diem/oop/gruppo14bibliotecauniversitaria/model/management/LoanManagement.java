@@ -16,6 +16,7 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
 import java.io.Serializable;
 import java.util.*;
 import java.time.LocalDate;
@@ -57,6 +58,13 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
 
     @Override
     public boolean add(Loan l){
+        if( l == null ) throw new IllegalArgumentException();
+        
+        if(loans.add(l)) {
+            FileManager.writeToTextFileObject(l, "da definire");
+            return true;
+        }
+        else return false;
     } 
        
      /**
@@ -71,7 +79,15 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
     @Override
     public boolean remove(Loan l)
     {
+       if( l == null ) throw new IllegalArgumentException();
        
+       if(loans.contains(l)){
+           loans.remove(l);
+           FileManager.updateFileObject(this.loans, "Damodificare");
+           return true;
+       }
+       
+       else return false;
     }
     
     /**
@@ -84,7 +100,9 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
      */
 
     public boolean update(Loan l){
-         // AGGIORNA I DATI DELL'UTENTE E DEL LIBRO NEL MOMENTO IN CUI VIENE RIMOSSO O AGGIUNTO UN PRESTITO 
+        if( l == null ) throw new IllegalArgumentException();
+        
+        
     }
     
     /**
@@ -96,7 +114,10 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
 
     @Override
     public void viewSorted(){
-        
+        System.out.println();
+        for(Loan l : loans){
+            System
+        }
     }
     
     /**
