@@ -1,0 +1,13 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan.equals" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan.equals">
+<area shape="rect" id="Node000001" title="Definisce l&#39;uguaglianza logica tra due oggetti Loan (Prestito)." alt="" coords="5,71,380,111"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#a1aff84149af2c4e63eb3b7bea91be2f3" title="Confronta l&#39;oggetto corrente con un altro per verificarne l&#39;uguaglianza." alt="" coords="428,5,802,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="328,67,466,48,461,50,329,73"/>
+<area shape="rect" id="Node000004" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a22bdc9faafc77d0834f9fd79711431e3" title="Metodo per controllare se due oggetti della classe User sono uguali sulla base del numeberId." alt="" coords="428,71,802,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="379,88,415,91,409,91,380,94"/>
+<area shape="rect" id="Node000006" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_loan.html#a937df0e0922b024591ae599a29b52e42" title="Costruttore della classe Loan." alt="" coords="428,136,802,177"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="329,109,466,133,461,133,328,115"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#acdad5ebe133bd2a67ea085810f16106d" title="Costruttore della classe Book." alt="" coords="850,5,1224,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="802,23,837,25,832,26,802,28"/>
+<area shape="rect" id="Node000005" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a15f06c21e0c5570e46fcf5e8463a5457" title="costruttore User" alt="" coords="850,71,1224,111"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="802,88,837,91,832,91,802,94"/>
+</map>

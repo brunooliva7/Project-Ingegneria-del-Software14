@@ -1,5 +1,7 @@
 <map id="src/main/java/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/model/data/Book.java" name="src/main/java/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/model/data/Book.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,266,61"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="67,109,204,135"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,59,138,95,133,92,134,63"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="19,5,279,61"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,109,136,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,60,93,99,90,95,122,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="159,109,296,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="175,59,209,98,204,97,173,64"/>
 </map>
