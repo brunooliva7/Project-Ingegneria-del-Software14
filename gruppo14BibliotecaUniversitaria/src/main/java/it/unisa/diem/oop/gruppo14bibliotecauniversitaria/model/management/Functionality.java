@@ -55,13 +55,16 @@ public interface Functionality <T> {
     
     /**
      * @brief Aggiorna un'entità.
-     * @param entity Entità da aggiornare (non deve essere null)
+     * 
+     * @param entity1 Entità da aggiornare (non deve essere null)
+     * @param entity2 Nuova entità
+     * 
      * @return true se l'aggiornamento è avvenuto con successo, false altrimenti
      *
      * @pre entity != null
      * @post I dati dell'entità sono aggiornati nella collezione
      */
-    boolean update(T entity);
+    boolean update(T entity1, T entity2);
     
     /**
      * @brief Visualizza le entità ordinate.
@@ -82,5 +85,5 @@ public interface Functionality <T> {
      * @post Restituisce l'entità corrispondente se presente, altrimenti null
      */
    
-    T search(T entity1, T entity2);
+    T search(T entity1);
 }
