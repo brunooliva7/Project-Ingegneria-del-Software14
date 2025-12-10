@@ -30,7 +30,7 @@ public class User   implements Comparable<User>,Serializable{
     
     private  String name; /// < @brief Nome dell'utente
     private  String surname; ///< @brief Cognome dell'utente
-    private String numberId;  ///< @brief Matricola dell'utente
+    private  String numberId;  ///< @brief Matricola dell'utente
     private  String email;  ///< @brief Email dell'utente 
     private  Map<Book,LocalDate> booksOnloan; ///< @brief Mappa che mantiene al proprio interno una lista di  libri in prestito  con data di restituzione associata  per utente 
     
@@ -98,6 +98,15 @@ public class User   implements Comparable<User>,Serializable{
     
     public void setEmail(String email){
         this.email=email;
+    }
+    /**
+     * @brief Imposta il numberId(matricola)dell'utente
+     * @param numberId Nuovo numberId da impostare 
+     * @post Il numberId  è correttamente aggiornato
+    */
+    
+    public void setNumberId(String numberId){
+        this.numberId=numberId;
     }
     /**
      * @brief Imposta la mappa di libri-dataRestituzione dell'utente
