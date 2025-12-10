@@ -14,6 +14,8 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
+import java.io.File;
 import java.io.Serializable;
 import java.util.*;
 /**
@@ -25,6 +27,7 @@ import java.util.*;
  */
 public class UserManagement implements Functionality<User>,Serializable{
     private Set<User> list; ///<  Lista di iscritti
+    private File userDatabase = new File("userDatabase.txt"); //<file database dei prestiti
     /**
      *  @brief Costruttore UserManagement 
      * 
@@ -56,19 +59,15 @@ public class UserManagement implements Functionality<User>,Serializable{
     @Override
     public boolean add(User u) {
          //controllo se l'utente è null 
-         if (u == null) {
-           return false ; // esce senza aggiungere ritornando che non è andato a buon fine l'inserimento
-    } 
-
-    for (User e : list) {
-        if (e.getNumberId().equals(u.getNumberId())) {  //controllo sulla matricola dato che deve essere per forza univoca
-          return false; // esce senza aggiungere duplicato ritornando che non è andato a buon fine l'inserimento
-        }
-    }
-
-    list.add(u);
-    return true;
-}
+         if (u == null) 
+         { throw new IllegalArgumentException();
+            // esce senza aggiungere ritornando che non è andato a buon fine l'inserimento lanciando l'eccezione che specifica che l'argomento non è valido 
+         }
+    if(list.add(u)){
+      FileManager.writeToTextFileObject(u, this.userDatabase); //aggiorno il file d'archivio 
+       return true;}
+         return false;
+                        }
     
     
     /**
@@ -79,9 +78,14 @@ public class UserManagement implements Functionality<User>,Serializable{
      */
     @Override
     public boolean remove(User u ) {
+         if (u == null) 
+         { throw new IllegalArgumentException();
+            // esce senza rimuovere ritornando che non è andato a buon fine l'operazione lanciando l'eccezione che specifica che l'argomento non è valido 
+         } 
          for(User utente: list){  //scorro tutta la nostra lista 
              if(utente.equals(u))  //se l'elemento della lista ha matricola uguale a quella dell'utente da rimuovere allora è quello cercato
              { list.remove(utente);
+               FileManager.updateFileObject(list, this.userDatabase); //aggiorno il file d'archivio 
                return true; //la rimozione è stata effettuata 
               }}
           return false; //se arrivo a questo punto significa che non ho trovato nella lista l'utente da eliminare quindi l'operazione non è andata a buon fine
@@ -93,8 +97,24 @@ public class UserManagement implements Functionality<User>,Serializable{
      *  @post I dati dell'utente u sono correttamente aggiornati 
      */
     @Override
-    public void update(User u ){
-       
+    public boolean update(User u1 ,User u2){   //deve prima inserire tutri i dati dell'utente di cui vuole cambiare le informazioni
+       if (u1 == null) 
+         { throw new IllegalArgumentException();
+            // esce senza aggiornare ritornando che non è andato a buon fine l'operazione lanciando l'eccezione che specifica che l'argomento non è valido 
+         } 
+        
+        boolean delate=false;
+        if(u1==null) return false;
+        else{
+            for(User u: list){
+                if(u.equals(u1)){
+                    delate=remove(u1);  //rimuovo l'utente di cui saranno cambiati i dati
+                  FileManager.updateFileObject(list, this.userDatabase);
+                    return add(u2);  //aggiunge l'utente con i nuovi dati 
+                }}
+        } return false; //se arrivo a questo punto significa che non abbiamo trovato l'utente di cui volevamo aggiornare 
+        
+        
     }
     /**
      *  @brief Metodo che permette di visualizzare il TreeSet contenente l'elenco ordinato in base al cognome e  nome degli utenti  
@@ -116,13 +136,17 @@ public class UserManagement implements Functionality<User>,Serializable{
      */
     @Override
     public User search(User u ){
+        if (u== null) 
+         { throw new IllegalArgumentException();
+            // esce senza aggiornare ritornando che non è andato a buon fine l'operazione lanciando l'eccezione che specifica che l'argomento non è valido 
+         } 
       if(u.getNumberId()!=null){ //se il campo dell'User u relativo alla matricola è diverso da null significa che la ricerca è stata fatta per matricola
           for(User us:list){
               if(us.equals(u)) {  //l'uguaglianza in questo caso deve basarsi sulla matricola quindi posso usare il metodo equals di User
                   return us;
               }
                   
-          }return null; //significa che non ha trovato l'utente cercato per matricola
+          }return null; //significa che non ha trovato l'utente cercato per matricola 
       }
           else  if(u.getSurname()!=null){  //se il campo dell'User u relativo al cognome è diverso da null significa che la ricerca è stata fatta per cognome 
           for(User us:list){
