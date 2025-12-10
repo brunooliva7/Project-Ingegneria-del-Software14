@@ -37,7 +37,7 @@ public class Librarian {
     
     private String username; ///< nome utente del bibliotecario
     private String password;///< password del bibliotecario
-    private final String filepath = "credentials.txt"; ///< file esterno
+    private File file = new File("credentials.txt");///< file esterno
 
     /**
      * @brief Verifica le credenziali inserite.
@@ -61,7 +61,7 @@ public class Librarian {
     String storedPasswordHash = null;
 
     try {
-        Scanner fileScanner = new Scanner(new File("credentials.text"));
+        Scanner fileScanner = new Scanner(file);
 
         while (fileScanner.hasNextLine()) {
             String line = fileScanner.nextLine();
@@ -160,7 +160,7 @@ public class Librarian {
         String encryptedPassword = hashPassword(newPassword);
 
         // Usiamo FileWriter con 'false' per indicare che vogliamo SOVRASCRIVERE il file, non aggiungere in coda.
-        try (PrintWriter writer = new PrintWriter(new FileWriter("credentials.text", false))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(file, false))) {
             
             // Scriviamo rispettando il formato che il tuo scanner si aspetta ("chiave : valore")
             writer.println("username : " + newUsername);
