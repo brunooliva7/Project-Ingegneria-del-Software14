@@ -33,7 +33,7 @@ public class Book implements Comparable<Book>,Serializable {
     private String title; ///< Titolo del libro
     private String authors; ///< Autore/i
     private LocalDate publicationYear; ///< Anno di pubblicazione
-    private int ISBN; ///< Codice identificativo univoco
+    private String ISBN; ///< Codice identificativo univoco
     private int availableCopies; ///< Numero di copie disponibili
     
     /**
@@ -47,7 +47,7 @@ public class Book implements Comparable<Book>,Serializable {
     * @post L'oggetto Book è correttamente inizializzato
     * 
     */
-    public Book(String title, String authors, LocalDate publicationYear, int ISBN, int availableCopies) {
+    public Book(String title, String authors, LocalDate publicationYear, String ISBN, int availableCopies) {
         this.title = title;
         this.authors = authors;
         this.publicationYear = publicationYear;
@@ -91,7 +91,7 @@ public class Book implements Comparable<Book>,Serializable {
     * @post Il codice identificativo è aggiornato
     * 
     */
-    public void setISBN(int ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 
@@ -138,7 +138,7 @@ public class Book implements Comparable<Book>,Serializable {
     * @return Codice identificativo del libro (stringa)
     * 
     */
-    public int getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 
