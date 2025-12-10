@@ -1,4 +1,4 @@
-f/*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -17,6 +17,7 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
+import java.io.File;
 import java.io.Serializable;
 import java.util.*;
 import java.time.LocalDate;
@@ -32,6 +33,7 @@ import java.time.LocalDate;
 
 public class LoanManagement implements Functionality<Loan>,Serializable{
    private Set <Loan> loan; ///< insieme dei prestiti da gestire 2
+   private File loanDatabase = new File("loanDatabase.txt"); //<file database dei prestiti
     
     
     /**
@@ -71,7 +73,7 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
         if( l == null ) throw new IllegalArgumentException();
         
         if(loan.add(l)) {
-            FileManager.writeToTextFileObject(l, "da definire");
+            FileManager.writeToTextFileObject(l, this.loanDatabase);
             return true;
         }
         else return false;
@@ -91,13 +93,15 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
     {
        if( l == null ) throw new IllegalArgumentException();
        
-       if(loan.contains(l)){
-           loan.remove(l);
-           FileManager.updateFileObject(this.loan, "Damodificare");
-           return true;
+       for(Loan l1 : loan){
+           if(l1.equals(l)){
+               loan.remove(l);
+               FileManager.updateFileObject(loan, this.loanDatabase);
+               return true;
+           }
        }
        
-       else return false;
+       return false;
     }
     
     /**
@@ -111,13 +115,17 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
      * @post I dati dell'utente e del libro associati al prestito sono aggiornati
      */
 
+   @Override
     public boolean update(Loan newL, Loan oldL){
         if( newL == null || oldL == null) throw new IllegalArgumentException();
         
-       if(loan.remove(oldL)){
-           loan.add(newL);
-           FileManager.updateFileObject(loan, "damodificare");
-           return true;
+      for(Loan l1 : loan){
+           if(l1.equals(oldL)){
+               loan.remove(oldL);
+               loan.add(newL);
+               FileManager.updateFileObject(loan, this.loanDatabase);
+               return true;
+           }
        }
        
        return false;
@@ -133,9 +141,10 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
 
     @Override
     public void viewSorted(){
-        System.out.println("Lista ordinata prestiti");
+        StringBuilder sb = new StringBuilder();
         for(Loan l : loan){
-             l.toString();
+             sb.append(l.toString());
+             sb.append("\n");
         }
     }
     

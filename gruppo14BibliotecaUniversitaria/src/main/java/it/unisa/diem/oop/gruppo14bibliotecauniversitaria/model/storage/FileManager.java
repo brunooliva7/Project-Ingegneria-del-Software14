@@ -15,6 +15,7 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -45,7 +46,7 @@ public class FileManager <T extends Serializable>{
      * @brief Scrive un oggetto serializzabile su file.
      *
      * @param object Oggetto da scrivere.
-     * @param filename Nome del file di destinazione.
+     * @param file File da modificare
      * @throws IOException Se si verifica un errore di I/O.
      * 
      * 
@@ -53,11 +54,11 @@ public class FileManager <T extends Serializable>{
      * @post Il file è stato scritto correttamente 
      */
 
-    public static <T extends Serializable> void writeToTextFileObject(T object, String filename){
-         if (object == null || filename == null) {
+    public static <T extends Serializable> void writeToTextFileObject(T object, File file){
+         if (object == null || file == null) {
             throw new IllegalArgumentException("Oggetto o nome file non valido");
         }
-        try (ObjectOutputStream write = new ObjectOutputStream((new FileOutputStream(filename)))){
+        try (ObjectOutputStream write = new ObjectOutputStream((new FileOutputStream(file)))){
             write.writeObject(object);
         } catch (IOException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,7 +69,7 @@ public class FileManager <T extends Serializable>{
     /**
      * @brief Aggiorna un oggetto nel file sostituendolo con uno nuovo.
      *
-     * @param filename Nome del file da aggiornare.
+     * @param file File da modificare
      * @param newObj Nuovo oggetto da inserire.
      * 
      * @throws IOException Se si verifica un errore di I/O.
@@ -79,14 +80,14 @@ public class FileManager <T extends Serializable>{
      */
 
     
-    public static <T extends Serializable> void updateFileObject(Set <T> newTree, String filename){  
+    public static <T extends Serializable> void updateFileObject(Set <T> newTree, File file){  
          
-        if (filename == null || newTree.isEmpty()) {
+        if (file == null || newTree.isEmpty()) {
             throw new IllegalArgumentException("Nome file non valido");
         }
 
         // Aprendo in modalità "write" senza append, il file viene svuotato
-        try (FileOutputStream fos = new FileOutputStream(filename)) {
+        try (FileOutputStream fos = new FileOutputStream(file)) {
             // Non scrivo nulla → file vuoto
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -94,7 +95,7 @@ public class FileManager <T extends Serializable>{
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        try (ObjectOutputStream write = new ObjectOutputStream((new FileOutputStream(filename)))){
+        try (ObjectOutputStream write = new ObjectOutputStream((new FileOutputStream(file)))){
             write.writeObject(newTree);
         } catch (IOException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,7 +106,7 @@ public class FileManager <T extends Serializable>{
     /**
      * @brief Legge riga da un file di testo.
      *
-     * @param filename Nome del file da cui leggere.
+     * @param file File da modificare
      * 
      * @throws IOException Se si verifica un errore di I/O.
      * 
@@ -113,11 +114,11 @@ public class FileManager <T extends Serializable>{
      * @post Lettura avvenuta correttamente
      */
 
-    public static void readLine(String filename){
+    public static void readLine(File file){
         
         String line;
         
-        try(BufferedReader reader = new BufferedReader(new FileReader("filename"))){
+        try(BufferedReader reader = new BufferedReader(new FileReader(file))){
             line = reader.readLine();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,7 +130,7 @@ public class FileManager <T extends Serializable>{
      /**
      * @brief Scrive riga su un file di testo.
      *
-     * @param filename Nome del file da cui leggere.
+     * @param file File da modificare
      * @param line Stringa da scrivere nel file
      * 
      * @throws IOException Se si verifica un errore di I/O.
@@ -138,9 +139,9 @@ public class FileManager <T extends Serializable>{
      * @post Lettura avvenuta correttamente
      */
     
-    public static void writeLine(String line,String filename){
+    public static void writeLine(String line, File file){
         
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("filename"))){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
             writer.write(line);
             writer.flush();
         } catch (IOException ex) {
