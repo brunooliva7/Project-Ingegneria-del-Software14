@@ -11,9 +11,15 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -41,14 +47,17 @@ public class View extends Application {
      * @param stage La finestra principale dell'applicazione JavaFX
      * @post Lo stage principale viene configurato e mostrato a schermo
      */
-    @Override
-    public void start(Stage stage) {
-
-        Label label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        Scene scene = new Scene(new StackPane(label), 640, 480);
-        stage.setScene(scene);
-        stage.show();
+     @Override
+    public void start(Stage primaryStage) {
+        MainController controller = new MainController();
+        LoginView loginView = new LoginView(controller);
+        loginView.show(primaryStage);
     }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     /**
      * @brief Metodo main dell'applicazione.
      *
