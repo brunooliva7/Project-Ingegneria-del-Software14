@@ -231,7 +231,7 @@ public class Book implements Comparable<Book>,Serializable {
         sb.append(", publicationYear='").append(publicationYear).append('\'');
         sb.append(", ISBN='").append(ISBN).append('\'');
         sb.append(", availableCopies=").append(availableCopies).append('}');
-    
+       return sb.toString();
     }
 }
 
