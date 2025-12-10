@@ -16,11 +16,9 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import java.util.Set;
 import java.util.TreeSet;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
 
 /**
  * @class BookManagement
@@ -47,13 +45,23 @@ public class BookManagement implements Functionality<Book> {
     * 
     */
     public BookManagement() {
-        this.catalogue = new TreeSet<>(); 
+        catalogue = new TreeSet<>(); 
+    }
+    
+    /**
+    * @brief Getter del catalogo dei libri
+    * 
+    * @pre catalogue != null
+    * @return insieme dei libri presenti
+    */
+    public Set<Book> getCatalogue() {
+        return catalogue;
     }
     
     /**
     * @brief Aggiunge un libro al catalogo
     * 
-    * @param[in] b Libro da aggiungere
+    * @param b Libro da aggiungere
     * 
     * @return true se l'aggiunta va a buon fine, false atrimenti
     * 
@@ -63,13 +71,26 @@ public class BookManagement implements Functionality<Book> {
     */
     @Override
     public boolean add(Book b) {
-        
+        if (b == null) return false;
+
+        for (Book bk : catalogue) {
+        if (bk.getISBN().equals(b.getISBN())) {
+            // ISBN già presente, incremento solo di 1 le copie disponibili
+            bk.setAvailableCopies(bk.getAvailableCopies() + 1);
+            return true; // aggiornamento effettuato
+        }
+        // Se non esiste ancora, aggiungo il nuovo libro
+        return catalogue.add(b);
+    }
+
+    // Se non esiste ancora, aggiungo il nuovo libro
+    return catalogue.add(b);
     }
     
     /**
     * @brief Elimina un libro dal catalogo
     * 
-    * @param[in] b Libro da rimuovere
+    * @param b Libro da rimuovere
     * 
     * @return true se la rimozione va a buon fine, false atrimenti
     * 
@@ -80,13 +101,20 @@ public class BookManagement implements Functionality<Book> {
     */
     @Override
     public boolean remove(Book b) {
-        
+        if (b == null) return false;
+        for (Book bk : catalogue) {
+            if (bk.equals(b)) { 
+                catalogue.remove(bk);
+                return true;
+            }
+        }
+        return false;
     }
     
     /**
     * @brief Modifica i dati di un libro nel catalogo
     * 
-    * @param[in] b Libro con i dati aggiornati
+    * @param b Libro con i dati aggiornati
     * 
     * @return true se l'aggiornamneto va a buon fine, false atrimenti
     * 
@@ -111,7 +139,13 @@ public class BookManagement implements Functionality<Book> {
     */
     @Override
     public void viewSorted(){
-        
+        if (catalogue.isEmpty()) {
+            System.out.println("Il catalogo è vuoto.");
+        } else {
+            for (Book b : catalogue) {
+                System.out.println(b);
+            }
+        }
     }
     
     
@@ -121,7 +155,7 @@ public class BookManagement implements Functionality<Book> {
     * Questo metodo permette di cercare uno specificato libro per titolo, autore o codice identificativo
     * La ricerca si basa sul confronto tra l'oggetto passato come parametro e gli elementi presenti nel catalogo
     * 
-    * @param[in] b Libro da cercare
+    * @param b Libro da cercare
     * @return Il libro trovato, se la ricerca è andata a buon fine; null, altrimenti
     * 
     * @pre b != null
@@ -131,7 +165,22 @@ public class BookManagement implements Functionality<Book> {
     */
     @Override
     public Book search(Book b){
-        
+        if (b == null) return null;
+
+        if (b.getISBN() != null) { // ricerca per ISBN
+            for (Book bk : catalogue) {
+                if (bk.equals(b)) {
+                    return bk;
+                }
+            }
+        } else if (b.getTitle() != null) { // ricerca per titolo
+            for (Book bk : catalogue) {
+                if (bk.getTitle().equalsIgnoreCase(b.getTitle())) {
+                    return bk;
+                }
+            }
+        }
+        return null;
     }
     
 }
