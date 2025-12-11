@@ -9,9 +9,12 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view;
  *  
  */
 
+import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -38,7 +41,9 @@ import javafx.stage.Stage;
  * Segue il pattern MVC
  */
 public class View extends Application {
-    /**
+    
+    private static Stage mainStage;
+    /** 
      * @brief Metodo di avvio dell'applicazione JavaFX.
      *
      * Questo metodo viene invocato dal runtime JavaFX al momento della creazione
@@ -47,16 +52,40 @@ public class View extends Application {
      * @param stage La finestra principale dell'applicazione JavaFX
      * @post Lo stage principale viene configurato e mostrato a schermo
      */
+    
+        
+        
      @Override
-    public void start(Stage primaryStage) {
-        MainController controller = new MainController();
-        LoginView loginView = new LoginView(controller);
-        loginView.show(primaryStage);
+    public void start(Stage stage) throws IOException {
+
+        mainStage=stage;
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/login.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Login");
+        stage.setScene(scene);
+        stage.show();   
+        
+        stage.sizeToScene();
+        
+    }
+    
+    public static void Homepage() throws IOException{
+        
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/homepage.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("Hello FXML!");
+        mainStage.setScene(scene);
+        mainStage.show();  
+        
+        mainStage.sizeToScene(); 
+        mainStage.centerOnScreen();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
     /**
      * @brief Metodo main dell'applicazione.
@@ -66,9 +95,7 @@ public class View extends Application {
      *
      * @param args Argomenti da riga di comando (non utilizzati)
      */
-
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
-
 }
