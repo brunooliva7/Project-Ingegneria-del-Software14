@@ -19,6 +19,9 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import java.util.Set;
 import java.util.TreeSet;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
+import java.io.File;
+import java.net.URL;
 
 /**
  * @class BookManagement
@@ -36,6 +39,8 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookMa
 public class BookManagement implements Functionality<Book> {
     private Set <Book> catalogue; ///< Catalogo dei libri gestito come un insieme ordinato in cui non sono permessi duplicati
     
+    URL resourceUrl = getClass().getClassLoader().getResource("bookDatabase.txt");
+    private final File bookDatabase = new File(resourceUrl.getFile());
     /**
     * @brief Costruttore della classe BookManagement
     * 
@@ -77,6 +82,7 @@ public class BookManagement implements Functionality<Book> {
         if (bk.getISBN().equals(b.getISBN())) {
             // ISBN già presente, incremento solo di 1 le copie disponibili
             bk.setAvailableCopies(bk.getAvailableCopies() + 1);
+            FileManager.writeToTextFileObject(bk, this.bookDatabase);
             return true; // aggiornamento effettuato
         }
         // Se non esiste ancora, aggiungo il nuovo libro
@@ -105,6 +111,7 @@ public class BookManagement implements Functionality<Book> {
         for (Book bk : catalogue) {
             if (bk.equals(b)) { 
                 catalogue.remove(bk);
+                FileManager.updateFileObject(catalogue, this.bookDatabase);
                 return true;
             }
         }
@@ -141,7 +148,8 @@ public class BookManagement implements Functionality<Book> {
                     System.out.println("Errore: il numero di copie disponibili non può essere negativo.");
                     return false; // aggiornamento non valido
                 }
-
+                
+                FileManager.updateFileObject(catalogue, this.bookDatabase);
                 return true; // aggiornamento effettuato
             }
         }

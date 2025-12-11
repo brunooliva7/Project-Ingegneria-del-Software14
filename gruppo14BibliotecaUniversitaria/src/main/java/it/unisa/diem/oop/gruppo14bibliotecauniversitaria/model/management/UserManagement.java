@@ -17,6 +17,7 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
 import java.io.File;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.*;
 /**
  *
@@ -27,7 +28,9 @@ import java.util.*;
  */
 public class UserManagement implements Functionality<User>,Serializable{
     private Set<User> list; ///<  Lista di iscritti
-    private File userDatabase = new File("userDatabase.txt"); //<file database dei prestiti
+    
+    URL resourceUrl = getClass().getClassLoader().getResource("userDatabase.txt");
+    private final File userDatabase = new File(resourceUrl.getFile()); //<file database dei prestiti
     /**
      *  @brief Costruttore UserManagement 
      * 

@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
@@ -37,7 +38,9 @@ public class Librarian {
     
     private String username; ///< nome utente del bibliotecario
     private String password;///< password del bibliotecario
-    private File file = new File("credentials.txt");///< file esterno
+    
+    URL resourceUrl = getClass().getClassLoader().getResource("credentials.txt");
+   private final File credentials = new File(resourceUrl.getFile());///< file esterno
 
     /**
      * @brief Verifica le credenziali inserite.
@@ -61,7 +64,7 @@ public class Librarian {
     String storedPasswordHash = null;
 
     try {
-        Scanner fileScanner = new Scanner(file);
+        Scanner fileScanner = new Scanner(credentials);
 
         while (fileScanner.hasNextLine()) {
             String line = fileScanner.nextLine();
@@ -160,7 +163,7 @@ public class Librarian {
         String encryptedPassword = hashPassword(newPassword);
 
         // Usiamo FileWriter con 'false' per indicare che vogliamo SOVRASCRIVERE il file, non aggiungere in coda.
-        try (PrintWriter writer = new PrintWriter(new FileWriter(file, false))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(credentials, false))) {
             
             // Scriviamo rispettando il formato che il tuo scanner si aspetta ("chiave : valore")
             writer.println("username : " + newUsername);

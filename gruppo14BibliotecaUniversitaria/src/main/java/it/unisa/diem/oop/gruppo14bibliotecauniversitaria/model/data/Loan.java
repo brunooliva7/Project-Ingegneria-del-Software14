@@ -160,9 +160,12 @@ public class Loan implements Comparable<Loan>,Serializable {
     */
     @Override
     public boolean equals(Object obj){
-        if (this == obj) return true;
-        if ( obj == null || getClass() != obj.getClass()) return false;
-        Loan other = (Loan) obj;
-        return this.user.equals(other.user) && this.book.equals(other.book);
+       if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    
+     Loan other = (Loan) obj;
+    return this.user.equals(other.user) && 
+           this.book.equals(other.book) && 
+           this.dueDate.equals(other.dueDate);
     }
 }
