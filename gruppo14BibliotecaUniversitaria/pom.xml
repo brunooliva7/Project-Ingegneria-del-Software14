@@ -82,6 +82,29 @@
                     <artifactId>javafx-controls</artifactId>
                     <version>11</version>
                 </dependency>
+                <!-- API -->
+                <dependency>
+                    <groupId>org.junit.jupiter</groupId>
+                    <artifactId>junit-jupiter-api</artifactId>
+                    <version>5.11.0</version>
+                    <scope>test</scope>
+                </dependency>
+
+                <!-- Params -->
+                <dependency>
+                    <groupId>org.junit.jupiter</groupId>
+                    <artifactId>junit-jupiter-params</artifactId>
+                    <version>5.11.0</version>
+                    <scope>test</scope>
+                </dependency>
+
+                <!-- Engine -->
+                <dependency>
+                    <groupId>org.junit.jupiter</groupId>
+                    <artifactId>junit-jupiter-engine</artifactId>
+                    <version>5.11.0</version>
+                    <scope>test</scope>
+                </dependency>
             </dependencies>
         </profile>
     </profiles>
