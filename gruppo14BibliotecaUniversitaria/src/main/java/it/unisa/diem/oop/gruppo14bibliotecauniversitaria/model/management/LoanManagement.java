@@ -98,15 +98,23 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
     public boolean remove(Loan l)
     {
         
-       if( l == null ) throw new IllegalArgumentException();
-       
-       if(loan.contains(l)){
-           loan.remove(l);
-           FileManager.updateFileObject(loan, this.loanDatabase);
-           return true;
-       }
-       
-       else return false;
+       if (l == null) throw new IllegalArgumentException();
+
+    Iterator<Loan> iterator = loan.iterator();
+    
+    while (iterator.hasNext()) {
+        Loan current = iterator.next();
+        
+        // Qui forziamo l'uso del TUO metodo equals (User + Book)
+        // ignorando la logica del compareTo (Data)
+        if (current.equals(l)) {
+            iterator.remove(); // Rimuove in modo sicuro
+            FileManager.updateFileObject(loan, this.loanDatabase);
+            return true;
+        }
+    }
+    
+    return false;
     }
     
     /**
@@ -122,19 +130,31 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
 
    @Override
     public boolean update(Loan newL, Loan oldL){
-        if( newL == null || oldL == null) throw new IllegalArgumentException();
+       if (newL == null || oldL == null) throw new IllegalArgumentException();
+
+            Iterator<Loan> iterator = loan.iterator();
+            boolean removed = false;
+
+    // 1. Cerchiamo l'elemento vecchio manualmente usando EQUALS
+            while (iterator.hasNext()) {
+            Loan current = iterator.next();
         
-      for(Loan l1: loan){
-           if(l1.equals(oldL)){
-               loan.remove(oldL);
-               loan.add(newL);
-               FileManager.updateFileObject(loan, this.loanDatabase);
-               return true;
-           }
-       }
-       
-       return false;
-        
+        if (current.equals(oldL)) {
+            // Trovato! Lo rimuoviamo in modo sicuro tramite l'iteratore
+            iterator.remove();
+            removed = true;
+            break; // Usciamo dal ciclo, il lavoro di rimozione è fatto
+        }
+    }
+
+    // 2. Se lo abbiamo trovato e rimosso, aggiungiamo il nuovo
+         if (removed) {
+        loan.add(newL); // Aggiungiamo il nuovo prestito
+        FileManager.updateFileObject(loan, this.loanDatabase);
+        return true;
+            }
+
+     return false;
     }
     
     /**
