@@ -14,6 +14,8 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
+import java.io.File;
 import java.io.Serializable;
 import java.util.*;
 /**
@@ -25,6 +27,7 @@ import java.util.*;
  */
 public class UserManagement implements Functionality<User>,Serializable{
     private Set<User> list; ///<  Lista di iscritti
+    private File userDatabase = new File("userDatabase.txt"); //<file database dei prestiti
     /**
      *  @brief Costruttore UserManagement 
      * 
@@ -59,17 +62,12 @@ public class UserManagement implements Functionality<User>,Serializable{
          if (u == null) 
          { throw new IllegalArgumentException();
             // esce senza aggiungere ritornando che non è andato a buon fine l'inserimento lanciando l'eccezione che specifica che l'argomento non è valido 
-         } 
-
-    for (User e : list) {
-        if (e.getNumberId().equals(u.getNumberId())) {  //controllo sulla matricola dato che deve essere per forza univoca
-          return false; // esce senza aggiungere duplicato ritornando che non è andato a buon fine l'inserimento
-        }
-    }
-
-    list.add(u);
-    return true;
-}
+         }
+    if(list.add(u)){
+      FileManager.writeToTextFileObject(u, this.userDatabase); //aggiorno il file d'archivio 
+       return true;}
+         return false;
+                        }
     
     
     /**
@@ -87,6 +85,7 @@ public class UserManagement implements Functionality<User>,Serializable{
          for(User utente: list){  //scorro tutta la nostra lista 
              if(utente.equals(u))  //se l'elemento della lista ha matricola uguale a quella dell'utente da rimuovere allora è quello cercato
              { list.remove(utente);
+               FileManager.updateFileObject(list, this.userDatabase); //aggiorno il file d'archivio 
                return true; //la rimozione è stata effettuata 
               }}
           return false; //se arrivo a questo punto significa che non ho trovato nella lista l'utente da eliminare quindi l'operazione non è andata a buon fine
@@ -110,6 +109,7 @@ public class UserManagement implements Functionality<User>,Serializable{
             for(User u: list){
                 if(u.equals(u1)){
                     delate=remove(u1);  //rimuovo l'utente di cui saranno cambiati i dati
+                  FileManager.updateFileObject(list, this.userDatabase);
                     return add(u2);  //aggiunge l'utente con i nuovi dati 
                 }}
         } return false; //se arrivo a questo punto significa che non abbiamo trovato l'utente di cui volevamo aggiornare 

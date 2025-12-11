@@ -124,9 +124,30 @@ public class BookManagement implements Functionality<Book> {
     * 
     */
     @Override
-    public boolean update(Book b){
-        
+    public boolean update(Book b1, Book b2) {
+        if (b1 == null || b2 == null) return false;
+
+        for (Book bk : catalogue) {
+            if (bk.getISBN().equals(b1.getISBN())) {
+                // Aggiorno i dati con quelli di b2
+                bk.setTitle(b2.getTitle());
+                bk.setAuthors(b2.getAuthors());
+                bk.setPublicationYear(b2.getPublicationYear());
+
+                // Controllo sulle copie disponibili
+                if (b2.getAvailableCopies() >= 0) {
+                    bk.setAvailableCopies(b2.getAvailableCopies());
+                } else {
+                    System.out.println("Errore: il numero di copie disponibili non può essere negativo.");
+                    return false; // aggiornamento non valido
+                }
+
+                return true; // aggiornamento effettuato
+            }
+        }
+        return false; // libro non trovato
     }
+    
     
     /**
     * @brief Visualizza in ordine i libri del catalogo
