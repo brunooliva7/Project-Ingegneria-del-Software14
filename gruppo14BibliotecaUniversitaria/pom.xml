@@ -18,9 +18,20 @@
                 <configuration>
                     <excludes>
                         <exclude>module-info.java</exclude>
+                        <exclude>**/view/**</exclude>
+                        <exclude>**/control/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M9</version>
+                <configuration>
+                     <useModulePath>false</useModulePath>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -81,8 +92,13 @@
                     <groupId>org.openjfx</groupId>
                     <artifactId>javafx-controls</artifactId>
                     <version>11</version>
-                </dependency>
-                <!-- API -->
+             </dependency>
+            </dependencies> 
+        </profile>
+    </profiles>
+    
+    <dependencies>
+       <!-- API -->
                 <dependency>
                     <groupId>org.junit.jupiter</groupId>
                     <artifactId>junit-jupiter-api</artifactId>
@@ -104,8 +120,6 @@
                     <artifactId>junit-jupiter-engine</artifactId>
                     <version>5.11.0</version>
                     <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
+                </dependency>  
+    </dependencies>
 </project>

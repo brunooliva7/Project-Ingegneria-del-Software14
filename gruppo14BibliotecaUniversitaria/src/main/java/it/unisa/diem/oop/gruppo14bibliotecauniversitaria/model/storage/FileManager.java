@@ -75,14 +75,14 @@ public class FileManager <T extends Serializable>{
      * @throws IOException Se si verifica un errore di I/O.
      * @throws ClassNotFoundException Se la classe degli oggetti non viene trovata.
      * 
-     * @pre newTree non è vuoto, filename valido 
+     * @pre filename valido 
      * @post Il file è stato aggiornamento correttamente 
      */
 
     
     public static <T extends Serializable> void updateFileObject(Set <T> newTree, File file){  
          
-        if (file == null || newTree.isEmpty()) {
+        if (file == null) {
             throw new IllegalArgumentException("Nome file non valido");
         }
 
