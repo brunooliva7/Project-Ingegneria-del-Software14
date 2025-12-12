@@ -7,23 +7,36 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-
+import javafx.scene.control.MenuItem;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
+import java.io.IOException;
 /**
  *
  * @author bruno
  */
 public class homepageController {
     
-    @FXML  
-    private Label prova;
+    @FXML
+    private MenuItem aggiungiUtente;
     
     @FXML
-    public void initialize() {
-        // Questo parte appena si apre la Homepage
-        System.out.println("Homepage caricata correttamente!");
-        
-        if(prova != null) {
-            prova.setText("Benvenuto nella Biblioteca!");
-        }
+    private MenuItem modficaUtente;
+    
+    @FXML
+    private MenuItem cancellaUtente;
+    
+    @FXML
+    private MenuItem cercaUtente;
+    
+    
+    @FXML
+    public void addUser() throws IOException{
+        View.addUser();
     }
+    
+    @FXML
+    public void modifyUser() throws IOException{
+        
+    }
+    
 }
