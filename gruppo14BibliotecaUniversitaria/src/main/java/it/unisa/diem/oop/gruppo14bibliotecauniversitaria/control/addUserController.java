@@ -1,0 +1,73 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
+import java.io.IOException;
+
+/**
+ *
+ * @author bruno
+ */
+public class addUserController {
+    
+    @FXML
+    private TextField name;
+    
+    @FXML
+    private TextField surname;
+    
+    @FXML
+    private TextField email;
+    
+    @FXML
+    private TextField numberID;
+    
+    @FXML
+    private Button addButton;
+    
+    @FXML 
+    private Label labelErrore;
+    
+    @FXML
+    private Button backButton;
+    
+    @FXML
+    public void initialize(){
+        numberID.disableProperty().bind(email.textProperty().isEmpty().or(surname.textProperty().isEmpty().or(name.textProperty().isEmpty())));
+        surname.disableProperty().bind(name.textProperty().isEmpty());
+        email.disableProperty().bind(name.textProperty().isEmpty().or(surname.textProperty().isEmpty()));   
+        addButton.disableProperty().bind(numberID.textProperty().isEmpty());
+    }
+    
+    @FXML
+    public void addUser(){
+        String nome = name.getText();
+        String cognome = surname.getText();
+        String mail = email.getText();
+        String matricola = numberID.getText();
+        
+        User u = new User(nome,cognome,mail,matricola);
+        UserManagement us = new UserManagement();
+        if(us.add(u)){
+            labelErrore.setText("Inserimento avvenuto correttamente");
+        }
+        else labelErrore.setText("Errore nell'inserimento");
+    }
+    
+    @FXML
+    public void backPage() throws IOException{
+        View.Homepage();
+    }
+    
+}

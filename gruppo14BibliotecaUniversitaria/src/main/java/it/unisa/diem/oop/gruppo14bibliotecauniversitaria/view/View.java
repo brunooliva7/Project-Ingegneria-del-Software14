@@ -67,7 +67,7 @@ public class View extends Application {
         stage.setScene(scene);
         stage.show();   
         
-        stage.sizeToScene();
+        stage.setMaximized(true);
         
     }
     
@@ -80,10 +80,12 @@ public class View extends Application {
         
         mainStage.setTitle("HomePage!");
         mainStage.setScene(scene);
-        mainStage.show();  
         
-        mainStage.sizeToScene(); 
-        mainStage.centerOnScreen();
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
     }
     
     
@@ -95,10 +97,12 @@ public class View extends Application {
         
         mainStage.setTitle("Modifica Credenziali!");
         mainStage.setScene(scene);
-        mainStage.show();  
         
-        mainStage.sizeToScene(); 
-        mainStage.centerOnScreen();
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
     }
     
    
@@ -112,22 +116,24 @@ public class View extends Application {
         mainStage.setScene(scene);
         mainStage.show();  
         
-        mainStage.sizeToScene(); 
-        mainStage.centerOnScreen();
+  
+        mainStage.setMaximized(true);
     }
      
-     public static void modifyUser2() throws IOException {
+     public static void modifyUser() throws IOException {
         
-        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/2modificautente.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificautente.fxml"));
         
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("Aggiungi utente");
         mainStage.setScene(scene);
-        mainStage.show();  
         
-        mainStage.sizeToScene(); 
-        mainStage.centerOnScreen();
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
     }
 
     /**

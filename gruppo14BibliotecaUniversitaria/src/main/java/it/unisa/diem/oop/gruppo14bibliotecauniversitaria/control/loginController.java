@@ -32,8 +32,6 @@ public class loginController {
     @FXML
     private Label labelErrore;
     
-    @FXML
-    private Label labelModify;
     
     @FXML
     private void initialize(){

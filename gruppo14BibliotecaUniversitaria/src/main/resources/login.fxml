@@ -16,7 +16,7 @@
         <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f57c3c;                       -fx-background-radius: 16 16 0 0;                      -fx-padding: 25 20 25 20;">
             <children>
                 <Label style="-fx-font-size: 24; -fx-text-fill: white; -fx-font-weight: bold;" text="📚 Biblioteca UNISA" />
-                <Label style="-fx-font-size: 14; -fx-text-fill: #ffe0b2;" text="Area Riservata Bibliotecario" />
+                <Label fx:id="labelErrore" style="-fx-font-size: 14; -fx-text-fill: #ffe0b2;" text="Area Riservata Bibliotecario" />
             </children>
         </VBox>
 

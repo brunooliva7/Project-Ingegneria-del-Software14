@@ -36,7 +36,16 @@ public class homepageController {
     
     @FXML
     public void modifyUser() throws IOException{
+        View.modifyUser();
+    }
+    
+    @FXML 
+    public void deleteUser() throws IOException{
         
     }
     
+    @FXML
+    public void searchUser() throws IOException{
+        
+    }
 }
