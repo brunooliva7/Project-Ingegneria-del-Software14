@@ -35,8 +35,7 @@ import java.time.LocalDate;
 public class LoanManagement implements Functionality<Loan>,Serializable{
    private Set <Loan> loan; ///< insieme dei prestiti da gestire 2
    
-   URL resourceUrl = getClass().getClassLoader().getResource("loanDatabase.txt");
-   private final File loanDatabase = new File(resourceUrl.getFile()); //<file database dei prestiti
+   private final File loanDatabase = new File("src/main/resources/loanDatabase.txt"); //<file database dei prestiti
    
    
    

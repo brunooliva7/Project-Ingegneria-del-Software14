@@ -39,8 +39,7 @@ import java.net.URL;
 public class BookManagement implements Functionality<Book> {
     private Set <Book> catalogue; ///< Catalogo dei libri gestito come un insieme ordinato in cui non sono permessi duplicati
     
-    URL resourceUrl = getClass().getClassLoader().getResource("bookDatabase.txt");
-    private final File bookDatabase = new File(resourceUrl.getFile());
+    private final File bookDatabase = new File("src/main/resources/bookDatabase.txt");
     /**
     * @brief Costruttore della classe BookManagement
     * 

@@ -29,8 +29,8 @@ import java.util.*;
 public class UserManagement implements Functionality<User>,Serializable{
     private Set<User> list; ///<  Lista di iscritti
     
-    URL resourceUrl = getClass().getClassLoader().getResource("userDatabase.txt");
-    private final File userDatabase = new File(resourceUrl.getFile()); //<file database dei prestiti
+    
+    private final File userDatabase = new File("src/main/resources/userDatabase.txt"); //<file database dei prestiti
     /**
      *  @brief Costruttore UserManagement 
      * 

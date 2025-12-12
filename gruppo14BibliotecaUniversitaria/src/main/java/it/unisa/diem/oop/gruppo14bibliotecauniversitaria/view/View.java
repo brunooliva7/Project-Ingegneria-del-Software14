@@ -78,14 +78,70 @@ public class View extends Application {
         
         Scene scene = new Scene(fxmlLoader.load());
         
-        mainStage.setTitle("Hello FXML!");
+        mainStage.setTitle("HomePage!");
         mainStage.setScene(scene);
         mainStage.show();  
         
         mainStage.sizeToScene(); 
         mainStage.centerOnScreen();
     }
-
+    
+    
+    public static void Modify() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modifyPage.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("Modifica Credenziali!");
+        mainStage.setScene(scene);
+        mainStage.show();  
+        
+        mainStage.sizeToScene(); 
+        mainStage.centerOnScreen();
+    }
+    
+    public static void Modify() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modifyPage.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("Modifica Credenziali!");
+        mainStage.setScene(scene);
+        mainStage.show();  
+        
+        mainStage.sizeToScene(); 
+        mainStage.centerOnScreen();
+    }
+    
+     public static void addUser() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/aggiungiutente.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("Aggiungi utente");
+        mainStage.setScene(scene);
+        mainStage.show();  
+        
+        mainStage.sizeToScene(); 
+        mainStage.centerOnScreen();
+    }
+     
+     public static void modifyUser2() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/2modificautente.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("Aggiungi utente");
+        mainStage.setScene(scene);
+        mainStage.show();  
+        
+        mainStage.sizeToScene(); 
+        mainStage.centerOnScreen();
+    }
 
     /**
      * @brief Metodo main dell'applicazione.
