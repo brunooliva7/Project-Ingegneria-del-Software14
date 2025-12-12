@@ -4,52 +4,59 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FDE68A 0%, #F59E0B 100%);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.Controller">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.Controller"
+            style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FDE68A 0%, #F59E0B 100%);">
 
-    <VBox alignment="CENTER" maxHeight="800" maxWidth="800" prefHeight="500" prefWidth="450" spacing="0">
+    <!-- BOTTONE INDIETRO posizionato in alto a sinistra con margine -->
+    <Button fx:id="backButtonau" text="Indietro"
+            style="-fx-background-color: #FF7043; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-font-size: 18;"
+            AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20">
+        <effect>
+            <DropShadow color="#00000075"/>
+        </effect>
+    </Button>
 
-        <!-- HEADER CARD -->
-        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f57c3c;  -fx-background-radius: 16 16 0 0;  -fx-padding: 25 20 25 20;">
-            <children>
-                <Label style="-fx-font-size: 24; -fx-text-fill: white; -fx-font-weight: bold;" text="📚 Biblioteca UNISA" />
-                <Label style="-fx-font-size: 14; -fx-text-fill: #ffe0b2;" text="Inserimento Studente" />
-            </children>
-        </VBox>
+    <!-- LAYOUT CENTRALE -->
+    <VBox alignment="CENTER" spacing="25" maxHeight="800" maxWidth="800" prefHeight="600" prefWidth="450"
+          AnchorPane.topAnchor="80" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+        <children>
+            <!-- HEADER CARD -->
+            <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #f57c3c; -fx-background-radius: 16 16 0 0; -fx-padding: 25 30 25 30;" maxWidth="450" prefWidth="450">
+                <children>
+                    <Label style="-fx-font-size: 24; -fx-text-fill: white; -fx-font-weight: bold;" text="📚 Biblioteca UNISA"/>
+                    <Label style="-fx-font-size: 14; -fx-text-fill: #ffe0b2;" text="Inserimento Studente"/>
+                </children>
+            </VBox>
 
-        <!-- CARD CENTRALE FORM -->
-        <VBox alignment="CENTER" spacing="20" style="-fx-background-color: white;-fx-background-radius: 0 0 16 16; -fx-padding: 40;">
-            <effect>
-                <DropShadow color="#00000033" offsetY="4" radius="20" />
-            </effect>
-            <children>
+            <!-- CARD CENTRALE FORM -->
+            <VBox alignment="CENTER" spacing="18" style="-fx-background-color: white; -fx-background-radius: 0 0 16 16; -fx-padding: 40 30 40 30;" maxWidth="450" prefWidth="450">
+                <effect>
+                    <DropShadow color="#00000033" offsetY="4" radius="20"/>
+                </effect>
+                <children>
+                    <!-- Nome -->
+                    <TextField fx:id="nomeFieldau" maxWidth="250" prefWidth="250" promptText="Nome" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;"/>
+                    <!-- Cognome -->
+                    <TextField fx:id="cognomeFieldau" maxWidth="250" prefWidth="250" promptText="Cognome" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;"/>
+                    <!-- Email -->
+                    <TextField fx:id="emailFieldau" maxWidth="250" prefWidth="250" promptText="Email" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;"/>
+                    <!-- Matricola -->
+                    <TextField fx:id="matricolaFieldau" maxWidth="250" prefWidth="250" promptText="Matricola" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;"/>
+                    <!-- Bottone Aggiungi -->
+                    <Button fx:id="aggiungiButtonau" maxWidth="250" prefWidth="250" style="-fx-background-color: #FF7043; -fx-text-fill: white;  -fx-font-weight: bold; -fx-background-radius: 8; -fx-font-size: 14;" text="Aggiungi">
+                        <effect>
+                            <DropShadow color="#00000033" radius="5" />
+                        </effect>
+                    </Button>
+                    <!-- Footer -->
+                    <Label style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno"/>
+                </children>
+            </VBox>
 
-                <!-- Nome -->
-                <TextField fx:id="nomeField" maxWidth="250" prefWidth="250" promptText="Nome" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043;                                    -fx-border-width: 1;                                    -fx-padding: 5;" />
-
-                <!-- Cognome -->
-                <TextField fx:id="cognomeField" maxWidth="250" prefWidth="250" promptText="Cognome" style="-fx-background-radius: 8;  -fx-border-radius: 8; -fx-border-color: #FF7043;                                    -fx-border-width: 1;                                    -fx-padding: 5;" />
-
-                <!-- Email -->
-                <TextField fx:id="emailField" maxWidth="250" prefWidth="250" promptText="Email" style="-fx-background-radius: 8;  -fx-border-radius: 8;  -fx-border-color: #FF7043; -fx-border-width: 1;                                    -fx-padding: 5;" />
-
-                <!-- Matricola -->
-                <TextField fx:id="matricolaField" maxWidth="250" prefWidth="250" promptText="Matricola" style="-fx-background-radius: 8;  -fx-border-radius: 8;                                    -fx-border-color: #FF7043;                                    -fx-border-width: 1;                                    -fx-padding: 5;" />
-
-                <!-- Bottone Aggiungi -->
-                <Button fx:id="aggiungiButton" maxWidth="250" prefWidth="250" style="-fx-background-color: #FF7043; -fx-text-fill: white;  -fx-font-weight: bold;                                 -fx-background-radius: 8;                                 -fx-font-size: 14;" text="Aggiungi">
-                    <effect>
-                        <DropShadow color="#00000033" radius="5" />
-                    </effect>
-                </Button>
-
-                <!-- Footer -->
-                <Label style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
-
-            </children>
-        </VBox>
-
+        </children>
     </VBox>
-</StackPane>
+
+</AnchorPane>
