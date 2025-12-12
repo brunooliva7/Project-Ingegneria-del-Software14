@@ -5,7 +5,7 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.management;
 
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.data.Book;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement;

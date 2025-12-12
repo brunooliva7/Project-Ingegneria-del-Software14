@@ -6,7 +6,7 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.data.Book;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import java.time.LocalDate;
 import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
