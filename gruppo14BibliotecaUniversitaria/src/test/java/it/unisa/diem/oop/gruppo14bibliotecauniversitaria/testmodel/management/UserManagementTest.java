@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
+package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
 import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
