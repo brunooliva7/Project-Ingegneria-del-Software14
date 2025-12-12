@@ -33,6 +33,9 @@ public class loginController {
     private Label labelErrore;
     
     @FXML
+    private Label labelModify;
+    
+    @FXML
     private void initialize(){
         passwordField.disableProperty().bind(usernameField.textProperty().isEmpty());
         
@@ -53,8 +56,13 @@ public class loginController {
             View.Homepage();
         }
         
-        else labelErrore.setText("no");
-        
-        
+        else labelErrore.setText("Credenziali Errate");  
     }
+    
+    @FXML
+    private void modifyCredentials() throws IOException{
+        View.Modify();
+    }
+    
+    
 }

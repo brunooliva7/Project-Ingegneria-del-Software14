@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
+package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.management;
 
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import java.time.LocalDate;
 import java.util.Set;

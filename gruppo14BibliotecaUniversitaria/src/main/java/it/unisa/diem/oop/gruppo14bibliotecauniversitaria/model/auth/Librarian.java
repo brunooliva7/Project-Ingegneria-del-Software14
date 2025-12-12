@@ -39,8 +39,7 @@ public class Librarian {
     private String username; ///< nome utente del bibliotecario
     private String password;///< password del bibliotecario
     
-    URL resourceUrl = getClass().getClassLoader().getResource("credentials.txt");
-   private final File credentials = new File(resourceUrl.getFile());///< file esterno
+   private final File credentials = new File("src/main/resources/credentials.txt");///< file esterno
 
     /**
      * @brief Verifica le credenziali inserite.
