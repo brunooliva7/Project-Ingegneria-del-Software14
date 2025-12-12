@@ -101,20 +101,7 @@ public class View extends Application {
         mainStage.centerOnScreen();
     }
     
-    public static void Modify() throws IOException {
-        
-        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modifyPage.fxml"));
-        
-        Scene scene = new Scene(fxmlLoader.load());
-        
-        mainStage.setTitle("Modifica Credenziali!");
-        mainStage.setScene(scene);
-        mainStage.show();  
-        
-        mainStage.sizeToScene(); 
-        mainStage.centerOnScreen();
-    }
-    
+   
      public static void addUser() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/aggiungiutente.fxml"));
