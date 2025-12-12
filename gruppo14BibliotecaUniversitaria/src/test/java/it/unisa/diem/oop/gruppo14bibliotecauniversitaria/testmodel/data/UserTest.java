@@ -50,13 +50,13 @@ class UserTest {
         dueDateB = LocalDate.now().plusDays(5);
         
         // Utente standard
-        user1 = new User("Mario", "Rossi", "S123456", "mario.rossi@unisa.it");
+        user1 = new User("Mario", "Rossi", "0612709999", "mario.rossi@unisa.it");
         
         // Utente con la stessa matricola di user1
-        user2_sameIdAs1 = new User("Luigi", "Verdi", "S123456", "luigi.verdi@unisa.it");
+        user2_sameIdAs1 = new User("Luigi", "Verdi", "0612709999", "luigi.verdi@unisa.it");
         
         // Utente completamente diverso
-        user3_different = new User("Anna", "Bianchi", "A987654", "anna.bianchi@unisa.it");
+        user3_different = new User("Anna", "Bianchi", "0612712323", "anna.bianchi@unisa.it");
     }
 
     // --- TEST COSTUTTORI, GETTER e SETTER ---
@@ -65,7 +65,7 @@ class UserTest {
     void testStandardConstructorAndGetters() {
         assertEquals("Mario", user1.getName());
         assertEquals("Rossi", user1.getSurname());
-        assertEquals("S123456", user1.getNumberId());
+        assertEquals("0612709999", user1.getNumberId());
         assertEquals("mario.rossi@unisa.it", user1.getEmail());
         assertTrue(user1.getBooksOnloan() instanceof TreeMap, "La mappa deve essere un'istanza di TreeMap");
         assertTrue(user1.getBooksOnloan().isEmpty(), "La mappa booksOnloan deve essere vuota inizialmente");
@@ -74,8 +74,8 @@ class UserTest {
     @Test
     void testSearchConstructor() {
         // Ricerca per Matricola
-        User searchById = new User("777123"); 
-        assertEquals("777123", searchById.getNumberId());
+        User searchById = new User("0612729867"); 
+        assertEquals("0612729867", searchById.getNumberId());
         assertNull(searchById.getSurname()); 
         
         // Ricerca per Cognome
@@ -88,7 +88,7 @@ class UserTest {
     void testSetters() {
         user1.setName("Giuseppe");
         user1.setSurname("Bianchi");
-        user1.setNumberId("999000");
+        user1.setNumberId("0612697850");
         user1.setEmail("nuova.email@test.it");
         
         TreeMap<Book, LocalDate> newMap = new TreeMap<>();
@@ -97,7 +97,7 @@ class UserTest {
 
         assertEquals("Giuseppe", user1.getName());
         assertEquals("Bianchi", user1.getSurname());
-        assertEquals("999000", user1.getNumberId());
+        assertEquals("0612697850", user1.getNumberId());
         assertEquals("nuova.email@test.it", user1.getEmail());
         assertEquals(newMap, user1.getBooksOnloan());
     }
@@ -160,7 +160,7 @@ class UserTest {
         
         // *** CORREZIONE: Usiamo .append("\n") senza spazi o tabulazioni dopo. ***
         String expectedToString = new StringBuilder()
-            .append("User{name='Mario', surname='Rossi', numberId='S123456', email='mario.rossi@unisa.it', booksOnLoan={")
+            .append("User{name='Mario', surname='Rossi', numberId='0612709999', email='mario.rossi@unisa.it', booksOnLoan={")
             .append("\n").append(expectedBookString).append(" -> ").append(dueDateA) 
             .append("}}")
             .toString();
@@ -168,8 +168,8 @@ class UserTest {
         assertEquals(expectedToString, user1.toString());
         
         // Verifica toString con lista vuota
-        User userEmptyLoans = new User("Luigi", "Verdi", "S789", "l@test.it");
-        String expectedEmptyToString = "User{name='Luigi', surname='Verdi', numberId='S789', email='l@test.it', booksOnLoan={}}";
+        User userEmptyLoans = new User("Luigi", "Verdi", "0612789000", "l@test.it");
+        String expectedEmptyToString = "User{name='Luigi', surname='Verdi', numberId='0612789000', email='l@test.it', booksOnLoan={}}";
         assertEquals(expectedEmptyToString, userEmptyLoans.toString());
     }
 }
