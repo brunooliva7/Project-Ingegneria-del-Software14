@@ -58,6 +58,16 @@ class BookTest {
         assertEquals("978-0618260214", book1.getISBN());
         assertEquals(5, book1.getAvailableCopies());
     }
+    
+    /**
+     * @brief Test del costruttore con valore negativo per availableCopies (deve fallire).
+     */
+    @Test
+    void testConstructor_NegativeCopies_ThrowsException() {
+         assertThrows(IllegalArgumentException.class, () -> {
+            new Book("Invalid Book", "Author", DATE_2000, "123-4567890123", -1);
+        }, "Il costruttore dovrebbe lanciare IllegalArgumentException se availableCopies è negativo");
+    }
 
     /**
      * @brief Test di tutti i metodi setter.
@@ -77,6 +87,20 @@ class BookTest {
         assertEquals(newDate, book1.getPublicationYear());
         assertEquals("978-0007487295", book1.getISBN());
         assertEquals(12, book1.getAvailableCopies());
+    }
+
+    /**
+     * @brief Test che setAvailableCopies lanci un'eccezione per valori negativi.
+     */
+    @Test
+    void testSetAvailableCopies() {
+        // Verifica che l'impostazione di un valore negativo lanci l'eccezione
+        assertThrows(IllegalArgumentException.class, () -> {
+            book1.setAvailableCopies(-1);
+        }, "setAvailableCopies dovrebbe lanciare IllegalArgumentException se il valore è negativo");
+
+        // Verifica che lo stato del libro non sia cambiato
+        assertEquals(5, book1.getAvailableCopies(), "Il numero di copie non dovrebbe essere modificato dopo un'eccezione");
     }
 
     /**
@@ -123,7 +147,13 @@ class BookTest {
         Book bookNullIsbn = new Book("Title", "Author", DATE_2000, null, 1);
         Book bookNullIsbn2 = new Book("Title", "Author", DATE_2000, null, 1);
         assertFalse(book1.equals(bookNullIsbn), "Book con ISBN diverso da null non è uguale a Book con ISBN null");
-        assertFalse(bookNullIsbn.equals(bookNullIsbn2), "Due Book con ISBN null non dovrebbero essere considerati uguali");
+        
+        /* * NOTA: L'implementazione di equals() (ISBN != null && ISBN.equals(other.ISBN)) 
+         * e l'implementazione di hashCode() (return ISBN != null ? ISBN.hashCode() : 0)
+         * rendono due oggetti con ISBN=null NON uguali (false) e il loro hashCode uguale a 0.
+         * Per coerenza, si può mantenere: assertFalse(bookNullIsbn.equals(bookNullIsbn2)).
+         */
+        assertFalse(bookNullIsbn.equals(bookNullIsbn2), "Due Book con ISBN null non dovrebbero essere considerati uguali secondo l'attuale equals/hashCode");
     }
 
     /**
@@ -149,26 +179,5 @@ class BookTest {
     void testToString() {
         String expectedToString = "Book{title='The Lord of the Rings', authors='J.R.R. Tolkien', publicationYear='1997-10-26', ISBN='978-0618260214', availableCopies=5}";
         assertEquals(expectedToString, book1.toString());
-    }
-
-    /**
-     * @brief Test dell'invariante (availableCopies >= 0).
-     */
-    @Test
-    void testInvariant() {
-        // L'invariante è verificato indirettamente tramite i setter
-        book1.setAvailableCopies(0);
-        assertEquals(0, book1.getAvailableCopies());
-
-        // Test di un valore positivo
-        book1.setAvailableCopies(100);
-        assertEquals(100, book1.getAvailableCopies());
-
-        /*
-         * NOTA: La classe Book non impedisce l'impostazione di un valore negativo
-         * tramite i setter. In un sistema reale, setAvailableCopies() dovrebbe
-         * lanciare una eccezione (es. IllegalArgumentException) se il valore
-         * è negativo.
-         */
     }
 }

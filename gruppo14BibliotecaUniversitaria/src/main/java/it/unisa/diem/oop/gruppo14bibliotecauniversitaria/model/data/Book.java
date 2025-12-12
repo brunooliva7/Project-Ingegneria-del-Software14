@@ -48,6 +48,9 @@ public class Book implements Comparable<Book>,Serializable {
     * 
     */
     public Book(String title, String authors, LocalDate publicationYear, String ISBN, int availableCopies) {
+        if (availableCopies < 0) {
+            throw new IllegalArgumentException("Il numero iniziale di copie disponibili non può essere negativo: " + availableCopies);
+        }
         this.title = title;
         this.authors = authors;
         this.publicationYear = publicationYear;
@@ -98,11 +101,18 @@ public class Book implements Comparable<Book>,Serializable {
     /**
     * @brief Imposta il numero di copie disponibili
     * @param availableCopies Nuovo numero di copie disponibili
+    * 
+    * @throws IllegalArgumentException se availableCopies è negativo
+    * 
     * @pre availableCopies >= 0
     * @post Il numero di copie disponibili è aggiornato
     * 
     */
     public void setAvailableCopies(int availableCopies) {
+        if (availableCopies < 0) {
+            // Lancia un'eccezione se il valore è negativo
+            throw new IllegalArgumentException("Il numero di copie disponibili non può essere negativo: " + availableCopies);
+        }
         this.availableCopies = availableCopies;
     }
 
