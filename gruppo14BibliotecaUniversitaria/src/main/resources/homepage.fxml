@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FDE68A 0%, #F59E0B 100%);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.homepageController">
+
+    <VBox alignment="CENTER" maxWidth="700" spacing="0">
+
+        <!-- HEADER -->
+        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f57c3c; -fx-background-radius: 20 20 0 0; -fx-padding: 25 20 25 20;">
+            <children>
+                <Label style="-fx-font-size: 26; -fx-text-fill: white; -fx-font-weight: bold;" text="📚 Biblioteca UNISA" />
+                <Label style="-fx-font-size: 14; -fx-text-fill: #ffe0b2;" text="Pannello di gestione" />
+            </children>
+        </VBox>
+
+        <!-- CARD CENTRALE -->
+        <VBox alignment="CENTER" spacing="40" style="-fx-background-color: white; -fx-background-radius: 0 0 20 20; -fx-padding: 40;">
+            <children>
+
+                <Label style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #333;" text="Scegli un'area di gestione" />
+
+                <!-- BLOCCO PRINCIPALE -->
+                <HBox alignment="CENTER" spacing="30">
+                    <children>
+
+                        <!-- CARD UTENTE -->
+                        <VBox alignment="CENTER" prefHeight="150" prefWidth="150" spacing="10" style="-fx-background-color: #FFF3E0; -fx-background-radius: 15; -fx-border-color: #FB8C00; -fx-padding: 15;">
+                            <children>
+                                <Label style="-fx-font-size: 35;" text="📚👤" />
+                                <Label style="-fx-font-size: 16; -fx-font-weight: bold;" text="Utente" />
+                                <MenuButton text="Operazioni">
+                                    <items>
+                                        <MenuItem text="Aggiungi" />
+                                        <MenuItem text="Modifica" />
+                                        <MenuItem text="Cancella" />
+                                        <MenuItem text="Cerca" />
+                                    </items>
+                                </MenuButton>
+                            </children>
+                        </VBox>
+
+                        <!-- CARD PRESTITO -->
+                        <VBox alignment="CENTER" prefHeight="150" prefWidth="150" spacing="10" style="-fx-background-color: #FFF3E0; -fx-background-radius: 15; -fx-border-color: #FB8C00; -fx-padding: 15;">
+                            <children>
+                                <Label style="-fx-font-size: 35;" text="📚👤🔄" />
+                                <Label style="-fx-font-size: 16; -fx-font-weight: bold;" text="Prestito" />
+                                <MenuButton text="Operazioni">
+                                    <items>
+                                        <MenuItem text="Aggiungi" />
+                                        <MenuItem text="Modifica" />
+                                        <MenuItem text="Cancella" />
+                                        <MenuItem text="Cerca" />
+                                    </items>
+                                </MenuButton>
+                            </children>
+                        </VBox>
+
+                        <!-- CARD LIBRO -->
+                        <VBox alignment="CENTER" prefHeight="150" prefWidth="150" spacing="10" style="-fx-background-color: #FFF3E0; -fx-background-radius: 15; -fx-border-color: #FB8C00; -fx-padding: 15;">
+                            <children>
+                                <Label style="-fx-font-size: 35;" text="📚📖" />
+                                <Label style="-fx-font-size: 16; -fx-font-weight: bold;" text="Libro" />
+                                <MenuButton text="Operazioni">
+                                    <items>
+                                        <MenuItem text="Aggiungi" />
+                                        <MenuItem text="Modifica" />
+                                        <MenuItem text="Cancella" />
+                                        <MenuItem text="Cerca" />
+                                    </items>
+                                </MenuButton>
+                            </children>
+                        </VBox>
+
+                    </children>
+                </HBox>
+
+                <Label fx:id="prova" style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
+            </children>
+        </VBox>
+    </VBox>
+</StackPane>

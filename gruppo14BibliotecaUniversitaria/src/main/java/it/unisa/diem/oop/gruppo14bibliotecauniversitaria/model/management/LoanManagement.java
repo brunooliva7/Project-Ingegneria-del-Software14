@@ -134,20 +134,17 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
 
             Iterator<Loan> iterator = loan.iterator();
             boolean removed = false;
-
-    // 1. Cerchiamo l'elemento vecchio manualmente usando EQUALS
+            
             while (iterator.hasNext()) {
             Loan current = iterator.next();
         
         if (current.equals(oldL)) {
-            // Trovato! Lo rimuoviamo in modo sicuro tramite l'iteratore
+            
             iterator.remove();
             removed = true;
             break; // Usciamo dal ciclo, il lavoro di rimozione è fatto
         }
     }
-
-    // 2. Se lo abbiamo trovato e rimosso, aggiungiamo il nuovo
          if (removed) {
         loan.add(newL); // Aggiungiamo il nuovo prestito
         FileManager.updateFileObject(loan, this.loanDatabase);

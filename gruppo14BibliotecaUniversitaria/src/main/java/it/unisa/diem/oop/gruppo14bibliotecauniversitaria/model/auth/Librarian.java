@@ -63,9 +63,8 @@ public class Librarian {
     String storedUsername = null;
     String storedPasswordHash = null;
 
-    try {
-        Scanner fileScanner = new Scanner(credentials);
-
+    try (Scanner fileScanner = new Scanner(credentials);){
+        
         while (fileScanner.hasNextLine()) {
             String line = fileScanner.nextLine();
             String[] parts = line.split(":");
