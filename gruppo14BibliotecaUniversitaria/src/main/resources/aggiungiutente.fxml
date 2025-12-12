@@ -12,7 +12,7 @@
     <VBox alignment="CENTER" maxHeight="800" maxWidth="800" prefHeight="500" prefWidth="450" spacing="0">
 
         <!-- HEADER CARD -->
-        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f57c3c;                       -fx-background-radius: 16 16 0 0;                      -fx-padding: 25 20 25 20;">
+        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f57c3c;  -fx-background-radius: 16 16 0 0;  -fx-padding: 25 20 25 20;">
             <children>
                 <Label style="-fx-font-size: 24; -fx-text-fill: white; -fx-font-weight: bold;" text="📚 Biblioteca UNISA" />
                 <Label style="-fx-font-size: 14; -fx-text-fill: #ffe0b2;" text="Inserimento Studente" />
@@ -20,26 +20,26 @@
         </VBox>
 
         <!-- CARD CENTRALE FORM -->
-        <VBox alignment="CENTER" spacing="20" style="-fx-background-color: white;                       -fx-background-radius: 0 0 16 16;                       -fx-padding: 40;">
+        <VBox alignment="CENTER" spacing="20" style="-fx-background-color: white;-fx-background-radius: 0 0 16 16; -fx-padding: 40;">
             <effect>
                 <DropShadow color="#00000033" offsetY="4" radius="20" />
             </effect>
             <children>
 
                 <!-- Nome -->
-                <TextField fx:id="nomeField" maxWidth="250" prefWidth="250" promptText="Nome" style="-fx-background-radius: 8;                                    -fx-border-radius: 8;                                    -fx-border-color: #FF7043;                                    -fx-border-width: 1;                                    -fx-padding: 5;" />
+                <TextField fx:id="nomeField" maxWidth="250" prefWidth="250" promptText="Nome" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043;                                    -fx-border-width: 1;                                    -fx-padding: 5;" />
 
                 <!-- Cognome -->
-                <TextField fx:id="cognomeField" maxWidth="250" prefWidth="250" promptText="Cognome" style="-fx-background-radius: 8;                                    -fx-border-radius: 8;                                    -fx-border-color: #FF7043;                                    -fx-border-width: 1;                                    -fx-padding: 5;" />
+                <TextField fx:id="cognomeField" maxWidth="250" prefWidth="250" promptText="Cognome" style="-fx-background-radius: 8;  -fx-border-radius: 8; -fx-border-color: #FF7043;                                    -fx-border-width: 1;                                    -fx-padding: 5;" />
 
                 <!-- Email -->
-                <TextField fx:id="emailField" maxWidth="250" prefWidth="250" promptText="Email" style="-fx-background-radius: 8;                                    -fx-border-radius: 8;                                    -fx-border-color: #FF7043;                                    -fx-border-width: 1;                                    -fx-padding: 5;" />
+                <TextField fx:id="emailField" maxWidth="250" prefWidth="250" promptText="Email" style="-fx-background-radius: 8;  -fx-border-radius: 8;  -fx-border-color: #FF7043; -fx-border-width: 1;                                    -fx-padding: 5;" />
 
                 <!-- Matricola -->
-                <TextField fx:id="matricolaField" maxWidth="250" prefWidth="250" promptText="Matricola" style="-fx-background-radius: 8;                                    -fx-border-radius: 8;                                    -fx-border-color: #FF7043;                                    -fx-border-width: 1;                                    -fx-padding: 5;" />
+                <TextField fx:id="matricolaField" maxWidth="250" prefWidth="250" promptText="Matricola" style="-fx-background-radius: 8;  -fx-border-radius: 8;                                    -fx-border-color: #FF7043;                                    -fx-border-width: 1;                                    -fx-padding: 5;" />
 
-                <!-- Bottone Prestiti -->
-                <Button fx:id="aggiungiButton" maxWidth="250" prefWidth="250" style="-fx-background-color: #FF7043;                                 -fx-text-fill: white;                                 -fx-font-weight: bold;                                 -fx-background-radius: 8;                                 -fx-font-size: 14;" text="Aggiungi">
+                <!-- Bottone Aggiungi -->
+                <Button fx:id="aggiungiButton" maxWidth="250" prefWidth="250" style="-fx-background-color: #FF7043; -fx-text-fill: white;  -fx-font-weight: bold;                                 -fx-background-radius: 8;                                 -fx-font-size: 14;" text="Aggiungi">
                     <effect>
                         <DropShadow color="#00000033" radius="5" />
                     </effect>
