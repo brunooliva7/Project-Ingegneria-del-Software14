@@ -14,7 +14,6 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data;
 
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement;
 import java.io.Serializable;
 import java.util.*;
 import java.time.LocalDate;  
@@ -166,15 +165,17 @@ public class User   implements Comparable<User>,Serializable{
          }
          else return this.name.compareTo(other.name); //se il compare sul nome ha prodotto 0 significa che hanno lo stesso cognome e il confronto deve essere fatto sulla base del nome
     }
+    
     /**
-      * @brief  Servirà a cercare nell'elenco definito nella classe LoanManagement i prestiti appartenenti all'utente,cercando  tramite matricola
-                così da poter riempire la mappa attributo  booksOnLoan  
-      * @param  l L'elenco tra cui dovrò cercare i prestiti associati all'utente
-      * @param  s La matricola dell'utente di cui dovrò cercare i prestiti
-      * @pre    l,s != null
-      * @post   viene aggiornata la mappa di libri-data ristituzione dell'utente in base all'elenco dei prestiti dell'utente 
-      * @return Mappa dei libri-dataRestituzione riferita ai prestiti dell'utente
-      * 
+    * @brief  Aggiorna la mappa dei libri attualmente in prestito all'utente,
+    *         associando un libro alla sua data di restituzione.
+    *
+    * @param  b   Il libro da registrare come prestito
+    * @param  data La data di restituzione prevista per il libro
+    *
+    * @pre    b != null && data != null
+    * @post   La mappa booksOnLoan viene aggiornata con la coppia (libro, data di restituzione)
+    *
     */
     public void findLoans(Book b,LocalDate data ){
       booksOnloan.put(b,data);
@@ -215,21 +216,18 @@ public class User   implements Comparable<User>,Serializable{
     @Override 
     public String toString(){
         StringBuffer sb = new StringBuffer();  //creo uno StringBuffer per facilitare la creazione dell'output 
-         sb.append("User{");
-         sb.append("name='").append(name).append('\'');
-         sb.append(", surname='").append(surname).append('\'');
-         sb.append(", numberId='").append(numberId).append('\'');
-         sb.append(", email='").append(email).append('\'');
-         sb.append(", booksOnLoan={");
+        sb.append("User{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", surname='").append(surname).append('\'');
+        sb.append(", numberId='").append(numberId).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", booksOnLoan={");
 
-    if (booksOnloan != null && !booksOnloan.isEmpty()) {   //se la mia mappa non è nulla o vuota stampo ogni sua coppia libro-data 
-        booksOnloan.forEach((book, date) -> 
-            sb.append("\n  ").append(book).append(" -> ").append(date)
-        );
-    }
+        if (booksOnloan != null && !booksOnloan.isEmpty()) {   //se la mia mappa non è nulla o vuota stampo ogni sua coppia libro-data 
+            booksOnloan.forEach((book, date) -> sb.append("\n").append(book).append(" -> ").append(date));
+        }
 
-    sb.append("}}");
-    return sb.toString();
-
+        sb.append("}}");
+        return sb.toString();
     }
 }
