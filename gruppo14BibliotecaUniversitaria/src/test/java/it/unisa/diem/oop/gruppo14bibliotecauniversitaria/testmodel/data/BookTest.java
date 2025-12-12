@@ -41,7 +41,7 @@ class BookTest {
     @BeforeEach
     void setUp() {
         book1 = new Book("The Lord of the Rings", "J.R.R. Tolkien", DATE_1997, "978-0618260214", 5);
-        book2 = new Book("A Different Title", "Another Author", DATE_2000, "978-0618260214", 10); // L'ISBN deve essere identico qui
+        book2 = new Book("A Different Title", "Another Author", DATE_2000, "978-0618260214", 10); // ISBN uguale a quello di book1
 
         // Oggetto completamente diverso
         book3 = new Book("1984", "George Orwell", DATE_2000, "978-0451524935", 2);
@@ -115,7 +115,7 @@ class BookTest {
         Book bookA = new Book("Test Title", "Author A", DATE_2000, "ISBN-A", 1);
         Book bookB = new Book("test title", "Author B", DATE_2000, "ISBN-B", 1); // Titolo con case diverso
         
-        // Confronto per autori: Author A vs Author B -> A precede B
+        // Confronto per autori, Author A vs Author B : A precede B
         assertTrue(bookA.compareTo(bookB) < 0, "Dovrebbe essere < 0 se i titoli sono uguali ma Author A precede Author B");
         
         // 3. Oggetti uguali (stesso titolo e autore)
@@ -148,7 +148,7 @@ class BookTest {
         Book bookNullIsbn2 = new Book("Title", "Author", DATE_2000, null, 1);
         assertFalse(book1.equals(bookNullIsbn), "Book con ISBN diverso da null non è uguale a Book con ISBN null");
         
-        /* * NOTA: L'implementazione di equals() (ISBN != null && ISBN.equals(other.ISBN)) 
+        /* * L'implementazione di equals() (ISBN != null && ISBN.equals(other.ISBN)) 
          * e l'implementazione di hashCode() (return ISBN != null ? ISBN.hashCode() : 0)
          * rendono due oggetti con ISBN=null NON uguali (false) e il loro hashCode uguale a 0.
          * Per coerenza, si può mantenere: assertFalse(bookNullIsbn.equals(bookNullIsbn2)).
