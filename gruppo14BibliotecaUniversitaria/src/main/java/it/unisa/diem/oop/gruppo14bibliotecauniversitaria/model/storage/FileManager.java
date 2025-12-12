@@ -78,8 +78,6 @@ public class FileManager <T extends Serializable>{
      * @pre filename valido 
      * @post Il file è stato aggiornamento correttamente 
      */
-
-    
     public static <T extends Serializable> void updateFileObject(Set <T> newTree, File file){  
          
         if (file == null) {
