@@ -56,23 +56,33 @@ public class User   implements Comparable<User>,Serializable{
      * @param s Stringa usata dal bibliotecario per ricercare l'utente corrispondente 
      * @post L'User è correttamente inizializzato per quello che ci serve
      */
-    public User (String s ){  //overload del costruttore,sarà utilizzato solo ai fini della ricerca dell'utente
-        if(Character.isDigit(s.charAt(0))){ //se la stringa passata inizia con un numero è una matricola
-            this.name=null;
-            this.surname=null;
-            this.numberId=s;
-            this.email=null;
-            this.booksOnloan=null;
+    public User (String inputRicerca ){  //overload del costruttore,sarà utilizzato solo ai fini della ricerca dell'utente
+        
+     // 1. Inizializziamo tutto a null di default
+        this.name = null;
+        this.surname = null;
+        this.numberId = null;
+        this.email = null;
+        this.booksOnloan = null;
+
+    // 2. Protezione anti-crash: se la stringa è null o vuota, ci fermiamo qui.
+         if (inputRicerca == null || inputRicerca.trim().isEmpty()) {
+            return; 
         }
-        else { //se la stringa passata non inizia con un numero la ricerca è stata effettuala per cognome 
-            this.name=null;
-            this.surname=s;
-            this.numberId=null;
-            this.email=null;
-             this.booksOnloan=null;
-            
+
+        String cleanInput = inputRicerca.trim();
+
+    // 3. Logica robusta: Usiamo le REGEX per capire se sono SOLO numeri
+    // "\\d+" significa "uno o più numeri da 0 a 9"
+        if (cleanInput.matches("\\d+")) {
+        // È sicuramente una matricola (perché contiene solo numeri)
+        this.numberId = cleanInput;
+        } else {
+        // Contiene lettere o simboli, quindi è sicuramente un cognome
+        this.surname = cleanInput;
         }
     }
+    
     /**
       * @brief Imposta il nome dell'utente
       * @param name Nuovo nome da impostare 

@@ -63,23 +63,45 @@ public class modifyUserController {
      }
      
      @FXML
-     public void search(){
-         String utente = searchField.getText();
-         User u = new User(utente);
-         
-         userached = user.search(u);
-         
-         if(userached != null){
-          
-             nameField.setText(userached.getName());
-            surnameField.setText(userached.getSurname());
-            emailField.setText(userached.getEmail());
-            numberidField.setText(userached.getNumberId());
+     public void search() {
+        System.out.println("--- INIZIO RICERCA ---");
     
-         }
-         
-         else labelMessage.setText("Ricerca non riuscita");
-     }
+    // 1. FORZA LA RILETTURA (Fondamentale se hai appena aggiunto un utente dall'altra schermata)
+    this.user = new UserManagement(); 
+    
+    // 2. STAMPA DI DIAGNOSTICA: Cosa abbiamo caricato dal file?
+    System.out.println("Utenti caricati in memoria: " + user.getList().size());
+    for(User u : user.getList()) {
+        System.out.println("   [MEMORIA] Matricola: '" + u.getNumberId() + "' - Cognome: '" + u.getSurname() + "'");
+    }
+
+    String input = searchField.getText();
+    System.out.println("Input utente grezzo: '" + input + "'");
+
+    // Crea l'oggetto sonda
+    User userSonda = new User(input);
+    
+    // Vediamo come il costruttore ha interpretato l'input
+    System.out.println("Interpretato come Matricola? " + userSonda.getNumberId());
+    System.out.println("Interpretato come Cognome? " + userSonda.getSurname());
+
+    // Esegui la ricerca
+    User risultato = user.search(userSonda);
+
+    if (risultato != null) {
+        System.out.println("RISULTATO: TROVATO!");
+        // ... codice per riempire i campi ...
+        nameField.setText(risultato.getName());
+        surnameField.setText(risultato.getSurname());
+        numberidField.setText(risultato.getNumberId());
+        emailField.setText(risultato.getEmail());
+    } else {
+        System.out.println("RISULTATO: NON TROVATO.");
+        labelMessage.setText("Utente non trovato.");
+    }
+    System.out.println("--- FINE RICERCA ---");
+}
+
      
      @FXML 
      public void confirm(){

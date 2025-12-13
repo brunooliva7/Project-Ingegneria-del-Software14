@@ -57,8 +57,9 @@ public class addUserController {
         String mail = email.getText();
         String matricola = numberID.getText();
         
-        User u = new User(nome,cognome,mail,matricola);
+        User u = new User(nome,cognome,matricola,mail);
         UserManagement us = new UserManagement();
+        
         if(us.add(u)){
             labelErrore.setText("Inserimento avvenuto correttamente");
         }
