@@ -172,6 +172,22 @@ public class View extends Application {
 
             popupStage.showAndWait();
   }
+    
+    public static void viewUSers() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/visualizzaelencoutente.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("VisualizzaUtenti");
+        mainStage.setScene(scene);
+        
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
+    }
      
      
 
