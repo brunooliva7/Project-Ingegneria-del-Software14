@@ -10,7 +10,6 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.data;
  *
  * @author maramariano
  * @date 12-12-2025
- * @version 2.0
  */
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;

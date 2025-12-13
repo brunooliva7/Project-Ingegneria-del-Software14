@@ -26,7 +26,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Modality;
 
-
 /**
  * JavaFX App
  */
@@ -156,7 +155,7 @@ public class View extends Application {
         mainStage.show();  
     }
      
-    public static void searchUser() throws IOException{
+     public static void searchUser() throws IOException {
         
             FXMLLoader loader = new FXMLLoader(View.class.getResource("/ricercautente.fxml")); 
             Parent root = loader.load();
