@@ -138,6 +138,38 @@ public class View extends Application {
         
         mainStage.show();  
     }
+     
+     public static void deleteUser() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/cancellautente.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("EliminaUtente");
+        mainStage.setScene(scene);
+        
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
+    }
+     
+     public static void searchUser() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/ricercautente.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("EliminaUtente");
+        mainStage.setScene(scene);
+        
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
+    }
 
     /**
      * @brief Metodo main dell'applicazione.
