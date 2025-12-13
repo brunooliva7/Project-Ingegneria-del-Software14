@@ -1,7 +1,5 @@
 <map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User.getNumberId" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User.getNumberId">
-<area shape="rect" id="Node000001" title="Restituisce la matricola dell&#39;utente." alt="" coords="478,39,852,79"/>
-<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_user_management.html#aedec5eaa6c153b099c3d5b9a7c842149" title="Metodo che aggiunge un user all&#39;elenco." alt="" coords="5,5,430,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="460,44,430,44,430,39,465,44"/>
-<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_user_management.html#a50eb28e8f2c864d212be72774afae84a" title="Metodo che permette di cercare un utente nell&#39;elenco tramite cognome o matricola." alt="" coords="5,71,430,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="460,74,431,78,430,73,465,73"/>
+<area shape="rect" id="Node000001" title="Restituisce la matricola dell&#39;utente." alt="" coords="478,5,852,46"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_user_management.html#a50eb28e8f2c864d212be72774afae84a" title="Metodo che permette di cercare un utente nell&#39;elenco tramite cognome o matricola." alt="" coords="5,5,430,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="460,26,430,28,430,23,465,26"/>
 </map>

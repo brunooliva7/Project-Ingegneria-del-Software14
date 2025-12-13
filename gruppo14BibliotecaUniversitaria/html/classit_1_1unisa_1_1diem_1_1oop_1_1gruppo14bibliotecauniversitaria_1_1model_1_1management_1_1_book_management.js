@@ -5,6 +5,6 @@ var classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_
     [ "getCatalogue", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#a0aa89bd3d657a6e1f80a7da14353f41d", null ],
     [ "remove", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#ace955fe551932a72413b35bfa00ea6e5", null ],
     [ "search", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#a5c459374e69c840f80d8bcf9cb5e6cf1", null ],
-    [ "update", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#aef9d721cf9c41d3500c61231674e1888", null ],
+    [ "update", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#af21f22dbdda14d41210dc4b7b4b201ed", null ],
     [ "viewSorted", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#a74fbfa764dd1c8d0fa5fa642d6188ae5", null ]
 ];

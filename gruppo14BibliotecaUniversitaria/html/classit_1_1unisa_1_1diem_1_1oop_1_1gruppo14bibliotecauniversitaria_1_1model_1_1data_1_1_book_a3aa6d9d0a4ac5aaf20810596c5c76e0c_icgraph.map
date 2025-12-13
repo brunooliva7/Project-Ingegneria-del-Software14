@@ -1,7 +1,9 @@
 <map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book.getISBN" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book.getISBN">
-<area shape="rect" id="Node000001" title="Restituisce il valore di ISBN." alt="" coords="478,39,852,79"/>
+<area shape="rect" id="Node000001" title="Restituisce il valore di ISBN." alt="" coords="478,71,852,111"/>
 <area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#a953028734e138bdc99ea58cd284b41f7" title="Aggiunge un libro al catalogo." alt="" coords="5,5,430,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="460,44,430,44,430,39,465,44"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="503,68,362,49,362,44,508,67"/>
 <area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#a5c459374e69c840f80d8bcf9cb5e6cf1" title="Ricerca un libro nel catalogo." alt="" coords="5,71,430,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="460,74,431,78,430,73,465,73"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="460,91,431,94,430,88,465,91"/>
+<area shape="rect" id="Node000004" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#af21f22dbdda14d41210dc4b7b4b201ed" title="Modifica i dati di un libro nel catalogo." alt="" coords="5,136,430,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="509,114,362,138,361,133,503,114"/>
 </map>

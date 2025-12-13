@@ -1,0 +1,9 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement.update" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement.update">
+<area shape="rect" id="Node000001" title="Metodo che permette di aggiornare i dati di un utente." alt="" coords="5,39,430,79"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_user_management.html#aedec5eaa6c153b099c3d5b9a7c842149" title="Metodo che aggiunge un user all&#39;elenco." alt="" coords="478,5,902,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="430,41,465,41,460,42,431,47"/>
+<area shape="rect" id="Node000004" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager.html#abde472b5151e1a37b2b29180fbe209e4" title="Aggiorna il file sostituendo il contenuto con un nuovo Set di oggetti." alt="" coords="494,71,886,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="430,71,481,77,475,77,430,76"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager.html#ad74436a021b6ae0d6553c5317b334d8b" title="Scrive un oggetto serializzabile su file." alt="" coords="950,5,1342,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="902,23,937,26,932,26,902,28"/>
+</map>

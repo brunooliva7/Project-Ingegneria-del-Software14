@@ -1,7 +1,7 @@
 var classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user =
 [
     [ "User", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a15f06c21e0c5570e46fcf5e8463a5457", null ],
-    [ "User", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a6b21bb9fcd20e05bd4d32abda3041fd0", null ],
+    [ "User", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a0848990a84bf33fed792faaca8c2a4e7", null ],
     [ "compareTo", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a54c5e505ba6c3410d0e6a9b3e891a414", null ],
     [ "equals", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a22bdc9faafc77d0834f9fd79711431e3", null ],
     [ "findLoans", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a7b849a770a1ebb189f70b2386e3897e9", null ],
@@ -14,6 +14,7 @@ var classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_
     [ "setBooksOnLoan", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a57e952ab4f3c7c597c9548fd6e3c15b0", null ],
     [ "setEmail", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a5eac165b5cece57e0897e5743138e55b", null ],
     [ "setName", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#af8fc5f57c4ec33e75e57a658f5723cf6", null ],
+    [ "setNumberId", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#afbbe9ba0ff83ad28f96cb2f044cb9718", null ],
     [ "setSurname", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a935dd9f5a844145b6538d367a75b5dc4", null ],
     [ "toString", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a55891c743c4ca2a73105f9e67c01fe3d", null ]
 ];

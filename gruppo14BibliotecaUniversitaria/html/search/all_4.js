@@ -1,11 +1,4 @@
 var searchData=
 [
-  ['filemanager_0',['FileManager',['../classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager.html',1,'it::unisa::diem::oop::gruppo14bibliotecauniversitaria::model::storage']]],
-  ['filemanager_2ejava_1',['FileManager.java',['../_file_manager_8java.html',1,'']]],
-  ['findloans_2',['findLoans',['../classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a7b849a770a1ebb189f70b2386e3897e9',1,'it::unisa::diem::oop::gruppo14bibliotecauniversitaria::model::data::User']]],
-  ['functionality_3',['Functionality',['../interfaceit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_functionality.html',1,'it::unisa::diem::oop::gruppo14bibliotecauniversitaria::model::management']]],
-  ['functionality_2ejava_4',['Functionality.java',['../_functionality_8java.html',1,'']]],
-  ['functionality_3c_20book_20_3e_5',['Functionality&lt; Book &gt;',['../interfaceit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_functionality.html',1,'it::unisa::diem::oop::gruppo14bibliotecauniversitaria::model::management']]],
-  ['functionality_3c_20loan_20_3e_6',['Functionality&lt; Loan &gt;',['../interfaceit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_functionality.html',1,'it::unisa::diem::oop::gruppo14bibliotecauniversitaria::model::management']]],
-  ['functionality_3c_20user_20_3e_7',['Functionality&lt; User &gt;',['../interfaceit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_functionality.html',1,'it::unisa::diem::oop::gruppo14bibliotecauniversitaria::model::management']]]
+  ['equals_0',['equals',['../classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#a1aff84149af2c4e63eb3b7bea91be2f3',1,'it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book.equals()'],['../classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_loan.html#a9ede5654a3f30117eedceb38fd0aa608',1,'it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan.equals()'],['../classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#a22bdc9faafc77d0834f9fd79711431e3',1,'it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User.equals()']]]
 ];

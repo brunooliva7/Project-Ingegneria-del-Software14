@@ -97,14 +97,14 @@ $(function(){initNavTree('classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecau
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aa722a405854cb1ae54c9ac63d696e588" id="r_aa722a405854cb1ae54c9ac63d696e588"><td class="memItemLeft" align="right" valign="top">static&lt; T extends Serializable &gt; void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa722a405854cb1ae54c9ac63d696e588">writeToTextFileObject</a> (T object, String filename)</td></tr>
-<tr class="memdesc:aa722a405854cb1ae54c9ac63d696e588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scrive un oggetto serializzabile su file.  <br /></td></tr>
-<tr class="memitem:afb9fd1e6c856a4d4054b37cb5f4b80c9" id="r_afb9fd1e6c856a4d4054b37cb5f4b80c9"><td class="memItemLeft" align="right" valign="top">static&lt; T extends Serializable &gt; void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb9fd1e6c856a4d4054b37cb5f4b80c9">updateFileObject</a> (Set&lt; T &gt; newTree, String filename)</td></tr>
-<tr class="memdesc:afb9fd1e6c856a4d4054b37cb5f4b80c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggiorna un oggetto nel file sostituendolo con uno nuovo.  <br /></td></tr>
-<tr class="memitem:a3609240c9b0a2b2da9c827ebfa492fb7" id="r_a3609240c9b0a2b2da9c827ebfa492fb7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3609240c9b0a2b2da9c827ebfa492fb7">readLine</a> (String filename)</td></tr>
-<tr class="memdesc:a3609240c9b0a2b2da9c827ebfa492fb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legge riga da un file di testo.  <br /></td></tr>
-<tr class="memitem:a13db34108a07221c901177c57b27b731" id="r_a13db34108a07221c901177c57b27b731"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a13db34108a07221c901177c57b27b731">writeLine</a> (String line, String filename)</td></tr>
-<tr class="memdesc:a13db34108a07221c901177c57b27b731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scrive riga su un file di testo.  <br /></td></tr>
+<tr class="memitem:ad74436a021b6ae0d6553c5317b334d8b" id="r_ad74436a021b6ae0d6553c5317b334d8b"><td class="memItemLeft" align="right" valign="top">static&lt; T extends Serializable &gt; void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad74436a021b6ae0d6553c5317b334d8b">writeToTextFileObject</a> (Set&lt; T &gt; object, File file)</td></tr>
+<tr class="memdesc:ad74436a021b6ae0d6553c5317b334d8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scrive un oggetto serializzabile su file.  <br /></td></tr>
+<tr class="memitem:abde472b5151e1a37b2b29180fbe209e4" id="r_abde472b5151e1a37b2b29180fbe209e4"><td class="memItemLeft" align="right" valign="top">static&lt; T extends Serializable &gt; void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abde472b5151e1a37b2b29180fbe209e4">updateFileObject</a> (Set&lt; T &gt; newTree, File file)</td></tr>
+<tr class="memdesc:abde472b5151e1a37b2b29180fbe209e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggiorna il file sostituendo il contenuto con un nuovo Set di oggetti.  <br /></td></tr>
+<tr class="memitem:a7d5829531547a9e96fd4d10e8d891ab0" id="r_a7d5829531547a9e96fd4d10e8d891ab0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d5829531547a9e96fd4d10e8d891ab0">readLine</a> (File file)</td></tr>
+<tr class="memdesc:a7d5829531547a9e96fd4d10e8d891ab0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Legge riga da un file di testo.  <br /></td></tr>
+<tr class="memitem:a3173749f25c4e79d8d95402ceb50ec8d" id="r_a3173749f25c4e79d8d95402ceb50ec8d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3173749f25c4e79d8d95402ceb50ec8d">writeLine</a> (String line, File file)</td></tr>
+<tr class="memdesc:a3173749f25c4e79d8d95402ceb50ec8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scrive riga su un file di testo.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Classe generica per la gestione di file contenenti oggetti serializzabili e linee di testo. </p>
@@ -112,15 +112,15 @@ Static Public Member Functions</h2></td></tr>
 <li>Scrivere, leggere e aggiornare oggetti serializzabili su file (binario).</li>
 <li>Scrivere, leggere e aggiornare linee di testo su file (testuale).</li>
 </ul>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>Tipo generico che deve implementare Serializable. </td></tr>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">&lt;T&gt;</td><td>Tipo generico che deve implementare Serializable. </td></tr>
   </table>
   </dd>
 </dl>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a3609240c9b0a2b2da9c827ebfa492fb7" name="a3609240c9b0a2b2da9c827ebfa492fb7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3609240c9b0a2b2da9c827ebfa492fb7">&#9670;&#160;</a></span>readLine()</h2>
+<a id="a7d5829531547a9e96fd4d10e8d891ab0" name="a7d5829531547a9e96fd4d10e8d891ab0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d5829531547a9e96fd4d10e8d891ab0">&#9670;&#160;</a></span>readLine()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,7 +131,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void <a class="el" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager.html">it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager</a>&lt; T extends Serializable &gt;.readLine </td>
           <td>(</td>
-          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filename</em></span></td><td>)</td>
+          <td class="paramtype">File</td>          <td class="paramname"><span class="paramname"><em>file</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -145,23 +145,17 @@ Static Public Member Functions</h2></td></tr>
 <p>Legge riga da un file di testo. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filename</td><td>Nome del file da cui leggere.</td></tr>
+    <tr><td class="paramname">file</td><td>File da cui leggere</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">IOException</td><td>Se si verifica un errore di I/O.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section pre"><dt>Precondition</dt><dd>filename valido </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>file non nullo e valido </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Lettura avvenuta correttamente </dd></dl>
 
 </div>
 </div>
-<a id="afb9fd1e6c856a4d4054b37cb5f4b80c9" name="afb9fd1e6c856a4d4054b37cb5f4b80c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb9fd1e6c856a4d4054b37cb5f4b80c9">&#9670;&#160;</a></span>updateFileObject()</h2>
+<a id="abde472b5151e1a37b2b29180fbe209e4" name="abde472b5151e1a37b2b29180fbe209e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abde472b5151e1a37b2b29180fbe209e4">&#9670;&#160;</a></span>updateFileObject()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,7 +171,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>&#160;)</td>
+          <td class="paramtype">File</td>          <td class="paramname"><span class="paramname"><em>file</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -187,40 +181,48 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Aggiorna un oggetto nel file sostituendolo con uno nuovo. </p>
+<p>Aggiorna il file sostituendo il contenuto con un nuovo Set di oggetti. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filename</td><td>Nome del file da aggiornare. </td></tr>
-    <tr><td class="paramname">newObj</td><td>Nuovo oggetto da inserire.</td></tr>
+    <tr><td class="paramname">newTree</td><td>Set di oggetti da scrivere nel file </td></tr>
+    <tr><td class="paramname">file</td><td>File da modificare</td></tr>
+    <tr><td class="paramname">&lt;T&gt;</td><td>Tipo generico che deve implementare Serializable.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">IOException</td><td>Se si verifica un errore di I/O. </td></tr>
-    <tr><td class="paramname">ClassNotFoundException</td><td>Se la classe degli oggetti non viene trovata.</td></tr>
+    <tr><td class="paramname">IllegalArgumentException</td><td>Se il parametro 'file' è nullo.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section pre"><dt>Precondition</dt><dd>newTree non è vuoto, filename valido </dd></dl>
-<dl class="section post"><dt>Postcondition</dt><dd>Il file è stato aggiornamento correttamente </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>filename non nullo </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Il file è stato aggiornato correttamente </dd></dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_afb9fd1e6c856a4d4054b37cb5f4b80c9_icgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_afb9fd1e6c856a4d4054b37cb5f4b80c9_icgraph" loading="lazy" alt=""/></div>
-<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_afb9fd1e6c856a4d4054b37cb5f4b80c9_icgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_afb9fd1e6c856a4d4054b37cb5f4b80c9_icgraph">
-<area shape="rect" title="Aggiorna un oggetto nel file sostituendolo con uno nuovo." alt="" coords="478,39,870,79"/>
-<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#a66c9271aa992c3f201cc356091e101f6" title="Rimuove un prestito dall&#39;insieme." alt="" coords="5,5,430,46"/>
-<area shape="poly" title=" " alt="" coords="460,44,430,44,430,39,465,43"/>
-<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#a3109767497f8da9b16066d0798b3edf1" title="Aggiorna i dati di un prestito." alt="" coords="5,71,430,111"/>
-<area shape="poly" title=" " alt="" coords="460,74,431,79,430,73,465,74"/>
+<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_abde472b5151e1a37b2b29180fbe209e4_icgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_abde472b5151e1a37b2b29180fbe209e4_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_abde472b5151e1a37b2b29180fbe209e4_icgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_abde472b5151e1a37b2b29180fbe209e4_icgraph">
+<area shape="rect" title="Aggiorna il file sostituendo il contenuto con un nuovo Set di oggetti." alt="" coords="478,169,870,210"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#ace955fe551932a72413b35bfa00ea6e5" title="Elimina un libro dal catalogo." alt="" coords="5,5,430,46"/>
+<area shape="poly" title=" " alt="" coords="627,161,538,110,485,84,429,62,386,49,385,44,431,56,487,79,541,106,632,161"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#a66c9271aa992c3f201cc356091e101f6" title="Rimuove un prestito dall&#39;insieme." alt="" coords="5,71,430,111"/>
+<area shape="poly" title=" " alt="" coords="585,165,429,127,365,115,364,109,430,122,590,164"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_user_management.html#ac1a06fae52243b7d39f04e97fc353ab1" title="Metodo che rimuove un user dall&#39;elenco." alt="" coords="5,136,430,177"/>
+<area shape="poly" title=" " alt="" coords="460,175,431,175,430,169,465,174"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#af21f22dbdda14d41210dc4b7b4b201ed" title="Modifica i dati di un libro nel catalogo." alt="" coords="5,201,430,242"/>
+<area shape="poly" title=" " alt="" coords="460,205,431,209,430,204,465,204"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#a3109767497f8da9b16066d0798b3edf1" title="Aggiorna i dati di un prestito." alt="" coords="5,267,430,307"/>
+<area shape="poly" title=" " alt="" coords="584,215,430,256,364,269,363,263,429,251,589,214"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_user_management.html#aeef6351ad40c5b533dfef84a13c79765" title="Metodo che permette di aggiornare i dati di un utente." alt="" coords="5,332,430,373"/>
+<area shape="poly" title=" " alt="" coords="632,218,541,273,486,300,431,322,386,334,385,329,429,316,484,295,538,268,626,219"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a13db34108a07221c901177c57b27b731" name="a13db34108a07221c901177c57b27b731"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13db34108a07221c901177c57b27b731">&#9670;&#160;</a></span>writeLine()</h2>
+<a id="a3173749f25c4e79d8d95402ceb50ec8d" name="a3173749f25c4e79d8d95402ceb50ec8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3173749f25c4e79d8d95402ceb50ec8d">&#9670;&#160;</a></span>writeLine()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -236,7 +238,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>&#160;)</td>
+          <td class="paramtype">File</td>          <td class="paramname"><span class="paramname"><em>file</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -249,14 +251,8 @@ Here is the caller graph for this function:</div>
 <p>Scrive riga su un file di testo. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filename</td><td>Nome del file da cui leggere. </td></tr>
+    <tr><td class="paramname">file</td><td>File da modificare </td></tr>
     <tr><td class="paramname">line</td><td>Stringa da scrivere nel file</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">IOException</td><td>Se si verifica un errore di I/O.</td></tr>
   </table>
   </dd>
 </dl>
@@ -265,8 +261,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="aa722a405854cb1ae54c9ac63d696e588" name="aa722a405854cb1ae54c9ac63d696e588"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa722a405854cb1ae54c9ac63d696e588">&#9670;&#160;</a></span>writeToTextFileObject()</h2>
+<a id="ad74436a021b6ae0d6553c5317b334d8b" name="ad74436a021b6ae0d6553c5317b334d8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad74436a021b6ae0d6553c5317b334d8b">&#9670;&#160;</a></span>writeToTextFileObject()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -277,12 +273,12 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">static&lt; T extends Serializable &gt; void <a class="el" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager.html">it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager</a>&lt; T extends Serializable &gt;.writeToTextFileObject </td>
           <td>(</td>
-          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>object</em></span>, </td>
+          <td class="paramtype">Set&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em>object</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>&#160;)</td>
+          <td class="paramtype">File</td>          <td class="paramname"><span class="paramname"><em>file</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -295,27 +291,34 @@ Here is the caller graph for this function:</div>
 <p>Scrive un oggetto serializzabile su file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">object</td><td>Oggetto da scrivere. </td></tr>
-    <tr><td class="paramname">filename</td><td>Nome del file di destinazione. </td></tr>
+    <tr><td class="paramname">object</td><td>Set di oggetti da scrivere. </td></tr>
+    <tr><td class="paramname">file</td><td>File su cui scrivere/sovrascrivere. </td></tr>
+    <tr><td class="paramname">&lt;T&gt;</td><td>Tipo generico che deve implementare Serializable.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">IOException</td><td>Se si verifica un errore di I/O.</td></tr>
+    <tr><td class="paramname">IllegalArgumentException</td><td>Se il parametro 'file' è nullo.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section pre"><dt>Precondition</dt><dd>object !=0 , filename valido </dd></dl>
-<dl class="section post"><dt>Postcondition</dt><dd>Il file è stato scritto correttamente </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>object !=0 , file valido </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Il file è stato scritto/sovrascritto correttamente </dd></dl>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_aa722a405854cb1ae54c9ac63d696e588_icgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_aa722a405854cb1ae54c9ac63d696e588_icgraph" loading="lazy" alt=""/></div>
-<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_aa722a405854cb1ae54c9ac63d696e588_icgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_aa722a405854cb1ae54c9ac63d696e588_icgraph">
-<area shape="rect" title="Scrive un oggetto serializzabile su file." alt="" coords="478,5,870,46"/>
-<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#a17ddbc7f71ef831be35fce6e18c8219f" title="Aggiunge un prestito all&#39;insieme." alt="" coords="5,5,430,46"/>
-<area shape="poly" title=" " alt="" coords="460,26,430,28,430,23,465,26"/>
+<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_ad74436a021b6ae0d6553c5317b334d8b_icgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_ad74436a021b6ae0d6553c5317b334d8b_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_ad74436a021b6ae0d6553c5317b334d8b_icgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager_ad74436a021b6ae0d6553c5317b334d8b_icgraph">
+<area shape="rect" title="Scrive un oggetto serializzabile su file." alt="" coords="950,71,1342,111"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#a953028734e138bdc99ea58cd284b41f7" title="Aggiunge un libro al catalogo." alt="" coords="478,5,902,46"/>
+<area shape="poly" title=" " alt="" coords="982,68,837,49,837,44,987,68"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#a17ddbc7f71ef831be35fce6e18c8219f" title="Aggiunge un prestito all&#39;insieme." alt="" coords="478,71,902,111"/>
+<area shape="poly" title=" " alt="" coords="932,91,903,94,903,88,937,91"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_user_management.html#aedec5eaa6c153b099c3d5b9a7c842149" title="Metodo che aggiunge un user all&#39;elenco." alt="" coords="478,136,902,177"/>
+<area shape="poly" title=" " alt="" coords="987,114,837,138,837,133,982,114"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_user_management.html#aeef6351ad40c5b533dfef84a13c79765" title="Metodo che permette di aggiornare i dati di un utente." alt="" coords="5,136,430,177"/>
+<area shape="poly" title=" " alt="" coords="459,156,430,159,430,154,465,156"/>
 </map>
 </div>
 

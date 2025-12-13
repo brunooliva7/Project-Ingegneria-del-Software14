@@ -6,7 +6,15 @@ var annotated_dup =
           [ "oop", null, [
             [ "gruppo14bibliotecauniversitaria", null, [
               [ "control", null, [
-                [ "Controller", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1_controller.html", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1_controller" ]
+                [ "addUserController", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller.html", null ],
+                [ "Controller", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1_controller.html", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1_controller" ],
+                [ "deleteController", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1delete_controller.html", null ],
+                [ "homepageController", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1homepage_controller.html", null ],
+                [ "loginController", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1login_controller.html", null ],
+                [ "modifycredentialController", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1modifycredential_controller.html", null ],
+                [ "modifyUserController", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1modify_user_controller.html", null ],
+                [ "searchUserController", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller.html", null ],
+                [ "viewUserController", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller.html", null ]
               ] ],
               [ "model", null, [
                 [ "auth", null, [
@@ -30,6 +38,16 @@ var annotated_dup =
               ] ],
               [ "view", null, [
                 [ "View", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view" ]
+              ] ],
+              [ "testmodel", null, [
+                [ "auth", null, [
+                  [ "LibrarianTest", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1testmodel_1_1auth_1_1_librarian_test.html", null ]
+                ] ],
+                [ "management", null, [
+                  [ "BookManagementTest", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1testmodel_1_1management_1_1_book_management_test.html", null ],
+                  [ "LoanManagementTest", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1testmodel_1_1management_1_1_loan_management_test.html", null ],
+                  [ "UserManagementTest", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1testmodel_1_1management_1_1_user_management_test.html", null ]
+                ] ]
               ] ]
             ] ]
           ] ]

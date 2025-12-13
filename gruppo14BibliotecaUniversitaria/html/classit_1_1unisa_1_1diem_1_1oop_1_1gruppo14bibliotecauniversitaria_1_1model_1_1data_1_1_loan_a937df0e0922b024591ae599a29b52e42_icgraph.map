@@ -1,7 +1,11 @@
 <map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan.Loan" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan.Loan">
-<area shape="rect" id="Node000001" title="Costruttore della classe Loan." alt="" coords="428,39,802,79"/>
-<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_loan.html#ad8eb2242e3ba2745f0ed208cdc4117a3" title="Confronta il prestito corrente con un altro prestito." alt="" coords="5,5,380,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="410,43,380,43,380,38,415,43"/>
-<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_loan.html#a9ede5654a3f30117eedceb38fd0aa608" title="Definisce l&#39;uguaglianza logica tra due oggetti Loan (Prestito)." alt="" coords="5,71,380,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="410,75,380,79,380,74,415,74"/>
+<area shape="rect" id="Node000001" title="Costruttore della classe Loan." alt="" coords="900,39,1274,79"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_loan.html#ad8eb2242e3ba2745f0ed208cdc4117a3" title="Confronta il prestito corrente con un altro prestito." alt="" coords="478,5,852,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="882,43,852,43,852,38,887,43"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_loan.html#a9ede5654a3f30117eedceb38fd0aa608" title="Definisce l&#39;uguaglianza logica tra due oggetti Loan (Prestito)." alt="" coords="478,71,852,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="882,75,853,79,852,74,887,74"/>
+<area shape="rect" id="Node000004" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#a66c9271aa992c3f201cc356091e101f6" title="Rimuove un prestito dall&#39;insieme." alt="" coords="5,37,430,78"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="460,76,430,76,430,71,465,76"/>
+<area shape="rect" id="Node000005" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#a3109767497f8da9b16066d0798b3edf1" title="Aggiorna i dati di un prestito." alt="" coords="5,103,430,143"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="460,106,431,110,430,105,465,105"/>
 </map>
