@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -106,11 +105,9 @@ public class FileManager <T extends Serializable>{
     /**
      * @brief Legge riga da un file di testo.
      *
-     * @param file File da 
+     * @param file File da cui leggere
      * 
-     * @throws IOException Se si verifica un errore di I/O.
-     * 
-     * @pre filename valido 
+     * @pre file non nullo e valido
      * @post Lettura avvenuta correttamente
      */
 
@@ -132,8 +129,6 @@ public class FileManager <T extends Serializable>{
      *
      * @param file File da modificare
      * @param line Stringa da scrivere nel file
-     * 
-     * @throws IOException Se si verifica un errore di I/O.
      * 
      * @pre filename valido, line != null
      * @post Lettura avvenuta correttamente

@@ -15,12 +15,10 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.storage;
  * (linee).
  *
  * @author maramariano
- * @date 12-12-2025
- * @version 1.0
+ * @date 13-12-2025
  */
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -52,27 +50,16 @@ class FileManagerTest {
         private String value;
         private int id;
 
-        /**
-         * @brief Costruttore di TestData.
-         * @param value Valore stringa.
-         * @param id ID numerico (usato per l'uguaglianza e l'ordinamento).
-         */
         public TestData(String value, int id) {
             this.value = value;
             this.id = id;
         }
 
-        /**
-         * @brief Rappresentazione in stringa dell'oggetto.
-         */
         @Override
         public String toString() {
             return value + ":" + id;
         }
         
-        /**
-         * @brief Definizione di uguaglianza basata sull'ID.
-         */
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -81,9 +68,7 @@ class FileManagerTest {
             return id == testData.id;
         }
         
-        /**
-         * @brief Definizione di ordinamento basata sull'ID.
-         */
+        // Necessario per la TreeSet
         @Override
         public int compareTo(TestData other) {
             return Integer.compare(this.id, other.id);
@@ -92,11 +77,10 @@ class FileManagerTest {
 
     /**
      * @brief Configurazione eseguita prima di ogni test.
-     * * Crea i riferimenti ai file temporanei per ogni test.
+     * * Crea i riferimenti ai file temporanei all'interno della {@code @TempDir}.
      */
     @BeforeEach
     void setUp() throws IOException {
-        // Crea file temporanei per ogni esecuzione di test
         tempObjectFile = new File(tempDir, "test_objects.dat");
         tempTextFile = new File(tempDir, "test_text.txt");
     }
@@ -104,15 +88,17 @@ class FileManagerTest {
     // --- TEST METODI SERIALIZZAZIONE (OGGETTI) ---
 
     /**
-     * @brief Test di writeToTextFileObject (Scrittura di un singolo oggetto serializzabile).
-     * * Verifica che un oggetto venga scritto e possa essere letto correttamente dal file.
+     * @brief Test di writeToTextFileObject per la scrittura corretta di un Set di oggetti.
+     * * Verifica che un Set di oggetti venga scritto correttamente nel file binario.
      */
     @Test
     void testWriteToTextFileObject_Success() throws IOException, ClassNotFoundException {
-        TestData originalData = new TestData("TestObject", 100);
+        Set<TestData> originalSet = new TreeSet<>();
+        originalSet.add(new TestData("Object1", 1));
+        originalSet.add(new TestData("Object2", 2));
         
-        // 1. Scrivi l'oggetto
-        FileManager.writeToTextFileObject(originalData, tempObjectFile);
+        // 1. Scrivi il Set
+        FileManager.writeToTextFileObject(originalSet, tempObjectFile);
 
         // 2. Verifica che il file esista e non sia vuoto
         assertTrue(tempObjectFile.exists());
@@ -120,9 +106,9 @@ class FileManagerTest {
 
         // 3. Leggi l'oggetto per verificare il contenuto
         try (ObjectInputStream read = new ObjectInputStream(new FileInputStream(tempObjectFile))) {
-            TestData readData = (TestData) read.readObject();
-            assertEquals(originalData.id, readData.id);
-            assertEquals(originalData.value, readData.value);
+            Set<TestData> readSet = (Set<TestData>) read.readObject();
+            assertEquals(originalSet.size(), readSet.size(), "Il Set letto deve avere la stessa dimensione.");
+            assertTrue(readSet.contains(new TestData("Any", 1)), "Il Set deve contenere l'oggetto con ID 1.");
         }
     }
 
@@ -139,42 +125,28 @@ class FileManagerTest {
 
         // File null
         assertThrows(IllegalArgumentException.class, () -> {
-            FileManager.writeToTextFileObject(new TestData("data", 1), null);
+            FileManager.writeToTextFileObject(new TreeSet<>(), null);
         }, "Dovrebbe lanciare IllegalArgumentException se il file è null.");
     }
     
     /**
      * @brief Test di updateFileObject (Sovrascrittura di un Set di oggetti).
-     * * Verifica che il file venga svuotato e riscritto con un nuovo set di dati.
+     * * Verifica che il file venga svuotato e riscritto con un nuovo set di dati, perdendo i dati precedenti.
      */
     @Test
     void testUpdateFileObject_Success() throws IOException, ClassNotFoundException {
-        // 1. Prepara il Set da scrivere
+        // 1. Scrivi un primo Set (2 elementi)
         Set<TestData> originalSet = new TreeSet<>();
         originalSet.add(new TestData("First", 1));
         originalSet.add(new TestData("Second", 2));
-
-        // 2. Scrivi il Set
         FileManager.updateFileObject(originalSet, tempObjectFile);
-        assertEquals(2, originalSet.size(), "Il set iniziale ha 2 elementi.");
 
-        // 3. Verifica leggendo il contenuto
-        Set<TestData> readSet;
-        try (ObjectInputStream read = new ObjectInputStream(new FileInputStream(tempObjectFile))) {
-            readSet = (Set<TestData>) read.readObject();
-        }
-        
-        assertEquals(originalSet.size(), readSet.size(), "Il set letto deve avere la stessa dimensione.");
-        assertTrue(readSet.contains(new TestData("AnyValue", 1)), "Il set deve contenere l'oggetto con ID 1.");
-
-
-        // 4. Prepara un nuovo Set (con meno elementi) e sovrascrivi
+        // 2. Prepara un nuovo Set (1 elemento) e sovrascrivi
         Set<TestData> newSet = new TreeSet<>();
         newSet.add(new TestData("Third", 3)); // Un solo elemento
-
         FileManager.updateFileObject(newSet, tempObjectFile);
 
-        // 5. Verifica leggendo il contenuto aggiornato
+        // 3. Verifica leggendo il contenuto aggiornato
         Set<TestData> updatedReadSet;
         try (ObjectInputStream read = new ObjectInputStream(new FileInputStream(tempObjectFile))) {
             updatedReadSet = (Set<TestData>) read.readObject();
@@ -224,7 +196,7 @@ class FileManagerTest {
     
     /**
      * @brief Test di readLine (Lettura di una singola riga di testo).
-     * * Verifica che il metodo si esegua senza lanciare eccezioni I/O.
+     * * Verifica che il metodo si esegua senza lanciare eccezioni I/O non gestite.
      */
     @Test
     void testReadLine_NoExceptions() throws IOException {
