@@ -41,7 +41,7 @@ public class homepageController {
     
     @FXML 
     public void deleteUser() throws IOException{
-        
+        View.deleteUser();
     }
     
     @FXML

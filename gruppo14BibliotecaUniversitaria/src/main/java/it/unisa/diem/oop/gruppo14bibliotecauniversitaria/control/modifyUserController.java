@@ -49,7 +49,7 @@ public class modifyUserController {
      private Label labelMessage;
      
      UserManagement user = new UserManagement();
-     private User userached = null;
+     private User risultato = null;
      
      @FXML
      public void initialize(){
@@ -64,42 +64,30 @@ public class modifyUserController {
      
      @FXML
      public void search() {
-        System.out.println("--- INIZIO RICERCA ---");
-    
-    // 1. FORZA LA RILETTURA (Fondamentale se hai appena aggiunto un utente dall'altra schermata)
+       
     this.user = new UserManagement(); 
-    
-    // 2. STAMPA DI DIAGNOSTICA: Cosa abbiamo caricato dal file?
-    System.out.println("Utenti caricati in memoria: " + user.getList().size());
-    for(User u : user.getList()) {
-        System.out.println("   [MEMORIA] Matricola: '" + u.getNumberId() + "' - Cognome: '" + u.getSurname() + "'");
-    }
-
     String input = searchField.getText();
-    System.out.println("Input utente grezzo: '" + input + "'");
-
-    // Crea l'oggetto sonda
     User userSonda = new User(input);
-    
-    // Vediamo come il costruttore ha interpretato l'input
-    System.out.println("Interpretato come Matricola? " + userSonda.getNumberId());
-    System.out.println("Interpretato come Cognome? " + userSonda.getSurname());
-
-    // Esegui la ricerca
-    User risultato = user.search(userSonda);
+    this.risultato = user.search(userSonda);
 
     if (risultato != null) {
-        System.out.println("RISULTATO: TROVATO!");
-        // ... codice per riempire i campi ...
+       
         nameField.setText(risultato.getName());
         surnameField.setText(risultato.getSurname());
         numberidField.setText(risultato.getNumberId());
         emailField.setText(risultato.getEmail());
+        
+        
+        
+         nameField.setDisable(false);
+        surnameField.setDisable(false);
+         emailField.setDisable(false);
+         numberidField.setDisable(false);
+         confirmButton.setDisable(false);
     } else {
-        System.out.println("RISULTATO: NON TROVATO.");
         labelMessage.setText("Utente non trovato.");
+        labelMessage.setStyle("-fx-text-fill: red;");
     }
-    System.out.println("--- FINE RICERCA ---");
 }
 
      
@@ -107,11 +95,14 @@ public class modifyUserController {
      public void confirm(){
           User newUser = new User(nameField.getText(),surnameField.getText(),numberidField.getText(),emailField.getText());
             
-            if(user.update(userached, newUser)){
+            if(user.update(risultato, newUser)){
                 labelMessage.setText("Modifica Riuscita");
+                labelMessage.setStyle("-fx-text-fill: green;");
             }
             
-            else labelMessage.setText("Modifica non riuscita");
+            else{ labelMessage.setText("Modifica non riuscita");
+            labelMessage.setStyle("-fx-text-fill: red;");
+            }
      }
      
       @FXML
