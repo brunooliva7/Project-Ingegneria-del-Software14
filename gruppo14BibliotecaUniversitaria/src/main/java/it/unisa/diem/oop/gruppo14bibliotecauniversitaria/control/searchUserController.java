@@ -5,10 +5,23 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+
 /**
  *
  * @author bruno
  */
 public class searchUserController {
+    
+    @FXML
+    private TextField searchField;
+    
+    @FXML
+    private Button searchButton;
+    
+    
+    
     
 }
