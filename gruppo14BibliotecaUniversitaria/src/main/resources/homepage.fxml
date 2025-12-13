@@ -63,7 +63,7 @@
                                         <MenuItem fx:id="visualizzaElencoPrestito"  text="Visualizza elenco prestiti"/>
 
 
-                                        <MenuItem fx:id="visualizzaElencoPrestito" onAction="#viewLoanList" text="Visualizza elenco prestiti"/>
+                                        <MenuItem fx:id="visualizzaElencoPrestito"  text="Visualizza elenco prestiti"/>
 
                                     </items>
                                 </MenuButton>
@@ -87,7 +87,7 @@
                                         <MenuItem fx:id="visualizzaElencoPrestito" text="Visualizza elenco libri"/>
 
 
-                                        <MenuItem fx:id="visualizzaElencoPrestito" onAction="#viewBookList "text="Visualizza elenco libri"/>
+                                        <MenuItem fx:id="visualizzaElencoPrestito" text="Visualizza elenco libri"/>
 
                                     </items>
                                 </MenuButton>
