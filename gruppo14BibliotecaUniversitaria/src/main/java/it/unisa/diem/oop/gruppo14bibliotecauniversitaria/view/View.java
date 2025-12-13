@@ -114,10 +114,13 @@ public class View extends Application {
         
         mainStage.setTitle("Aggiungi utente");
         mainStage.setScene(scene);
+        
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
         mainStage.show();  
         
-  
-        mainStage.setMaximized(true);
     }
      
      public static void modifyUser() throws IOException {

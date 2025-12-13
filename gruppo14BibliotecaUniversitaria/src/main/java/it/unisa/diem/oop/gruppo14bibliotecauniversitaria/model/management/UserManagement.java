@@ -16,6 +16,9 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.*;
@@ -30,7 +33,7 @@ public class UserManagement implements Functionality<User>,Serializable{
     private Set<User> list; ///<  Lista di iscritti
     
     
-    private final File userDatabase = new File("src/main/resources/userDatabase.txt"); //<file database dei prestiti
+    private final File userDatabase = new File("archivio_utenti.dat"); //<file database dei prestiti
     /**
      *  @brief Costruttore UserManagement 
      * 
@@ -38,8 +41,27 @@ public class UserManagement implements Functionality<User>,Serializable{
      */
     
     
-    public UserManagement(){
-        list=new TreeSet<>(); 
+    public UserManagement(){   
+        this.list = new TreeSet<>(); 
+        
+        if (userDatabase.exists() && userDatabase.length() > 0) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(userDatabase))) {
+                
+                Object letto = ois.readObject();
+                
+                if (letto instanceof Set) {
+                    this.list = (Set<User>) letto;
+                    System.out.println("Caricamento riuscito: " + list.size() + " utenti.");
+                } else {
+                    System.err.println("ERRORE FILE: Il file contiene un oggetto " + letto.getClass().getName() + " invece di un Set. Il file verrà sovrascritto al prossimo salvataggio.");
+                }
+
+            } catch (IOException | ClassNotFoundException e) {
+                System.err.println("Attenzione: Impossibile caricare il database utenti (verrà creato nuovo). Dettaglio: " + e.getMessage());
+            }
+        } else {
+            System.out.println("File database non trovato o vuoto. Avvio con lista vuota.");
+        }
     }
     
      /**
@@ -67,7 +89,7 @@ public class UserManagement implements Functionality<User>,Serializable{
             // esce senza aggiungere ritornando che non è andato a buon fine l'inserimento lanciando l'eccezione che specifica che l'argomento non è valido 
          }
     if(list.add(u)){
-      FileManager.writeToTextFileObject(u, this.userDatabase); //aggiorno il file d'archivio 
+      FileManager.writeToTextFileObject(list, this.userDatabase); //aggiorno il file d'archivio 
        return true;}
          return false;
                         }
@@ -139,29 +161,23 @@ public class UserManagement implements Functionality<User>,Serializable{
      */
     @Override
     public User search(User u ){
-        if (u== null) 
-         { throw new IllegalArgumentException();
-            // esce senza aggiornare ritornando che non è andato a buon fine l'operazione lanciando l'eccezione che specifica che l'argomento non è valido 
-         } 
-      if(u.getNumberId()!=null){ //se il campo dell'User u relativo alla matricola è diverso da null significa che la ricerca è stata fatta per matricola
-          for(User us:list){
-              if(us.equals(u)) {  //l'uguaglianza in questo caso deve basarsi sulla matricola quindi posso usare il metodo equals di User
-                  return us;
-              }
-                  
-          }return null; //significa che non ha trovato l'utente cercato per matricola 
-      }
-          else  if(u.getSurname()!=null){  //se il campo dell'User u relativo al cognome è diverso da null significa che la ricerca è stata fatta per cognome 
-          for(User us:list){
-              if(us.getSurname().equalsIgnoreCase(u.getSurname())) { //l'uguaglianza ora si base sul campo cognome 
-                  return us;
-              }
-                  
-          }return null; //significa che non ha trovato l'utente cercato per matricola
-                  
-      }  return null;//se la ricerca non è fatta nè per cognome nè per matricola allora ritorna null
-      }
+         if (u == null) throw new IllegalArgumentException();
+
+        if (u.getNumberId() != null) { 
+            for (User us : list) {
+                if (us.equals(u)) {
+                    return us;
+                }
+            }
+        } else if (u.getSurname() != null) { // ricerca per titolo
+            for (User us : list) {
+                if (us.getSurname().equalsIgnoreCase(u.getSurname())) {
+                    return us;
+                }
+            }
+        }
+        return null;
+     }
     
-    
-    }
+}
 

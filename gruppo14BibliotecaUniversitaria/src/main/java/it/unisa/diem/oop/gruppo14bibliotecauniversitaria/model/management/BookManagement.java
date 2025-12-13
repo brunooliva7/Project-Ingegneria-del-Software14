@@ -81,7 +81,7 @@ public class BookManagement implements Functionality<Book> {
         if (bk.getISBN().equals(b.getISBN())) {
             // ISBN già presente, incremento solo di 1 le copie disponibili
             bk.setAvailableCopies(bk.getAvailableCopies() + 1);
-            FileManager.writeToTextFileObject(bk, this.bookDatabase);
+            FileManager.writeToTextFileObject(catalogue, this.bookDatabase);
             return true; // aggiornamento effettuato
         }
         // Se non esiste ancora, aggiungo il nuovo libro

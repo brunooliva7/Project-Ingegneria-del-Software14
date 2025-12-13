@@ -54,7 +54,7 @@ public class FileManager <T extends Serializable>{
      * @post Il file è stato scritto correttamente 
      */
 
-    public static <T extends Serializable> void writeToTextFileObject(T object, File file){
+    public static <T extends Serializable> void writeToTextFileObject(Set <T> object, File file){
          if (object == null || file == null) {
             throw new IllegalArgumentException("Oggetto o nome file non valido");
         }
