@@ -63,6 +63,10 @@ public class addUserController {
         if(us.add(u)){
             labelErrore.setText("Inserimento avvenuto correttamente");
             labelErrore.setStyle("-fx-text-fill: green;");
+            name.clear();
+            surname.clear();
+            email.clear();
+            numberID.clear();
         }
         else{ labelErrore.setText("Errore nell'inserimento");
             labelErrore.setStyle("-fx-text-fill: red;");

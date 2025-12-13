@@ -24,8 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-
+import javafx.stage.Modality;
 /**
  * JavaFX App
  */
@@ -157,11 +156,28 @@ public class View extends Application {
      
      public static void searchUser() throws IOException {
         
-        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/ricercautente.fxml"));
+            FXMLLoader loader = new FXMLLoader(View.class.getResource("/ricercautente.fxml")); 
+            Parent root = loader.load();
+
+            Stage popupStage = new Stage();
+            popupStage.setTitle("RicercaUtente");
+            popupStage.setScene(new Scene(root));
+
+
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+
+            popupStage.setResizable(false);
+
+            popupStage.showAndWait();
+  }
+    
+    public static void viewUSers() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/visualizzaelencoutente.fxml"));
         
         Scene scene = new Scene(fxmlLoader.load());
         
-        mainStage.setTitle("EliminaUtente");
+        mainStage.setTitle("VisualizzaUtenti");
         mainStage.setScene(scene);
         
         mainStage.setResizable(true);
@@ -170,6 +186,8 @@ public class View extends Application {
         
         mainStage.show();  
     }
+     
+     
 
     /**
      * @brief Metodo main dell'applicazione.
