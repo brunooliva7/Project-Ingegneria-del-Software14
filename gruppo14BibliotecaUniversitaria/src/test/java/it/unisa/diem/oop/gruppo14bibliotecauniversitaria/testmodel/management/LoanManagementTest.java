@@ -10,6 +10,7 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement;
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -168,4 +169,33 @@ public class LoanManagementTest {
         assertNull(found, "Dovrebbe restituire null se il prestito non esiste");
     }
     
+    
+     // --- TEST VIEWSORTED ---
+    @Test
+    void testViewSortedOrder() {
+        
+        // Aggiungo in ordine sparso
+        loanManagement.add(loan2); 
+        loanManagement.add(loan1); 
+        
+        // Il TreeSet (loanManagement.getLoan()) ordina per data di scadenza (più vicina precede).
+        Set<Loan> loanSet = loanManagement.getLoan();
+        Iterator<Loan> iterator = loanSet.iterator();
+        
+        Loan first = iterator.next();  // Ci aspettiamo loan1 (10/01)
+        Loan second = iterator.next(); // Ci aspettiamo loan2 (15/01)
+        
+        // Verifico l'ordinamento
+        assertEquals(loan1.getDueDate(), first.getDueDate(), "Il primo prestito deve avere la scadenza più vicina (loan1).");
+        assertEquals(loan2.getDueDate(), second.getDueDate(), "Il secondo prestito deve avere la scadenza più lontana (loan2).");
+        
+        // Verifico che viewSorted non lanci eccezioni (sebbene non verifichiamo l'output su console)
+        assertDoesNotThrow(() -> loanManagement.viewSorted(), "viewSorted non deve lanciare eccezioni.");
+    }
+
+    @Test
+    void testViewSortedEmpty() {
+        // Assicurati che l'esecuzione su catalogo vuoto non dia errori
+        assertDoesNotThrow(() -> loanManagement.viewSorted(), "viewSorted su catalogo vuoto non deve lanciare eccezioni.");
+    }
 }

@@ -10,7 +10,6 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.data;
  *
  * @author maramariano
  * @date 12-12-2025
- * @version 1.0
  */
 
 import org.junit.jupiter.api.BeforeEach;

@@ -7,6 +7,7 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
+import java.util.Iterator;
 import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -81,6 +82,11 @@ public class UserManagementTest {
         assertFalse(result, "Dovrebbe restituire false se si prova a rimuovere un utente che non c'è");
         assertEquals(1, userManagement.getList().size(), "La lista non dovrebbe cambiare");
     }
+    
+    @Test
+    void testRemoveNullUserThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> userManagement.remove(null));
+    }
 
     // --- TEST UPDATE ---
     @Test
@@ -95,6 +101,19 @@ public class UserManagementTest {
         assertTrue(result, "Update dovrebbe restituire true");
         assertFalse(userManagement.getList().contains(user1), "Il vecchio utente non deve più esistere");
         assertTrue(userManagement.getList().contains(user2), "Il nuovo utente deve essere presente");
+    }
+    
+    @Test
+    void testUpdateNonExistingUser() {
+        // Tento di aggiornare userNotPresent che non è nel Set
+        boolean result = userManagement.update(userNotPresent, user1);
+        assertFalse(result, "Update dovrebbe fallire se il libro da modificare non esiste");
+    }
+    
+    @Test
+    void testUpdateNullOldUserThrowsException() {
+        // La logica di UserManagement prevede che update(null, u2) lanci IllegalArgumentException
+        assertThrows(IllegalArgumentException.class, () -> userManagement.update(null, user2));
     }
 
     // --- TEST SEARCH ---
@@ -133,4 +152,35 @@ public class UserManagementTest {
         assertNull(found, "Dovrebbe restituire null se l'utente non viene trovato");
     }
     
+    @Test
+    void testSearchNullUserThrowsException() {
+        // La logica di UserManagement prevede che search(null) lanci IllegalArgumentException
+        assertThrows(IllegalArgumentException.class, () -> userManagement.search(null));
+    }
+    
+    // --- TEST VIEWSORTED ---
+    @Test
+    void testViewSortedOrder() {
+        userManagement.add(user1); 
+        userManagement.add(user2); 
+        
+        // TreeSet ordina per Cognome e poi Nome. Bianchi (B) viene prima di Rossi (R).
+        Set<User> list = userManagement.getList();
+        
+        Iterator<User> iterator = list.iterator();
+        
+        User first = iterator.next();  // Ci aspettiamo Bianchi (user2)
+        User second = iterator.next(); // Ci aspettiamo Rossi (user1)
+        
+        assertEquals(user2.getNumberId(), first.getNumberId(), "Il primo utente deve essere Bianchi (B prima di R).");
+        assertEquals(user1.getNumberId(), second.getNumberId(), "Il secondo utente deve essere Rossi.");
+        
+        assertDoesNotThrow(() -> userManagement.viewSorted(), "viewSorted non deve lanciare eccezioni.");
+    }
+
+    @Test
+    void testViewSortedEmpty() {
+        // Assicurati che l'esecuzione su catalogo vuoto non dia errori
+        assertDoesNotThrow(() -> userManagement.viewSorted(), "viewSorted su catalogo vuoto non deve lanciare eccezioni.");
+    }
 }
