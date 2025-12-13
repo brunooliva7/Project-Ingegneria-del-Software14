@@ -40,7 +40,7 @@
                                         <MenuItem fx:id="modificaUtente" onAction="#modifyUser" text="Modifica" />
                                         <MenuItem fx:id="cancellaUtente" onAction="#deleteUser" text="Cancella" />
                                         <MenuItem fx:id="cercaUtente" onAction="#searchUser" text="Cerca" />
-                                        <MenuItem fx:id="visualizzaElencoUtente" onAction="#viewUserList "text="Visualizza elenco utenti"/>
+                                        <MenuItem fx:id="visualizzaElencoUtente" text="Visualizza elenco utenti"/>
                                     </items>
                                 </MenuButton>
                             </children>
@@ -57,7 +57,7 @@
                                         <MenuItem text="Modifica" />
                                         <MenuItem text="Cancella" />
                                         <MenuItem text="Cerca" />
-                                        <MenuItem fx:id="visualizzaElencoPrestito" onAction="#viewLoanList" text="Visualizza elenco prestiti"/>
+                                        <MenuItem fx:id="visualizzaElencoPrestito"  text="Visualizza elenco prestiti"/>
                                     </items>
                                 </MenuButton>
                             </children>
@@ -74,7 +74,7 @@
                                         <MenuItem text="Modifica" />
                                         <MenuItem text="Cancella" />
                                         <MenuItem text="Cerca" />
-                                        <MenuItem fx:id="visualizzaElencoPrestito" onAction="#viewBookList "text="Visualizza elenco libri"/>
+                                        <MenuItem fx:id="visualizzaElencoPrestito" text="Visualizza elenco libri"/>
                                     </items>
                                 </MenuButton>
                             </children>

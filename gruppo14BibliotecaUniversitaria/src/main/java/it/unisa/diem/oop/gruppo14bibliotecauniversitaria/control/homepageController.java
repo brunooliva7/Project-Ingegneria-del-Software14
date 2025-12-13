@@ -46,6 +46,6 @@ public class homepageController {
     
     @FXML
     public void searchUser() throws IOException{
-        
+        View.searchUser();
     }
 }
