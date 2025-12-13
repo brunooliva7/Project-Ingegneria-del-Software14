@@ -62,8 +62,11 @@ public class addUserController {
         
         if(us.add(u)){
             labelErrore.setText("Inserimento avvenuto correttamente");
+            labelErrore.setStyle("-fx-text-fill: green;");
         }
-        else labelErrore.setText("Errore nell'inserimento");
+        else{ labelErrore.setText("Errore nell'inserimento");
+            labelErrore.setStyle("-fx-text-fill: red;");
+        }
     }
     
     @FXML
