@@ -162,21 +162,21 @@ public class UserManagement implements Functionality<User>,Serializable{
     @Override
     public User search(User u ){
          if (u == null) throw new IllegalArgumentException();
-
-        if (u.getNumberId() != null) { 
+            //esce dato che l'utente da cercare non è valido e lancia l'eccezione adeguata 
+        if (u.getNumberId() != null) {  //se l'utente è stato cercato tramite matricola solo quel campo non sarà nullo grazie all'utilizzo del secondo costruttore 
             for (User us : list) {
-                if (us.equals(u)) {
+                if (us.equals(u)) { //l'uguaglianza deve essere sulla base della matricola esattamente come il metodo equals() di User quindi lo uso direttamente 
                     return us;
                 }
-            }
-        } else if (u.getSurname() != null) { // ricerca per titolo
+            } 
+        } else if (u.getSurname() != null) {  //se l'utente è stato cercato tramite cognome solo quel campo non sarà nullo grazie all'utilizzo del secondo costruttore 
             for (User us : list) {
-                if (us.getSurname().equalsIgnoreCase(u.getSurname())) {
+                if (us.getSurname().equalsIgnoreCase(u.getSurname())) {   //se trovo nell'elenco un User che ha cognome corrispondente a quello cercato allora lo ritorno 
                     return us;
                 }
             }
         }
-        return null;
+        return null;  //se arriva a questo punto significa che non ha trovato tra l'elenco l'utente cercato
      }
     
 }
