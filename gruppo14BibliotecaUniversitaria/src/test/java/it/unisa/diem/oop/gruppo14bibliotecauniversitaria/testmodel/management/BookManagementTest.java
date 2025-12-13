@@ -5,6 +5,12 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.management;
 
+/**
+ * @file BookManagementTest.java
+ *
+ * @author bruno
+ * @date 12-12-2025
+ */
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import java.time.LocalDate;
@@ -17,17 +23,25 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 /**
- *
- * @author bruno
+ * @class BookManagementTest
+ * 
+ * @brief Implementa una suite di test JUnit per la classe {@link it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement}
+ * 
  */
 public class BookManagementTest {
     
-    private BookManagement bookManagement;
-    private Book book1;
-    private Book book2;
-    private Book bookNotPresent;
+    private BookManagement bookManagement; ///< Istanza della classe da testare
+    private Book book1; ///< Libro di test 1
+    private Book book2; ///< Libro 2
+    private Book bookNotPresent; ///< Libro non presente nel catalogo
 
+    /**
+     * @brief Configurazione eseguita prima di ogni test.
+     * * Inizializza un nuovo {@link BookManagement} e i libri di test. Pulisce
+     * il catalogo per garantire l'isolamento dei test.
+     */
     @BeforeEach
     void setUp() {
         bookManagement = new BookManagement();
@@ -45,6 +59,10 @@ public class BookManagementTest {
 
     // --- TEST ADD ---
 
+    /**
+     * @brief Testa l'aggiunta di un nuovo libro al catalogo.
+     * * Verifica che il metodo add() restituisca true e che la dimensione del catalogo sia corretta.
+     */
     @Test
     void testAddNewBook() {
         boolean result = bookManagement.add(book1);
@@ -53,6 +71,11 @@ public class BookManagementTest {
         assertEquals(1, bookManagement.getCatalogue().size(), "Il catalogo deve contenere 1 libro");
     }
 
+    /**
+     * @brief Testa l'aggiunta di un libro già esistente.
+     * * Verifica che, se il libro esiste (stesso ISBN), le copie vengano incrementate
+     * senza aggiungere un nuovo elemento al Set sottostante.
+     */
     @Test
     void testAddExistingBookIncrementsCopies() {
         // Aggiungo il libro la prima volta (copie iniziali: 5)
@@ -72,6 +95,9 @@ public class BookManagementTest {
         assertEquals(6, storedBook.getAvailableCopies(), "Le copie dovrebbero essere incrementate (5 + 1)");
     }
 
+    /**
+     * @brief Testa l'aggiunta di un riferimento nullo.
+     */
     @Test
     void testAddNull() {
         assertFalse(bookManagement.add(null), "Dovrebbe restituire false se si passa null");
@@ -79,6 +105,10 @@ public class BookManagementTest {
 
     // --- TEST REMOVE ---
 
+    /**
+     * @brief Testa la rimozione di un libro esistente.
+     * * Verifica che il metodo remove() restituisca true e che il libro sia rimosso dal catalogo.
+     */
     @Test
     void testRemoveExistingBook() {
         bookManagement.add(book1);
@@ -88,6 +118,10 @@ public class BookManagementTest {
         assertEquals(0, bookManagement.getCatalogue().size(), "Il catalogo deve essere vuoto");
     }
 
+    /**
+     * @brief Testa la rimozione di un libro non presente.
+     * * Verifica che il metodo remove() restituisca false e che la dimensione del catalogo non cambi.
+     */
     @Test
     void testRemoveNonExistingBook() {
         bookManagement.add(book1);
@@ -97,6 +131,9 @@ public class BookManagementTest {
         assertEquals(1, bookManagement.getCatalogue().size());
     }
 
+    /**
+     * @brief Testa la rimozione di un riferimento nullo.
+     */
     @Test
     void testRemoveNull() {
         assertFalse(bookManagement.remove(null));
@@ -104,6 +141,10 @@ public class BookManagementTest {
 
     // --- TEST UPDATE ---
 
+    /**
+     * @brief Testa l'aggiornamento dei dettagli di un libro esistente.
+     * * Verifica che titolo e copie del libro nel catalogo vengano aggiornati utilizzando un nuovo oggetto con lo stesso ISBN.
+     */
     @Test
     void testUpdateBookDetails() {
         bookManagement.add(book1);
@@ -121,6 +162,10 @@ public class BookManagementTest {
         assertEquals(10, retrieved.getAvailableCopies(), "Le copie dovrebbero essere aggiornate");
     }
 
+    /**
+     * @brief Testa l'aggiornamento con un numero di copie non valido (negativo).
+     * * L'aggiornamento dovrebbe fallire per mantenere l'integrità dei dati.
+     */
     @Test
     void testUpdateWithNegativeCopies() {
         bookManagement.add(book1);
@@ -148,6 +193,9 @@ public class BookManagementTest {
         assertEquals(5, retrieved.getAvailableCopies());
     }
 
+    /**
+     * @brief Testa l'aggiornamento di un libro non esistente.
+     */
     @Test
     void testUpdateNonExistingBook() {
         boolean result = bookManagement.update(bookNotPresent, book1);
@@ -156,6 +204,10 @@ public class BookManagementTest {
 
     // --- TEST SEARCH ---
 
+    /**
+     * @brief Testa la ricerca di un libro utilizzando l'ISBN.
+     * * Si assume che la logica di ricerca si basi principalmente sull'ISBN.
+     */
     @Test
     void testSearchByISBN() {
         bookManagement.add(book1);
@@ -170,6 +222,11 @@ public class BookManagementTest {
         assertEquals("Il Signore degli Anelli", found.getTitle());
     }
 
+    /**
+     * @brief Testa la ricerca di un libro utilizzando il Titolo (se ISBN è nullo).
+     * * Questo test è valido solo se la logica di ricerca prevede il fallback
+     * al titolo in assenza di ISBN.
+     */
     @Test
     void testSearchByTitle() {
         bookManagement.add(book2); // Titolo: "1984"
@@ -185,6 +242,9 @@ public class BookManagementTest {
         assertEquals("9780451524", found.getISBN());
     }
 
+    /**
+     * @brief Testa la ricerca di un libro non trovato.
+     */
     @Test
     void testSearchNotFound() {
         bookManagement.add(book1);
@@ -193,16 +253,17 @@ public class BookManagementTest {
     }
     
     // --- TEST VIEWSORTED ---
+    
+    /**
+     * @brief Testa l'ordinamento del catalogo.
+     * * Verifica che i libri siano restituiti nell'ordine previsto dalla
+     * implementazione del metodo compareTo in {@link Book} (tipicamente per titolo).
+     */
     @Test
     void testViewSortedOrder() {
         // Aggiungi i libri in ordine sparso
         bookManagement.add(book2);
         bookManagement.add(book1);
-        
-        // book1 ha titolo "Il Codice Segreto"
-        // book2 ha titolo "La Vita Nuova"
-        // TreeSet ordina in base all'implementazione di compareTo in Book.
-        // Ipotizzando che l'ordinamento sia alfabetico per Titolo: book1 viene prima di book2.
         
         Set<Book> catalogue = bookManagement.getCatalogue();
         
@@ -214,20 +275,21 @@ public class BookManagementTest {
         Book firstBook = iterator.next(); // Questo ora è "1984" (book2)
         Book secondBook = iterator.next(); // Questo ora è "Il Signore degli Anelli" (book1)
 
-        // Il TreeSet ha restituito book2 per primo e book1 per secondo.
-        // Dobbiamo correggere le asserzioni di conseguenza.
+        // Il TreeSet ha restituito book2 per primo e book1 per secondo. Dobbiamo correggere le asserzioni di conseguenza.
         assertEquals(book2.getISBN(), firstBook.getISBN(), "Il primo libro in ordine deve essere book2 ('1984')");
         assertEquals(book1.getISBN(), secondBook.getISBN(), "Il secondo libro in ordine deve essere book1 ('Il Signore degli Anelli')");
         
         // Il metodo viewSorted non torna nulla, ma stampa su console.
-        // In un test unitario, verifichiamo solo che l'iterazione interna al metodo sia corretta
-        // e che il catalogo non sia vuoto.
+        // In un test unitario, verifichiamo solo che l'iterazione interna al metodo sia corretta e che il catalogo non sia vuoto.
         assertDoesNotThrow(() -> bookManagement.viewSorted(), "viewSorted non deve lanciare eccezioni.");
     }
     
+    /**
+     * @brief Testa il metodo viewSorted su un catalogo vuoto.
+     * * Verifica che non vengano lanciate eccezioni.
+     */
     @Test
     void testViewSortedEmpty() {
-        // Assicurati che l'esecuzione di viewSorted su catalogo vuoto non dia errori
         assertDoesNotThrow(() -> bookManagement.viewSorted(), "viewSorted su catalogo vuoto non deve lanciare eccezioni.");
     }
 }
