@@ -6,8 +6,13 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.storage;
 
 /**
- * 
- *@file FileManagerTest.java
+ * @file FileManagerTest.java
+ *
+ * @brief Implementa una suite di test JUnit per la classe
+ * {@link it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager}.
+ * * Verifica la corretta esecuzione delle operazioni di I/O (lettura, scrittura,
+ * aggiornamento) sia su file binari (oggetti serializzati) sia su file di testo
+ * (linee).
  *
  * @author maramariano
  * @date 12-12-2025
@@ -28,34 +33,46 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @class FileManagerTest
- * @brief Classe di test per la classe FileManager.
+ * @brief Classe di test per la classe {@link FileManager}.
  */
 class FileManagerTest {
 
-    // JUnit Jupiter fornisce una directory temporanea pulita
+    /** @brief Directory temporanea fornita da JUnit Jupiter per i file di test. */
     @TempDir
     File tempDir; 
     
-    private File tempObjectFile;
-    private File tempTextFile;
+    private File tempObjectFile; ///< File temporaneo usato per i test di serializzazione binaria.
+    private File tempTextFile;   ///< File temporaneo usato per i test di I/O testuale.
     
-    // Classe serializzabile e comparabile per i test generici
-    // Deve essere statica per essere creata senza un'istanza di FileManagerTest
+    /**
+     * @brief Classe di supporto serializzabile e comparabile per testare i metodi generici di FileManager.
+     */
     static class TestData implements Serializable, Comparable<TestData> {
         private static final long serialVersionUID = 1L;
         private String value;
         private int id;
 
+        /**
+         * @brief Costruttore di TestData.
+         * @param value Valore stringa.
+         * @param id ID numerico (usato per l'uguaglianza e l'ordinamento).
+         */
         public TestData(String value, int id) {
             this.value = value;
             this.id = id;
         }
 
+        /**
+         * @brief Rappresentazione in stringa dell'oggetto.
+         */
         @Override
         public String toString() {
             return value + ":" + id;
         }
         
+        /**
+         * @brief Definizione di uguaglianza basata sull'ID.
+         */
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -64,13 +81,19 @@ class FileManagerTest {
             return id == testData.id;
         }
         
-        // Necessario per la TreeSet
+        /**
+         * @brief Definizione di ordinamento basata sull'ID.
+         */
         @Override
         public int compareTo(TestData other) {
             return Integer.compare(this.id, other.id);
         }
     }
 
+    /**
+     * @brief Configurazione eseguita prima di ogni test.
+     * * Crea i riferimenti ai file temporanei per ogni test.
+     */
     @BeforeEach
     void setUp() throws IOException {
         // Crea file temporanei per ogni esecuzione di test
@@ -82,6 +105,7 @@ class FileManagerTest {
 
     /**
      * @brief Test di writeToTextFileObject (Scrittura di un singolo oggetto serializzabile).
+     * * Verifica che un oggetto venga scritto e possa essere letto correttamente dal file.
      */
     @Test
     void testWriteToTextFileObject_Success() throws IOException, ClassNotFoundException {
@@ -104,6 +128,7 @@ class FileManagerTest {
 
     /**
      * @brief Test di writeToTextFileObject con input non valido.
+     * * Verifica che vengano lanciate {@code IllegalArgumentException} per input nulli.
      */
     @Test
     void testWriteToTextFileObject_InvalidInput() {
@@ -120,6 +145,7 @@ class FileManagerTest {
     
     /**
      * @brief Test di updateFileObject (Sovrascrittura di un Set di oggetti).
+     * * Verifica che il file venga svuotato e riscritto con un nuovo set di dati.
      */
     @Test
     void testUpdateFileObject_Success() throws IOException, ClassNotFoundException {
@@ -161,6 +187,7 @@ class FileManagerTest {
     
     /**
      * @brief Test di updateFileObject con input non valido.
+     * * Verifica che venga lanciata {@code IllegalArgumentException} se il file è nullo.
      */
     @Test
     void testUpdateFileObject_InvalidInput() {
@@ -171,17 +198,13 @@ class FileManagerTest {
         assertThrows(IllegalArgumentException.class, () -> {
             FileManager.updateFileObject(testSet, null);
         }, "Dovrebbe lanciare IllegalArgumentException se il file è null.");
-    
-        // Nota: la tua implementazione non gestisce esplicitamente newTree=null, 
-        // ma una NullPointerException verrebbe lanciata internamente da TreeSet se newTree non è null.
-        // Se si volesse testare newTree=null, bisognerebbe lanciare IllegalArgumentException 
-        // e modificare la classe FileManager.
     }
 
     // --- TEST METODI TESTUALI (LINEE) ---
     
     /**
      * @brief Test di writeLine (Scrittura di una singola riga di testo).
+     * * Scrive una riga e la rilegge per verificare la correttezza del contenuto.
      */
     @Test
     void testWriteLine_Success() throws IOException {
@@ -201,10 +224,7 @@ class FileManagerTest {
     
     /**
      * @brief Test di readLine (Lettura di una singola riga di testo).
-     * * NOTA: La tua implementazione di readLine non restituisce la riga letta, 
-     * * ma ha solo effetti collaterali (stampa o log). Per renderla testabile, 
-     * * dovremmo modificare FileManager.readLine() per restituire String.
-     * * Qui verifichiamo solo che non lanci eccezioni.
+     * * Verifica che il metodo si esegua senza lanciare eccezioni I/O.
      */
     @Test
     void testReadLine_NoExceptions() throws IOException {
@@ -214,18 +234,17 @@ class FileManagerTest {
         }
         
         // Esegui readLine (ci aspettiamo che non lanci eccezioni)
-        // Se il test supera, il metodo è eseguito senza errori di I/O.
         assertDoesNotThrow(() -> FileManager.readLine(tempTextFile), "La lettura non dovrebbe lanciare eccezioni.");
     }
     
     /**
      * @brief Test di readLine su file inesistente.
+     * * Verifica che il metodo gestisca {@code FileNotFoundException} internamente senza propagarla.
      */
     @Test
     void testReadLine_FileNotFound() {
         File missingFile = new File(tempDir, "missing.txt");
-        // Esegui readLine su file inesistente (ci aspettiamo che non lanci eccezioni, 
-        // ma che logghi FileNotFoundException internamente)
+        // Esegui readLine su file inesistente (ci aspettiamo che non lanci eccezioni)
         assertDoesNotThrow(() -> FileManager.readLine(missingFile), "Il metodo dovrebbe gestire FileNotFoundException internamente.");
     }
 }

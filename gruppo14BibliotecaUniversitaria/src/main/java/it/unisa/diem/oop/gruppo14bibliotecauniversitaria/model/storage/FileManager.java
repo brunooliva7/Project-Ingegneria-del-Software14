@@ -36,7 +36,7 @@ import java.util.logging.Logger;
  * - Scrivere, leggere e aggiornare oggetti serializzabili su file (binario).
  * - Scrivere, leggere e aggiornare linee di testo su file (testuale).
  *
- * @tparam T Tipo generico che deve implementare Serializable.
+ * @param <T> Tipo generico che deve implementare Serializable.
  */
 
 public class FileManager <T extends Serializable>{
@@ -45,13 +45,14 @@ public class FileManager <T extends Serializable>{
     /**
      * @brief Scrive un oggetto serializzabile su file.
      *
-     * @param object Oggetto da scrivere.
-     * @param file File da modificare
-     * @throws IOException Se si verifica un errore di I/O.
+     * @param object Set di oggetti da scrivere.
+     * @param file File su cui scrivere/sovrascrivere.
+     * @param <T> Tipo generico che deve implementare Serializable.
+     *
+     * @throws IllegalArgumentException Se il parametro 'file' è nullo.
      * 
-     * 
-     * @pre object !=0 , filename valido 
-     * @post Il file è stato scritto correttamente 
+     * @pre object !=0 , file valido 
+     * @post Il file è stato scritto/sovrascritto correttamente 
      */
 
     public static <T extends Serializable> void writeToTextFileObject(Set <T> object, File file){
@@ -67,16 +68,17 @@ public class FileManager <T extends Serializable>{
     }
     
     /**
-     * @brief Aggiorna un oggetto nel file sostituendolo con uno nuovo.
-     *
+     * @brief Aggiorna il file sostituendo il contenuto con un nuovo Set di oggetti
+     * 
+     * @param newTree Set di oggetti da scrivere nel file
      * @param file File da modificare
-     * @param newObj Nuovo oggetto da inserire.
      * 
-     * @throws IOException Se si verifica un errore di I/O.
-     * @throws ClassNotFoundException Se la classe degli oggetti non viene trovata.
+     * @param <T> Tipo generico che deve implementare Serializable.
      * 
-     * @pre filename valido 
-     * @post Il file è stato aggiornamento correttamente 
+     * @throws IllegalArgumentException Se il parametro 'file' è nullo.
+     * 
+     * @pre filename non nullo
+     * @post Il file è stato aggiornato correttamente 
      */
     public static <T extends Serializable> void updateFileObject(Set <T> newTree, File file){  
          
@@ -104,7 +106,7 @@ public class FileManager <T extends Serializable>{
     /**
      * @brief Legge riga da un file di testo.
      *
-     * @param file File da modificare
+     * @param file File da 
      * 
      * @throws IOException Se si verifica un errore di I/O.
      * 
