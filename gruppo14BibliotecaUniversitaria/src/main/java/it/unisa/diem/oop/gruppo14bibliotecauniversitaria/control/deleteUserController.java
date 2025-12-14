@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
  *
  * @author bruno
  */
-public class deleteController {
+public class deleteUserController {
     
      @FXML
     private TextField searchField;

@@ -25,7 +25,7 @@ import javafx.scene.control.TextField;
  *
  * @author maramariano
  */
-public class AddBookController implements Initializable {
+public class addBookController implements Initializable {
 
     // Campi dei dati per l'inserimento del libro
     @FXML
