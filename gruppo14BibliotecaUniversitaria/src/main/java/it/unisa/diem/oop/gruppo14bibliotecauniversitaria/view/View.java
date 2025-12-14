@@ -124,7 +124,7 @@ public class View extends Application {
      
      public static void modifyUser() throws IOException {
         
-        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificautente.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/prova.fxml"));
         
         Scene scene = new Scene(fxmlLoader.load());
         
