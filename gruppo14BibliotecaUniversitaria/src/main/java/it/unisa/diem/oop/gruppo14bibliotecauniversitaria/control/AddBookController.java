@@ -73,27 +73,32 @@ public class AddBookController implements Initializable {
         String autore = authors.getText();
         String isbn = ISBN.getText();
         
-        // Usiamo String per la data
         String annoTesto = publicationYear.getText(); 
 
-        LocalDate dataPubblicazione;
+        LocalDate dataPubblicazione; // Sarà la data finale richiesta dal costruttore Book
         int copieDisponibili;
 
         try {
-            // 2. Conversione dei valori
+            // 2. Tenta la conversione dell'anno e delle copie
+
+            // Conversione dell'ANNO (da String a int)
+            int anno = Integer.parseInt(annoTesto);
             
-            // Tenta la conversione della data
-            dataPubblicazione = LocalDate.parse(annoTesto);
+            // Creazione di una LocalDate utilizzando l'anno inserito
+            // Impostiamo il mese e il giorno a Gennaio 1 per default (o quello che preferisci)
+            dataPubblicazione = LocalDate.of(anno, 1, 1);
             
-            // Tenta la conversione delle copie
+            // Conversione delle COPIE (da String a int)
             copieDisponibili = Integer.parseInt(availableCopies.getText());
             
-        } catch (DateTimeParseException e) {
-            labelErrore.setText("Errore: Il formato della data deve essere AAAA-MM-GG (es. 2025-01-20).");
+        } catch (NumberFormatException e) {
+            // Questo gestisce sia un errore nell'anno che nelle copie (se non sono numeri)
+            labelErrore.setText("Errore: Anno di pubblicazione e/o Copie disponibili devono essere numeri interi.");
             labelErrore.setStyle("-fx-text-fill: red;");
             return;
-        } catch (NumberFormatException e) {
-            labelErrore.setText("Errore: Le Copie devono essere numeri interi.");
+        } catch (java.time.DateTimeException e) {
+            // Gestisce se l'anno non fosse valido (es. anno 0 o negativo, anche se Integer.parseInt previene già molto)
+            labelErrore.setText("Errore: Anno di pubblicazione non valido.");
             labelErrore.setStyle("-fx-text-fill: red;");
             return;
         }
