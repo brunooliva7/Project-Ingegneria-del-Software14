@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1150.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FDE68A 0%, #F59E0B 100%);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.deleteLoanController">
+
+    <children>
+        <!-- BOTTONE INDIETRO -->
+        <Button fx:id="backButton" onAction="#backPage" style="-fx-background-color: #F97316; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16; -fx-background-radius: 10; -fx-padding: 8 16;" text="← Indietro" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
+            <effect>
+                <DropShadow color="#00000040" offsetY="2" radius="8" />
+            </effect>
+        </Button>
+
+        <!-- LAYOUT CENTRALE -->
+        <VBox alignment="TOP_CENTER" layoutX="16.0" maxHeight="600" maxWidth="1167.0" prefHeight="600" prefWidth="1079.0" spacing="20" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 25;" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="150">
+            
+            <effect>
+                <DropShadow color="#00000035" offsetY="5" radius="20" />
+            </effect>
+            
+            <children>
+                <!-- TITOLO -->
+                <Label style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #374151;" text="Elimina  prestito" />
+                
+                <!-- Selezione Utente -->
+                
+                    <TextField fx:id="usersearch" style="-fx-font-size: 16; -fx-text-fill: #374151;" text="Cerca utente interessato tramite matricola o cognome:" />
+                     <TextField fx:id="booksearch" style="-fx-font-size: 16; -fx-text-fill: #374151;" text="Cerca libro interessato tramite ISBN o titolo:" />
+                
+                <!-- Pulsante Elimina -->
+                <Button fx:id="dleteButton" prefHeight="45" prefWidth="200" style="-fx-background-color: #FF7043; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Cerca">
+                    <effect>
+                        <DropShadow color="#00000030" radius="6" />
+                    </effect>
+                </Button>
+                    
+                   
+                
+                <Label style="-fx-font-size: 16; -fx-text-fill: #374151;" text="Clicca due volte sul prestito desiderato per eliminarlo" />
+                 <!-- TABLEVIEW -->
+            <TableView fx:id="userTableView" maxHeight="400" maxWidth="1100" prefHeight="400" prefWidth="1100" style="                             -fx-background-radius: 10;                             -fx-border-radius: 10;                             -fx-border-color: #E5E7EB;                             -fx-font-size: 13;">
+
+                <columns>
+                    <TableColumn fx:id="nomeColumn" prefWidth="150" text="Nome utente" />
+                    <TableColumn fx:id="cognomeColumn" prefWidth="150" text="Cognome utente" />
+                    <TableColumn fx:id="matricolaColumn" prefWidth="150" text="Matricola utente" />
+                    <TableColumn fx:id="titoloColumn" prefWidth="150" text="Titolo libro" />
+                    <TableColumn fx:id="autoriColumn" prefWidth="150" text="Autori libro" />
+                    <TableColumn fx:id="isbnColumn" prefWidth="150" text="ISBN libro" />
+                    <TableColumn fx:id="duedateColumn" prefWidth="150" text="Data restituzione" />
+                </columns>
+            </TableView>
+
+                <!-- Footer -->
+                <Label style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
