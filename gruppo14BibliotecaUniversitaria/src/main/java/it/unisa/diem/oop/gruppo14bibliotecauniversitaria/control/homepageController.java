@@ -101,9 +101,4 @@ public class homepageController {
     public void viewLoan() throws IOException{
         View.viewLoan();
     }
-    
-    @FXML
-    public void modifyLoan() throws IOException{
-        View.modifyLoan();
-    }
 }
