@@ -72,7 +72,8 @@ public class UserManagement implements Functionality<User>,Serializable{
      */
     
     public Set<User> getList() {
-    return list;}
+        return list;
+    }
     
     /**
      *  @brief Metodo che aggiunge un user all'elenco 

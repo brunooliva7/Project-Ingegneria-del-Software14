@@ -24,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,7 +43,8 @@ import java.util.List;
 public class BookManagement implements Functionality<Book> {
     private Set <Book> catalogue; ///< Catalogo dei libri gestito come un insieme ordinato in cui non sono permessi duplicati
     
-    private final File bookDatabase = new File("bookDatabase.dat");
+    private final File bookDatabase = new File("bookDatabase.dat"); ///< File database dei libri
+    
     /**
     * @brief Costruttore della classe BookManagement
     * 
@@ -61,13 +63,13 @@ public class BookManagement implements Functionality<Book> {
                 
                 if (letto instanceof Set) {
                     this.catalogue = (Set<Book>) letto;
-                    System.out.println("Caricamento riuscito: " + catalogue.size() + " utenti.");
+                    System.out.println("Caricamento riuscito: " + catalogue.size() + " libri.");
                 } else {
                     System.err.println("ERRORE FILE: Il file contiene un oggetto " + letto.getClass().getName() + " invece di un Set. Il file verrà sovrascritto al prossimo salvataggio.");
                 }
 
             } catch (IOException | ClassNotFoundException e) {
-                System.err.println("Attenzione: Impossibile caricare il database utenti (verrà creato nuovo). Dettaglio: " + e.getMessage());
+                System.err.println("Attenzione: Impossibile caricare il database libri (verrà creato nuovo). Dettaglio: " + e.getMessage());
             }
         } else {
             System.out.println("File database non trovato o vuoto. Avvio con lista vuota.");
@@ -97,7 +99,10 @@ public class BookManagement implements Functionality<Book> {
     */
     @Override
     public boolean add(Book b) {
-        if (b == null) return false;
+        if (b == null){ 
+            throw new IllegalArgumentException();
+            // esce senza aggiungere ritornando che non è andato a buon fine l'inserimento lanciando l'eccezione che specifica che l'argomento non è valido 
+         }
 
         // 1. Controlla se l'ISBN è già presente (e aggiorna le copie se lo è)
         for (Book bk : catalogue) {
@@ -132,7 +137,10 @@ public class BookManagement implements Functionality<Book> {
     */
     @Override
     public boolean remove(Book b) {
-        if (b == null) return false;
+        if (b == null) {
+            throw new IllegalArgumentException();
+            // esce senza rimuovere ritornando che non è andato a buon fine l'operazione, lanciando l'eccezione che specifica che l'argomento non è valido 
+         } 
         for (Book bk : catalogue) {
             if (bk.equals(b)) { 
                 catalogue.remove(bk);
@@ -204,47 +212,63 @@ public class BookManagement implements Functionality<Book> {
             System.out.println("Il catalogo è vuoto.");
         } else {
             for (Book b : catalogue) {
-                System.out.println(b);
+                System.out.println(b.toString()); //stampo per ogni libro appartenente all'elenco i corrispondenti dati 
             }
         }
     }
+    
+    
 
     /**
+     * @param b
      * @brief Ricerca libri per query (Titolo, Autore o ISBN).
      * Questo metodo permette di cercare libri nel catalogo che contengano 
      * la stringa 'query' nel titolo, negli autori o nel codice ISBN.
      * La ricerca è parziale (non richiede la corrispondenza esatta).
-     * @param query Stringa di ricerca (parziale).
      * @return Lista dei libri corrispondenti alla query.
      */
-    public List<Book> searchBooks (String query) {
-        // Se la query è vuota o null, restituisce tutti i libri.
-        if (query == null || query.trim().isEmpty()) {
-            return new java.util.ArrayList<>(catalogue);
-        }
-
-        // Normalizza la query in minuscolo per una ricerca case-insensitive
-        String normalizedQuery = query.trim().toLowerCase();
-
-        List<Book> foundBooks = new java.util.ArrayList<>();
-
-        // Scorre l'insieme dei libri (catalogue)
+    @Override
+    public List <Book> search(Book b){
+        List<Book> lista=new ArrayList<>();  //usiamo una lista dato che se la ricerca viene fatta per cognome possono esserci più utenti nell'elenco corrispondenti 
+         if (b == null) throw new IllegalArgumentException();
+            //esce dato che l'utente da cercare non è valido e lancia l'eccezione adeguata 
+        // 1. Ricerca per ISBN (campo unico, massima priorità)
+    if (b.getISBN() != null && !b.getISBN().isEmpty()) {
+        String isbnCercato = b.getISBN();
         for (Book bk : catalogue) {
-            // Controlla se la query è contenuta (ricerca parziale) in uno dei tre campi:
-            if (bk.getTitle().toLowerCase().contains(normalizedQuery) || 
-                bk.getAuthors().toLowerCase().contains(normalizedQuery) ||
-                bk.getISBN().toLowerCase().contains(normalizedQuery)) 
-            {
-                foundBooks.add(bk);
+            // Cerca corrispondenza esatta per l'ISBN
+            if (bk.getISBN().equalsIgnoreCase(isbnCercato)) {
+                lista.add(bk);
+                return lista; // L'ISBN è unico, possiamo uscire subito
             }
         }
-        return foundBooks;
-    }
-
-    @Override
-    public Book search(Book entity1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    } 
+    
+    // 2. Ricerca per TITOLO
+    else if (b.getTitle() != null && !b.getTitle().isEmpty()) {
+        String titoloCercato = b.getTitle().toLowerCase();
+        for (Book bk : catalogue) {
+            // Ricerca parziale (contains) sul Titolo
+            if (bk.getTitle().toLowerCase().contains(titoloCercato)) {
+                lista.add(bk);
+            }
+        }
+    } 
+    
+    // 3. Ricerca per AUTORI
+    else if (b.getAuthors() != null && !b.getAuthors().isEmpty()) {
+        String autoreCercato = b.getAuthors().toLowerCase();
+        for (Book bk : catalogue) {
+            // Ricerca parziale (contains) sugli Autori
+            if (bk.getAuthors().toLowerCase().contains(autoreCercato)) {
+                lista.add(bk);
+            }
+        }
     }
     
+    // Se non è stato specificato nessun criterio valido (ISBN, Titolo, Autori)
+    // la lista sarà vuota o conterrà i risultati della ricerca.
+    return lista;
+    }
     
 }
