@@ -160,11 +160,14 @@ public class deleteBookController implements Initializable {
     /**
      * Gestisce il ritorno alla Home Page.
      * @param event
-     * @throws java.io.IOException
      */
     @FXML
-    public void backPage(ActionEvent event) throws IOException{
-        View.Homepage();
+    public void backPage(ActionEvent event){
+        try {
+            View.Homepage(); 
+        } catch (IOException e) {
+            showAlert("Errore di Caricamento", "Impossibile caricare la pagina iniziale.", AlertType.ERROR);
+        }
     } 
     
     /**

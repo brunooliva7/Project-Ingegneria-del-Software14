@@ -20,13 +20,19 @@ public class homepageController {
     private MenuItem aggiungiUtente;
     
     @FXML
-    private MenuItem modficaUtente;
+    private MenuItem modificaUtente;
     
     @FXML
     private MenuItem cancellaUtente;
     
     @FXML
     private MenuItem cercaUtente;
+    
+    @FXML
+    private MenuItem aggiungiLibro;
+    
+    @FXML
+    private MenuItem cancellaLibro;
     
     
     @FXML
@@ -52,5 +58,15 @@ public class homepageController {
     @FXML
     public void viewUser() throws IOException{
         View.viewUSers();
+    }
+    
+    @FXML
+    public void addBook() throws IOException{
+        View.addBook();
+    }
+    
+    @FXML
+    public void deleteBook() throws IOException{
+        View.deleteBook();
     }
 }
