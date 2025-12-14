@@ -80,15 +80,27 @@ public class addLoanController {
          loan = new Loan(book,user,duedate);
          
          if(user.getBooksOnloan().size() <= 3){
+             if(book.getAvailableCopies()==0){
             if(loanManagement.add(loan)){
                 labelMessage.setText("Modifica Riuscita");
                 labelMessage.setStyle("-fx-text-fill: green;");
+                book.setAvailableCopies(book.getAvailableCopies() - 1);
             }
          
             else{
                 labelMessage.setText("Modifica Riuscita");
                 labelMessage.setStyle("-fx-text-fill: green;");
             }
+          }
+             
+             else{
+                  Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("ERRORE");
+            alert.setHeaderText("Numero di copie");
+            alert.setContentText("Non ci sono numero di copie per libro selezionato");
+
+            alert.showAndWait();
+             }
          }
          else{
              Alert alert = new Alert(AlertType.INFORMATION);
