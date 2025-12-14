@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  *
@@ -77,15 +79,25 @@ public class addLoanController {
          
          loan = new Loan(book,user,duedate);
          
-         if(loanManagement.add(loan)){
-             labelMessage.setText("Modifica Riuscita");
-             labelMessage.setStyle("-fx-text-fill: green;");
-         }
+         if(user.getBooksOnloan().size() <= 3){
+            if(loanManagement.add(loan)){
+                labelMessage.setText("Modifica Riuscita");
+                labelMessage.setStyle("-fx-text-fill: green;");
+            }
          
+            else{
+                labelMessage.setText("Modifica Riuscita");
+                labelMessage.setStyle("-fx-text-fill: green;");
+            }
+         }
          else{
-             labelMessage.setText("Modifica Riuscita");
-             labelMessage.setStyle("-fx-text-fill: green;");
-         }    
+             Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("ERRORE");
+            alert.setHeaderText("Numero di Prestiti");
+            alert.setContentText("Hai raggiunto il numero di prestiti massimo");
+
+            alert.showAndWait();
+         }
     }
     
     @FXML
