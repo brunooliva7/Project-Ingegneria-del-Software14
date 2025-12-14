@@ -32,7 +32,7 @@ public class Book implements Comparable<Book>,Serializable {
     
     private String title; ///< Titolo del libro
     private String authors; ///< Autore/i
-    private LocalDate publicationYear; ///< Anno di pubblicazione
+    private String publicationYear; ///< Anno di pubblicazione
     private String ISBN; ///< Codice identificativo univoco
     private int availableCopies; ///< Numero di copie disponibili
     
@@ -47,10 +47,17 @@ public class Book implements Comparable<Book>,Serializable {
     * @post L'oggetto Book è correttamente inizializzato
     * 
     */
-    public Book(String title, String authors, LocalDate publicationYear, String ISBN, int availableCopies) {
+    public Book(String title, String authors, String publicationYear, String ISBN, int availableCopies) {
         if (availableCopies < 0) {
             throw new IllegalArgumentException("Il numero iniziale di copie disponibili non può essere negativo: " + availableCopies);
         }
+        
+        if (publicationYear != null && !publicationYear.isEmpty()) {
+            if (!publicationYear.matches("\\d{4}")) { // Forziamo 4 cifre per l'anno
+                throw new IllegalArgumentException("L'anno di pubblicazione deve essere una stringa contenente esattamente 4 cifre");
+            }
+        }
+        
         this.title = title;
         this.authors = authors;
         this.publicationYear = publicationYear;
@@ -122,7 +129,7 @@ public class Book implements Comparable<Book>,Serializable {
     * @post La data di pubblicazione è aggiornata
     * 
     */
-    public void setPublicationYear(LocalDate publicationYear) {
+    public void setPublicationYear(String publicationYear) {
         this.publicationYear = publicationYear;
     }
 
@@ -174,10 +181,10 @@ public class Book implements Comparable<Book>,Serializable {
 
     /**
     * @brief Restituisce il valore di publicationYear
-    * @return Anno di pubblicazione del libro (LocalDate)
+    * @return Anno di pubblicazione del libro (String)
     * 
     */
-    public LocalDate getPublicationYear() {
+    public String getPublicationYear() {
         return publicationYear;
     }
 

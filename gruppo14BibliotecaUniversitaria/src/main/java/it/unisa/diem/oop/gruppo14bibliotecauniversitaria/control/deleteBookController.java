@@ -10,7 +10,6 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookMa
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate; 
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -29,7 +28,7 @@ import javafx.scene.control.Alert.AlertType;
 
 
 /**
- * FXML Controller class per la schermata di eliminazione libro.
+ * FXML Controller class
  *
  * @author maramariano
  */
@@ -45,7 +44,7 @@ public class deleteBookController implements Initializable {
     // Colonne della TableView
     @FXML private TableColumn<Book, String> titoloColumn;
     @FXML private TableColumn<Book, String> autoriColumn;
-    @FXML private TableColumn<Book, LocalDate> dataColumn; 
+    @FXML private TableColumn<Book, String> dataColumn; 
     @FXML private TableColumn<Book, String> isbnColumn;
     @FXML private TableColumn<Book, Integer> copieColumn;
     
@@ -56,16 +55,16 @@ public class deleteBookController implements Initializable {
     /**
      * Inizializza il controller.
      */
-    @Override
+    @FXML
     public void initialize(URL url, ResourceBundle rb) {
-        // 1. Configurazione delle colonne della TableView
+        // Configurazione delle colonne della TableView
         titoloColumn.setCellValueFactory(new PropertyValueFactory<>("title")); 
         autoriColumn.setCellValueFactory(new PropertyValueFactory<>("authors")); 
         dataColumn.setCellValueFactory(new PropertyValueFactory<>("publicationDate")); 
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("ISBN")); 
         copieColumn.setCellValueFactory(new PropertyValueFactory<>("availableCopies")); 
 
-        // 2. Associa i metodi ai pulsanti tramite riferimento (this::metodo)
+        // Associa i metodi ai pulsanti tramite riferimento (this::metodo)
         backButton.setOnAction(this::backPage);
         searchButton.setOnAction(this::handleSearchAction);
         deleteBookButton.setOnAction(this::handleDeleteAction);
@@ -76,7 +75,7 @@ public class deleteBookController implements Initializable {
         // Disabilita il pulsante Elimina all'avvio
         deleteBookButton.setDisable(true);
         
-        // 3. Ascolta la selezione della riga per abilitare il pulsante Elimina
+        // Ascolta la selezione della riga per abilitare il pulsante Elimina
         bookTableViewricerca.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             deleteBookButton.setDisable(newSelection == null);
         });
@@ -94,37 +93,37 @@ public class deleteBookController implements Initializable {
     }
     
     /**
- * Gestisce l'azione del pulsante di ricerca.
- * Ora utilizza il metodo search(Book b) di BookManagement.
- */
-private void handleSearchAction(ActionEvent event) {
-    String query = searchField.getText().trim();
+    * Gestisce l'azione del pulsante di ricerca.
+    * Ora utilizza il metodo search(Book b) di BookManagement.
+    */
+    @FXML
+    private void handleSearchAction(ActionEvent event) {
+        String query = searchField.getText().trim();
 
-    if (query.isEmpty()) {
-        loadAllBooks(); 
-        return;
+        if (query.isEmpty()) {
+            loadAllBooks(); 
+            return;
+        }
+
+        // CREA UN OGGETTO BOOK PARZIALE
+        Book partialBook = new Book(query); 
+        // Devi usare il costruttore di Book appropriato per Title, Authors, Year, ISBN, Copies
+
+        // 2. CHIAMA IL TUO METODO search(Book b)
+        List<Book> results = bookManager.search(partialBook); 
+
+        bookList = FXCollections.observableArrayList(results);
+        bookTableViewricerca.setItems(bookList);
+
+        if (results.isEmpty()) {
+            showAlert("Ricerca", "Nessun libro trovato per la query: " + query, AlertType.INFORMATION);
+        }
     }
-
-    // 1. CREA UN OGGETTO BOOK PARZIALE
-    // Assumiamo che la query sia il titolo per sfruttare la logica di ricerca di BookManagement.
-    // Gli altri campi saranno nulli.
-    Book partialBook = new Book(query, null, null, null, 0); 
-    // Devi usare il costruttore di Book appropriato per Title, Authors, Year, ISBN, Copies
-
-    // 2. CHIAMA IL TUO METODO search(Book b)
-    List<Book> results = bookManager.search(partialBook); 
-    
-    bookList = FXCollections.observableArrayList(results);
-    bookTableViewricerca.setItems(bookList);
-
-    if (results.isEmpty()) {
-        showAlert("Ricerca", "Nessun libro trovato per la query: " + query, AlertType.INFORMATION);
-    }
-}
 
     /**
      * Gestisce l'azione di eliminazione del libro selezionato.
      */
+    @FXML
     private void handleDeleteAction(ActionEvent event) {
         Book selectedBook = bookTableViewricerca.getSelectionModel().getSelectedItem();
 
@@ -149,7 +148,7 @@ private void handleSearchAction(ActionEvent event) {
      * Gestisce il ritorno alla Home Page.
      * Deve gestire l'IOException internamente perché associato tramite setOnAction.
      */
-    // Rimosso @FXML per coerenza con l'associazione in initialize
+    @FXML
     private void backPage(ActionEvent event){ 
         try {
             View.Homepage(); 
@@ -161,6 +160,7 @@ private void handleSearchAction(ActionEvent event) {
     /**
      * Metodo helper per mostrare gli alert.
      */
+    @FXML
     private void showAlert(String title, String message, AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
