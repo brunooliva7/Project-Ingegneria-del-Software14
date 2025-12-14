@@ -35,6 +35,12 @@ public class homepageController {
     private MenuItem cancellaLibro;
     
     @FXML
+    private MenuItem modificaLibro;
+    
+    @FXML
+    private MenuItem cercaLibro;
+    
+    @FXML
     private MenuItem aggiungiPrestito;
     
     @FXML
@@ -80,6 +86,21 @@ public class homepageController {
     @FXML
     public void deleteBook() throws IOException{
         View.deleteBook();
+    }
+    
+    @FXML
+    public void updateBook() throws IOException{
+        View.updateBook();
+    }
+    
+    @FXML
+    public void searchBook() throws IOException{
+        View.searchBook();
+    }
+    
+    @FXML
+    public void viewBooks() throws IOException{
+        View.viewBooks();
     }
     
     @FXML
