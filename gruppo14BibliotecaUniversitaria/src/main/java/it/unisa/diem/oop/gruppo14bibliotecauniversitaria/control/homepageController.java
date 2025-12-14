@@ -34,6 +34,18 @@ public class homepageController {
     @FXML
     private MenuItem cancellaLibro;
     
+    @FXML
+    private MenuItem aggiungiPrestito;
+    
+    @FXML
+    private MenuItem cancellaPrestito;
+    
+    @FXML
+    private MenuItem visualizzaElencoPrestito;
+    
+    @FXML
+    private MenuItem cercaPrestito;
+    
     
     @FXML
     public void addUser() throws IOException{
@@ -68,5 +80,30 @@ public class homepageController {
     @FXML
     public void deleteBook() throws IOException{
         View.deleteBook();
+    }
+    
+    @FXML
+    public void addLoan() throws IOException{
+        View.addLoan();
+    }
+    
+    @FXML
+    public void searchLoan() throws IOException{
+        View.searchLoan();
+    }
+    
+    @FXML
+    public void deleteLoan() throws IOException{
+        View.deleteLoan();
+    }
+    
+    @FXML
+    public void viewLoan() throws IOException{
+        View.viewLoan();
+    }
+    
+    @FXML
+    public void modifyLoan() throws IOException{
+        View.modifyLoan();
     }
 }

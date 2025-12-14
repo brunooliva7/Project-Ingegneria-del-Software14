@@ -45,7 +45,7 @@
                     <TableColumn fx:id="matricolaColumn" prefWidth="150" text="Matricola utente" />
                     <TableColumn fx:id="titoloColumn" prefWidth="150" text="Titolo libro" />
                     <TableColumn fx:id="autoriColumn" prefWidth="150" text="Autori libro" />
-                    <TableColumn fx:id="ISBNColumn" prefWidth="150" text="ISBN libro" />
+                    <TableColumn fx:id="isbnColumn" prefWidth="150" text="ISBN libro" />
                     <TableColumn fx:id="duedateColumn" prefWidth="150" text="Data restituzione" />
                 </columns>
             </TableView>

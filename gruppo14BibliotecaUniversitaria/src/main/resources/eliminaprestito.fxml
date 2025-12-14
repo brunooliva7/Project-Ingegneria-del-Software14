@@ -13,7 +13,7 @@
 
     <children>
         <!-- BOTTONE INDIETRO -->
-        <Button fx:id="backButton" style="-fx-background-color: #F97316; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16; -fx-background-radius: 10; -fx-padding: 8 16;" text="← Indietro" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
+        <Button fx:id="backButton" onAction="#backPage" style="-fx-background-color: #F97316; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16; -fx-background-radius: 10; -fx-padding: 8 16;" text="← Indietro" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
             <effect>
                 <DropShadow color="#00000040" offsetY="2" radius="8" />
             </effect>
@@ -54,8 +54,8 @@
                     <TableColumn fx:id="matricolaColumn" prefWidth="150" text="Matricola utente" />
                     <TableColumn fx:id="titoloColumn" prefWidth="150" text="Titolo libro" />
                     <TableColumn fx:id="autoriColumn" prefWidth="150" text="Autori libro" />
-                    <TableColumn fx:id="ISBNColumn" prefWidth="150" text="ISBN libro" />
-                    <TableColumn fx:id="dataRestituzioneColumn" prefWidth="150" text="Data restituzione" />
+                    <TableColumn fx:id="isbnColumn" prefWidth="150" text="ISBN libro" />
+                    <TableColumn fx:id="duedateColumn" prefWidth="150" text="Data restituzione" />
                 </columns>
             </TableView>
 
