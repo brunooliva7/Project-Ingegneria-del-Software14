@@ -291,7 +291,7 @@ public class View extends Application {
     
     public static void modifyLoan() throws IOException {
         
-        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificaprestito.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificaprestiti.fxml"));
         
         Scene scene = new Scene(fxmlLoader.load());
         
