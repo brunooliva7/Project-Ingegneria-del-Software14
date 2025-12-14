@@ -288,23 +288,6 @@ public class View extends Application {
         mainStage.show();  
         
     }
-    
-    public static void modifyLoan() throws IOException {
-        
-        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificaprestiti.fxml"));
-        
-        Scene scene = new Scene(fxmlLoader.load());
-        
-        mainStage.setTitle("Modifica Prestito");
-        mainStage.setScene(scene);
-        
-        mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
-        mainStage.setMaximized(true);
-        
-        mainStage.show();  
-        
-    }
 
     /**
      * @brief Metodo main dell'applicazione.

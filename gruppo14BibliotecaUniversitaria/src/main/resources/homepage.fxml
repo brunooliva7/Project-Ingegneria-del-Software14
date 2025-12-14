@@ -54,7 +54,6 @@
                                 <MenuButton text="Operazioni">
                                     <items>
                                         <MenuItem fx:id="aggiugniPrestito" onAction="#addLoan" text="Aggiungi" />
-                                        <MenuItem fx:id="modificaPrestito" onAction="#modifyLoan" text="Modifica" />
                                         <MenuItem fx:id="cancellaPrestito" onAction="#deleteLoan" text="Cancella" />
                                         <MenuItem fx:id="cercaPrestito" onAction="#searchLoan" text="Cerca" />
 
