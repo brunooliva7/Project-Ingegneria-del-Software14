@@ -57,6 +57,44 @@ public class Book implements Comparable<Book>,Serializable {
         this.ISBN = ISBN;
         this.availableCopies = availableCopies;
     }
+    
+    public Book (String inputRicerca ){  //overload del costruttore,sarà utilizzato solo ai fini della ricerca dell'utente
+        
+     // 1. Inizializziamo tutto a null di default
+        this.title = null;
+        this.authors = null;
+        this.publicationYear = null;
+        this.ISBN = null;
+        this.availableCopies = 0;
+
+    // 2. Protezione anti-crash: se la stringa è null o vuota, ci fermiamo qui.
+         if (inputRicerca == null || inputRicerca.trim().isEmpty()) {
+            return; 
+        }
+
+        String cleanInput = inputRicerca.trim();
+
+        // Pattern per ISBN: numeri, trattini e opzionalmente 'X' alla fine
+        // Usiamo una REGEX interna per non dipendere da variabili esterne
+        final String isbnPattern = "^[0-9]{9,17}([Xx])?$";
+        
+        // 3. Logica di Discriminazione:
+    
+        // Se l'input sembra un codice ISBN (solo numeri, trattini, e forse X finale)
+        if (cleanInput.matches(isbnPattern)) {
+            // Se è un ISBN, inizializza SOLO il campo ISBN.
+            this.ISBN = cleanInput;
+
+        } else if (cleanInput.contains(" ")) {
+            // Se contiene spazi, è più probabile che sia un Titolo (o Autori).
+            // Inizializza SOLO il campo Titolo.
+            this.title = cleanInput;
+
+        } else {
+            // Non è un ISBN e non ha spazi. Trattalo come Titolo (parziale) o Autore.
+            this.title = cleanInput;
+        }
+    }
 
     /**
     * @brief Imposta il valore del titolo
