@@ -16,11 +16,15 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import java.util.Set;
 import java.util.TreeSet;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
 
 /**
@@ -39,7 +43,7 @@ import java.net.URL;
 public class BookManagement implements Functionality<Book> {
     private Set <Book> catalogue; ///< Catalogo dei libri gestito come un insieme ordinato in cui non sono permessi duplicati
     
-    private final File bookDatabase = new File("src/main/resources/bookDatabase.txt");
+    private final File bookDatabase = new File("bookDatabase.dat");
     /**
     * @brief Costruttore della classe BookManagement
     * 
@@ -50,6 +54,25 @@ public class BookManagement implements Functionality<Book> {
     */
     public BookManagement() {
         catalogue = new TreeSet<>(); 
+        
+        if (bookDatabase.exists() && bookDatabase.length() > 0) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(bookDatabase))) {
+                
+                Object letto = ois.readObject();
+                
+                if (letto instanceof Set) {
+                    this.catalogue = (Set<Book>) letto;
+                    System.out.println("Caricamento riuscito: " + catalogue.size() + " utenti.");
+                } else {
+                    System.err.println("ERRORE FILE: Il file contiene un oggetto " + letto.getClass().getName() + " invece di un Set. Il file verrà sovrascritto al prossimo salvataggio.");
+                }
+
+            } catch (IOException | ClassNotFoundException e) {
+                System.err.println("Attenzione: Impossibile caricare il database utenti (verrà creato nuovo). Dettaglio: " + e.getMessage());
+            }
+        } else {
+            System.out.println("File database non trovato o vuoto. Avvio con lista vuota.");
+        }
     }
     
     /**
