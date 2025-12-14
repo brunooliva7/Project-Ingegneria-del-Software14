@@ -10,10 +10,13 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookMa
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -70,21 +73,33 @@ public class AddBookController implements Initializable {
         String autore = authors.getText();
         String isbn = ISBN.getText();
         
-        int annoPubblicazione;
+        // Usiamo String per la data
+        String annoTesto = publicationYear.getText(); 
+
+        LocalDate dataPubblicazione;
         int copieDisponibili;
 
         try {
-            // 2. Converto i valori numerici e gestisco errori di input
-            annoPubblicazione = Integer.parseInt(publicationYear.getText());
+            // 2. Conversione dei valori
+            
+            // Tenta la conversione della data
+            dataPubblicazione = LocalDate.parse(annoTesto);
+            
+            // Tenta la conversione delle copie
             copieDisponibili = Integer.parseInt(availableCopies.getText());
+            
+        } catch (DateTimeParseException e) {
+            labelErrore.setText("Errore: Il formato della data deve essere AAAA-MM-GG (es. 2025-01-20).");
+            labelErrore.setStyle("-fx-text-fill: red;");
+            return;
         } catch (NumberFormatException e) {
-            labelErrore.setText("Errore: Anno e/o Copie devono essere numeri interi.");
+            labelErrore.setText("Errore: Le Copie devono essere numeri interi.");
             labelErrore.setStyle("-fx-text-fill: red;");
             return;
         }
 
         // 3. Creazione dell'oggetto Libro
-        Book b = new Book(titolo, autore, annoPubblicazione, isbn, copieDisponibili);
+        Book b = new Book(titolo, autore, dataPubblicazione, isbn, copieDisponibili);
 
         // 4. Inserimento del Libro
         BookManagement bm = new BookManagement();
