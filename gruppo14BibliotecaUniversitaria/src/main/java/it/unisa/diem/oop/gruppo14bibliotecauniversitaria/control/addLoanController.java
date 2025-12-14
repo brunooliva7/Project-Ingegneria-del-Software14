@@ -77,6 +77,7 @@ public class addLoanController {
          
          loan = new Loan(book,user,duedate);
          
+         if(book.getAvailableCopies() <= 3){
          if(loanManagement.add(loan)){
              labelMessage.setText("Modifica Riuscita");
              labelMessage.setStyle("-fx-text-fill: green;");
@@ -85,7 +86,12 @@ public class addLoanController {
          else{
              labelMessage.setText("Modifica Riuscita");
              labelMessage.setStyle("-fx-text-fill: green;");
-         }    
+         }
+         }
+         else{
+             labelMessage.setText("Numero di Prestiti raggiunto");
+             labelMessage.setStyle("-fx-text-fill: red;");
+         }
     }
     
     @FXML
