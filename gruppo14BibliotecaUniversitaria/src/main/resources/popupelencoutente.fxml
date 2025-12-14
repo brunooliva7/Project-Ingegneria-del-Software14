@@ -7,7 +7,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.modiyUserController"
+            fx:controller="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.modifyUserController"
             style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FDE68A 0%, #F59E0B 100%);">
 
     <!-- BOTTONE INDIETRO -->
