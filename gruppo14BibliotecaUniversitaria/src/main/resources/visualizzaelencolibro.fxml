@@ -31,9 +31,11 @@
             <!-- TABLEVIEW FOR BOOKS -->
             <TableView fx:id="bookTableView" maxHeight="250" maxWidth="450" style="-fx-background-color: #ffff99ff; -fx-pref-width: 450; -fx-pref-height: 250;" AnchorPane.bottomAnchor="150" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="60">
                 <columns>
-                   <TableColumn fx:id="titoloColumn" prefWidth="150" text="Titolo" />
+                    <TableColumn fx:id="titoloColumn" prefWidth="150" text="Titolo" />
                     <TableColumn fx:id="autoriColumn" prefWidth="150" text="Autori" />
+                    <TableColumn fx:id="publicationYearColumn" prefWidth="150" text="Anno di pubblicazione" />
                     <TableColumn fx:id="isbnColumn" prefWidth="150" text="ISBN" />
+                    <TableColumn fx:id="availableCopiesColumn" prefWidth="150" text="Numero di copie disponibili" />
                 </columns>
             </TableView>
 
