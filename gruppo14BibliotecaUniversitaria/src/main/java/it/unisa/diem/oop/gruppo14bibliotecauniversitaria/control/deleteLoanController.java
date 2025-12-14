@@ -104,6 +104,7 @@ public class deleteLoanController {
             
             // Prendi l'oggetto cliccato
             loanSelezionato = loanTableView.getSelectionModel().getSelectedItem();
+            loanSelezionato.getBook().setAvailableCopies(loanSelezionato.getBook().getAvailableCopies()+1);
             
            if(loanManagement.remove(loanSelezionato)){
                labelMessage.setText("Prestito rimosso");
