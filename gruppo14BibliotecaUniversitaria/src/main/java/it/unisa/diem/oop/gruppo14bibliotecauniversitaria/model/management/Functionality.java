@@ -85,5 +85,5 @@ public interface Functionality <T> {
      * @post Restituisce l'entità corrispondente se presente, altrimenti null
      */
    
-    T search(T entity1);
+    List<T> search(T entity1);
 }
