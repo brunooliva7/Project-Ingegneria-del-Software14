@@ -193,7 +193,7 @@ public class View extends Application {
         
         Scene scene = new Scene(fxmlLoader.load());
         
-        mainStage.setTitle("Aggiungi libro");
+        mainStage.setTitle("AggiungiLibro");
         mainStage.setScene(scene);
         
         mainStage.setResizable(true);
