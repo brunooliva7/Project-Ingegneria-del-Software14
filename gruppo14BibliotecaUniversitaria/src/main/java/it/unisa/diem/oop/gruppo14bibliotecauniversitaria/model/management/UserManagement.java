@@ -160,23 +160,24 @@ public class UserManagement implements Functionality<User>,Serializable{
      *  @return L'utente trovato
      */
     @Override
-    public User search(User u ){
+    public List <User> search(User u ){
+        List<User> lista=new ArrayList<>();  //usiamo una lista dato che se la ricerca viene fatta per cognome possono esserci più utenti nell'elenco corrispondenti 
          if (u == null) throw new IllegalArgumentException();
             //esce dato che l'utente da cercare non è valido e lancia l'eccezione adeguata 
         if (u.getNumberId() != null) {  //se l'utente è stato cercato tramite matricola solo quel campo non sarà nullo grazie all'utilizzo del secondo costruttore 
             for (User us : list) {
                 if (us.equals(u)) { //l'uguaglianza deve essere sulla base della matricola esattamente come il metodo equals() di User quindi lo uso direttamente 
-                    return us;
+                    lista.add(us);
                 }
             } 
         } else if (u.getSurname() != null) {  //se l'utente è stato cercato tramite cognome solo quel campo non sarà nullo grazie all'utilizzo del secondo costruttore 
             for (User us : list) {
                 if (us.getSurname().equalsIgnoreCase(u.getSurname())) {   //se trovo nell'elenco un User che ha cognome corrispondente a quello cercato allora lo ritorno 
-                    return us;
+                   lista.add(us);
                 }
             }
         }
-        return null;  //se arriva a questo punto significa che non ha trovato tra l'elenco l'utente cercato
+        return lista ; 
      }
     
 }
