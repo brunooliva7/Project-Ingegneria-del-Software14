@@ -15,9 +15,13 @@
 
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.*;
@@ -35,7 +39,7 @@ import java.time.LocalDate;
 public class LoanManagement implements Functionality<Loan>,Serializable{
    private Set <Loan> loan; ///< insieme dei prestiti da gestire 2
    
-   private final File loanDatabase = new File("src/main/resources/loanDatabase.txt"); //<file database dei prestiti
+   private final File loanDatabase = new File("loanDatabase.dat"); //<file database dei prestiti
    
    
    
@@ -50,6 +54,25 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
 
     public LoanManagement(){
         loan = new TreeSet<>();
+        
+        if(loanDatabase.exists() && loanDatabase.length() > 0){
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(loanDatabase))) {
+                
+                Object letto = ois.readObject();
+                
+                if (letto instanceof Set) {
+                    this.loan = (Set<Loan>) loan;
+                    System.out.println("Caricamento riuscito: " + loan.size() + " prestiti.");
+                } else {
+                    System.err.println("ERRORE FILE: Il file contiene un oggetto " + letto.getClass().getName() + " invece di un Set. Il file verrà sovrascritto al prossimo salvataggio.");
+                }
+
+            } catch (IOException | ClassNotFoundException e) {
+                System.err.println("Attenzione: Impossibile caricare il database utenti (verrà creato nuovo). Dettaglio: " + e.getMessage());
+            }
+        } else {
+            System.out.println("File database non trovato o vuoto. Avvio con lista vuota.");
+        }
     }
       /**
      * @brief Getter dell'elenco loan 
@@ -179,15 +202,19 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
      */
 
     @Override
-    public Loan search(Loan l){
+    public List<Loan> search(Loan l){
+        
+        List<Loan> list = new ArrayList<>();
+        
        if( l == null ) throw new IllegalArgumentException();
        
         for (Loan currentLoan : loan) {
             if (currentLoan.equals(l)) {
-                return currentLoan; // Prestito trovato
+               list.add(l);
             }
         }
-        return null;
+      
+      return list;
     }
 
 }

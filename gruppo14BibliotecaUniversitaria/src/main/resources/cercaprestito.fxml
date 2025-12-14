@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+
+<AnchorPane style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FDE68A 0%, #F59E0B 100%);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.PrestitiController">
+   <children>
+   
+       <!-- BOTTONE INDIETRO posizionato in alto a sinistra con margine -->
+        <Button fx:id="backButton"
+                text="← Indietro"
+                AnchorPane.leftAnchor="20"
+                AnchorPane.topAnchor="20"
+                style="
+                    -fx-background-color: #F97316;
+                    -fx-text-fill: white;
+                    -fx-font-weight: bold;
+                    -fx-font-size: 16;
+                    -fx-background-radius: 10;
+                    -fx-padding: 8 16;">
+            <effect>
+                <DropShadow color="#00000040" radius="8" offsetY="2"/>
+            </effect>
+        </Button>
+
+       <!-- LAYOUT CENTRALE -->
+       <VBox alignment="TOP_CENTER" maxHeight="500" maxWidth="500" prefHeight="500" prefWidth="450" spacing="20"  AnchorPane.rightAnchor="200"  AnchorPane.leftAnchor="200" AnchorPane.topAnchor="200"
+                style="
+                -fx-background-color: white;
+                -fx-background-radius: 20;
+                -fx-padding: 25;">
+
+            <effect>
+                <DropShadow color="#00000035" radius="20" offsetY="5"/>
+            </effect>
+   
+           <children>
+               <!-- TITOLO -->
+                <Label text="Ricerca prestito"
+                       style="
+                        -fx-font-size: 22;
+                        -fx-font-weight: bold;
+                        -fx-text-fill: #374151;"/>
+               <!-- Barra di ricerca  -->
+               <HBox alignment="CENTER" spacing="10">
+                   <children>
+                       <TextField fx:id="searchField" maxWidth="500" prefHeight="50" prefWidth="300" promptText="Cerca prestito..." style="-fx-background-radius: 8;                                        -fx-border-radius: 8;                                        -fx-border-color: #FF7043;                                        -fx-border-width: 1;                                        -fx-padding: 5;" HBox.hgrow="ALWAYS" />
+                       <Button fx:id="searchButtonp" maxWidth="700" prefHeight="50" style="-fx-background-color: #FF7043;                                     -fx-text-fill: white;                                     -fx-font-weight: bold;     -fx-background-radius: 10;" text="🔍" HBox.hgrow="NEVER">
+                           <effect>
+                               <DropShadow color="#00000030" radius="6" />
+                           </effect>
+                       </Button>
+                   </children>
+               </HBox>
+   
+               <!-- Footer -->
+               <Label style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
+   
+   
+                      <HBox alignment="CENTER" prefWidth="450" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="400" />
+                   <Label style="-fx-font-size: 18; -fx-text-fill: #777;" text="Clicca sul prestito desiderato" />
+         
+            <!-- TABLEVIEW -->
+            <TableView fx:id="loanTableView"
+                       prefWidth="1100"
+                       maxWidth="1100"
+                       prefHeight="400"
+                       maxHeight="400"
+                       style="
+                            -fx-background-radius: 10;
+                            -fx-border-radius: 10;
+                            -fx-border-color: #E5E7EB;
+                            -fx-font-size: 13;">
+
+                <columns>
+                    <TableColumn fx:id="nomeColumn" text="Nome utente" prefWidth="150"/>
+                    <TableColumn fx:id="cognomeColumn" text="Cognome utente" prefWidth="150"/>
+                    <TableColumn fx:id="matricolaColumn" text="Matricola utente" prefWidth="150"/>
+                    <TableColumn fx:id="titoloColumn" text="Titolo libro" prefWidth="150"/>
+                    <TableColumn fx:id="autoriColumn" text="Autori libro" prefWidth="150"/>
+                    <TableColumn fx:id="ISBNColumn" text="ISBN libro" prefWidth="150"/>
+                    <TableColumn fx:id="dataRestituzioneColumn" text="Data restituzione" prefWidth="150"/>
+                </columns>
+            </TableView>
+           </children>
+   
+       </VBox>
+   </children>
+
+</AnchorPane>
