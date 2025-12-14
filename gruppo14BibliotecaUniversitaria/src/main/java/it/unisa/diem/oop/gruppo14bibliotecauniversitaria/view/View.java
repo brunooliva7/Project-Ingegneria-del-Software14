@@ -204,7 +204,22 @@ public class View extends Application {
         
     }
      
-     
+    public static void deleteBook() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/cancellalibro.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("CancellaLibro");
+        mainStage.setScene(scene);
+        
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
+        
+    }
 
     /**
      * @brief Metodo main dell'applicazione.

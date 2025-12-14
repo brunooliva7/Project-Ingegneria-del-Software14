@@ -78,12 +78,12 @@ public interface Functionality <T> {
     
      /**
      * @brief Cerca un'entità nella collezione.
-     * @param entity Entità da cercare (non deve essere null)
+     * @param entity1 Entità da cercare (non deve essere null)
      * @return L'entità trovata, oppure null se non presente
      *
      * @pre entity != null
      * @post Restituisce l'entità corrispondente se presente, altrimenti null
      */
    
-    T search(T entity1);
+    List<T> search(T entity1);
 }
