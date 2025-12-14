@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FDE68A 0%, #F59E0B 100%);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.gruppo14bibliotecauniversitaria.control.addLoanController">
+
+    <children>
+        <!-- BOTTONE INDIETRO -->
+        <Button fx:id="backButton" onAction="#backPage" style="-fx-background-color: #F97316; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16; -fx-background-radius: 10; -fx-padding: 8 16;" text="← Indietro" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
+            <effect>
+                <DropShadow color="#00000040" offsetY="2" radius="8" />
+            </effect>
+        </Button>
+
+        <!-- LAYOUT CENTRALE -->
+        <VBox alignment="TOP_CENTER" maxHeight="600" maxWidth="600" prefHeight="600" prefWidth="500" spacing="20" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 25;" AnchorPane.leftAnchor="200" AnchorPane.rightAnchor="200" AnchorPane.topAnchor="150">
+            
+            <effect>
+                <DropShadow color="#00000035" offsetY="5" radius="20" />
+            </effect>
+            
+            <children>
+                <!-- TITOLO -->
+                <Label style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #374151;" text="Registra nuovo prestito" />
+                
+                <!-- Selezione Utente -->
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label style="-fx-font-size: 16; -fx-text-fill: #374151;" text="Seleziona utente:" />
+                    
+                     <ComboBox fx:id="userComboBox" editable="true" prefHeight="40" prefWidth="250" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1;" />
+                   
+                </HBox>
+
+                <!-- Selezione Libro -->
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label style="-fx-font-size: 16; -fx-text-fill: #374151;" text="Seleziona libro:" />
+                    <ComboBox fx:id="bookComboBox" editable="true" prefHeight="40" prefWidth="250" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1;" />
+                </HBox>
+
+                <!-- Data Restituzione -->
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label style="-fx-font-size: 16; -fx-text-fill: #374151;" text="Data restituzione:" />
+                    <DatePicker fx:id="dueDatePicker" prefHeight="40" prefWidth="250" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1;" />
+                </HBox>
+
+                <!-- Pulsante Registra -->
+                <Button fx:id="registerButton" onAction="#registerLoan" prefHeight="45" prefWidth="200" style="-fx-background-color: #FF7043; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Registra Prestito">
+                    <effect>
+                        <DropShadow color="#00000030" radius="6" />
+                    </effect>
+                </Button>
+
+                <!-- Footer -->
+                <Label fx:id="labelMessage" style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

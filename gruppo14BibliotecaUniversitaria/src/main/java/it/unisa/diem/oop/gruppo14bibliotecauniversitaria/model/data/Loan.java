@@ -47,6 +47,47 @@ public class Loan implements Comparable<Loan>,Serializable {
         this.dueDate = dueDate; 
     }
     
+    public Loan(String inputRicerca1, String inputRicerca2) {
+         // 1. Inizializziamo tutto a null di default
+        this.book= null;
+        this.user = null;
+        this.dueDate = null;
+        
+
+    // 2. Protezione anti-crash: se la stringa è null o vuota, ci fermiamo qui.
+         if (inputRicerca1 == null || inputRicerca1.trim().isEmpty()) {
+            return; 
+        }
+
+        String cleanInput = inputRicerca1.trim();
+
+    // 3. Logica robusta: Usiamo le REGEX per capire se sono SOLO numeri
+    // "\\d+" significa "uno o più numeri da 0 a 9"
+        if (cleanInput.matches("\\d+")) {
+        // È sicuramente una matricola (perché contiene solo numeri)
+        this.user = new User(inputRicerca1);
+        } else {
+        // Contiene lettere o simboli, quindi è sicuramente un cognome
+        this.user = new User(inputRicerca1);
+        }
+        
+        if (inputRicerca2 == null || inputRicerca2.trim().isEmpty()) {
+            return; 
+        }
+
+        String cleanInput1 = inputRicerca2.trim();
+
+    // 3. Logica robusta: Usiamo le REGEX per capire se sono SOLO numeri
+    // "\\d+" significa "uno o più numeri da 0 a 9"
+        if (cleanInput1.matches("\\d+")) {
+        // È sicuramente una matricola (perché contiene solo numeri)
+        this.book = new Book(inputRicerca2);
+        } else {
+        // Contiene lettere o simboli, quindi è sicuramente un cognome
+        this.book = new Book(inputRicerca2);
+        }
+    }
+    
     /**
      * @brief Restituisce il libro associato al prestito
      * @return Oggetto Book
@@ -165,7 +206,6 @@ public class Loan implements Comparable<Loan>,Serializable {
     
      Loan other = (Loan) obj;
     return this.user.equals(other.user) && 
-           this.book.equals(other.book) && 
-           this.dueDate.equals(other.dueDate);
+           this.book.equals(other.book);
     }
 }
