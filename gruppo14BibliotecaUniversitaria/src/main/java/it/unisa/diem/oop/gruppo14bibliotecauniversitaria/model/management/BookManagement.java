@@ -16,16 +16,15 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import java.util.Set;
 import java.util.TreeSet;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URL;
+import java.util.List;
 
 /**
  * @class BookManagement
@@ -100,19 +99,23 @@ public class BookManagement implements Functionality<Book> {
     public boolean add(Book b) {
         if (b == null) return false;
 
+        // 1. Controlla se l'ISBN è già presente (e aggiorna le copie se lo è)
         for (Book bk : catalogue) {
-        if (bk.getISBN().equals(b.getISBN())) {
-            // ISBN già presente, incremento solo di 1 le copie disponibili
-            bk.setAvailableCopies(bk.getAvailableCopies() + 1);
-            FileManager.writeToTextFileObject(catalogue, this.bookDatabase);
-            return true; // aggiornamento effettuato
+            if (bk.getISBN().equals(b.getISBN())) {
+                // ISBN già presente, incremento solo di 1 le copie disponibili
+                bk.setAvailableCopies(bk.getAvailableCopies() + 1);
+                FileManager.writeToTextFileObject(catalogue, this.bookDatabase);
+                return true; // aggiornamento effettuato
+            }
         }
-        // Se non esiste ancora, aggiungo il nuovo libro
-        return catalogue.add(b);
-    }
 
-    // Se non esiste ancora, aggiungo il nuovo libro
-    return catalogue.add(b);
+        // 2. Se il ciclo è terminato e l'ISBN non è stato trovato, aggiunge il nuovo libro
+        boolean added = catalogue.add(b);
+        if (added) {
+             // Se l'aggiunta ha successo, salva il file
+             FileManager.writeToTextFileObject(catalogue, this.bookDatabase);
+        }
+        return added;
     }
     
     /**
@@ -141,16 +144,23 @@ public class BookManagement implements Functionality<Book> {
     }
     
     /**
-    * @brief Modifica i dati di un libro nel catalogo
+    * @brief Aggiorna i dati di un libro presente nel catalogo
     * 
-    * @param b Libro con i dati aggiornati
+    * Questo metodo cerca un libro nel catalogo con lo stesso ISBN di @p b1
+    * e ne aggiorna i dati utilizzando le informazioni contenute in @p b2.
+    * L'aggiornamento include titolo, autori, anno di pubblicazione e numero
+    * di copie disponibili (solo se non negativo).
     * 
-    * @return true se l'aggiornamneto va a buon fine, false atrimenti
+    * @param b1 Libro da identificare nel catalogo (tramite ISBN)
+    * @param b2 Libro contenente i dati aggiornati
     * 
-    * @pre b != null
-    * @pre Il libro deve essere presente nel catalogo
-    * @post I dati del libro risultano aggiornati
+    * @return true se l'aggiornamento va a buon fine, false altrimenti
     * 
+    * @pre b1 != null
+    * @pre b2 != null
+    * @pre Il libro identificato da b1 deve essere presente nel catalogo
+    * @post I dati del libro nel catalogo risultano aggiornati con quelli di b2
+    *   
     */
     @Override
     public boolean update(Book b1, Book b2) {
@@ -198,40 +208,43 @@ public class BookManagement implements Functionality<Book> {
             }
         }
     }
-    
-    
-    /**
-    * @brief Ricerca un libro nel catalogo
-    * 
-    * Questo metodo permette di cercare uno specificato libro per titolo, autore o codice identificativo
-    * La ricerca si basa sul confronto tra l'oggetto passato come parametro e gli elementi presenti nel catalogo
-    * 
-    * @param b Libro da cercare
-    * @return Il libro trovato, se la ricerca è andata a buon fine; null, altrimenti
-    * 
-    * @pre b != null
-    * 
-    * @post Restituisce il libro corrispondente se presente, altrimenti null
-    * 
-    */
-    @Override
-    public Book search(Book b){
-        if (b == null) return null;
 
-        if (b.getISBN() != null) { // ricerca per ISBN
-            for (Book bk : catalogue) {
-                if (bk.equals(b)) {
-                    return bk;
-                }
-            }
-        } else if (b.getTitle() != null) { // ricerca per titolo
-            for (Book bk : catalogue) {
-                if (bk.getTitle().equalsIgnoreCase(b.getTitle())) {
-                    return bk;
-                }
+    /**
+     * @brief Ricerca libri per query (Titolo, Autore o ISBN).
+     * Questo metodo permette di cercare libri nel catalogo che contengano 
+     * la stringa 'query' nel titolo, negli autori o nel codice ISBN.
+     * La ricerca è parziale (non richiede la corrispondenza esatta).
+     * @param query Stringa di ricerca (parziale).
+     * @return Lista dei libri corrispondenti alla query.
+     */
+    public List<Book> searchBooks (String query) {
+        // Se la query è vuota o null, restituisce tutti i libri.
+        if (query == null || query.trim().isEmpty()) {
+            return new java.util.ArrayList<>(catalogue);
+        }
+
+        // Normalizza la query in minuscolo per una ricerca case-insensitive
+        String normalizedQuery = query.trim().toLowerCase();
+
+        List<Book> foundBooks = new java.util.ArrayList<>();
+
+        // Scorre l'insieme dei libri (catalogue)
+        for (Book bk : catalogue) {
+            // Controlla se la query è contenuta (ricerca parziale) in uno dei tre campi:
+            if (bk.getTitle().toLowerCase().contains(normalizedQuery) || 
+                bk.getAuthors().toLowerCase().contains(normalizedQuery) ||
+                bk.getISBN().toLowerCase().contains(normalizedQuery)) 
+            {
+                foundBooks.add(bk);
             }
         }
-        return null;
+        return foundBooks;
     }
+
+    @Override
+    public Book search(Book entity1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
 }

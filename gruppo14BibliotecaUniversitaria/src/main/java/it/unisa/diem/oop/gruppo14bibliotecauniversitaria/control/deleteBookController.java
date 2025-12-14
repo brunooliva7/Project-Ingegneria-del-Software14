@@ -20,7 +20,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -74,6 +73,8 @@ public class deleteBookController implements Initializable {
 
     /**
      * Inizializza il controller.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -105,28 +106,29 @@ public class deleteBookController implements Initializable {
      * Carica tutti i libri nella TableView (ad esempio, all'avvio).
      */
     private void loadAllBooks() {
-        // Assumiamo che bookManager.getAllBooks() ritorni List<Book>
-        List<Book> allBooks = bookManager.getAllBooks();
-        bookList = FXCollections.observableArrayList(allBooks);
-        bookTableViewricerca.setItems(bookList);
-    }
+    // Converte il Set (catalogue) in List
+    List<Book> allBooks = new java.util.ArrayList<>(bookManager.getCatalogue());
+    
+    bookList = FXCollections.observableArrayList(allBooks);
+    bookTableViewricerca.setItems(bookList);
+}
     
     /**
      * Gestisce l'azione del pulsante di ricerca.
      */
     private void handleSearchAction(ActionEvent event) {
         String query = searchField.getText().trim();
-        
+
         if (query.isEmpty()) {
-            loadAllBooks(); // Se la query è vuota, ricarica tutti i libri
+            loadAllBooks(); 
             return;
         }
 
-        // BookManagement ha un metodo search che cerca per titolo/ISBN/Autore
-        List<Book> results = bookManager.search(query); 
+        // Chiama il metodo corretto che esegue la ricerca parziale su stringa
+        List<Book> results = bookManager.searchBooks(query); 
         bookList = FXCollections.observableArrayList(results);
         bookTableViewricerca.setItems(bookList);
-        
+
         if (results.isEmpty()) {
             showAlert("Ricerca", "Nessun libro trovato per la query: " + query, AlertType.INFORMATION);
         }
@@ -137,20 +139,19 @@ public class deleteBookController implements Initializable {
      */
     private void handleDeleteAction(ActionEvent event) {
         Book selectedBook = bookTableViewricerca.getSelectionModel().getSelectedItem();
-        
+
         if (selectedBook == null) {
             showAlert("Errore", "Selezionare un libro da eliminare.", AlertType.ERROR);
             return;
         }
-        
-        // Tentativo di eliminazione
-        if (bookManager.deleteBook(selectedBook)) { // Assumiamo che BookManagement abbia un metodo deleteBook
+
+        // ORA: Chiama il metodo remove() che hai in BookManagement
+        if (bookManager.remove(selectedBook)) { 
             showAlert("Successo", "Libro eliminato: " + selectedBook.getTitle(), AlertType.INFORMATION);
-            
-            // Rimuove il libro dalla lista visualizzata e ricarica i dati
+
+            // Rimuove l'elemento dalla lista visualizzata
             bookList.remove(selectedBook);
-            // Non c'è bisogno di chiamare loadAllBooks(), basta aggiornare la ObservableList
-            
+
         } else {
             showAlert("Errore", "Impossibile eliminare il libro.", AlertType.ERROR);
         }
@@ -158,15 +159,12 @@ public class deleteBookController implements Initializable {
 
     /**
      * Gestisce il ritorno alla Home Page.
+     * @throws java.io.IOException
      */
-    private void backPage(ActionEvent event) {
-        try {
-            View.Homepage(); // Assumiamo che View.Homepage() carichi la scena corretta
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Errore di Caricamento", "Impossibile caricare la pagina iniziale.", AlertType.ERROR);
-        }
-    }
+    @FXML
+    public void backPage() throws IOException{
+        View.Homepage();
+    } 
     
     /**
      * Metodo helper per mostrare gli alert.
