@@ -5,6 +5,7 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,7 +34,7 @@ import javafx.stage.Stage;
  */
 public class viewUserController {
     
-    UserManagement userManagement;
+ 
     
     @FXML
     private TableView<User> userTableView;
@@ -54,10 +55,17 @@ public class viewUserController {
     @FXML
     private Button backButton;
     
+    private Model model;
+      
+    
+    public void setModel(Model model) {
+    this.model = model;
+    }
+    
     @FXML
     public void initialize(){
         
-        this.userManagement = new UserManagement();
+        
         
         nomeColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         cognomeColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
@@ -81,7 +89,7 @@ public class viewUserController {
         
         
         
-        ObservableList<User> listaDati = FXCollections.observableArrayList(this.userManagement.getList().stream().sorted().collect(Collectors.toList()));
+        ObservableList<User> listaDati = FXCollections.observableArrayList(model.getUserManagement().getList().stream().sorted().collect(Collectors.toList()));
             
         userTableView.setItems(listaDati);
         userTableView.getSortOrder().clear(); // rimuovi eventuali ordinamenti così che la tableView rispetta l'ordina naturale della lista 

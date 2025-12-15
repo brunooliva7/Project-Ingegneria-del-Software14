@@ -5,6 +5,7 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
@@ -51,12 +52,18 @@ public class searchUserController {
     @FXML
     private Button backButton;
 
-    private UserManagement userManagement;
+    
     private ObservableList<User> userList;
+     private Model model;
+      
+    
+     
+    public void setModel(Model model) {
+    this.model = model;
+    }
     
     @FXML
     public void initialize(){
-        this.userManagement=new UserManagement();
         
         searchButtonu.disableProperty().bind(searchField.textProperty().isEmpty());
         
@@ -98,7 +105,7 @@ public class searchUserController {
     }
 
     User userSonda = new User(input); // costruttore per ricerca
-    List<User> risultati = userManagement.search(userSonda);
+    List<User> risultati = model.getUserManagement().search(userSonda);
 
     ObservableList<User> datiTabella = FXCollections.observableArrayList(risultati);
     userTableViewricerca.setItems(datiTabella);

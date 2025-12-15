@@ -5,6 +5,7 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -82,15 +83,21 @@ public class modifyUserController {
     @FXML
     private TableColumn<User, String> matricolaColumn;
      
-     UserManagement userManagement;
+    
      private User risultato = null;
      
      List <User> list;
      private ObservableList<User> observableList;
+      private Model model;
+      
+    
+    public void setModel(Model model) {
+    this.model = model;
+    }
      
      @FXML
      public void initialize(){
-         this.userManagement = new UserManagement();
+        
          
          modifyPane.setVisible(false);
          modifyPane.setManaged(false);
@@ -126,7 +133,7 @@ public class modifyUserController {
     
     String input = searchField.getText();
     User userSonda = new User(input);
-    this.list = userManagement.search(userSonda);
+    this.list = model.getUserManagement().search(userSonda);
 
     if (!list.isEmpty()) {
        
@@ -164,7 +171,7 @@ public class modifyUserController {
      public void confirm(){
           User newUser = new User(nameField.getText(),surnameField.getText(),numberidField.getText(),emailField.getText());
             
-            if(userManagement.update(risultato, newUser)){
+            if(model.getUserManagement().update(risultato, newUser)){
                 labelMessageModify.setText("Modifica Riuscita");
                 labelMessageModify.setStyle("-fx-text-fill: green;");
                   // Aggiorno la TableView in automatico

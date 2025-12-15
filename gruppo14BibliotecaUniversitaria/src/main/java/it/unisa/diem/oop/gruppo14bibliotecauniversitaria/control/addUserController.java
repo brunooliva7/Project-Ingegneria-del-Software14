@@ -5,6 +5,7 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,7 +18,7 @@ import java.io.IOException;
 
 /**
  *
- * @author bruno
+ * @author elisa
  */
 public class addUserController {
     
@@ -42,8 +43,11 @@ public class addUserController {
     @FXML
     private Button backButton;
     
+    private Model model;
+    
     @FXML
     public void initialize(){
+      
         numberID.disableProperty().bind(email.textProperty().isEmpty().or(surname.textProperty().isEmpty().or(name.textProperty().isEmpty())));
         surname.disableProperty().bind(name.textProperty().isEmpty());
         email.disableProperty().bind(name.textProperty().isEmpty().or(surname.textProperty().isEmpty()));   
@@ -58,9 +62,12 @@ public class addUserController {
         String matricola = numberID.getText();
         
         User u = new User(nome,cognome,matricola,mail);
-        UserManagement us = new UserManagement();
-        
-        if(us.add(u)){
+      
+        if(model.getUserManagement().getList().contains(u)){
+            labelErrore.setText("Matricola già esistente");
+            labelErrore.setStyle("-fx-text-fill: red;");
+        }
+        else if(model.getUserManagement().add(u)){
             labelErrore.setText("Inserimento avvenuto correttamente");
             labelErrore.setStyle("-fx-text-fill: green;");
             name.clear();
