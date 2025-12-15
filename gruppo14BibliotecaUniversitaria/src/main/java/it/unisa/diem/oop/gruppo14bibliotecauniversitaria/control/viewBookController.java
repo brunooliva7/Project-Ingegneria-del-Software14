@@ -62,7 +62,7 @@ public class viewBookController implements Initializable {
         // 2. Carica i dati all'avvio
         loadAllBooks();
         
-        bookTableView.setOnMouseClicked((MouseEvent event) -> {
+        bookTableView.setOnMouseClicked((event) -> {
         // Controlla se è stato un doppio click del tasto primario del mouse
         if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
             
@@ -71,8 +71,8 @@ public class viewBookController implements Initializable {
             
             if (selectedBook != null) {
                 try {
-                    // Chiamata per la navigazione
-                    View.updateBook(); 
+                    // CHIAMATA CORRETTA: Usa il metodo con il parametro Book
+                    View.updateBook(selectedBook); 
                     
                 } catch (IOException e) {
                     System.err.println("Errore: Impossibile caricare la pagina di modifica libro.");
@@ -81,7 +81,7 @@ public class viewBookController implements Initializable {
             }
         }
     });
-    }
+} // Chiusura di initialize
     
     /**
      * Carica tutti i libri dal BookManagement e popola la TableView.
