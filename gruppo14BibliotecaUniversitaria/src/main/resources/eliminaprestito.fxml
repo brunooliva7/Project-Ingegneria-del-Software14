@@ -32,11 +32,11 @@
                 
                 <!-- Selezione Utente -->
                 
-                    <TextField fx:id="usersearch" style="-fx-font-size: 16; -fx-text-fill: #374151;" text="Cerca utente interessato tramite matricola o cognome:" />
-                     <TextField fx:id="booksearch" style="-fx-font-size: 16; -fx-text-fill: #374151;" text="Cerca libro interessato tramite ISBN o titolo:" />
+                    <TextField fx:id="userSearchField" promptText="Cerca utente interessato tramite matricola o cognome:" style="-fx-font-size: 16; -fx-text-fill: #374151;" />
+                     <TextField fx:id="bookSearchField" promptText="Cerca libro interessato tramite ISBN o titolo:" style="-fx-font-size: 16; -fx-text-fill: #374151;" />
                 
                 <!-- Pulsante Elimina -->
-                <Button fx:id="dleteButton" prefHeight="45" prefWidth="200" style="-fx-background-color: #FF7043; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Cerca">
+                <Button fx:id="confirmButton" prefHeight="45" prefWidth="200" style="-fx-background-color: #FF7043; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Cerca">
                     <effect>
                         <DropShadow color="#00000030" radius="6" />
                     </effect>
@@ -46,7 +46,7 @@
                 
                 <Label style="-fx-font-size: 16; -fx-text-fill: #374151;" text="Clicca due volte sul prestito desiderato per eliminarlo" />
                  <!-- TABLEVIEW -->
-            <TableView fx:id="userTableView" maxHeight="400" maxWidth="1100" prefHeight="400" prefWidth="1100" style="                             -fx-background-radius: 10;                             -fx-border-radius: 10;                             -fx-border-color: #E5E7EB;                             -fx-font-size: 13;">
+            <TableView fx:id="loanTableView" maxHeight="400" maxWidth="1100" prefHeight="400" prefWidth="1100" style="                             -fx-background-radius: 10;                             -fx-border-radius: 10;                             -fx-border-color: #E5E7EB;                             -fx-font-size: 13;">
 
                 <columns>
                     <TableColumn fx:id="nomeColumn" prefWidth="150" text="Nome utente" />

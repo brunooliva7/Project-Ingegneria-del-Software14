@@ -16,6 +16,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,12 +33,12 @@ import javafx.stage.Stage;
  */
 public class viewUserController {
     
-    UserManagement userManagemente;
+    UserManagement userManagement;
     
     @FXML
     private TableView<User> userTableView;
    
-   @FXML
+    @FXML
     private TableColumn<User, String> nomeColumn;
 
     @FXML
@@ -43,6 +46,10 @@ public class viewUserController {
 
     @FXML
     private TableColumn<User, String> matricolaColumn;
+    @FXML
+    private TableColumn<User, String> emailColumn;
+    @FXML
+    private TableColumn<User, String> mapColumn;
     
     @FXML
     private Button backButton;
@@ -50,13 +57,31 @@ public class viewUserController {
     @FXML
     public void initialize(){
         
-        this.userManagemente = new UserManagement();
+        this.userManagement = new UserManagement();
         
         nomeColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         cognomeColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         matricolaColumn.setCellValueFactory(new PropertyValueFactory<>("numberId"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         
-        ObservableList<User> listaDati = FXCollections.observableArrayList(this.userManagemente.getList());
+         // visualizzare la mappa dei prestiti come stringa
+        mapColumn.setCellValueFactory(cellData -> {
+            User user = cellData.getValue();
+            if (user.getBooksOnloan() != null && !user.getBooksOnloan().isEmpty()) {
+                String prestiti = user.getBooksOnloan().entrySet().stream() //scorro tutte le coppie libro->data della collezione di prestiti dell'User
+                        .map(e -> "ISBN libro:"+e.getKey().getISBN() + " -> Data scadenza:" + e.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                        .collect(Collectors.joining(", "));
+                return new SimpleStringProperty(prestiti);
+            } else {
+                return new SimpleStringProperty("");
+            }
+        });
+        
+        
+        
+        
+        
+        ObservableList<User> listaDati = FXCollections.observableArrayList(this.userManagement.getList());
         
         userTableView.setItems(listaDati);
        
