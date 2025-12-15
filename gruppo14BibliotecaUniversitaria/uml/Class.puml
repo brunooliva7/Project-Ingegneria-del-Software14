@@ -6,8 +6,34 @@ interface Comparable
 class Application 
 
 class View {
-  + start(stage: Stage): void
-  + main(args: String[]): void {static}
+  ' Campi Statici (Stato)
+    - mainStage : Stage {static}
+    - model : Model {static}
+    ' Metodi del Ciclo di Vita (JavaFX)
+    + start(stage: Stage): void
+    + main(args: String[]): void {static}
+    ' Metodi di Navigazione Principali 
+    + Homepage(): void {static}
+    + Login(): void {static}
+    + Modify(): void {static}
+    ' Metodi di Navigazione per la Gestione UTENTI
+    + addUser(): void {static}
+    + modifyUser(): void {static}
+    + deleteUser(): void {static}
+    + searchUser(): void {static}
+    + viewUSers(): void {static}
+    ' Metodi di Navigazione per la Gestione LIBRI
+    + addBook(): void {static}
+    + deleteBook(): void {static}
+    + updateBook(bookToModify: Book): void {static}
+    + updateBook(): void {static}
+    + viewBooks(): void {static}
+    + searchBook(): void {static}
+    ' Metodi di Navigazione per la Gestione PRESTITI
+    + searchLoan(): void {static}
+    + addLoan(): void {static}
+    + deleteLoan(): void {static}
+    + viewLoan(): void {static}
 }
 
 class Controller {
@@ -19,131 +45,190 @@ class Controller {
 }
 
 class Model {
-  - BookManagement bookManagement
-  - LoanManagement loanManagement
-  - UserManagement userManagement
-  - Librarian librarian
-  + Model(bookManagement: BookManagement, userManagement: UserManagement, loanManagement: LoanManagement, librarian: Librarian)
-  + getBookManagement(): BookManagement
-  + setBookManagement(BookManagement): void
-  + getUserManagement(): UserManagement
-  + setUserManagement(UserManagement): void
-  + getLoanManagement(): LoanManagement
-  + setLoanManagement(LoanManagement): void
-  + getLibrarian(): Librarian
-  + setLibrarian(Librarian): void
+  ' Campi (Attributi)
+    - bookManagement : BookManagement
+    - userManagement :  UserManagement 
+    - loanManagement : LoanManagement 
+    
+    ' Costruttori
+    + Model(bookManagement: BookManagement, userManagement: UserManagement, loanManagement: LoanManagement)
+    
+    ' Metodi Getter
+    + getBookManagement(): BookManagement
+    + getUserManagement(): UserManagement
+    + getLoanManagement(): LoanManagement
 }
 
 class Librarian {
   - username: String
   - password: String
-  - filepath: String = "credentials.txt"
-  + getUsername() : String
-  + getPassword() : String
-  + checkCredentials(usernameInput : String, passwordInput : String)
-  + modifyCredentials(newUsername : String, newPassword : String)
+  - final credentials : File {readOnly}
+    
+    ' Metodi Pubblici
+    + checkCredentials(usernameInput: String, passwordInput: String): boolean
+    + modifyCredentials(newUsername: String, newPassword: String): void
+    + getUsername(): String
+    + getPassword(): String
+    
+    ' Metodo Privato (Funzione di Utilità)
+    - hashPassword(password: String): String
 }
 
 class User {
+  ' Attributi (Campi)
   - name : String
   - surname : String
   - numberId : String
   - email : String
   - booksOnLoan : Map<Book, LocalDate>
+  ' Costruttori
   + User(name: String, surname: String, numberId: String, email: String)
+  + User(inputRicerca: String)
+  ' Metodi Setter
   + setName(name: String): void
   + setSurname(surname: String): void
   + setEmail(email: String): void
   + setBooksOnLoan(newMap: TreeMap<Book, LocalDate>): void
+  ' Metodi Getter
   + getName(): String
   + getSurname(): String
   + getNumberId(): String
   + getEmail(): String
-  + getBooksOnLoan(): Map<Book, LocalDate>
+  ' Metodi di Utility e Interfaccia
   + compareTo(other: User): int
-  + findLoans(l: LoanManagement, s: String): Map<Book, LocalDate>
+  + findLoans(b: Book, data: LocalDate): void
+  + equals(obj: Object): boolean
+  + hashCode(): int
+  + toString(): String
 }
 
 class Book {
+  ' Attributi (Campi)
   - title : String
   - authors : String
   - publicationYear : LocalDate
   - ISBN : String
   - availableCopies : int
-  +Book(title: String, authors: String, publicationYear: LocalDate, ISBN: String, availableCopies: int)
+  ' Costruttori
+  + Book(title: String, authors: String, publicationYear: LocalDate, ISBN: String, availableCopies: int)
+  + Book(inputRicerca: String)
+  ' Metodi Getter
   + getTitle() : String
   + getAuthors() : String
   + getPublicationYear() : LocalDate
   + getISBN() : String
   + getAvailableCopies() : int
+  ' Metodi Setter
   + setTitle(title : String) : void
   + setAuthors(authors : String) : void
   + setPublicationYear(publicationYear : LocalDate) : void
   + setISBN(ISBN : String) : void
   + setAvailableCopies(availableCopies : int) : void
-  +compareTo(other : Book) : int
+  ' Metodi di Utility e Interfaccia
+  + compareTo(other: Book): int
+  + equals(obj: Object): boolean
+  + hashCode(): int
+  + toString(): String
 }
 
 class Loan {
+  ' Attributi (Campi)
   - book: Book
   - user: User
   - dueDate: LocalDate
-  + Loan(book: Book, user: User, dueDate: LocalDate)
+  ' Costruttori
+  + Loan (book: Book, user: User, dueDate: LocalDate)
+  + Loan(inputRicerca1: String, inputRicerca2: String)
+  ' Metodi Getter
   + getBook(): Book
   + getUser(): User
   + getDueDate(): LocalDate
+  ' Metodi Setter
   + setBook(book: Book): void
   + setUser(user: User): void
   + setDueDate(dueDate: LocalDate): void
   + compareTo(other: Loan): int
+  ' Metodi Proxy/TableView (Accesso ai dati interni per FXML)
+  + getName(): String
+  + getSurname(): String
+  + getNumberId(): String
+  + getTitle(): String
+  + getAuthors(): String
+  + getISBN(): String
+  ' Metodi di Utility e Interfaccia
+  + compareTo(other: Loan): int
+  + toString(): String
+  + equals(obj: Object): boolean
+  + hashCode(): int
 }
 
 interface Functionality<T> {
   + add(entity: T): boolean
   + remove(entity: T): boolean
-  + update(entity: T): boolean
+  + update(entity1: T, entity2: T): boolean
   + viewSorted(): void
-  + search(entity: T): T
+  + search(entity1: T): T
 }
 
 class BookManagement {
+  ' Attributi (Campi)
   - catalogue: Set<Book>
+  - bookDatabase : File {readOnly}
+  ' Costruttori
   + BookManagement()
+  ' Metodi Pubblici (Implementazione Functionality)
   + add(b: Book): boolean
   + remove(b: Book): boolean
-  + update(b: Book): boolean
+  + update(b1: Book, b2: Book): boolean
   + viewSorted(): void
-  + search(b: Book): Book
+  + search(b: Book): List<Book>
+  ' Metodi Getter
+  + getCatalogue(): Set<Book>
 }
 
 class LoanManagement {
-  - loans : Set<Loan>
+  ' Attributi (Campi)
+  - loan: Set<Loan>
+  - loanDatabase : File {readOnly}
+  ' Costruttori
   + LoanManagement()
+  ' Metodi Pubblici (Implementazione Functionality)
   + add(l: Loan): boolean
   + remove(l: Loan): boolean
-  + update(l: Loan): boolean
+  + update(newL: Loan, oldL: Loan): boolean
   + viewSorted(): void
-  + search(l: Loan): Loan
+  + search(l: Loan): List<Loan>
+  ' Metodi Getter
+  + getLoan(): Set<Loan>
 }
 
 class UserManagement {
+  ' Attributi (Campi)
   - list : Set<User> 
+  - userDatabase : File {readOnly}
+  ' Costruttori
   + UserManagement()
-  + add(u: User): void
-  + remove(u: User): void
-  + update(u: User): void
+  ' Metodi Pubblici (Implementazione Functionality)
+  + add(u: User): boolean
+  + remove(u: User): boolean
+  + update(u1: User, u2: User): boolean
   + viewSorted(): void
-  + search(s: String): User
+  + search(u: User): List<User>
+  ' Metodi Getter
+  + getList(): Set<User>
 }
 
 class FileManager<T> {
-  + removeFromTextFileObject(object: T, filename: String): void {static}
-  + writeToTextFileObject(object: T, filename: String): void {static}
-  + updateFileObject(newObject: T, filename: String): void{static}
-  + readLine(filename: String): void{static}
-  + writeLine(line: String, filename: String): void{static}
-  + updateLine(line: String, filename: String): void{static}
+  ' Metodi per I/O di Oggetti Serializzati (File Binari: .dat)
+  + {static} writeToTextFileObject(object: Set<T>, file: File): void
+  + {static} updateFileObject(newTree: Set<T>, file: File): void
+    
+  ' Metodi per I/O Testuale (File di Testo: .txt)
+  + {static} readLine(file: File): void
+  + {static} writeLine(line: String, file: File): void
 }
+
+
 
 ' === Ereditarietà e implementazione ===
 View --|> Application
