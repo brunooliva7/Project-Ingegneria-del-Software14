@@ -60,7 +60,7 @@
                 
 
                 <!-- Footer -->
-                <Label style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
+                <Label fx:id="labelMessage" style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
             </children>
         </VBox>
     </children>

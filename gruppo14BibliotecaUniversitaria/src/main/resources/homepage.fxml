@@ -76,7 +76,7 @@
                                         <MenuItem fx:id="modificaLibro" onAction="#updateBook"  text="Modifica" />
                                         <MenuItem fx:id="cancellaLibro" onAction="#deleteBook" text="Cancella" />
                                         <MenuItem fx:id="cercaLibro" onAction="#searchBook" text="Cerca" />
-                                        <MenuItem fx:id="visualizzaElencoLibro" onAction="#viewBooks" text="Visualizza elenco libri" />
+                                        <MenuItem fx:id="visualizzaElencoLibro" onAction="#viewBooks" text="Visualizza elenco libri"/>
                                     </items>
                                 </MenuButton>
                             </children>

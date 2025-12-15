@@ -13,6 +13,7 @@
     <!-- Bottone Indietro -->
     <Button fx:id="backButton" text="← Indietro"
             AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20"
+            onAction="#backPage"
             style="-fx-background-color: #F97316; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16; -fx-background-radius: 10; -fx-padding: 8 16;">
         <effect>
             <DropShadow color="#00000040" radius="8" offsetY="2"/>
