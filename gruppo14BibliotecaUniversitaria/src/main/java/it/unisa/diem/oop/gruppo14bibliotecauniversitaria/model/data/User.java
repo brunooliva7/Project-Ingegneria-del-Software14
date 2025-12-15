@@ -169,7 +169,7 @@ public class User   implements Comparable<User>,Serializable{
      */
     @Override
     public int compareTo(User other){
-         int comparing=this.surname.compareTo(other.surname); //faccio un compare basato sul cognome
+         int comparing=this.surname.compareToIgnoreCase(other.surname); //faccio un compare basato sul cognome
          if(comparing!=0){  //se il comparing è diverso da 0 significa che effettivamente il confronto è stato possibile dato che i cognomi erano diversi
              return comparing;
          }
@@ -204,7 +204,7 @@ public class User   implements Comparable<User>,Serializable{
         if(this==obj) return true; //hanno lo stesso riferimento sono sicuramente uguali
         if(obj.getClass()!= User.class) return false; //se non hanno la stessa classe sono sicuramente diversi 
         User other=(User) obj; //casting esplicito così da poter vedere se hanno il campo numberID uguale (univoco)
-        return this.numberId!= null && this.numberId.equals(other.numberId); //ritorno se sono uguali o no facendo anche un controllo su null così da evitare la NullPointerException
+        return this.numberId!= null && this.numberId.trim().equals(other.numberId.trim()); //ritorno se sono uguali o no facendo anche un controllo su null così da evitare la NullPointerException
     }
     
     /**
@@ -215,7 +215,7 @@ public class User   implements Comparable<User>,Serializable{
     
     @Override
     public int hashCode(){
-         return numberId != null ? numberId.hashCode() : 0; 
+         return numberId != null ? numberId.trim().hashCode() : 0; 
 
     }
     /**

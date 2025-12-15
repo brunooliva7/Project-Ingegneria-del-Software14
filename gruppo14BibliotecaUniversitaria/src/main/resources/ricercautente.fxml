@@ -21,6 +21,7 @@
                 text="← Indietro"
                 AnchorPane.leftAnchor="20"
                 AnchorPane.topAnchor="20"
+                onAction="#backPage" 
                 style="
                     -fx-background-color: #F97316;
                     -fx-text-fill: white;
@@ -53,7 +54,7 @@
                <!-- Barra di ricerca  -->
                <HBox alignment="CENTER" spacing="10">
                    <children>
-                       <TextField fx:id="searchField" maxWidth="500" prefHeight="50" prefWidth="300" promptText="Cerca studente..." style="-fx-background-radius: 8;                                        -fx-border-radius: 8;                                        -fx-border-color: #FF7043;                                        -fx-border-width: 1;                                        -fx-padding: 5;" HBox.hgrow="ALWAYS" />
+                       <TextField fx:id="searchField" maxWidth="500" prefHeight="50" prefWidth="300" promptText="Cerca studente tramite cognome o matricola..." style="-fx-background-radius: 8;                                        -fx-border-radius: 8;                                        -fx-border-color: #FF7043;                                        -fx-border-width: 1;                                        -fx-padding: 5;" HBox.hgrow="ALWAYS" />
                        <Button fx:id="searchButtonu" maxWidth="700" prefHeight="50" style="-fx-background-color: #FF7043;                                     -fx-text-fill: white;                                     -fx-font-weight: bold;     -fx-background-radius: 10;" text="🔍" HBox.hgrow="NEVER">
                            <effect>
                                <DropShadow color="#00000030" radius="6" />

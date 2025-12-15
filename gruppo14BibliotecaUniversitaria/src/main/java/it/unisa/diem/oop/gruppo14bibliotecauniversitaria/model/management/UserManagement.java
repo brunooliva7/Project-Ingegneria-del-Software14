@@ -108,13 +108,15 @@ public class UserManagement implements Functionality<User>,Serializable{
          { throw new IllegalArgumentException();
             // esce senza rimuovere ritornando che non è andato a buon fine l'operazione lanciando l'eccezione che specifica che l'argomento non è valido 
          } 
-         for(User utente: list){  //scorro tutta la nostra lista 
-             if(utente.equals(u))  //se l'elemento della lista ha matricola uguale a quella dell'utente da rimuovere allora è quello cercato
-             { list.remove(utente);
-               FileManager.updateFileObject(list, this.userDatabase); //aggiorno il file d'archivio 
-               return true; //la rimozione è stata effettuata 
-              }}
-          return false; //se arrivo a questo punto significa che non ho trovato nella lista l'utente da eliminare quindi l'operazione non è andata a buon fine
+        Iterator<User> iter = list.iterator(); 
+         while(iter.hasNext()) {  //scorro la lista di utenti
+         User utente = iter.next();
+         if(utente.equals(u)) {  //il controllo dell'uguaglianza va fatto sulla matricola(campo univoco dell'user) quindi uso direttamente equals() di User dato che è implementato in questo modo 
+         iter.remove();  // rimuove in sicurezza durante l'iterazione
+         FileManager.updateFileObject(list, this.userDatabase);  //aggiorno il file
+         return true;
+    }
+    } return false; //se arruva qui significs che non ha trovato l'utente da rimuovere 
     }
     /**
      *  @brief Metodo che permette di aggiornare i dati di un utente

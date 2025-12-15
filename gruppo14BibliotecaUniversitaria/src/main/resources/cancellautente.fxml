@@ -18,6 +18,7 @@
        <!-- BOTTONE INDIETRO posizionato in alto a sinistra con margine -->
         <Button fx:id="backButton"
                 text="← Indietro"
+                onAction="#backPage"
                 AnchorPane.leftAnchor="20"
                 AnchorPane.topAnchor="20"
                 style="
@@ -52,26 +53,27 @@
                         -fx-text-fill: #374151;"/>
                <!-- Barra di ricerca  -->
                <HBox alignment="CENTER" spacing="10">
-                   <children>
-                       <TextField fx:id="searchField" maxWidth="500" prefHeight="50" prefWidth="300" promptText="Cerca studente..." style="-fx-background-radius: 8;                                        -fx-border-radius: 8;                                        -fx-border-color: #FF7043;                                        -fx-border-width: 1;                                        -fx-padding: 5;" HBox.hgrow="ALWAYS" />
-                       <Button fx:id="searchButtonu" maxWidth="700" prefHeight="50" style="-fx-background-color: #FF7043;                                     -fx-text-fill: white;                                     -fx-font-weight: bold;     -fx-background-radius: 10;" text="🔍" HBox.hgrow="NEVER">
+                   
+                       <TextField fx:id="searchField" maxWidth="500" prefHeight="50" prefWidth="300" promptText="Cerca studente tramite cognome o matricola..." style="-fx-background-radius: 8;                                        -fx-border-radius: 8;                                        -fx-border-color: #FF7043;                                        -fx-border-width: 1;                                        -fx-padding: 5;" HBox.hgrow="ALWAYS" />
+                       <Button fx:id="searchButtonu" onAction="#search"  maxWidth="700" prefHeight="50" style="-fx-background-color: #FF7043;                                     -fx-text-fill: white;                                     -fx-font-weight: bold;     -fx-background-radius: 10;" text="🔍" HBox.hgrow="NEVER">
                            <effect>
                                <DropShadow color="#00000030" radius="6" />
                            </effect>
                        </Button>
-                          <Button fx:id="deleteuserButton" maxWidth="100" prefHeight="80" style="-fx-background-color: #FF7043;  -fx-text-fill: white;    -fx-font-weight: bold;     -fx-background-radius: 10;" text="Elimina utente" HBox.hgrow="NEVER">
+                          <Button fx:id="deleteuserButton" onAction="#delete" maxWidth="150" prefHeight="100" style="-fx-background-color: #FF7043;  -fx-text-fill: white;    -fx-font-weight: bold;     -fx-background-radius: 10;" text="Elimina utente" HBox.hgrow="NEVER">
                            <effect>
                                <DropShadow color="#00000030" radius="6" />
                            </effect>
                        </Button>
+                       
+
+                       </HBox>
+   
                        <Label fx:id="labelMessage"
                             text=""
                             style="-fx-font-size: 14; -fx-font-weight: bold;" />
-                   </children>
-               </HBox>
-   
-               <!-- Footer -->
-               <Label style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
+                  
+              
    
    
                       <HBox alignment="CENTER" prefWidth="450" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="400" />
@@ -98,6 +100,9 @@
                     <TableColumn fx:id="matricolaColumn" text="Matricola" prefWidth="150"/>
                 </columns>
             </TableView>
+             
+               <!-- Footer -->
+               <Label style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
            </children>
    
        </VBox>
