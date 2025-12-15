@@ -33,7 +33,7 @@
                        prefHeight="600" prefWidth="750" 
                        style="-fx-background-color: #ffff99ff;">
                 <columns>
-                    <TableColumn fx:id="titoloColumn" prefWidth="2500" text="Titolo" />
+                    <TableColumn fx:id="titoloColumn" prefWidth="200" text="Titolo" />
                     <TableColumn fx:id="autoriColumn" prefWidth="180" text="Autori" />
                     <TableColumn fx:id="annoPubblicazioneColumn" prefWidth="100" text="Anno di pubblicazione" />
                     <TableColumn fx:id="isbnColumn" prefWidth="120" text="ISBN" />
