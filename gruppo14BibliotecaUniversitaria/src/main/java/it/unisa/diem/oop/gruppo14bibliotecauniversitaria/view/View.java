@@ -27,6 +27,7 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchUserContr
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.viewBookController;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.viewUserController;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
