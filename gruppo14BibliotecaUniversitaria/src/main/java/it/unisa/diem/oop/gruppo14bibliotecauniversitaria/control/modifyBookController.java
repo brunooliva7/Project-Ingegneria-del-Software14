@@ -212,7 +212,6 @@ public void confirm(ActionEvent event) {
             View.Homepage();
         } catch (IOException e) {
             System.err.println("Impossibile caricare la Home Page.");
-            e.printStackTrace();
         }
     }
 }
