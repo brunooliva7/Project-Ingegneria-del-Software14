@@ -1,0 +1,5 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.modifyBookController.backPage" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.modifyBookController.backPage">
+<area shape="rect" id="Node000001" title="Gestisce il ritorno alla Home Page." alt="" coords="5,5,394,48"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html#a4ef811c7c45f6f0eea69ce3aec1ba4df" title="Carica e mostra la Homepage dell&#39;applicazione." alt="" coords="442,5,778,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="394,24,429,27,424,27,394,29"/>
+</map>

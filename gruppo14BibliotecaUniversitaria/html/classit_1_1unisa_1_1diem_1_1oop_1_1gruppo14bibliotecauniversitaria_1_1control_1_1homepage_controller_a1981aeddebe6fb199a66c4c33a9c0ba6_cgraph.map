@@ -1,0 +1,7 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.homepageController.addUser" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.homepageController.addUser">
+<area shape="rect" id="Node000001" title="Gestisce il click su &quot;Aggiungi Utente&quot;." alt="" coords="5,5,415,48"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html#a09fbbc53e770329a53537b2d1070f58f" title="Carica la schermata per l&#39;aggiunta di un nuovo utente." alt="" coords="463,5,799,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="415,24,450,27,444,27,415,29"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller.html#a98d6e41f5c8b8430e40c1c8a164ed49f" title=" " alt="" coords="847,5,1217,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="799,24,834,27,829,27,800,29"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View.deleteBook" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View.deleteBook">
+<area shape="rect" id="Node000001" title="Carica la schermata per eliminare un libro." alt="" coords="5,5,342,48"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1delete_book_controller.html#a275831d7a14217e6726ce084cae5c5e4" title="Imposta l&#39;istanza del Model." alt="" coords="390,5,774,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="342,24,377,27,371,27,342,29"/>
+</map>

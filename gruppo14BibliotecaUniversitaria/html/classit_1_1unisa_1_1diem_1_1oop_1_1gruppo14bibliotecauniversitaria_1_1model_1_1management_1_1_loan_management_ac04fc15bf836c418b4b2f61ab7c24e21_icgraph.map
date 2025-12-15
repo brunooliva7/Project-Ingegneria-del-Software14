@@ -1,0 +1,9 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement.getLoan" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement.getLoan">
+<area shape="rect" id="Node000001" title="Restituisce l&#39;insieme dei prestiti gestiti." alt="" coords="1268,5,1693,48"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1loan_view_controller.html#ad4625f3a02a0d77a100b21d6bebacff6" title="Inietta il modello e popola la tabella dei prestiti." alt="" coords="847,5,1220,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1250,27,1221,29,1221,24,1256,27"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html#a4deccc30e2615ec0adf8ead99a30caa3" title="Carica la schermata per visualizzare l&#39;elenco dei prestiti." alt="" coords="463,5,799,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="829,27,799,29,799,24,834,27"/>
+<area shape="rect" id="Node000004" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1homepage_controller.html#adc17afea9c99776d2a2ab8d2c91433fb" title="Gestisce il click su &quot;Visualizza Elenco Prestiti&quot;." alt="" coords="5,5,415,48"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="445,27,415,29,415,24,450,27"/>
+</map>

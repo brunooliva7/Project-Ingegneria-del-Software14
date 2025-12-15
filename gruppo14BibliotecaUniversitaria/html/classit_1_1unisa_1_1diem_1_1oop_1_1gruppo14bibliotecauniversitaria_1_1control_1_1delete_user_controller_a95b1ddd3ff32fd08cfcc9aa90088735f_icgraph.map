@@ -1,0 +1,7 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.deleteUserController.setModel" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.deleteUserController.setModel">
+<area shape="rect" id="Node000001" title=" " alt="" coords="847,5,1231,48"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html#a04a476ac14b01c57f59a55d9836597eb" title="Carica la schermata per l&#39;eliminazione di un utente." alt="" coords="463,5,799,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="829,27,800,29,799,24,834,27"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1homepage_controller.html#a5cf53253d2ec47573d496a569ad29951" title="Gestisce il click su &quot;Elimina Utente&quot;." alt="" coords="5,5,415,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="445,27,415,29,415,24,450,27"/>
+</map>

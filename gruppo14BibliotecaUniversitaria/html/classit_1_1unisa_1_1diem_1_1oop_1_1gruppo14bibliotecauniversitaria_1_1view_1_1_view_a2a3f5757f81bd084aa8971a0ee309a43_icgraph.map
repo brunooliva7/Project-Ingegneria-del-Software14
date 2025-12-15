@@ -1,0 +1,5 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View.addBook" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View.addBook">
+<area shape="rect" id="Node000001" title="Carica la schermata per aggiungere un nuovo libro." alt="" coords="463,5,799,48"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1homepage_controller.html#a6e017b68186e292fbe9e0b0b7b664043" title="Gestisce il click su &quot;Aggiungi Libro&quot;." alt="" coords="5,5,415,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="445,27,415,29,415,24,450,27"/>
+</map>

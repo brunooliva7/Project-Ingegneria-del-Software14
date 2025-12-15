@@ -1,0 +1,7 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addLoanController.setModel" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addLoanController.setModel">
+<area shape="rect" id="Node000001" title="Inietta il modello e popola i campi di selezione." alt="" coords="847,5,1217,48"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html#ae9af4c3c22a86a37a33a704516085c5e" title="Carica la schermata per l&#39;aggiunta di un prestito." alt="" coords="463,5,799,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="829,27,800,29,800,24,834,27"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1homepage_controller.html#af28a005dfae208c7f8b0b933ea5243d4" title="Gestisce il click su &quot;Aggiungi Prestito&quot;." alt="" coords="5,5,415,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="445,27,415,29,415,24,450,27"/>
+</map>

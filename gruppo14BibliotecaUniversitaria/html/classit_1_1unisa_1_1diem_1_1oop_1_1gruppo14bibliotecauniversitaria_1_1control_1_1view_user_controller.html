@@ -91,32 +91,121 @@ $(function(){initNavTree('classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecau
   <div class="headertitle"><div class="title">it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.viewUserController Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Collaboration diagram for it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.viewUserController:</div>
-<div class="dyncontent">
-<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller__coll__graph.png" border="0" usemap="#ait_8unisa_8diem_8oop_8gruppo14bibliotecauniversitaria_8control_8view_user_controller_coll__map" loading="lazy" alt="Collaboration graph"/></div>
-<map name="ait_8unisa_8diem_8oop_8gruppo14bibliotecauniversitaria_8control_8view_user_controller_coll__map" id="ait_8unisa_8diem_8oop_8gruppo14bibliotecauniversitaria_8control_8view_user_controller_coll__map">
-<area shape="rect" title=" " alt="" coords="1066,35,1443,75"/>
-<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_user_management.html" title="UserManagement è una classe che si occupa essenzialmente delle funzionalità messe a disposizione per ..." alt="" coords="479,35,903,75"/>
-<area shape="poly" title=" " alt="" coords="919,52,1068,55,1063,55,919,58"/>
-<area shape="rect" href="interfaceit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_functionality.html" title=" " alt="" coords="5,5,430,46"/>
-<area shape="poly" title=" " alt="" coords="445,37,481,42,476,42,445,42"/>
-<area shape="rect" title=" " alt="" coords="173,70,262,96"/>
-<area shape="poly" title=" " alt="" coords="277,77,481,67,476,68,277,82"/>
-</map>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+
+<p>Gestisce la visualizzazione dell'elenco degli utenti.  
+ <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab959e404df1b36ac2cb8974efc7c0aca" id="r_ab959e404df1b36ac2cb8974efc7c0aca"><td class="memItemLeft" align="right" valign="top"><a id="ab959e404df1b36ac2cb8974efc7c0aca" name="ab959e404df1b36ac2cb8974efc7c0aca"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initialize</b> ()</td></tr>
-<tr class="memitem:af05f85301d77242c811e21c8510e5b86" id="r_af05f85301d77242c811e21c8510e5b86"><td class="memItemLeft" align="right" valign="top"><a id="af05f85301d77242c811e21c8510e5b86" name="af05f85301d77242c811e21c8510e5b86"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>backPage</b> ()  throws IOException</td></tr>
+<tr class="memitem:a1e4e7fc531cc1d51ee05e2d1b0fd15ad" id="r_a1e4e7fc531cc1d51ee05e2d1b0fd15ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e4e7fc531cc1d51ee05e2d1b0fd15ad">setModel</a> (<a class="el" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1_model.html">Model</a> model)</td></tr>
+<tr class="memitem:ab959e404df1b36ac2cb8974efc7c0aca" id="r_ab959e404df1b36ac2cb8974efc7c0aca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab959e404df1b36ac2cb8974efc7c0aca">initialize</a> ()</td></tr>
+<tr class="memitem:af05f85301d77242c811e21c8510e5b86" id="r_af05f85301d77242c811e21c8510e5b86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af05f85301d77242c811e21c8510e5b86">backPage</a> ()  throws IOException</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>bruno </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/main/java/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/control/<b>viewUserController.java</b></li>
+<div class="textblock"><p>Gestisce la visualizzazione dell'elenco degli utenti. </p>
+<p>La classe <span class="tt"><a class="el" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller.html" title="Gestisce la visualizzazione dell&#39;elenco degli utenti.">viewUserController</a></span> gestisce la visualizzazione degli utenti in una <span class="tt">TableView</span>, che mostra le informazioni di base degli utenti (nome, cognome, matricola, email) e i prestiti attivi. Inoltre, il controller interagisce con il modello per ottenere i dati da visualizzare. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="af05f85301d77242c811e21c8510e5b86" name="af05f85301d77242c811e21c8510e5b86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af05f85301d77242c811e21c8510e5b86">&#9670;&#160;</a></span>backPage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.viewUserController.backPage </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> throws IOException</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Metodo chiamato quando il bibliotecario clicca sul pulsante "Indietro". Torna alla homepage dell'applicazione.</p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">IOException</td><td>Se c'è un errore nel caricamento della homepage. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller_af05f85301d77242c811e21c8510e5b86_cgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller_af05f85301d77242c811e21c8510e5b86_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller_af05f85301d77242c811e21c8510e5b86_cgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller_af05f85301d77242c811e21c8510e5b86_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,382,48"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html#a4ef811c7c45f6f0eea69ce3aec1ba4df" title="Carica e mostra la Homepage dell&#39;applicazione." alt="" coords="430,5,766,48"/>
+<area shape="poly" title=" " alt="" coords="382,24,417,27,412,27,382,29"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab959e404df1b36ac2cb8974efc7c0aca" name="ab959e404df1b36ac2cb8974efc7c0aca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab959e404df1b36ac2cb8974efc7c0aca">&#9670;&#160;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.viewUserController.initialize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Metodo chiamato all'inizializzazione del controller. Configura le colonne della <span class="tt">TableView</span> per visualizzare correttamente i dati degli utenti. Inoltre, imposta l'ordinamento naturale della lista di utenti.</p>
+<dl class="section post"><dt>Postcondition</dt><dd>Le colonne della <span class="tt">TableView</span> sono configurate per visualizzare le informazioni degli utenti. </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller_ab959e404df1b36ac2cb8974efc7c0aca_cgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller_ab959e404df1b36ac2cb8974efc7c0aca_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller_ab959e404df1b36ac2cb8974efc7c0aca_cgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller_ab959e404df1b36ac2cb8974efc7c0aca_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,382,48"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#aec6b5cd44441cb4e81402cd9e20cd7df" title="Restituisce la mappa di libri&#45;dataRestituzione dell&#39;utente." alt="" coords="430,5,804,48"/>
+<area shape="poly" title=" " alt="" coords="382,24,417,27,411,27,382,29"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1e4e7fc531cc1d51ee05e2d1b0fd15ad" name="a1e4e7fc531cc1d51ee05e2d1b0fd15ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e4e7fc531cc1d51ee05e2d1b0fd15ad">&#9670;&#160;</a></span>setModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.viewUserController.setModel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1_model.html">Model</a></td>          <td class="paramname"><span class="paramname"><em>model</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Imposta il modello dell'applicazione.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>Il modello dell'applicazione da impostare. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller_a1e4e7fc531cc1d51ee05e2d1b0fd15ad_icgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller_a1e4e7fc531cc1d51ee05e2d1b0fd15ad_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller_a1e4e7fc531cc1d51ee05e2d1b0fd15ad_icgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1view_user_controller_a1e4e7fc531cc1d51ee05e2d1b0fd15ad_icgraph">
+<area shape="rect" title=" " alt="" coords="847,5,1223,48"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html#a6ab599d30e3d778214e74531053c4e40" title="Carica la schermata per visualizzare l&#39;elenco completo degli utenti." alt="" coords="463,5,799,48"/>
+<area shape="poly" title=" " alt="" coords="829,27,799,29,799,24,834,27"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1homepage_controller.html#a456509574d6cd37bdd488ace664c7dcc" title="Gestisce il click su &quot;Visualizza Elenco Utenti&quot;." alt="" coords="5,5,415,48"/>
+<area shape="poly" title=" " alt="" coords="445,27,415,29,415,24,450,27"/>
+</map>
+</div>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>src/main/java/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/control/<a class="el" href="view_user_controller_8java.html">viewUserController.java</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

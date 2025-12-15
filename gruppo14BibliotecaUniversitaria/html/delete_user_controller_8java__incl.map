@@ -1,0 +1,31 @@
+<map id="src/main/java/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/control/deleteUserController.java" name="src/main/java/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/control/deleteUserController.java">
+<area shape="rect" id="Node000001" title="Controller per la gestione della cancellazione degli utenti." alt="" coords="2004,5,2264,64"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,112,351,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2001,39,1308,63,843,84,367,114,366,109,843,79,1308,58,2006,38"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="374,120,776,147"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="2001,42,1473,71,789,115,717,121,717,115,788,109,1473,66,2006,42"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="800,112,1225,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="2006,47,1241,114,1240,109,2001,47"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="1249,120,1614,147"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="2006,54,1539,120,1539,115,2001,54"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="1638,120,1774,147"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="2006,63,1787,115,1771,118,1770,113,1785,109,2001,64"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="1798,120,1889,147"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="2047,64,1902,115,1894,117,1893,112,1900,109,2042,65"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="1912,120,2121,147"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="2102,63,2044,113,2042,108,2097,65"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="2145,120,2358,147"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="2169,62,2227,111,2222,109,2168,67"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="2382,120,2507,147"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="2227,62,2392,115,2387,115,2226,67"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="2530,120,2711,147"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="2265,59,2520,109,2545,117,2539,116,2519,115,2264,64"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="2735,120,2909,147"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="2264,47,2480,74,2724,109,2751,117,2746,116,2723,115,2479,79,2264,53"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="2933,112,3106,155"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="2265,42,2560,66,2737,85,2920,112,2915,112,2736,91,2559,72,2265,47"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="3130,120,3332,147"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="2265,39,2648,64,2883,84,3118,109,3154,117,3149,117,3118,115,2882,89,2648,69,2264,45"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="3357,112,3524,155"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="2264,35,2470,42,2736,54,3036,76,3344,112,3339,112,3036,81,2736,60,2469,47,2265,41"/>
+</map>

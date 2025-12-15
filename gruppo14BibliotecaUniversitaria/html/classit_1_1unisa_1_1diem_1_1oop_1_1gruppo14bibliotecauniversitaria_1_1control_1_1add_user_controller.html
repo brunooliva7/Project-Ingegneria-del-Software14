@@ -91,20 +91,178 @@ $(function(){initNavTree('classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecau
   <div class="headertitle"><div class="title">it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addUserController Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Gestisce l'interfaccia utente per l'aggiunta di un nuovo utente.  
+ <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afe906bfaa265b8fe1a71464149ac97c8" id="r_afe906bfaa265b8fe1a71464149ac97c8"><td class="memItemLeft" align="right" valign="top"><a id="afe906bfaa265b8fe1a71464149ac97c8" name="afe906bfaa265b8fe1a71464149ac97c8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initialize</b> ()</td></tr>
-<tr class="memitem:a9d356ad9ede8b9996481ee583f773e5c" id="r_a9d356ad9ede8b9996481ee583f773e5c"><td class="memItemLeft" align="right" valign="top"><a id="a9d356ad9ede8b9996481ee583f773e5c" name="a9d356ad9ede8b9996481ee583f773e5c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addUser</b> ()</td></tr>
-<tr class="memitem:ab5612de106dde1a56690321ed05b1933" id="r_ab5612de106dde1a56690321ed05b1933"><td class="memItemLeft" align="right" valign="top"><a id="ab5612de106dde1a56690321ed05b1933" name="ab5612de106dde1a56690321ed05b1933"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>backPage</b> ()  throws IOException</td></tr>
+<tr class="memitem:a98d6e41f5c8b8430e40c1c8a164ed49f" id="r_a98d6e41f5c8b8430e40c1c8a164ed49f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a98d6e41f5c8b8430e40c1c8a164ed49f">setModel</a> (<a class="el" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1_model.html">Model</a> model)</td></tr>
+<tr class="memitem:ab047b853b40e2ba95000b6ff4b69cfa6" id="r_ab047b853b40e2ba95000b6ff4b69cfa6"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab047b853b40e2ba95000b6ff4b69cfa6">isValidEmail</a> (String email)</td></tr>
+<tr class="memitem:afe906bfaa265b8fe1a71464149ac97c8" id="r_afe906bfaa265b8fe1a71464149ac97c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe906bfaa265b8fe1a71464149ac97c8">initialize</a> ()</td></tr>
+<tr class="memitem:a9d356ad9ede8b9996481ee583f773e5c" id="r_a9d356ad9ede8b9996481ee583f773e5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d356ad9ede8b9996481ee583f773e5c">addUser</a> ()</td></tr>
+<tr class="memitem:ab5612de106dde1a56690321ed05b1933" id="r_ab5612de106dde1a56690321ed05b1933"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5612de106dde1a56690321ed05b1933">backPage</a> ()  throws IOException </td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>bruno </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/main/java/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/control/<b>addUserController.java</b></li>
+<div class="textblock"><p>Gestisce l'interfaccia utente per l'aggiunta di un nuovo utente. </p>
+<p>La classe <span class="tt"><a class="el" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller.html" title="Gestisce l&#39;interfaccia utente per l&#39;aggiunta di un nuovo utente.">addUserController</a></span> fornisce la logica per aggiungere un nuovo utente al sistema, inclusi i controlli per la validità dell'email e il controllo della matricola. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a9d356ad9ede8b9996481ee583f773e5c" name="a9d356ad9ede8b9996481ee583f773e5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d356ad9ede8b9996481ee583f773e5c">&#9670;&#160;</a></span>addUser()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addUserController.addUser </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Metodo chiamato quando l'utente clicca sul pulsante "Aggiungi".</p>
+<p>Aggiunge un nuovo utente al sistema, eseguendo la validazione dell'email e controllando che la matricola non sia già esistente.</p>
+<dl class="section post"><dt>Postcondition</dt><dd>Se l'utente viene aggiunto con successo, i campi vengono resettati. </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_a9d356ad9ede8b9996481ee583f773e5c_cgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_a9d356ad9ede8b9996481ee583f773e5c_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_a9d356ad9ede8b9996481ee583f773e5c_cgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_a9d356ad9ede8b9996481ee583f773e5c_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,376,48"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller.html#ab047b853b40e2ba95000b6ff4b69cfa6" title=" " alt="" coords="424,5,794,48"/>
+<area shape="poly" title=" " alt="" coords="376,24,411,27,405,27,376,29"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab5612de106dde1a56690321ed05b1933" name="ab5612de106dde1a56690321ed05b1933"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5612de106dde1a56690321ed05b1933">&#9670;&#160;</a></span>backPage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addUserController.backPage </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> throws IOException</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Metodo chiamato quando l'utente clicca sul pulsante "Indietro". Torna alla pagina della homepage.</p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">IOException</td><td>Se c'è un errore nel caricamento della homepage. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_ab5612de106dde1a56690321ed05b1933_cgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_ab5612de106dde1a56690321ed05b1933_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_ab5612de106dde1a56690321ed05b1933_cgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_ab5612de106dde1a56690321ed05b1933_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,376,48"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html#a4ef811c7c45f6f0eea69ce3aec1ba4df" title="Carica e mostra la Homepage dell&#39;applicazione." alt="" coords="424,5,760,48"/>
+<area shape="poly" title=" " alt="" coords="376,24,411,27,405,27,376,29"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afe906bfaa265b8fe1a71464149ac97c8" name="afe906bfaa265b8fe1a71464149ac97c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe906bfaa265b8fe1a71464149ac97c8">&#9670;&#160;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addUserController.initialize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Metodo chiamato all'inizializzazione del controller. Disabilita i campi di input e il pulsante "Aggiungi" se i campi obbligatori non sono compilati. </p>
+
+</div>
+</div>
+<a id="ab047b853b40e2ba95000b6ff4b69cfa6" name="ab047b853b40e2ba95000b6ff4b69cfa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab047b853b40e2ba95000b6ff4b69cfa6">&#9670;&#160;</a></span>isValidEmail()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addUserController.isValidEmail </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>email</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Verifica la validità dell'email fornita.</p>
+<p>Utilizza una espressione regolare per controllare se l'email segue il formato standard.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">email</td><td>L'email da verificare. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true se l'email è valida, false altrimenti. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_ab047b853b40e2ba95000b6ff4b69cfa6_icgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_ab047b853b40e2ba95000b6ff4b69cfa6_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_ab047b853b40e2ba95000b6ff4b69cfa6_icgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_ab047b853b40e2ba95000b6ff4b69cfa6_icgraph">
+<area shape="rect" title=" " alt="" coords="424,5,794,48"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller.html#a9d356ad9ede8b9996481ee583f773e5c" title=" " alt="" coords="5,5,376,48"/>
+<area shape="poly" title=" " alt="" coords="406,27,376,29,376,24,411,27"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a98d6e41f5c8b8430e40c1c8a164ed49f" name="a98d6e41f5c8b8430e40c1c8a164ed49f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98d6e41f5c8b8430e40c1c8a164ed49f">&#9670;&#160;</a></span>setModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addUserController.setModel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1_model.html">Model</a></td>          <td class="paramname"><span class="paramname"><em>model</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Imposta il modello dell'applicazione.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>Il modello dell'applicazione da impostare. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_a98d6e41f5c8b8430e40c1c8a164ed49f_icgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_a98d6e41f5c8b8430e40c1c8a164ed49f_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_a98d6e41f5c8b8430e40c1c8a164ed49f_icgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1add_user_controller_a98d6e41f5c8b8430e40c1c8a164ed49f_icgraph">
+<area shape="rect" title=" " alt="" coords="847,5,1217,48"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html#a09fbbc53e770329a53537b2d1070f58f" title="Carica la schermata per l&#39;aggiunta di un nuovo utente." alt="" coords="463,5,799,48"/>
+<area shape="poly" title=" " alt="" coords="829,27,800,29,800,24,834,27"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1homepage_controller.html#a1981aeddebe6fb199a66c4c33a9c0ba6" title="Gestisce il click su &quot;Aggiungi Utente&quot;." alt="" coords="5,5,415,48"/>
+<area shape="poly" title=" " alt="" coords="445,27,415,29,415,24,450,27"/>
+</map>
+</div>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>src/main/java/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/control/<a class="el" href="add_user_controller_8java.html">addUserController.java</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

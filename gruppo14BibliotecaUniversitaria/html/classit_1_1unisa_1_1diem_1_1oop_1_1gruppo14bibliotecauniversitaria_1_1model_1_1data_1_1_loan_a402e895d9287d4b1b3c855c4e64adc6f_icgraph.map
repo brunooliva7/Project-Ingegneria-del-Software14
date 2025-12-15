@@ -1,0 +1,5 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan.getBook" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan.getBook">
+<area shape="rect" id="Node000001" title="Restituisce il libro associato al prestito." alt="" coords="478,5,852,48"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#aad308def72a49f04fbe40d19a6626240" title="Cerca prestiti nell&#39;insieme in base a criteri parziali." alt="" coords="5,5,430,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="460,27,430,29,430,24,465,27"/>
+</map>

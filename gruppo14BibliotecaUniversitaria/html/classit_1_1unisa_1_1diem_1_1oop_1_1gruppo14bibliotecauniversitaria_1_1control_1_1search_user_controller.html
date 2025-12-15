@@ -91,32 +91,153 @@ $(function(){initNavTree('classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecau
   <div class="headertitle"><div class="title">it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchUserController Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Collaboration diagram for it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchUserController:</div>
-<div class="dyncontent">
-<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller__coll__graph.png" border="0" usemap="#ait_8unisa_8diem_8oop_8gruppo14bibliotecauniversitaria_8control_8search_user_controller_coll__map" loading="lazy" alt="Collaboration graph"/></div>
-<map name="ait_8unisa_8diem_8oop_8gruppo14bibliotecauniversitaria_8control_8search_user_controller_coll__map" id="ait_8unisa_8diem_8oop_8gruppo14bibliotecauniversitaria_8control_8search_user_controller_coll__map">
-<area shape="rect" title=" " alt="" coords="984,35,1373,75"/>
-<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_user_management.html" title="UserManagement è una classe che si occupa essenzialmente delle funzionalità messe a disposizione per ..." alt="" coords="479,35,903,75"/>
-<area shape="poly" title=" " alt="" coords="919,52,987,55,981,55,919,58"/>
-<area shape="rect" href="interfaceit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_functionality.html" title=" " alt="" coords="5,5,430,46"/>
-<area shape="poly" title=" " alt="" coords="445,37,481,42,476,42,445,42"/>
-<area shape="rect" title=" " alt="" coords="173,70,262,96"/>
-<area shape="poly" title=" " alt="" coords="277,77,481,67,476,68,277,82"/>
-</map>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+
+<p>Gestisce la ricerca degli utenti.  
+ <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aad3f96da98e70c89a9e0d461bef218b8" id="r_aad3f96da98e70c89a9e0d461bef218b8"><td class="memItemLeft" align="right" valign="top"><a id="aad3f96da98e70c89a9e0d461bef218b8" name="aad3f96da98e70c89a9e0d461bef218b8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initialize</b> ()</td></tr>
-<tr class="memitem:a29b2922fdbeb503bb371d0c79ff70b4e" id="r_a29b2922fdbeb503bb371d0c79ff70b4e"><td class="memItemLeft" align="right" valign="top"><a id="a29b2922fdbeb503bb371d0c79ff70b4e" name="a29b2922fdbeb503bb371d0c79ff70b4e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>search</b> ()</td></tr>
+<tr class="memitem:a9e5b3b3f6e0e3869939e08d01ad08539" id="r_a9e5b3b3f6e0e3869939e08d01ad08539"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e5b3b3f6e0e3869939e08d01ad08539">setModel</a> (<a class="el" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1_model.html">Model</a> model)</td></tr>
+<tr class="memitem:aad3f96da98e70c89a9e0d461bef218b8" id="r_aad3f96da98e70c89a9e0d461bef218b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad3f96da98e70c89a9e0d461bef218b8">initialize</a> ()</td></tr>
+<tr class="memitem:a29b2922fdbeb503bb371d0c79ff70b4e" id="r_a29b2922fdbeb503bb371d0c79ff70b4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29b2922fdbeb503bb371d0c79ff70b4e">search</a> ()</td></tr>
+<tr class="memitem:ae84e2c5e5ba900fa4ce9ad654cb7ebca" id="r_ae84e2c5e5ba900fa4ce9ad654cb7ebca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae84e2c5e5ba900fa4ce9ad654cb7ebca">backPage</a> ()  throws IOException </td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>bruno </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/main/java/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/control/<b>searchUserController.java</b></li>
+<div class="textblock"><p>Gestisce la ricerca degli utenti. </p>
+<p>La classe <span class="tt"><a class="el" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller.html" title="Gestisce la ricerca degli utenti.">searchUserController</a></span> gestisce l'interfaccia grafica e le azioni per cercare un utente in base a una stringa di input, che può essere una matricola, un nome o un cognome. I risultati della ricerca vengono mostrati in una <span class="tt">TableView</span>, che visualizza le informazioni dell'utente come nome, cognome, matricola, email e prestiti attivi. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="ae84e2c5e5ba900fa4ce9ad654cb7ebca" name="ae84e2c5e5ba900fa4ce9ad654cb7ebca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae84e2c5e5ba900fa4ce9ad654cb7ebca">&#9670;&#160;</a></span>backPage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchUserController.backPage </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> throws IOException</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Metodo chiamato quando il bibliotecario clicca sul pulsante "Indietro". Torna alla homepage dell'applicazione.</p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">IOException</td><td>Se c'è un errore nel caricamento della homepage. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_ae84e2c5e5ba900fa4ce9ad654cb7ebca_cgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_ae84e2c5e5ba900fa4ce9ad654cb7ebca_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_ae84e2c5e5ba900fa4ce9ad654cb7ebca_cgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_ae84e2c5e5ba900fa4ce9ad654cb7ebca_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,394,48"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html#a4ef811c7c45f6f0eea69ce3aec1ba4df" title="Carica e mostra la Homepage dell&#39;applicazione." alt="" coords="442,5,778,48"/>
+<area shape="poly" title=" " alt="" coords="394,24,429,27,424,27,394,29"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aad3f96da98e70c89a9e0d461bef218b8" name="aad3f96da98e70c89a9e0d461bef218b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad3f96da98e70c89a9e0d461bef218b8">&#9670;&#160;</a></span>initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchUserController.initialize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Metodo chiamato all'inizializzazione del controller. Configura la <span class="tt">TableView</span>, le colonne e abilita/disabilita i pulsanti in base agli input dell'utente.</p>
+<dl class="section post"><dt>Postcondition</dt><dd>Le colonne della <span class="tt">TableView</span> vengono configurate e il pulsante di ricerca è abilitato solo quando il campo di ricerca non è vuoto. </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_aad3f96da98e70c89a9e0d461bef218b8_cgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_aad3f96da98e70c89a9e0d461bef218b8_cgraph" loading="lazy" alt=""/></div>
+<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_aad3f96da98e70c89a9e0d461bef218b8_cgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_aad3f96da98e70c89a9e0d461bef218b8_cgraph">
+<area shape="rect" title=" " alt="" coords="5,39,394,81"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#aec6b5cd44441cb4e81402cd9e20cd7df" title="Restituisce la mappa di libri&#45;dataRestituzione dell&#39;utente." alt="" coords="449,5,823,48"/>
+<area shape="poly" title=" " alt="" coords="394,42,436,42,430,43,395,48"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller.html#a29b2922fdbeb503bb371d0c79ff70b4e" title=" " alt="" coords="442,72,830,115"/>
+<area shape="poly" title=" " alt="" coords="394,72,429,77,423,77,394,78"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a29b2922fdbeb503bb371d0c79ff70b4e" name="a29b2922fdbeb503bb371d0c79ff70b4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29b2922fdbeb503bb371d0c79ff70b4e">&#9670;&#160;</a></span>search()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchUserController.search </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Metodo chiamato quando il bibliotecario clicca sul pulsante di ricerca. Cerca un utente e aggiorna la <span class="tt">TableView</span> con i risultati.</p>
+<dl class="section post"><dt>Postcondition</dt><dd>La <span class="tt">TableView</span> viene aggiornata con i risultati della ricerca. Se non vengono trovati utenti, viene mostrato un messaggio di errore. </dd></dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_a29b2922fdbeb503bb371d0c79ff70b4e_icgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_a29b2922fdbeb503bb371d0c79ff70b4e_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_a29b2922fdbeb503bb371d0c79ff70b4e_icgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_a29b2922fdbeb503bb371d0c79ff70b4e_icgraph">
+<area shape="rect" title=" " alt="" coords="442,5,830,48"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller.html#aad3f96da98e70c89a9e0d461bef218b8" title=" " alt="" coords="5,5,394,48"/>
+<area shape="poly" title=" " alt="" coords="423,27,394,29,394,24,429,27"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9e5b3b3f6e0e3869939e08d01ad08539" name="a9e5b3b3f6e0e3869939e08d01ad08539"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e5b3b3f6e0e3869939e08d01ad08539">&#9670;&#160;</a></span>setModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchUserController.setModel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1_model.html">Model</a></td>          <td class="paramname"><span class="paramname"><em>model</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Imposta il modello dell'applicazione.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>Il modello dell'applicazione da impostare. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_a9e5b3b3f6e0e3869939e08d01ad08539_icgraph.png" border="0" usemap="#aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_a9e5b3b3f6e0e3869939e08d01ad08539_icgraph" loading="lazy" alt=""/></div>
+<map name="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_a9e5b3b3f6e0e3869939e08d01ad08539_icgraph" id="aclassit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller_a9e5b3b3f6e0e3869939e08d01ad08539_icgraph">
+<area shape="rect" title=" " alt="" coords="847,5,1235,48"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html#a1d1d1fb804de457637d5bf6e6809f10c" title="Carica la schermata per la ricerca degli utenti." alt="" coords="463,5,799,48"/>
+<area shape="poly" title=" " alt="" coords="829,27,799,29,799,24,834,27"/>
+<area shape="rect" href="classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1homepage_controller.html#acb08a20e021d1155ab9a3332804fdd9f" title="Gestisce il click su &quot;Cerca Utente&quot;." alt="" coords="5,5,415,48"/>
+<area shape="poly" title=" " alt="" coords="445,27,415,29,415,24,450,27"/>
+</map>
+</div>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>src/main/java/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/control/<a class="el" href="search_user_controller_8java.html">searchUserController.java</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
