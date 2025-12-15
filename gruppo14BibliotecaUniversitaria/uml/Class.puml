@@ -36,14 +36,6 @@ class View {
     + viewLoan(): void {static}
 }
 
-class Controller {
-  - model : Model
-  - view : View
-  + Controller(model : Model, view : View) : View
-  + initBindings() : void
-  + initHandler() : void
-}
-
 class Model {
   ' Campi (Attributi)
     - bookManagement : BookManagement
@@ -228,7 +220,424 @@ class FileManager<T> {
   + {static} writeLine(line: String, file: File): void
 }
 
+class LoginController {
+  ' Attributi (Campi FXML e Modello)
+  - librarian : Librarian
+  - usernameField : TextField
+  - passwordField : TextField
+  - loginButton : Button
+  - labelErrore : Label
+  ' Metodi Pubblici/Handler (richiamati da FXML)
+  + initialize(): void
+  + handleLogin(): void
+  + modifyCredentials(): void
+}
 
+class addBookController {
+    ' Attributi (Campi FXML e Modello)
+    - title : TextField
+    - authors : TextField
+    - publicationYear : TextField
+    - ISBN : TextField
+    - availableCopies : TextField
+    - addButton : Button
+    - labelErrore : Label
+    - backButton : Button
+    - model : Model
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + initialize(): void
+    + addBook(): void
+    + backPage(): void
+}
+
+class addLoanController {
+    ' Attributi (Campi FXML e Modello/Gestori)
+    - userComboBox : ComboBox<User>
+    - bookComboBox : ComboBox<Book>
+    - dueDatePicker : DatePicker
+    - labelMessage : Label
+    - registerButton : Button
+    - userManagement : UserManagement
+    - bookManagement : BookManagement
+    - loanManagement : LoanManagement
+    - model : Model
+    - book : Book
+    - user : User
+    - duedate : LocalDate
+    - loan : Loan
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + initialize(): void
+    + registerLoan(): void
+    + backPage(): void
+}
+
+class addUserController {
+    ' Attributi (Campi FXML e Modello)
+    - name : TextField
+    - surname : TextField
+    - email : TextField
+    - numberID : TextField
+    - addButton : Button
+    - labelErrore : Label
+    - backButton : Button
+    - model : Model
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + isValidEmail(email: String): boolean
+    + initialize(): void
+    + addUser(): void
+    + backPage(): void
+}
+
+class deleteBookController {
+    ' Attributi (Campi FXML e Modello)
+    - backButton : Button
+    - searchField : TextField
+    - searchButton : Button
+    - deleteBookButton : Button
+    - bookTableViewricerca : TableView<Book>
+    - titoloColumn : TableColumn<Book, String>
+    - autoriColumn : TableColumn<Book, String>
+    - dataColumn : TableColumn<Book, String>
+    - isbnColumn : TableColumn<Book, String>
+    - copieColumn : TableColumn<Book, Integer>
+    - model : Model
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + initialize(url: URL, rb: ResourceBundle): void
+    + handleSearchAction(event: ActionEvent): void
+    + handleDeleteAction(event: ActionEvent): void
+    + backPage(event: ActionEvent): void
+    
+    ' Metodi Privati di Utility
+    - loadAllBooks(): void
+    - showAlert(title: String, message: String, type: AlertType): void
+}
+
+class deleteLoanController {
+    ' Attributi (Campi FXML e Modello)
+    - userSearchField : TextField
+    - bookSearchField : TextField
+    - loanTableView : TableView<Loan>
+    - nomeColumn : TableColumn<Loan, String>
+    - cognomeColumn : TableColumn<Loan, String>
+    - matricolaColumn : TableColumn<Loan, String>
+    - autoriColumn : TableColumn<Loan, String>
+    - titoloColumn : TableColumn<Loan, String>
+    - isbnColumn : TableColumn<Loan, String>
+    - duedateColumn : TableColumn<Loan, LocalDate>
+    - labelMessage : Label
+    - confirmButton : Button
+    - userInput : String
+    - bookInput : String
+    - loanManagement : LoanManagement
+    - bookManagement : BookManagement
+    - loanList : List<Loan>
+    - loanSelezionato : Loan
+    - model : Model
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + initialize(): void
+    + search(): void
+    + backPage(): void
+}
+
+class deleteUserController {
+    ' Attributi (Campi FXML e Modello)
+    - searchField : TextField
+    - searchButtonu : Button
+    - deleteuserButton : Button
+    - backButton : Button
+    - userTableViewricerca : TableView<User>
+    - nomeColumn : TableColumn<User, String>
+    - cognomeColumn : TableColumn<User, String>
+    - matricolaColumn : TableColumn<User, String>
+    - labelMessage : Label
+    - model : Model
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + initialize(): void
+    + search(): void
+    + delete(): void
+    + backPage(): void
+}
+
+class homepageController {
+    ' Attributi (Campi FXML per il Menu)
+    - aggiungiUtente : MenuItem
+    - modificaUtente : MenuItem
+    - cancellaUtente : MenuItem
+    - cercaUtente : MenuItem
+    - aggiungiLibro : MenuItem
+    - cancellaLibro : MenuItem
+    - modificaLibro : MenuItem
+    - cercaLibro : MenuItem
+    - aggiungiPrestito : MenuItem
+    - cancellaPrestito : MenuItem
+    - visualizzaElencoPrestito : MenuItem
+    - cercaPrestito : MenuItem
+    - model : Model
+    
+    ' Metodi Pubblici/Handler (Navigazione)
+    + addUser(): void
+    + modifyUser(): void
+    + deleteUser(): void
+    + searchUser(): void
+    + viewUser(): void
+    + addBook(): void
+    + deleteBook(): void
+    + updateBook(): void
+    + searchBook(): void
+    + viewBooks(): void
+    + addLoan(): void
+    + searchLoan(): void
+    + deleteLoan(): void
+    + viewLoan(): void
+}
+
+class loanViewController {
+    ' Attributi (Campi FXML e Modello)
+    - loanTableView : TableView<Loan>
+    - nomeColumn : TableColumn<Loan, String>
+    - cognomeColumn : TableColumn<Loan, String>
+    - matricolaColumn : TableColumn<Loan, String>
+    - autoriColumn : TableColumn<Loan, String>
+    - titoloColumn : TableColumn<Loan, String>
+    - isbnColumn : TableColumn<Loan, String>
+    - duedateColumn : TableColumn<Loan, LocalDate>
+    - loanManagement : LoanManagement
+    - model : Model
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + initialize(): void
+    + backPage(): void
+}
+
+class modifyBookController {
+    ' Attributi (Campi FXML: Ricerca)
+    - backButton : Button
+    - labelMessage : Label
+    - searchField : TextField
+    - searchButton : Button
+    
+    ' Attributi (Campi FXML: Form di modifica)
+    - titleField : TextField
+    - authorsField : TextField
+    - publicationYearField : TextField
+    - ISBNField : TextField
+    - availableCopiesField : TextField
+    - confirmButton : Button
+    
+    ' Attributi (Logica Interna)
+    - model : Model
+    - currentBook : Book
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + initialize(): void
+    + initData(book: Book): void
+    + search(event: ActionEvent): void
+    + confirm(event: ActionEvent): void
+    + backPage(event: ActionEvent): void
+    
+    ' Metodi Privati di Utility
+    - setFieldsEditable(editable: boolean): void
+    - clearFields(): void
+    - populateFields(book: Book): void
+}
+
+class modifyUserController {
+    ' Attributi (Campi FXML per Ricerca e Contenitori)
+    - searchPane : AnchorPane
+    - modifyPane : AnchorPane
+    - mainContainer : VBox
+    - searchField : TextField
+    - searchButton : Button
+    - userTableView : TableView<User>
+    - nomeColumn : TableColumn<User, String>
+    - cognomeColumn : TableColumn<User, String>
+    - matricolaColumn : TableColumn<User, String>
+    - labelMessageSearch : Label
+    
+    ' Attributi (Campi FXML per Modifica)
+    - nameField : TextField
+    - surnameField : TextField
+    - emailField : TextField
+    - numberidField : TextField
+    - confirmButton : Button
+    - prestititenteButton : Button
+    - labelMessageModify : Label
+    
+    ' Attributi (Logica Interna)
+    - risultato : User
+    - list : List<User>
+    - observableList : ObservableList<User>
+    - model : Model
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + initialize(): void
+    + search(): void
+    + confirm(): void
+    + backHomepage(): void
+    + SearchPage(): void
+    
+    ' Metodi Privati di Utility
+    - gestisciSelezione(userSelezionato: User): void
+}
+
+class modifycredentialController {
+    ' Attributi (Campi FXML e Modello)
+    - librarian : Librarian
+    - pin : TextField
+    - usernameModified : TextField
+    - passwordModified : TextField
+    - confirmModified : Button
+    - labelMessage : Label
+    - backButton : Button
+    
+    ' Metodi Pubblici/Handler
+    + initialize(): void
+    - handleModify(): void
+    - handleBack(): void
+}
+
+class searchBookController implements Initializable {
+    ' Attributi (Campi FXML: Ricerca e Controlli)
+    - searchField : TextField
+    - searchButton : Button
+    - backButton : Button
+    - labelMessage : Label
+    
+    ' Attributi (Campi FXML: TableView)
+    - bookTableView : TableView<Book>
+    - titleColumn : TableColumn<Book, String>
+    - authorsColumn : TableColumn<Book, String>
+    - publicationYearColumn : TableColumn<Book, Integer>
+    - ISBNColumn : TableColumn<Book, String>
+    - copiesColumn : TableColumn<Book, Integer>
+    
+    ' Attributi (Logica Interna)
+    - model : Model
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + initialize(url: URL, rb: ResourceBundle): void
+    + search(event: ActionEvent): void
+    + backPage(event: ActionEvent): void
+}
+
+class searchLoanController {
+    ' Attributi (Campi FXML: Ricerca e Controlli)
+    - userSearchField : TextField
+    - bookSearchField : TextField
+    - labelMessage : Label
+    - confirmButton : Button
+    
+    ' Attributi (Campi FXML: TableView)
+    - loanTableView : TableView<Loan>
+    - nomeColumn : TableColumn<Loan, String>
+    - cognomeColumn : TableColumn<Loan, String>
+    - matricolaColumn : TableColumn<Loan, String>
+    - autoriColumn : TableColumn<Loan, String>
+    - titoloColumn : TableColumn<Loan, String>
+    - isbnColumn : TableColumn<Loan, String>
+    - duedateColumn : TableColumn<Loan, LocalDate>
+    
+    ' Attributi (Logica Interna)
+    - userInput : String
+    - bookInput : String
+    - loanManagement : LoanManagement
+    - model : Model
+    - loanList : List<Loan>
+    - loan : Loan
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + initialize(): void
+    + search(): void
+    + backPage(): void
+}
+
+class searchUserController {
+    ' Attributi (Campi FXML: Ricerca e Controlli)
+    - searchField : TextField
+    - searchButtonu : Button
+    - labelMessage : Label
+    - backButton : Button
+    
+    ' Attributi (Campi FXML: TableView)
+    - userTableViewricerca : TableView<User>
+    - nomeColumn : TableColumn<User, String>
+    - cognomeColumn : TableColumn<User, String>
+    - matricolaColumn : TableColumn<User, String>
+    - emailColumn : TableColumn<User, String>
+    - mapColumn : TableColumn<User, String>
+    
+    ' Attributi (Logica Interna)
+    - userList : ObservableList<User>
+    - model : Model
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + initialize(): void
+    + search(): void
+    + backPage(): void
+}
+
+class viewBookController implements Initializable {
+    ' Attributi (Campi FXML: Controlli e TableView)
+    - backButton : Button
+    - bookTableView : TableView<Book>
+    
+    ' Attributi (Campi FXML: Colonne)
+    - titoloColumn : TableColumn<Book, String>
+    - autoriColumn : TableColumn<Book, String>
+    - annoPubblicazioneColumn : TableColumn<Book, String>
+    - isbnColumn : TableColumn<Book, String>
+    - copieDisponibiliColumn : TableColumn<Book, Integer>
+    
+    ' Attributi (Logica Interna)
+    - model : Model
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + initialize(url: URL, rb: ResourceBundle): void
+    + backPage(event: ActionEvent): void
+    
+    ' Metodi Privati di Utility
+    - loadAllBooks(): void
+}
+
+class viewUserController {
+    ' Attributi (Campi FXML: Controlli e TableView)
+    - userTableView : TableView<User>
+    - backButton : Button
+    
+    ' Attributi (Campi FXML: Colonne)
+    - nomeColumn : TableColumn<User, String>
+    - cognomeColumn : TableColumn<User, String>
+    - matricolaColumn : TableColumn<User, String>
+    - emailColumn : TableColumn<User, String>
+    - mapColumn : TableColumn<User, String>
+    
+    ' Attributi (Logica Interna)
+    - model : Model
+    
+    ' Metodi Pubblici/Handler
+    + setModel(model: Model): void
+    + initialize(): void
+    + backPage(): void
+}
 
 ' === Ereditarietà e implementazione ===
 View --|> Application
