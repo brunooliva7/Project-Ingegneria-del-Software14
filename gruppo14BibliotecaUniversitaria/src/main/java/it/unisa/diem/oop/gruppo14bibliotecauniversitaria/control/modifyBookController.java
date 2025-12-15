@@ -174,8 +174,16 @@ public void confirm(ActionEvent event) {
             labelMessage.setStyle("-fx-text-fill: red;");
             return;
         }
+        
+        int annoValue = Integer.parseInt(nuovoAnnoStr);
+        if (annoValue < 0 || annoValue > 2025) {
+            labelMessage.setText("Errore: L'anno di pubblicazione deve essere compreso tra 0 e 2025.");
+            labelMessage.setStyle("-fx-text-fill: red;");
+            return;
+        }
+        
         if (nuoveCopie < 0) {
-             labelMessage.setText("Errore: Il numero di copie disponibili non può essere negativo.");
+            labelMessage.setText("Errore: Il numero di copie disponibili non può essere negativo.");
             labelMessage.setStyle("-fx-text-fill: red;");
             return;
         }

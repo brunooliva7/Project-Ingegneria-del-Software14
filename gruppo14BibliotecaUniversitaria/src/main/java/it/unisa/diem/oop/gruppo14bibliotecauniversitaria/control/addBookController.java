@@ -77,6 +77,15 @@ public class addBookController {
                 return;
             }
             
+            int annoValue = Integer.parseInt(anno);
+            
+            // Verifica che l'anno sia nel range [0, 2025]
+            if (annoValue < 0 || annoValue > 2025) {
+                labelErrore.setText("Errore: L'anno di pubblicazione deve essere compreso tra 0 e 2025.");
+                labelErrore.setStyle("-fx-text-fill: red;");
+                return;
+            }
+            
             // Conversione delle COPIE (da String a int)
             copieDisponibili = Integer.parseInt(availableCopies.getText());
             if (copieDisponibili < 0) {
