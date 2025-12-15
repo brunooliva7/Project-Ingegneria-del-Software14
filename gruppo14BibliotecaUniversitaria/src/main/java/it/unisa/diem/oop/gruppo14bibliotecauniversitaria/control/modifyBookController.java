@@ -96,6 +96,7 @@ public class modifyBookController {
         authorsField.setStyle(style);
         publicationYearField.setStyle(style);
         availableCopiesField.setStyle(style);
+        ISBNField.setStyle(style);
     }
     
     /**
