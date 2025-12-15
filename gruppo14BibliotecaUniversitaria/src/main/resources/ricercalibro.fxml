@@ -70,9 +70,9 @@
                         <columns>
                             <TableColumn fx:id="titleColumn" text="Titolo" prefWidth="250"/>
                             <TableColumn fx:id="authorsColumn" text="Autori" prefWidth="180"/>
-                            <TableColumn fx:id="publicationYearColumn" text="Anno Pubbl." prefWidth="100"/>
+                            <TableColumn fx:id="publicationYearColumn" text="Anno di pubblicazione" prefWidth="100"/>
                             <TableColumn fx:id="ISBNColumn" text="ISBN" prefWidth="120"/>
-                            <TableColumn fx:id="copiesColumn" text="Copie Disp." prefWidth="100"/>
+                            <TableColumn fx:id="copiesColumn" text="Copie disponibili" prefWidth="100"/>
                         </columns>
                     </TableView>
                     
