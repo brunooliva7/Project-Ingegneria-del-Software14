@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.auth.Librarian;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,58 +17,52 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
- * @author bruno
+ * Controller per la schermata di modifica credenziali del bibliotecario.
  */
 public class modifycredentialController {
-    
-    Librarian librarian = new Librarian();
-    
+
+    private Librarian librarian = new Librarian();
+
+    @FXML private TextField pin;
+    @FXML private TextField usernameModified;
+    @FXML private TextField passwordModified;
+    @FXML private Button confirmModified;
+    @FXML private Label labelMessage;
+    @FXML private Button backButton;
+
     @FXML
-    private TextField pin;
-    
-    @FXML
-    private TextField usernameModified;
-    
-    @FXML
-    private TextField passwordModified;
-    
-    @FXML
-    private Button confirmModified;
-    
-    @FXML 
-    private Label labelMessage;
-    
-    @FXML
-    private Button backButton;
-    
-    @FXML 
-    public void initialize(){
+    public void initialize() {
+        // Disabilita password finché pin è vuoto o username disabilitato
         passwordModified.disableProperty().bind(pin.textProperty().isEmpty().or(usernameModified.disableProperty()));
-        
-        confirmModified.disableProperty().bind(usernameModified.textProperty().isEmpty().or(passwordModified.textProperty().isEmpty()).or(pin.disableProperty()));
+
+        // Disabilita conferma finché uno dei campi è vuoto
+        confirmModified.disableProperty().bind(
+            usernameModified.textProperty().isEmpty()
+                .or(passwordModified.textProperty().isEmpty())
+                .or(pin.disableProperty())
+        );
     }
-    
+
+    /**
+     * Gestisce la modifica delle credenziali.
+     */
     @FXML
-    private void handleModify(){
+    private void handleModify() {
         String pinString = pin.getText();
-        
         String username = usernameModified.getText();
-        
         String password = passwordModified.getText();
-        
-        if(pinString.compareTo("0061270") == 0){
-        librarian.modifyCredentials(username, password);
-        labelMessage.setText("Credenziali Modificate!");
-            
+
+        if ("0061270".equals(pinString)) {
+            librarian.modifyCredentials(username, password);
+            labelMessage.setText("Credenziali Modificate!");
+        } else {
+            labelMessage.setText("Pin non corretto");
         }
-        
-        else {
-          labelMessage.setText("Pin non corretto");
-        }
-        
-    } 
-    
+    }
+
+    /**
+     * Torna alla schermata di login.
+     */
     @FXML
     private void handleBack() {
         try {
@@ -78,9 +72,8 @@ public class modifycredentialController {
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
-            e.printStackTrace(); // utile per debug
+            e.printStackTrace();
             labelMessage.setText("Errore nel caricamento della login page");
         }
-}   
+    }
 }
-
