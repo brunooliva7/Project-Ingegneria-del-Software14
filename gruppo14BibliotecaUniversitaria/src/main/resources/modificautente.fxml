@@ -39,7 +39,7 @@
 
                         <!-- Ricerca -->
                         <HBox spacing="10">
-                            <TextField fx:id="searchField" promptText="Cerca utente per nome o matricola" HBox.hgrow="ALWAYS"/>
+                            <TextField fx:id="searchField" promptText="Cerca utente per cognome o matricola" HBox.hgrow="ALWAYS"/>
                             <Button fx:id="searchButton" text="Cerca" onAction="#search" />
                         </HBox>
 

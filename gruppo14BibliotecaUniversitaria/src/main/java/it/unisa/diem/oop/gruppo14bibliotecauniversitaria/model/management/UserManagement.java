@@ -89,11 +89,17 @@ public class UserManagement implements Functionality<User>,Serializable{
          { throw new IllegalArgumentException();
             // esce senza aggiungere ritornando che non è andato a buon fine l'inserimento lanciando l'eccezione che specifica che l'argomento non è valido 
          }
-    if(list.add(u)){
-      FileManager.writeToTextFileObject(list, this.userDatabase); //aggiorno il file d'archivio 
-       return true;}
-         return false;
-                        }
+          // Controlla se esiste già un user con lo stesso numberId
+         for (User existing : list) {
+           if (existing.equals(u)) {
+            return false; // già presente
+        }}
+         if(list.add(u)){
+         FileManager.writeToTextFileObject(list, this.userDatabase); //aggiorno il file d'archivio 
+         return true;}
+         
+         return false; 
+                        } 
     
     
     /**
@@ -108,7 +114,7 @@ public class UserManagement implements Functionality<User>,Serializable{
          { throw new IllegalArgumentException();
             // esce senza rimuovere ritornando che non è andato a buon fine l'operazione lanciando l'eccezione che specifica che l'argomento non è valido 
          } 
-        Iterator<User> iter = list.iterator(); 
+         Iterator<User> iter = list.iterator(); 
          while(iter.hasNext()) {  //scorro la lista di utenti
          User utente = iter.next();
          if(utente.equals(u)) {  //il controllo dell'uguaglianza va fatto sulla matricola(campo univoco dell'user) quindi uso direttamente equals() di User dato che è implementato in questo modo 

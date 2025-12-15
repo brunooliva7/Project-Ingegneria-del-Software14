@@ -68,8 +68,8 @@ public class addUserController {
             email.clear();
             numberID.clear();
         }
-        else{ labelErrore.setText("Errore nell'inserimento");
-            labelErrore.setStyle("-fx-text-fill: red;");
+        else{ labelErrore.setText("Errore nell'inserimento oppure matricola già esistente");
+              labelErrore.setStyle("-fx-text-fill: red;");
         }
     }
     

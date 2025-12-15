@@ -159,7 +159,7 @@ public class View extends Application {
         
         Scene scene = new Scene(fxmlLoader.load());
         
-        mainStage.setTitle("VisualizzaUtenti");
+        mainStage.setTitle("RicercaUtente");
         mainStage.setScene(scene);
         
         mainStage.setResizable(true);
