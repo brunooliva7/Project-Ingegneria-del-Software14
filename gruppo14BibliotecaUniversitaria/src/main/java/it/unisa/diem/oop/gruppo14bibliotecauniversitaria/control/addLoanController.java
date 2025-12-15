@@ -80,18 +80,28 @@ public class addLoanController {
          loan = new Loan(book,user,duedate);
          
          if(user.getBooksOnloan().size() <= 3){
-             if(book.getAvailableCopies()==0){
-            if(loanManagement.add(loan)){
-                labelMessage.setText("Modifica Riuscita");
-                labelMessage.setStyle("-fx-text-fill: green;");
-                book.setAvailableCopies(book.getAvailableCopies() - 1);
+             if(book.getAvailableCopies() > 0){
+                 if(this.duedate.compareTo(LocalDate.now()) > 0){
+                    if(loanManagement.add(loan)){
+                        labelMessage.setText("Modifica Riuscita");
+                        labelMessage.setStyle("-fx-text-fill: green;");
+                        book.setAvailableCopies(book.getAvailableCopies() - 1);
+                    }
+
+                    else{
+                        labelMessage.setText("Modifica Riuscita");
+                        labelMessage.setStyle("-fx-text-fill: green;");
+                    }
+                }
+                else{
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("ERRORE");
+                    alert.setHeaderText("Data di Restituzione");
+                    alert.setContentText("La data di restituzione inserita non è corretta");
+
+                    alert.showAndWait(); 
+                 }
             }
-         
-            else{
-                labelMessage.setText("Modifica Riuscita");
-                labelMessage.setStyle("-fx-text-fill: green;");
-            }
-          }
              
              else{
                   Alert alert = new Alert(AlertType.INFORMATION);

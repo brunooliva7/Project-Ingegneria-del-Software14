@@ -7,6 +7,7 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
@@ -63,13 +64,12 @@ public class deleteLoanController {
     @FXML
     private Button confirmButton;
     
-     @FXML
-    private Label labelMeassage;
      
      private String userInput;
      private String bookInput;
      
      private LoanManagement loanManagement;
+     private BookManagement bookManagement;
      
      private List<Loan> loanList;
      
@@ -107,6 +107,11 @@ public class deleteLoanController {
             loanSelezionato.getBook().setAvailableCopies(loanSelezionato.getBook().getAvailableCopies()+1);
             
            if(loanManagement.remove(loanSelezionato)){
+               
+               this.bookManagement = new BookManagement();
+               
+               this.bookManagement.update(this.loanSelezionato.getBook(), this.loanSelezionato.getBook());
+               
                labelMessage.setText("Prestito rimosso");
                 labelMessage.setStyle("-fx-text-fill: green;");
            }
