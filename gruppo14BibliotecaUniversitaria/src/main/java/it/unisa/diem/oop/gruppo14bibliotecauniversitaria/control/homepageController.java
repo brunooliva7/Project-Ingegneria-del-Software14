@@ -6,7 +6,6 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
