@@ -148,57 +148,60 @@ public class modifyBookController {
      * Gestisce l'azione del pulsante "Conferma modifiche".
      * Aggiorna il libro nel gestore.
      */
-    @FXML
-    public void confirm(ActionEvent event) {
-        if (currentBook == null) {
-            labelMessage.setText("Errore: Nessun libro selezionato da modificare.");
+   @FXML
+public void confirm(ActionEvent event) {
+    if (currentBook == null) {
+        labelMessage.setText("Errore: Nessun libro selezionato da modificare.");
+        labelMessage.setStyle("-fx-text-fill: red;");
+        return;
+    }
+    
+    // Memorizziamo il riferimento al libro originale prima delle modifiche
+    // (Questo sarà il nostro 'entity1')
+    Book originalBook = this.currentBook; 
+    
+    try {
+        // 1. Recupero i dati modificati dai campi
+        String nuovoTitolo = titleField.getText().trim();
+        String nuoviAutori = authorsField.getText().trim();
+        String nuovoAnnoStr = publicationYearField.getText().trim();
+        String isbnOriginale = ISBNField.getText().trim(); // L'ISBN rimane l'identificatore
+        int nuoveCopie = Integer.parseInt(availableCopiesField.getText().trim());
+        
+        // 2. Validazione minima
+        if (!nuovoAnnoStr.matches("\\d{4}")) {
+            labelMessage.setText("Errore: Anno di pubblicazione deve essere composto esattamente da 4 cifre.");
+            labelMessage.setStyle("-fx-text-fill: red;");
+            return;
+        }
+        if (nuoveCopie < 0) {
+             labelMessage.setText("Errore: Il numero di copie disponibili non può essere negativo.");
             labelMessage.setStyle("-fx-text-fill: red;");
             return;
         }
         
-        try {
-            // 1. Recupero i dati modificati dai campi
-            String nuovoTitolo = titleField.getText().trim();
-            String nuoviAutori = authorsField.getText().trim();
-            String nuovoAnnoStr = publicationYearField.getText().trim();
-            int nuoveCopie = Integer.parseInt(availableCopiesField.getText().trim());
-            
-            // 2. Validazione minima
-            if (!nuovoAnnoStr.matches("\\d{4}")) {
-                labelMessage.setText("Errore: Anno di pubblicazione deve essere composto esattamente da 4 cifre.");
-                labelMessage.setStyle("-fx-text-fill: red;");
-                return;
-            }
-            if (nuoveCopie < 0) {
-                 labelMessage.setText("Errore: Il numero di copie disponibili non può essere negativo.");
-                labelMessage.setStyle("-fx-text-fill: red;");
-                return;
-            }
-            
-            // 3. Aggiornamento dell'oggetto corrente
-            currentBook.setTitle(nuovoTitolo);
-            currentBook.setAuthors(nuoviAutori);
-            currentBook.setPublicationYear(nuovoAnnoStr);
-            currentBook.setAvailableCopies(nuoveCopie);
-            
-            // 4. Salva le modifiche tramite il gestore
-            if (bookManager.update(currentBook)) {
-                labelMessage.setText("✅ Modifiche al libro '" + nuovoTitolo + "' salvate con successo!");
-                labelMessage.setStyle("-fx-text-fill: green;");
-                clearFields(); // Resetta l'interfaccia dopo il successo
-            } else {
-                labelMessage.setText("❌ Errore: Aggiornamento del libro fallito (ad esempio, ISBN non trovato nel database).");
-                labelMessage.setStyle("-fx-text-fill: red;");
-            }
-            
-        } catch (NumberFormatException e) {
-            labelMessage.setText("Errore: Copie disponibili deve essere un numero intero valido.");
-            labelMessage.setStyle("-fx-text-fill: red;");
-        } catch (Exception e) {
-            labelMessage.setText("Errore generico durante la modifica: " + e.getMessage());
+        // 3. Creazione di una NUOVA entità Book con i dati modificati (Questo sarà il nostro 'entity2')
+        // Usiamo l'ISBN originale come identificatore chiave.
+        Book updatedBook = new Book(nuovoTitolo, nuoviAutori, nuovoAnnoStr, isbnOriginale, nuoveCopie);
+        
+        // 4. Salva le modifiche tramite il gestore, utilizzando la firma (vecchio, nuovo)
+        if (bookManager.update(originalBook, updatedBook)) {
+            labelMessage.setText("✅ Modifiche al libro '" + updatedBook.getTitle() + "' salvate con successo!");
+            labelMessage.setStyle("-fx-text-fill: green;");
+            clearFields(); // Resetta l'interfaccia dopo il successo
+        } else {
+            labelMessage.setText("❌ Errore: Aggiornamento del libro fallito (ad esempio, ISBN non trovato o dati non validi nel gestore).");
             labelMessage.setStyle("-fx-text-fill: red;");
         }
+        
+    } catch (NumberFormatException e) {
+        labelMessage.setText("Errore: Copie disponibili deve essere un numero intero valido.");
+        labelMessage.setStyle("-fx-text-fill: red;");
+    } catch (Exception e) {
+        labelMessage.setText("Errore generico durante la modifica: " + e.getMessage());
+        labelMessage.setStyle("-fx-text-fill: red;");
     }
+}
     
     /**
      * Gestisce il ritorno alla Home Page.
