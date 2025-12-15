@@ -264,24 +264,49 @@ public class View extends Application {
         
     }
     
-    public static void updateBook() throws IOException {
-        
+    public static void updateBook(Book bookToModify) throws IOException {
+    
+        // 1. Crea il loader e carica il file FXML
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificalibro.fxml"));
-        // Ottengo il controller  e passo il modello
-           modifyBookController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
-        
+        Parent root = fxmlLoader.load(); // Carichiamo il Parent per poter accedere al controller
+
+        // 2. Ottieni il controller DOPO che l'FXML è stato caricato
+        modifyBookController controller = fxmlLoader.getController();
+
+        // 3. INIEZIONE DEL DATO: Chiama il metodo initData del controller
+        if (controller != null) {
+            controller.initData(bookToModify); 
+        }
+
+        // 4. Crea la Scene con il Parent caricato
+        Scene scene = new Scene(root);
+
+        // 5. Configurazione dello Stage (la tua logica originale)
         mainStage.setTitle("Modifica Libro");
         mainStage.setScene(scene);
-        
-        mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
-        mainStage.setMaximized(true);
-        
-        mainStage.show();  
-        
+
+        // NOTA: Questa riga è ridondante se l'ultima è true
+        // mainStage.setResizable(true); 
+        // mainStage.setMaximized(false); 
+        mainStage.setMaximized(true); // Mantiene la finestra massimizzata (come da tuo codice)
+
+        mainStage.show();
     }
+        public static void updateBook() throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificalibro.fxml"));
+        Parent root = fxmlLoader.load();
+
+        // Non otteniamo il controller né chiamiamo initData(), perché non abbiamo dati da iniettare.
+
+        Scene scene = new Scene(root);
+
+        // (Ripristina la tua logica di visualizzazione originale)
+        mainStage.setTitle("Modifica Libro");
+        mainStage.setScene(scene);
+        mainStage.setMaximized(true); 
+        mainStage.show();
+}
     
     public static void viewBooks() throws IOException {
         
