@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.auth.Librarian;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
+import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -64,16 +66,7 @@ public class modifycredentialController {
      * Torna alla schermata di login.
      */
     @FXML
-    private void handleBack() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            labelMessage.setText("Errore nel caricamento della login page");
-        }
+    private void handleBack() throws IOException {
+        View.Login();
     }
 }

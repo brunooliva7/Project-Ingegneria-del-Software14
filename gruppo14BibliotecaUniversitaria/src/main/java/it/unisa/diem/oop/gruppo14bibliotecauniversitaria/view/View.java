@@ -75,6 +75,22 @@ public class View extends Application {
         mainStage.show();
     }
     
+    // Aggiungi questo alla classe View.java
+    public static void Login() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("Login");
+        mainStage.setScene(scene);
+        
+        // Full Screen Logic: Ecco le righe che forzano l'ingrandimento quando TORNI indietro
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false);
+        mainStage.setMaximized(true);
+        
+        mainStage.show();
+    }
+    
     public static void Modify() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modifyPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
