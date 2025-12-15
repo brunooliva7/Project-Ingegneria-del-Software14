@@ -52,20 +52,30 @@ public class deleteBookController implements Initializable {
     // Gestione dei dati
     private Model model;
       
-    
+    /**
+     * @brief Imposta l'istanza del Model.
+     * 
+     * @param model L'istanza del Model dell'applicazione.
+     */
     public void setModel(Model model) {
     this.model = model;
     }
 
     /**
-     * Inizializza il controller.
+     * @brief Inizializza il controller.
+     * 
+     * Configura le CellValueFactory delle colonne della TableView, associa i gestori di eventi
+     * ai pulsanti e imposta un Listener per abilitare/disabilitare il pulsante di eliminazione.
+     * 
+     * @param url Posizione relativa del file FXML.
+     * @param rb Risorse specifiche per la localizzazione.
      */
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
         // Configurazione delle colonne della TableView
         titoloColumn.setCellValueFactory(new PropertyValueFactory<>("title")); 
         autoriColumn.setCellValueFactory(new PropertyValueFactory<>("authors")); 
-        dataColumn.setCellValueFactory(new PropertyValueFactory<>("publicationDate")); 
+        dataColumn.setCellValueFactory(new PropertyValueFactory<>("publicationYear")); 
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("ISBN")); 
         copieColumn.setCellValueFactory(new PropertyValueFactory<>("availableCopies")); 
 
@@ -77,30 +87,35 @@ public class deleteBookController implements Initializable {
         // Disabilita il pulsante Elimina all'avvio
         deleteBookButton.setDisable(true);
         
-        // Ascolta la selezione della riga per abilitare il pulsante Elimina
+        // Listener: Abilita/Disabilita il pulsante di eliminazione in base alla selezione della riga
         bookTableViewricerca.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             deleteBookButton.setDisable(newSelection == null);
         });
     }
 
     /**
-     * Carica tutti i libri nella TableView all'avvio o dopo una ricerca vuota.
+     * @brief Carica tutti i libri dal catalogo nella TableView.
+     * 
+     * Utilizzato all'avvio o quando il campo di ricerca è vuoto.
      */
     private void loadAllBooks() {
         if (model == null) return;
         
-        // 1. Ottiene la lista dei libri dal Model
+        // Ottiene la lista dei libri dal Model
         List<Book> allBooks = new java.util.ArrayList<>(model.getBookManagement().getCatalogue()); 
         
-        // 2. Imposta l'elenco osservabile DIRETTAMENTE sulla TableView
-        // La TableView contiene ora la sua propria lista osservabile interna.
+        // Imposta l'elenco osservabile sulla TableView
         bookTableViewricerca.setItems(FXCollections.observableArrayList(allBooks));
     }
     
     /**
-    * Gestisce l'azione del pulsante di ricerca.
-    * Ora utilizza il metodo search(Book b) di BookManagement.
-    */
+     * @brief Gestisce l'azione di ricerca (pulsante "Cerca").
+     * 
+     * Se la query è vuota, carica tutti i libri. Altrimenti, esegue la ricerca
+     * parziale tramite il Model e aggiorna la TableView con i risultati.
+     *
+     * @param event L'evento di azione.
+     */
     @FXML
     private void handleSearchAction(ActionEvent event) {
         if (model == null) return;
@@ -112,14 +127,14 @@ public class deleteBookController implements Initializable {
             return;
         }
 
-        // CREA UN OGGETTO BOOK PARZIALE
-        Book partialBook = new Book(query); 
-        // Devi usare il costruttore di Book appropriato per Title, Authors, Year, ISBN, Copies
+        // Crea un oggetto book parziale
+        Book partialBook = new Book(query);
 
         try {
+            // Chiama il Model per eseguire la ricerca
             List<Book> results = model.getBookManagement().search(partialBook); 
 
-            // Imposta i risultati DIRETTAMENTE sulla TableView
+            // Imposta i risultati direttamente sulla TableView
             bookTableViewricerca.setItems(FXCollections.observableArrayList(results));
 
             if (results.isEmpty()) {
@@ -131,12 +146,18 @@ public class deleteBookController implements Initializable {
     }
 
     /**
-     * Gestisce l'azione di eliminazione del libro selezionato.
+     * @brief Gestisce l'azione di eliminazione (pulsante "Elimina").
+     * 
+     * Rimuove il libro selezionato dalla TableView e chiama il Model per rimuoverlo
+     * dal catalogo. Fornisce feedback all'utente tramite Alert.
+     * 
+     * @param event L'evento di azione.
      */
     @FXML
     private void handleDeleteAction(ActionEvent event) {
         if (model == null) return;
         
+        // Ottiene il libro selezionato nella TableView
         Book selectedBook = bookTableViewricerca.getSelectionModel().getSelectedItem();
 
         if (selectedBook == null) {
@@ -144,22 +165,25 @@ public class deleteBookController implements Initializable {
             return;
         }
 
-        // 1. Chiama il Model per l'eliminazione dal catalogo principale
+        // Chiama il Model per l'eliminazione dal catalogo principale
         if (model.getBookManagement().remove(selectedBook)) { 
             showAlert("Successo", "Libro eliminato: " + selectedBook.getTitle(), AlertType.INFORMATION);
 
-            // 2. AGGIORNAMENTO VISTA: Rimuove l'elemento dalla lista osservabile
-            //    accedendo alla lista interna della TableView.
+            // Rimuove l'elemento dalla lista osservabile associata alla TableView.
             bookTableViewricerca.getItems().remove(selectedBook);
 
         } else {
+            //Fallimento
             showAlert("Errore", "Impossibile eliminare il libro. Potrebbe essere in prestito.", AlertType.ERROR);
         }
     }
 
     /**
-     * Gestisce il ritorno alla Home Page.
-     * Deve gestire l'IOException internamente perché associato tramite setOnAction.
+     * @brief Gestisce il ritorno alla Home Page.
+     * 
+     * Carica la Home Page (View.Homepage()).
+     * 
+     * @param event L'evento di azione.
      */
     @FXML
     private void backPage(ActionEvent event){ 
@@ -171,7 +195,12 @@ public class deleteBookController implements Initializable {
     }
     
     /**
-     * Metodo helper per mostrare gli alert.
+     * @brief Metodo helper per mostrare una finestra di alert all'utente.
+     * 
+     * @param title Titolo della finestra di alert.
+     * @param message Contenuto del messaggio visualizzato.
+     * @param type Tipo di alert.
+     * 
      */
     @FXML
     private void showAlert(String title, String message, AlertType type) {

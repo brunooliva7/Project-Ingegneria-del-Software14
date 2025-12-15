@@ -19,16 +19,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
- * FXML Controller class per la modifica dei dati di un Libro.
- * Utilizza una singola schermata per ricerca e form di modifica.
+ * FXML Controller class
+ *
+ * @author maramariano
  */
 public class modifyBookController {
 
-    // Campi definiti nell'FXML
+    //Campi FXML: Ricerca
     @FXML private Button backButton;
     @FXML private Label labelMessage;
     @FXML private TextField searchField;
     @FXML private Button searchButton;
+    
+    //Campi FXML: Form di modifica
     @FXML private TextField titleField;
     @FXML private TextField authorsField;
     @FXML private TextField publicationYearField;
@@ -37,16 +40,23 @@ public class modifyBookController {
     @FXML private Button confirmButton;
 
     // Logica interna
-    private Model model; // NUOVO: Riferimento al Model
-    private Book currentBook = null; // Memorizza il libro attualmente caricato per la modifica
+    private Model model; //Riferimento al Model
+    private Book currentBook = null; // Memorizza il riferimento al libro originale trovato
 
-    // NUOVO: Metodo per l'iniezione del Model
+    /**
+     * @brief Imposta l'istanza del Model.
+     * 
+     * @param model L'istanza del Model dell'applicazione.
+     */
     public void setModel(Model model) {
         this.model = model;
     }
 
     /**
-     * Inizializzazione del controller.
+     * @brief Metodo di inizializzazione del Controller.
+     * 
+     * Configura lo stato iniziale dell'interfaccia: disabilita i campi di modifica, 
+     * il pulsante di conferma e imposta il data binding per la ricerca.
      */
     @FXML
     public void initialize() {
@@ -56,36 +66,42 @@ public class modifyBookController {
         // Il bottone di conferma è disabilitato finché non c'è un libro da modificare
         confirmButton.setDisable(true);
         
-        // Collega il bottone di ricerca al campo di testo:
+        // Collega il bottone di ricerca al campo di testo: si abilita solo se il campo non è vuoto
         searchButton.disableProperty().bind(searchField.textProperty().isEmpty());
         
         labelMessage.setText("Inserisci ISBN, titolo o autore per cercare il libro da modificare.");
         labelMessage.setStyle("-fx-text-fill: black;");
     }
     
+    /**
+     * @brief Popola il form con i dati di un libro ricevuto da una vista precedente.
+     * 
+     * Utilizzato se si arriva a questa schermata selezionando un libro da una TableView esterna.
+     * 
+     * @param book L'oggetto Book da visualizzare e modificare.
+     */
     public void initData(Book book) {
     if (book != null) {
         this.currentBook = book;
         
-        // 1. Popola i campi con i dati del libro
+        // Popola i campi con i dati del libro
         populateFields(book); 
         
-        // 2. Assicurati che il campo di ricerca sia chiaro
+        // Per assicurarsi che il campo di ricerca sia chiaro
         searchField.clear(); 
-        
-        // 3. Il pulsante di conferma è abilitato, il form è modificabile
-        //    (Questo è gestito da populateFields/setFieldsEditable)
-        
-        // 4. Messaggio per l'utente
-        labelMessage.setText("Libro caricato tramite doppio click. Modifica i campi o cerca un altro libro.");
+       
+        // Messaggio per l'utente
+        labelMessage.setText("Libro caricato tramite selezione. Modifica i campi e conferma.");
         labelMessage.setStyle("-fx-text-fill: #10B981;"); 
         
-        // La ricerca rimane disponibile
+ 
     }
 }
     
     /**
-     * Helper: Imposta lo stato di modificabilità dei campi e lo stile.
+     * @brief Helper: Imposta lo stato di modificabilità dei campi e applica uno stile visivo.
+     * 
+     * @param editable Lo stato booleano (true per modificabile, false altrimenti).
      */
     private void setFieldsEditable(boolean editable) {
         // L'ISBN non dovrebbe mai essere modificabile, è l'ID
@@ -96,17 +112,17 @@ public class modifyBookController {
         publicationYearField.setEditable(editable);
         availableCopiesField.setEditable(editable);
         
-        // Rimuove lo stile di disabilitazione per i campi modificabili
+        // Rimozione dello stile di disabilitazione per i campi modificabili
         String style = editable ? "-fx-border-color: #22C55E;" : "-fx-border-color: #E5E7EB;";
         titleField.setStyle(style);
         authorsField.setStyle(style);
         publicationYearField.setStyle(style);
         availableCopiesField.setStyle(style);
-        ISBNField.setStyle(style);
+        ISBNField.setStyle(style); // L'ISBN resta non editabile, ma riceve lo stile
     }
     
     /**
-     * Pulisce tutti i campi e resetta lo stato.
+     * @brief Pulisce tutti i campi del form e resetta lo stato interno del controller.
      */
     private void clearFields() {
         titleField.clear();
@@ -120,7 +136,11 @@ public class modifyBookController {
     }
     
     /**
-     * Popola i campi con i dati del Libro trovato.
+     * @brief Popola i campi del form con i dati del Libro fornito.
+     * 
+     * Abilita i campi di modifica e il pulsante di conferma.
+     * 
+     * @param book L'oggetto Book i cui dati devono essere visualizzati.
      */
     private void populateFields(Book book) {
         titleField.setText(book.getTitle());
@@ -133,8 +153,12 @@ public class modifyBookController {
     }
 
     /**
-     * Gestisce l'azione del pulsante di ricerca.
-     * Cerca il libro e, se trovato, popola il form.
+     * @brief Gestisce l'azione del pulsante di ricerca.
+     * 
+     * Utilizza la query per cercare un libro tramite il Model. Se trovato, 
+     * ne carica i dati nel form di modifica. Se la ricerca restituisce più risultati, viene considerato solo il primo.
+     * 
+     * @param event L'evento di azione.
      */
     @FXML
     public void search(ActionEvent event) {
@@ -152,9 +176,10 @@ public class modifyBookController {
         if (query.isEmpty()) return;
 
         try {
+            // Creazione del Book parziale
             Book partialBook = new Book(query);
             
-            // 🚀 CHIAMATA MVC: Delega la ricerca al Model
+            //Chiamata MVC: Delega la ricerca al Model
             List<Book> results = model.getBookManagement().search(partialBook);
             
             if (results.isEmpty()) {
@@ -177,8 +202,11 @@ public class modifyBookController {
     }
     
     /**
-     * Gestisce l'azione del pulsante "Conferma modifiche".
-     * Aggiorna il libro nel gestore.
+     * @brief Gestisce l'azione del pulsante "Conferma modifiche".
+     * 
+     * Esegue la validazione dei dati modificati e chiama il Model per aggiornare il libro nel gestore.
+     * 
+     * @param event L'evento di azione.
      */
    @FXML
     public void confirm(ActionEvent event) {
@@ -196,30 +224,46 @@ public class modifyBookController {
         Book originalBook = this.currentBook; 
 
         try {
-            // ... (1. Recupero dati e 2. Validazione - Logica omessa, è corretta) ...
+            // Recupero dati e validazione
             String nuovoTitolo = titleField.getText().trim();
             String nuoviAutori = authorsField.getText().trim();
             String nuovoAnnoStr = publicationYearField.getText().trim();
             String isbnOriginale = ISBNField.getText().trim(); 
-            int nuoveCopie = Integer.parseInt(availableCopiesField.getText().trim());
             
-            // 2. Validazione (omessa per brevità, è nel codice originale)
-            // ... (Validazione 4 cifre, range anno, copie non negative) ...
-            if (!nuovoAnnoStr.matches("\\d{4}")) { /* ... */ return; }
-            int annoValue = Integer.parseInt(nuovoAnnoStr);
-            if (annoValue < 0 || annoValue > 2025) { /* ... */ return; }
-            if (nuoveCopie < 0) { /* ... */ return; }
+            int nuoveCopie;
+            int annoValue;
+            
+            // Validazione Anno
+            if (!nuovoAnnoStr.matches("\\d{4}")) { 
+                 labelMessage.setText("Errore: Anno di pubblicazione deve essere composto esattamente da 4 cifre.");
+                 labelMessage.setStyle("-fx-text-fill: red;");
+                 return;
+            }
+            annoValue = Integer.parseInt(nuovoAnnoStr);
+            if (annoValue < 0 || annoValue > 2025) { 
+                 labelMessage.setText("Errore: Anno di pubblicazione non valido (0-2025).");
+                 labelMessage.setStyle("-fx-text-fill: red;");
+                 return;
+            }
+            
+            // Validazione Copie
+            nuoveCopie = Integer.parseInt(availableCopiesField.getText().trim());
+            if (nuoveCopie < 0) { 
+                 labelMessage.setText("Errore: Il numero di copie disponibili non può essere negativo.");
+                 labelMessage.setStyle("-fx-text-fill: red;");
+                 return;
+            }
 
-            // 3. Creazione di una NUOVA entità Book 
+            //Creazione di una nuova netità Book con i dati modificati
             Book updatedBook = new Book(nuovoTitolo, nuoviAutori, nuovoAnnoStr, isbnOriginale, nuoveCopie);
 
-            // 4. 🚀 CHIAMATA MVC: Salva le modifiche tramite il Model
+            // Chiamata MVC: Salva le modifiche tramite il Model
             if (model.getBookManagement().update(originalBook, updatedBook)) {
-                labelMessage.setText("✅ Modifiche al libro '" + updatedBook.getTitle() + "' salvate con successo!");
+                labelMessage.setText("Modifiche al libro '" + updatedBook.getTitle() + "' salvate con successo!");
                 labelMessage.setStyle("-fx-text-fill: green;");
                 clearFields(); 
             } else {
-                labelMessage.setText("❌ Errore: Aggiornamento del libro fallito (ISBN non trovato nel gestore).");
+                labelMessage.setText(" Errore: Aggiornamento del libro fallito (ISBN non trovato nel gestore).");
                 labelMessage.setStyle("-fx-text-fill: red;");
             }
 
@@ -233,7 +277,9 @@ public class modifyBookController {
 }
     
     /**
-     * Gestisce il ritorno alla Home Page.
+     * @brief Gestisce il ritorno alla Home Page.
+     * * Carica la Home Page (View.Homepage()).
+     * * @param event L'evento di azione.
      */
     @FXML
     public void backPage(ActionEvent event) {
