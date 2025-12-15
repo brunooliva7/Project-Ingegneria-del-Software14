@@ -21,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 
 /**
  *
@@ -69,17 +70,21 @@ public class searchLoanController {
      private String bookInput;
      
      private LoanManagement loanManagement;
+     private Model model;
+             
      
      private List<Loan> loanList;
      
      private Loan loan = null;
     
-   
+     public void setModel(Model model) {
+        this.model = model;
+    }
     
     @FXML
     private void initialize(){
         
-        this.loanManagement = new LoanManagement();
+        this.loanManagement = model.getLoanManagement();
         
         confirmButton.disableProperty().bind(bookSearchField.textProperty().isEmpty());
         bookSearchField.disableProperty().bind(userSearchField.textProperty().isEmpty());
@@ -97,8 +102,8 @@ public class searchLoanController {
     @FXML
     private void search(){
         
-          userInput = userSearchField.getText();
-        bookInput = bookSearchField.getText();
+            userInput = userSearchField.getText();
+            bookInput = bookSearchField.getText();
 
         // Creo oggetti User/Book parziali solo con ID o ISBN
         Loan filterLoan = new Loan(userInput, bookInput);

@@ -53,7 +53,7 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
      */
 
     public LoanManagement(){
-        loan = new TreeSet<>();
+        loan = new HashSet<>();
         
         if(loanDatabase.exists() && loanDatabase.length() > 0){
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(loanDatabase))) {

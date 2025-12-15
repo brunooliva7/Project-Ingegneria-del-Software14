@@ -22,6 +22,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
 /**
  *
  * @author bruno
@@ -71,18 +73,24 @@ public class deleteLoanController {
      private LoanManagement loanManagement;
      private BookManagement bookManagement;
      
+     
      private List<Loan> loanList;
      
      private Loan loan = null;
      private Loan loanSelezionato = null;
     
-   
+     private Model model;
+    
+    public void setModel(Model model) {
+        this.model = model;
+    }
+    
     
     @FXML
     private void initialize(){
         
-        this.loanManagement = new LoanManagement();
-        this.bookManagement = new BookManagement();
+        this.bookManagement = model.getBookManagement();
+        this.loanManagement = model.getLoanManagement();
         
         confirmButton.disableProperty().bind(bookSearchField.textProperty().isEmpty());
         bookSearchField.disableProperty().bind(userSearchField.textProperty().isEmpty());

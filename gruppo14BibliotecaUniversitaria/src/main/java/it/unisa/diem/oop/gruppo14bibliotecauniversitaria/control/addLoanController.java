@@ -5,6 +5,7 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
@@ -47,18 +48,24 @@ public class addLoanController {
     
     private UserManagement userManagement;
     private BookManagement bookManagement;
+    
     private Book book = null;
     private User user = null;
     private LocalDate duedate = null;
     private Loan loan = null;
     private LoanManagement loanManagement;
+    private Model model;
+    
+    public void setModel(Model model) {
+        this.model = model;
+    }
     
     @FXML
     private void initialize(){
         
-        this.userManagement = new UserManagement();
-        this.bookManagement = new BookManagement();
-        this.loanManagement = new LoanManagement();
+        this.userManagement = model.getUserManagement();
+        this.bookManagement = model.getBookManagement();
+        this.loanManagement = model.getLoanManagement();
         
         userComboBox.setItems(FXCollections.observableArrayList(userManagement.getList()));
         bookComboBox.setItems(FXCollections.observableArrayList(bookManagement.getCatalogue()));

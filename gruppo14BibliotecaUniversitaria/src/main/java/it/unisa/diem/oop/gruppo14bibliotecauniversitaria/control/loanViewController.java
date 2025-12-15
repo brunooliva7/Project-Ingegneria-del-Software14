@@ -16,7 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 /**
  *
  * @author bruno
@@ -48,11 +48,16 @@ public class loanViewController {
     private TableColumn<Loan,LocalDate> duedateColumn;
     
     private LoanManagement loanManagement;
+    private Model model;
+    
+   public void setModel(Model model) {
+        this.model = model;
+    }
     
     @FXML
     private void initialize(){
         
-        this.loanManagement = new LoanManagement();
+        this.loanManagement = model.getLoanManagement();
         
          nomeColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         cognomeColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
