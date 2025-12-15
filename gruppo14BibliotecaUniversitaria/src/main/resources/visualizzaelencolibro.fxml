@@ -37,7 +37,7 @@
                     <TableColumn fx:id="autoriColumn" prefWidth="180" text="Autori" />
                     <TableColumn fx:id="annoPubblicazioneColumn" prefWidth="100" text="Anno di pubblicazione" />
                     <TableColumn fx:id="isbnColumn" prefWidth="120" text="ISBN" />
-                    <TableColumn fx:id="copieDisponibiliColumn" prefWidth="1o0" text="Numero di copie disponibili" />
+                    <TableColumn fx:id="copieDisponibiliColumn" prefWidth="100" text="Numero di copie disponibili" />
                 </columns>
             </TableView>
 
