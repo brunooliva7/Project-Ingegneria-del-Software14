@@ -64,8 +64,6 @@ public class searchLoanController {
     @FXML
     private Button confirmButton;
     
-     @FXML
-    private Label labelMeassage;
      
      private String userInput;
      private String bookInput;
