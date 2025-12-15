@@ -56,7 +56,7 @@ public class loginController {
         
         else labelErrore.setText("Credenziali Errate");  
     }
-    
+    //comemnto prova
     @FXML
     private void modifyCredentials() throws IOException{
         View.Modify();
