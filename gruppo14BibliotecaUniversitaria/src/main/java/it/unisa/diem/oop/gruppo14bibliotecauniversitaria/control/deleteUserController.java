@@ -9,14 +9,19 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 /**
  *
- * @author bruno
+ * @author elisa
  */
 public class deleteUserController {
     
@@ -24,59 +29,109 @@ public class deleteUserController {
     private TextField searchField;
     
      @FXML
-    private Button searchButton;
+    private Button searchButtonu;
      
      @FXML
-     private Button deleteButton;
-     
-     @FXML
-     private Label labelMessage; 
+     private Button deleteuserButton;
      
       @FXML
      private Button backButton;
+       @FXML
+    private TableView<User> userTableViewricerca;
+
+    @FXML
+    private TableColumn<User, String> nomeColumn;
+
+    @FXML
+    private TableColumn<User, String> cognomeColumn;
+
+    @FXML
+    private TableColumn<User, String> matricolaColumn;
+    @FXML
+    private Label labelMessage;
+
+    private UserManagement userManagement;
      
-     UserManagement userManagement;
-     User risultato = null;
-     
+   
      @FXML
      public void initialize(){
-         searchButton.disableProperty().bind(searchField.textProperty().isEmpty());
+         searchButtonu.disableProperty().bind(searchField.textProperty().isEmpty());
          
-         deleteButton.setDisable(true);
+         deleteuserButton.setDisable(true);
          
          this.userManagement = new UserManagement();
+         // Configurazione colonne
+        nomeColumn.setCellValueFactory(data -> 
+            new javafx.beans.property.SimpleStringProperty(data.getValue().getName())
+        );
+        cognomeColumn.setCellValueFactory(data -> 
+            new javafx.beans.property.SimpleStringProperty(data.getValue().getSurname())
+        );
+        matricolaColumn.setCellValueFactory(data -> 
+            new javafx.beans.property.SimpleStringProperty(data.getValue().getNumberId())
+        );
+
+        // Abilita bottone di elimina solo se selezioni una riga
+        userTableViewricerca.getSelectionModel() .selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+                    deleteuserButton.setDisable(newSel == null);
+            if (newSel != null) {
+                        labelMessage.setText("Utente selezionato");
+                        labelMessage.setStyle("-fx-text-fill: #374151;");
+                    }        
+                });
      }
      
      @FXML
      public void search(){
-         this.userManagement = new UserManagement(); 
-        
+          
+        labelMessage.setText("");
+         
+           //assegno a input la stringa che usa il bibliotecario per cercare l'user 
          String input = searchField.getText();
         
-         User userSonda = new User(input);
+         User userSonda = new User(input); //usando il secondo costruttore creo un nuovo utente fittizio che mi serve solo da passare al metodo search()
         
-        this.risultato = userManagement.search(userSonda);
+        List<User> risultati = userManagement.search(userSonda);
+        //l'observable list mi serve per "aggiornare" l'interfaccia in modo live rispetto ai risultati ottenuti dalla search()
+        ObservableList<User> datiTabella = FXCollections.observableArrayList(risultati);
+        //aggiorno la tableView con i dati contenuti nella ObservableList 
+        userTableViewricerca.setItems(datiTabella);
 
-        if (risultato != null) {
-           labelMessage.setText("Utente Trovato: " + risultato.getSurname() + ":" + risultato.getNumberId());
-           labelMessage.setStyle("-fx-text-fill: green;");
-           deleteButton.setDisable(false);
-        } else {
-            labelMessage.setText("Utente non trovato");
+        // Se non trovo nulla, svuoto selezione,rimango disabilitato il bottone di elimina e faccio comparire una label che notifica l'assenza di studenti
+        if (risultati.isEmpty()) {
+            deleteuserButton.setDisable(true);
+            userTableViewricerca.getItems().clear();
+            labelMessage.setText("Nessun utente trovato");
             labelMessage.setStyle("-fx-text-fill: red;");
+            return;
         }
+       
     }
      
      @FXML
      public void delete(){
+        User selectedUser = userTableViewricerca.getSelectionModel().getSelectedItem();
+
+        if (selectedUser == null) {
+            labelMessage.setText("Nessun utente selezionato");
+            labelMessage.setStyle("-fx-text-fill: red;");
+            return;
+        }
+
+        boolean removed = userManagement.remove(selectedUser);
+
+        if (removed) {
+            userTableViewricerca.getItems().remove(selectedUser);
+            deleteuserButton.setDisable(true);
+            labelMessage.setText("Utente eliminato Correttamente");
+            labelMessage.setStyle("-fx-text-fill: green;");
+        }
+        else {
+              labelMessage.setText("Errore durante l'eliminazione");
+            labelMessage.setStyle("-fx-text-fill: red;");
+        }
          
-         if(userManagement.remove(risultato)){
-             labelMessage.setText("Utente eliminato Correttamente");
-             deleteButton.setDisable(true);
-             risultato = null;
-         }
-         
-         else labelMessage.setText("Utente non eliminato");
+        
      }
      
      @FXML

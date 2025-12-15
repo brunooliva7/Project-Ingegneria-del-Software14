@@ -153,7 +153,7 @@ public class UserManagement implements Functionality<User>,Serializable{
           }
     }
     /**
-     *  @brief Metodo che permette di cercare un utente nell'elenco tramite cognome o matricola
+     *  @brief Metodo che permette di cercare un utente nell'elenco tramite cognome o matricola 
      *  @param s  Dato utilizzato dal bibliotecario per cercare l'utente 
      *  @pre s != null
      *  @post L'utente viene mostrato 
