@@ -2,30 +2,12 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view;
 
 /**
  * @file View.java
- * 
  * @author bruno
  * @date 04-12-2025
- * @version 1.0
- *  
+ * @version 1.1
  */
 
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.LoginController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addBookController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addLoanController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addUserController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.deleteBookController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.deleteLoanController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.deleteUserController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.homepageController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.loanViewController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.modifyBookController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.modifyUserController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.modifycredentialController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchBookController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchLoanController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchUserController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.viewBookController;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.viewUserController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.*;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
@@ -33,404 +15,388 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanMa
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
 import java.io.IOException;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.Modality;
-/**
- * JavaFX App
- */
+
 /**
  * @class View
- * @brief Classe che rappresenta la vista dell'applicazione 
- *
- * La classe View estende `Application` di JavaFX e si occupa della costruzione
- * e visualizzazione della GUI. 
- *
- * La View è responsabile esclusivamente dell'interfaccia grafica: non contiene
- * logica applicativa, che è invece gestita dal Controller e dal Model,al suo interno abbiamo semplicemente tutti gli elementi grafici che ci serveranno per realizzare le interfacce utente
- * Segue il pattern MVC
+ * @brief Gestisce l'interfaccia grafica e la navigazione tra le schermate.
  */
 public class View extends Application {
-    private static Model model; // variabile statica del modello
-    private static Stage mainStage;
-    /** 
-     * @brief Metodo di avvio dell'applicazione JavaFX.
-     *
-     * Questo metodo viene invocato dal runtime JavaFX al momento della creazione
-     * della GUI. Inizializza gli elementi grafici, imposta la scena e mostra lo stage.
-     *
-     * @param stage La finestra principale dell'applicazione JavaFX
-     * @post Lo stage principale viene configurato e mostrato a schermo
-     */
     
-        
-        
-     @Override
-    public void start(Stage stage) throws IOException {
+    private static Stage mainStage;
+    
+    // Inizializzazione STATICA dei dati
+    private static UserManagement userManagement = new UserManagement();
+    private static BookManagement bookManagement = new BookManagement();
+    private static LoanManagement loanManagement = new LoanManagement();
+    
+    // Il Modello condiviso
+    private static Model model = new Model(bookManagement, userManagement, loanManagement);
 
-        mainStage=stage;
-        model=new Model(new BookManagement(),new UserManagement(),new LoanManagement());
+    /**
+     * @brief Metodo di avvio dell'applicazione.
+     */
+    @Override
+    public void start(Stage stage) throws IOException {
+        mainStage = stage;
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/login.fxml"));
-          // Passaggio del modello al controller
-         LoginController controller = fxmlLoader.getController();
-         controller.setModel(model);
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Login");
-        stage.setScene(scene);
-        stage.show();   
         
-        stage.setMaximized(true);
+        mainStage.setTitle("Login");
+        mainStage.setScene(scene);
         
+        // Full Screen Logic
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false);
+        mainStage.setMaximized(true);
+        
+        mainStage.show();
     }
     
     public static void Homepage() throws IOException{
-        
-        
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/homepage.fxml"));
-            // Ottengo il controller per la homepage e passo il modello
-        homepageController controller = fxmlLoader.getController();
-        controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
-        mainStage.setTitle("HomePage!");
+        // Ottengo il controller (se serve)
+        homepageController controller = fxmlLoader.getController();
+        
+        mainStage.setTitle("HomePage");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
+        mainStage.show();
     }
-    
     
     public static void Modify() throws IOException {
-        
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modifyPage.fxml"));
-             // Ottengo il controller e passo il modello
-        modifycredentialController controller = fxmlLoader.getController();
-        controller.setModel(model);  // Usa il modello già creato in start()
-        
-        
         Scene scene = new Scene(fxmlLoader.load());
         
-        mainStage.setTitle("Modifica Credenziali!");
+        modifycredentialController controller = fxmlLoader.getController();
+        
+        mainStage.setTitle("Modifica Credenziali");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
+        mainStage.show();
     }
     
-   
-     public static void addUser() throws IOException {
-        
+    // --- GESTIONE UTENTI ---
+
+    public static void addUser() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/aggiungiutente.fxml"));
-            // Ottengo il controller  e passo il modello
-           addUserController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
         
-        mainStage.setTitle("Aggiungi utente");
+        addUserController controller = fxmlLoader.getController();
+        controller.setModel(model); 
+        
+        Scene scene = new Scene(root);
+        
+        mainStage.setTitle("Aggiungi Utente");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
-        
+        mainStage.show();
     }
      
-     public static void modifyUser() throws IOException {
-        
+    public static void modifyUser() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificautente.fxml"));
-        // Ottengo il controller  e passo il modello
-           modifyUserController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
         
-        mainStage.setTitle("Aggiungi utente");
+        modifyUserController controller = fxmlLoader.getController();
+        controller.setModel(model); 
+        
+        Scene scene = new Scene(root);
+        
+        mainStage.setTitle("Modifica Utente");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
+        mainStage.show();
     }
      
-     public static void deleteUser() throws IOException {
-        
+    public static void deleteUser() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/cancellautente.fxml"));
-        // Ottengo il controller  e passo il modello
-           deleteUserController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
         
-        mainStage.setTitle("EliminaUtente");
+        deleteUserController controller = fxmlLoader.getController();
+        controller.setModel(model);
+        
+        Scene scene = new Scene(root);
+        
+        mainStage.setTitle("Elimina Utente");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
+        mainStage.show();
     }
      
-     public static void searchUser() throws IOException {
+    public static void searchUser() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/ricercautente.fxml"));
-        // Ottengo il controller  e passo il modello
-           searchUserController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
         
-        mainStage.setTitle("RicercaUtente");
+        searchUserController controller = fxmlLoader.getController();
+        controller.setModel(model);
+        
+        Scene scene = new Scene(root);
+        
+        mainStage.setTitle("Ricerca Utente");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show(); 
-        
-  }
+        mainStage.show();
+    }
     
     public static void viewUSers() throws IOException {
-        
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/visualizzaelencoutente.fxml"));
-        // Ottengo il controller  e passo il modello
-           viewUserController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
         
-        mainStage.setTitle("VisualizzaUtenti");
+        viewUserController controller = fxmlLoader.getController();
+        controller.setModel(model);
+        
+        Scene scene = new Scene(root);
+        
+        mainStage.setTitle("Visualizza Elenco Utenti");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
+        mainStage.show();
     }
     
+    // --- GESTIONE LIBRI ---
+
     public static void addBook() throws IOException {
-        
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/aggiungilibro.fxml"));
-        // Ottengo il controller  e passo il modello
-           addBookController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
+        
+        addBookController controller = fxmlLoader.getController();
+        controller.setModel(model);
+        
+        Scene scene = new Scene(root);
         
         mainStage.setTitle("Aggiungi Libro");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
-        
+        mainStage.show();
     }
      
     public static void deleteBook() throws IOException {
-        
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/cancellalibro.fxml"));
-        // Ottengo il controller  e passo il modello
-           deleteBookController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
+        
+        deleteBookController controller = fxmlLoader.getController();
+        controller.setModel(model);
+        
+        Scene scene = new Scene(root);
         
         mainStage.setTitle("Cancella Libro");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
-        
+        mainStage.show();
     }
     
     public static void updateBook(Book bookToModify) throws IOException {
-    
-        // 1. Crea il loader e carica il file FXML
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificalibro.fxml"));
-        Parent root = fxmlLoader.load(); // Carichiamo il Parent per poter accedere al controller
+        Parent root = fxmlLoader.load();
 
-        // 2. Ottieni il controller DOPO che l'FXML è stato caricato
         modifyBookController controller = fxmlLoader.getController();
-
-        // 3. INIEZIONE DEL DATO: Chiama il metodo initData del controller
         if (controller != null) {
             controller.initData(bookToModify); 
         }
 
-        // 4. Crea la Scene con il Parent caricato
         Scene scene = new Scene(root);
-
-        // 5. Configurazione dello Stage (la tua logica originale)
+        
         mainStage.setTitle("Modifica Libro");
         mainStage.setScene(scene);
-
-        // NOTA: Questa riga è ridondante se l'ultima è true
-        // mainStage.setResizable(true); 
-        // mainStage.setMaximized(false); 
-        mainStage.setMaximized(true); // Mantiene la finestra massimizzata (come da tuo codice)
-
-        mainStage.show();
-    }
-        public static void updateBook() throws IOException {
-
-        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificalibro.fxml"));
-        Parent root = fxmlLoader.load();
-
-        // Non otteniamo il controller né chiamiamo initData(), perché non abbiamo dati da iniettare.
-
-        Scene scene = new Scene(root);
-
-        // (Ripristina la tua logica di visualizzazione originale)
-        mainStage.setTitle("Modifica Libro");
-        mainStage.setScene(scene);
-        mainStage.setMaximized(true); 
-        mainStage.show();
-}
-    
-    public static void viewBooks() throws IOException {
         
-        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/visualizzaelencolibro.fxml"));
-        // Ottengo il controller  e passo il modello
-           viewBookController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
-        
-        mainStage.setTitle("Visualizza Libri");
-        mainStage.setScene(scene);
-        
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
+        mainStage.show();
+    }
+    
+    public static void updateBook() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificalibro.fxml"));
+        Parent root = fxmlLoader.load();
         
+        Scene scene = new Scene(root);
+        
+        mainStage.setTitle("Modifica Libro");
+        mainStage.setScene(scene);
+        
+        // Full Screen Logic
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false);
+        mainStage.setMaximized(true);
+        
+        mainStage.show();
+    }
+    
+    public static void viewBooks() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/visualizzaelencolibro.fxml"));
+        Parent root = fxmlLoader.load();
+        
+        viewBookController controller = fxmlLoader.getController();
+        controller.setModel(model);
+        
+        Scene scene = new Scene(root);
+        
+        mainStage.setTitle("Visualizza Elenco Libri");
+        mainStage.setScene(scene);
+        
+        // Full Screen Logic
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false);
+        mainStage.setMaximized(true);
+        
+        mainStage.show();
     }
     
     public static void searchBook() throws IOException {
-        
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/ricercalibro.fxml"));
-        // Ottengo il controller  e passo il modello
-           searchBookController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
         
-        mainStage.setTitle("Cerca libro");
+        searchBookController controller = fxmlLoader.getController();
+        controller.setModel(model);
+        
+        Scene scene = new Scene(root);
+        
+        mainStage.setTitle("Cerca Libro");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
-        
+        mainStage.show();
     }
     
+    // --- GESTIONE PRESTITI ---
+
     public static void searchLoan() throws IOException {
-        
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/cercaprestito.fxml"));
-        // Ottengo il controller  e passo il modello
-           searchLoanController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
+        
+        searchLoanController controller = fxmlLoader.getController();
+        controller.setModel(model);
+        
+        Scene scene = new Scene(root);
         
         mainStage.setTitle("Cerca Prestito");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
-        
+        mainStage.show();
     }
     
     public static void addLoan() throws IOException {
-        
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/aggiungiprestito.fxml"));
-        // Ottengo il controller  e passo il modello
-           addLoanController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
+        
+        addLoanController controller = fxmlLoader.getController();
+        controller.setModel(model);
+        
+        Scene scene = new Scene(root);
         
         mainStage.setTitle("Aggiungi Prestito");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
-        
+        mainStage.show();
     }
     
     public static void deleteLoan() throws IOException {
-        
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/eliminaprestito.fxml"));
-        // Ottengo il controller  e passo il modello
-           deleteLoanController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
         
-        mainStage.setTitle("Elimino Prestito");
+        deleteLoanController controller = fxmlLoader.getController();
+        controller.setModel(model);
+        
+        Scene scene = new Scene(root);
+        
+        mainStage.setTitle("Elimina Prestito");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
-        
+        mainStage.show();
     }
     
     public static void viewLoan() throws IOException {
-        
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/visualizzaelencoprestiti.fxml"));
-        // Ottengo il controller  e passo il modello
-           loanViewController controller = fxmlLoader.getController();
-           controller.setModel(model);  // Usa il modello già creato in start()
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
         
-        mainStage.setTitle("Visualizza Prestiti");
+        loanViewController controller = fxmlLoader.getController();
+        controller.setModel(model);
+        
+        Scene scene = new Scene(root);
+        
+        mainStage.setTitle("Visualizza Elenco Prestiti");
         mainStage.setScene(scene);
         
+        // Full Screen Logic
         mainStage.setResizable(true);
-        mainStage.setMaximized(false); 
+        mainStage.setMaximized(false);
         mainStage.setMaximized(true);
         
-        mainStage.show();  
-        
+        mainStage.show();
     }
 
-    /**
-     * @brief Metodo main dell'applicazione.
-     *
-     * Avvia l'applicazione JavaFX invocando `launch()`, che si occupa di creare
-     * lo stage principale e di chiamare automaticamente il metodo `start()`.
-     *
-     * @param args Argomenti da riga di comando (non utilizzati)
-     */
     public static void main(String[] args) {
         launch(args);
     }
