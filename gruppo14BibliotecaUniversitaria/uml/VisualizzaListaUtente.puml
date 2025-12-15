@@ -15,7 +15,6 @@ Controller -> UserManagement: viewSorted()
 UserManagement --> Controller: elenco utenti ordinato
 Controller --> View: elenco utenti ordinato
 View --> Bibliotecario: Mostra elenco utenti iscritti
-
 @enduml
 
 

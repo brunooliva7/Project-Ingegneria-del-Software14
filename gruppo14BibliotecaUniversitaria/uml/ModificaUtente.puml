@@ -13,8 +13,8 @@ View --> Bibliotecario: Mostra opzioni disponibili
 Bibliotecario -> View: Seleziona "Modifica dati"
 View --> Bibliotecario: Richiesta inserimento matricola
 Bibliotecario -> View: Inserisce matricola
-View -> Controller: richiesta modifica dati (matricola)
-Controller -> UserManagement: search(matricola)
+View -> Controller: richiesta modifica dati 
+Controller -> UserManagement: search(User u)
  
 alt Utente non trovato
     UserManagement --> Controller: erroreUtenteNonTrovato
@@ -27,14 +27,14 @@ else Utente trovato
     View --> Bibliotecario: Mostra form nuovi dati
     Bibliotecario -> View: Invia dati aggiornati
     View -> Controller: invia nuovi dati
-    Controller -> UserManagement: update (User u)
+    Controller -> UserManagement: update (User oldUser,User newUser)
     UserManagement -> User: User(String name, String surname, String numberId, String email)
     User --> UserManagement: confermaCreazione
     UserManagement --> UserManagement: add(User u)
     UserManagement --> Controller: confermaModifica
     Controller --> View: modifica effettuata
     View --> Bibliotecario: Modifica completata con successo
-    UserManagement -> FileManager: updateFileObject()
+    UserManagement -> FileManager: updateFileObject(listaUser, userDatabase)
 end
 @enduml
 

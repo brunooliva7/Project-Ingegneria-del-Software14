@@ -14,7 +14,7 @@ View –> Bibliotecario: Richiesta inserimento matricola/cognome
 Bibliotecario -> View: Inserisce criteri di ricerca
  
 View -> Controller: Ricerca utente
-Controller -> UserManagement:  search(String s)
+Controller -> UserManagement:  search(User u)
 alt Utente non esistente
 	UserManagement --> Controller: Errore: Utente non trovato
                 Controller ->View: Notifica errore
@@ -25,4 +25,5 @@ else Utente trovato
  	View--> Bibliotecario: Visualizza dati utente
 end
 @enduml
+
 
