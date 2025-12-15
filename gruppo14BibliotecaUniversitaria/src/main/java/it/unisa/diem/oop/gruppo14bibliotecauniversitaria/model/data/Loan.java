@@ -59,43 +59,30 @@ public class Loan implements Comparable<Loan>,Serializable {
      */
     
     public Loan(String inputRicerca1, String inputRicerca2) {
-         // 1. Inizializziamo tutto a null di default
-        this.book= null;
+        // 1. Inizializziamo a null
+        this.book = null;
         this.user = null;
         this.dueDate = null;
         
-
-    // 2. Protezione anti-crash: se la stringa è null o vuota, ci fermiamo qui.
-         if (inputRicerca1 == null || inputRicerca1.trim().isEmpty()) {
-            return; 
-        }
-
-        String cleanInput = inputRicerca1.trim();
-
-    // 3. Logica robusta: Usiamo le REGEX per capire se sono SOLO numeri
-    // "\\d+" significa "uno o più numeri da 0 a 9"
-        if (cleanInput.matches("\\d+")) {
-        // È sicuramente una matricola (perché contiene solo numeri)
-        this.user = new User(inputRicerca1);
-        } else {
-        // Contiene lettere o simboli, quindi è sicuramente un cognome
-        this.user = new User(inputRicerca1);
+        // 2. Gestione USER (inputRicerca1)
+        if (inputRicerca1 != null && !inputRicerca1.trim().isEmpty()) {
+            String cleanInput = inputRicerca1.trim();
+            if (cleanInput.matches("\\d+")) {
+                this.user = new User(inputRicerca1); // Matricola
+            } else {
+                this.user = new User(inputRicerca1); // Cognome/Nome
+            }
         }
         
-        if (inputRicerca2 == null || inputRicerca2.trim().isEmpty()) {
-            return; 
-        }
-
-        String cleanInput1 = inputRicerca2.trim();
-
-    // 3. Logica robusta: Usiamo le REGEX per capire se sono SOLO numeri
-    // "\\d+" significa "uno o più numeri da 0 a 9"
-        if (cleanInput1.matches("\\d+")) {
-        // È sicuramente una matricola (perché contiene solo numeri)
-        this.book = new Book(inputRicerca2);
-        } else {
-        // Contiene lettere o simboli, quindi è sicuramente un cognome
-        this.book = new Book(inputRicerca2);
+        // 3. Gestione BOOK (inputRicerca2) 
+        // Questo blocco viene eseguito SEMPRE, anche se inputRicerca1 era vuoto.
+        if (inputRicerca2 != null && !inputRicerca2.trim().isEmpty()) {
+            String cleanInput2 = inputRicerca2.trim();
+            if (cleanInput2.matches("\\d+")) {
+                this.book = new Book(inputRicerca2); // ISBN
+            } else {
+                this.book = new Book(inputRicerca2); // Titolo
+            }
         }
     }
     
@@ -287,6 +274,17 @@ public class Loan implements Comparable<Loan>,Serializable {
      */
     public String getISBN() {
         return book != null ? book.getISBN() : "";
+    }
+    
+    /**
+     * @brief Calcola l'hash code basato su User ID e Book ISBN.
+     * Necessario per il corretto funzionamento in HashSet e HashMap.
+     */
+    @Override
+    public int hashCode() {
+        String userId = (user != null) ? user.getNumberId() : null;
+        String bookIsbn = (book != null) ? book.getISBN() : null;
+        return Objects.hash(userId, bookIsbn);
     }
 
 

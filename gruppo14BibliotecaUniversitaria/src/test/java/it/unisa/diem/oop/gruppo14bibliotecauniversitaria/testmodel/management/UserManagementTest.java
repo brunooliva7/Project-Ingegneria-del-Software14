@@ -1,256 +1,218 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.management;
 
-/**
- * @file UserManagementTest.java
- *
- * @author bruno
- * @date 12-12-2025
- */
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
-import java.util.Iterator;
-import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @class UserManagementTest
- * 
- * @brief Implementa una suite di test JUnit per la classe {@link it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement}
- * 
+ * @brief Suite di test JUnit 5 per UserManagement.
+ * * Verifica le funzionalità CRUD (Create, Read, Update, Delete) e la ricerca
+ * degli utenti nel sistema, gestendo anche la persistenza su file.
  */
-public class UserManagementTest {
-    
-    private UserManagement userManagement; ///< Istanza della classe da testare
-    private User user1; ///< Utente di test 1
-    private User user2; ///< Utente di test 2
-    private User userNotPresent; ///< Utente non presente
+class UserManagementTest {
 
-    /**
-     * @brief Configurazione eseguita prima di ogni test.
-     * * Inizializza un nuovo {@link UserManagement} e gli oggetti {@link User}
-     * di supporto. Pulisce la lista interna per garantire l'isolamento dei test.
-     */
+    private UserManagement userManager;
+    private User user1;
+    private User user2;
+    private File dbFile;
+
     @BeforeEach
     void setUp() {
-        userManagement = new UserManagement();
+        // 1. Inizializza il manager
+        userManager = new UserManagement();
 
-        // Inizializzo gli utenti con: Nome, Cognome, Matricola, Email
-        user1 = new User("Mario", "Rossi", "0001", "mario.rossi@studenti.unisa.it");
-        user2 = new User("Luigi", "Bianchi", "0002", "luigi.bianchi@studenti.unisa.it");
-        
-        // Questo utente non verrà aggiunto alla lista, serve per i test negativi
-        userNotPresent = new User("Anna", "Verdi", "0003", "anna.verdi@studenti.unisa.it");
-        
-        // Pulisco la lista prima di ogni test per evitare interferenze col file
-        userManagement.getList().clear();
-    }
+        // 2. Pulisci la memoria se carica dati vecchi dal file
+        if (!userManager.getList().isEmpty()) {
+            userManager.getList().clear();
+        }
 
-    // --- TEST ADD ---
-    
-    /**
-     * @brief Testa l'aggiunta di un utente valido.
-     * * Verifica che il metodo {@code add} restituisca true e incrementi la dimensione della lista.
-     */
-    @Test
-    void testAddValidUser() {
-        boolean result = userManagement.add(user1);
-        assertTrue(result, "Dovrebbe restituire true quando si aggiunge un utente valido");
-        assertEquals(1, userManagement.getList().size(), "La lista dovrebbe contenere 1 utente");
+        // 3. Crea utenti di test
+        // Assumo costruttore User(name, surname, numberId, email)
+        user1 = new User("Mario", "Rossi", "001", "mario.rossi@email.it");
+        user2 = new User("Luigi", "Verdi", "002", "luigi.verdi@email.it");
+
+        // Riferimento al file per la pulizia nel tearDown
+        dbFile = new File("archivio_utenti.dat");
     }
 
-    /**
-     * @brief Testa l'aggiunta di un utente duplicato (stessa matricola).
-     * * Verifica che il metodo restituisca false e che la dimensione della lista non cambi.
-     */
-    @Test
-    void testAddDuplicateUser() {
-        userManagement.add(user1);
-        boolean result = userManagement.add(user1); // Provo ad aggiungere lo stesso utente
-        
-        assertFalse(result, "Dovrebbe restituire false se l'utente (stessa matricola) esiste già");
-        assertEquals(1, userManagement.getList().size(), "La dimensione non dovrebbe aumentare");
+    @AfterEach
+    void tearDown() {
+        // Cancella il file database per non lasciare sporcizia
+        if (dbFile.exists()) {
+            dbFile.delete();
+        }
     }
 
-    /**
-     * @brief Testa l'aggiunta di un riferimento nullo.
-     * * Verifica che il metodo lanci {@code IllegalArgumentException}.
-     */
-    @Test
-    void testAddNullUser() {
-        assertThrows(IllegalArgumentException.class, () -> userManagement.add(null));
+    @Nested
+    @DisplayName("Test Gestione Base (Add/Remove)")
+    class BasicManagementTests {
+
+        @Test
+        @DisplayName("add: aggiunge correttamente un utente")
+        void testAddUser() {
+            assertTrue(userManager.add(user1), "Dovrebbe restituire true all'aggiunta");
+            assertEquals(1, userManager.getList().size());
+            assertTrue(userManager.getList().contains(user1));
+
+            // Verifica persistenza
+            assertTrue(dbFile.exists(), "Il file database deve essere creato dopo l'aggiunta");
+        }
+
+        @Test
+        @DisplayName("add: non aggiunge duplicati (stesso ID)")
+        void testAddDuplicate() {
+            userManager.add(user1);
+            
+            // Utente con stesso ID ma dati diversi (dipende da equals/hashCode di User)
+            User duplicate = new User("Fake", "Clone", "001", "fake@email.it");
+            
+            assertFalse(userManager.add(duplicate), "Non deve aggiungere utenti con stessa matricola");
+            assertEquals(1, userManager.getList().size());
+        }
+
+        @Test
+        @DisplayName("add: lancia eccezione con null")
+        void testAddNull() {
+            assertThrows(IllegalArgumentException.class, () -> userManager.add(null));
+        }
+
+        @Test
+        @DisplayName("remove: rimuove utente esistente")
+        void testRemoveUser() {
+            userManager.add(user1);
+            userManager.add(user2);
+
+            assertTrue(userManager.remove(user1));
+            assertEquals(1, userManager.getList().size());
+            assertFalse(userManager.getList().contains(user1));
+            assertTrue(userManager.getList().contains(user2));
+        }
+
+        @Test
+        @DisplayName("remove: restituisce false se utente non esiste")
+        void testRemoveNonExisting() {
+            userManager.add(user1);
+            assertFalse(userManager.remove(user2));
+            assertEquals(1, userManager.getList().size());
+        }
+        
+        @Test
+        @DisplayName("remove: lancia eccezione con null")
+        void testRemoveNull() {
+            assertThrows(IllegalArgumentException.class, () -> userManager.remove(null));
+        }
     }
 
-    // --- TEST REMOVE ---
-    
-    /**
-     * @brief Testa la rimozione di un utente esistente.
-     * * Verifica che il metodo restituisca true e che la lista risulti vuota.
-     */
-    @Test
-    void testRemoveExistingUser() {
-        userManagement.add(user1);
-        boolean result = userManagement.remove(user1);
-        
-        assertTrue(result, "Dovrebbe restituire true se rimuove un utente esistente");
-        assertEquals(0, userManagement.getList().size(), "La lista dovrebbe essere vuota");
+    @Nested
+    @DisplayName("Test Aggiornamento (Update)")
+    class UpdateTests {
+
+        @Test
+        @DisplayName("update: aggiorna dati utente esistente")
+        void testUpdateUser() {
+            userManager.add(user1); // Matricola 001
+
+            // Nuovo oggetto con dati aggiornati (stessa matricola, o diversa se consentito)
+            // Nel tuo codice update fa remove(u1) e add(u2).
+            User updatedInfo = new User("Mario", "Bianchi", "001", "mario.bianchi@newemail.it");
+
+            assertTrue(userManager.update(user1, updatedInfo));
+
+            // Verifica che nel set ci sia l'utente aggiornato
+            // Nota: poichè è un Set, prendiamo l'elemento (ce n'è uno solo)
+            User stored = userManager.getList().iterator().next();
+            
+            assertAll("Verifica campi aggiornati",
+                () -> assertEquals("Bianchi", stored.getSurname()),
+                () -> assertEquals("mario.bianchi@newemail.it", stored.getEmail())
+            );
+        }
+
+        @Test
+        @DisplayName("update: fallisce se utente originale non esiste")
+        void testUpdateNonExisting() {
+            userManager.add(user1);
+            assertFalse(userManager.update(user2, user1));
+        }
+
+        @Test
+        @DisplayName("update: lancia eccezione con parametri null")
+        void testUpdateNull() {
+            assertThrows(IllegalArgumentException.class, () -> userManager.update(null, user1));
+            assertThrows(IllegalArgumentException.class, () -> userManager.update(user1, null));
+        }
     }
 
-    /**
-     * @brief Testa la rimozione di un utente non esistente.
-     * * Verifica che il metodo restituisca false e che la dimensione della lista non cambi.
-     */
-    @Test
-    void testRemoveNonExistingUser() {
-        userManagement.add(user1);
-        boolean result = userManagement.remove(userNotPresent);
-        
-        assertFalse(result, "Dovrebbe restituire false se si prova a rimuovere un utente che non c'è");
-        assertEquals(1, userManagement.getList().size(), "La lista non dovrebbe cambiare");
-    }
-    
-    /**
-     * @brief Testa la rimozione di un riferimento nullo.
-     * * Verifica che il metodo lanci {@code IllegalArgumentException}.
-     */
-    @Test
-    void testRemoveNullUserThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> userManagement.remove(null));
-    }
+    @Nested
+    @DisplayName("Test Ricerca (Search)")
+    class SearchTests {
 
-    // --- TEST UPDATE ---
-    /**
-     * @brief Testa l'aggiornamento di un utente esistente.
-     * * Verifica che l'utente originale sia rimosso e quello nuovo sia aggiunto
-     * (si assume che l'update gestisca la sostituzione completa dell'oggetto nel Set).
-     */
-    @Test
-    void testUpdateUser() {
-        userManagement.add(user1);
-        
-        // Aggiorno user1 facendolo diventare user2
-        boolean result = userManagement.update(user1, user2);
-        
-        assertTrue(result, "Update dovrebbe restituire true");
-        assertFalse(userManagement.getList().contains(user1), "Il vecchio utente non deve più esistere");
-        assertTrue(userManagement.getList().contains(user2), "Il nuovo utente deve essere presente");
-    }
-    
-    /**
-     * @brief Testa l'aggiornamento di un utente non presente nella lista.
-     * Verifica che l'update fallisca (false).
-     */
-    @Test
-    void testUpdateNonExistingUser() {
-        // Tento di aggiornare userNotPresent che non è nel Set
-        boolean result = userManagement.update(userNotPresent, user1);
-        assertFalse(result, "Update dovrebbe fallire se il libro da modificare non esiste");
-    }
-    
-    /**
-     * @brief Testa l'aggiornamento quando l'utente da modificare è nullo.
-     * * Verifica che venga lanciata {@code IllegalArgumentException}.
-     */
-    @Test
-    void testUpdateNullOldUserThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> userManagement.update(null, user2));
-    }
+        @BeforeEach
+        void initData() {
+            if(!userManager.getList().isEmpty()) userManager.getList().clear();
+            userManager.add(user1); // Rossi, 001
+            userManager.add(user2); // Verdi, 002
+        }
 
-    // --- TEST SEARCH ---
-    
-    /**
-     * @brief Testa la ricerca di un utente utilizzando la matricola.
-     * * Verifica che venga trovato l'utente corretto utilizzando solo la matricola come criterio.
-     */
-    @Test
-    void testSearchByMatricola() {
-        userManagement.add(user1); // Matricola "0001"
-        
-        // Creiamo un oggetto "sonda" che ha la stessa matricola
-        User searchCriteria = new User("Test", "Test", "0001", "test@test.it");
-        
-        User found = userManagement.search(searchCriteria);
-        assertNotNull(found, "Dovrebbe trovare l'utente tramite matricola");
-        assertEquals("Mario", found.getName(), "Dovrebbe restituire l'oggetto completo corretto");
-    }
+        @Test
+        @DisplayName("search: trova per Matricola")
+        void testSearchByMatricola() {
+            // Costruttore ricerca User(String input) -> Se numeri, va in numberId
+            User filter = new User("001");
+            
+            List<User> results = userManager.search(filter);
+            
+            assertEquals(1, results.size());
+            assertEquals(user1, results.get(0));
+        }
 
-    /**
-     * @brief Testa la ricerca di un utente utilizzando il cognome.
-     * * Si assume che la ricerca fallisca sulla matricola (perché null) e prosegua sul cognome.
-     */
-    @Test
-    void testSearchByCognome() {
-        userManagement.add(user2); // Cognome "Bianchi"
+        @Test
+        @DisplayName("search: trova per Cognome")
+        void testSearchBySurname() {
+            // Costruttore ricerca User(String input) -> Se lettere, va in surname
+            User filter = new User("Verdi");
+            
+            List<User> results = userManager.search(filter);
+            
+            assertEquals(1, results.size());
+            assertEquals(user2, results.get(0));
+        }
         
-        // la matricola DEVE essere null, altrimenti entra nel primo if.
-        User searchCriteria = new User(null, "Bianchi", null, null);
-        
-        User found = userManagement.search(searchCriteria);
-        
-        assertNotNull(found, "Dovrebbe trovare l'utente tramite cognome");
-        assertEquals("0002", found.getNumberId(), "Dovrebbe aver trovato l'utente Luigi Bianchi");
-    }
+        @Test
+        @DisplayName("search: trova per Cognome (case insensitive)")
+        void testSearchBySurnameCaseInsensitive() {
+            User filter = new User("rossi"); // minuscolo
+            
+            List<User> results = userManager.search(filter);
+            
+            assertEquals(1, results.size());
+            assertEquals(user1, results.get(0));
+        }
 
-    /**
-     * @brief Testa la ricerca di un utente non trovato.
-     * * Verifica che il metodo restituisca null.
-     */
-    @Test
-    void testSearchNotFound() {
-        userManagement.add(user1);
-        User found = userManagement.search(userNotPresent);
-        assertNull(found, "Dovrebbe restituire null se l'utente non viene trovato");
-    }
-    
-    /**
-     * @brief Testa la ricerca con un riferimento utente nullo.
-     * * Verifica che il metodo lanci {@code IllegalArgumentException}.
-     */
-    @Test
-    void testSearchNullUserThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> userManagement.search(null));
-    }
-    
-    // --- TEST VIEWSORTED ---
-    /**
-     * @brief Testa l'ordinamento degli utenti.
-     * * Verifica che gli utenti siano ordinati alfabeticamente per Cognome (come previsto dal interno).
-     */
-    @Test
-    void testViewSortedOrder() {
-        userManagement.add(user1); 
-        userManagement.add(user2); 
-        
-        // TreeSet ordina per Cognome e poi Nome. Bianchi (B) viene prima di Rossi (R).
-        Set<User> list = userManagement.getList();
-        
-        Iterator<User> iterator = list.iterator();
-        
-        User first = iterator.next();  // Ci aspettiamo Bianchi (user2)
-        User second = iterator.next(); // Ci aspettiamo Rossi (user1)
-        
-        assertEquals(user2.getNumberId(), first.getNumberId(), "Il primo utente deve essere Bianchi (B prima di R).");
-        assertEquals(user1.getNumberId(), second.getNumberId(), "Il secondo utente deve essere Rossi.");
-        
-        assertDoesNotThrow(() -> userManagement.viewSorted(), "viewSorted non deve lanciare eccezioni.");
-    }
+        @Test
+        @DisplayName("search: nessun risultato")
+        void testSearchNoMatch() {
+            User filter = new User("999"); // Matricola inesistente
+            assertTrue(userManager.search(filter).isEmpty());
+            
+            User filterName = new User("Gialli"); // Cognome inesistente
+            assertTrue(userManager.search(filterName).isEmpty());
+        }
 
-    /**
-     * @brief Testa il metodo viewSorted su una lista vuota.
-     * * Verifica che non vengano lanciate eccezioni.
-     */
-    @Test
-    void testViewSortedEmpty() {
-        assertDoesNotThrow(() -> userManagement.viewSorted(), "viewSorted su catalogo vuoto non deve lanciare eccezioni.");
+        @Test
+        @DisplayName("search: lancia eccezione con null")
+        void testSearchNull() {
+            assertThrows(IllegalArgumentException.class, () -> userManager.search(null));
+        }
     }
 }
