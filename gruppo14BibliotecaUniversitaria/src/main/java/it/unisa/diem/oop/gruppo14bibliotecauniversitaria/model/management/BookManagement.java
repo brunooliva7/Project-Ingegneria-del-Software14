@@ -29,10 +29,10 @@ import java.util.List;
 
 /**
  * @class BookManagement
- * @brief Questa classe si occupa della gestione dei dati del catolo dei libri della biblioteca
+ * @brief Questa classe si occupa della gestione dei dati del catalogo dei libri della biblioteca
  * 
- * La classe gestisce un insieme di libri attraverso le operazioni di aggiunta, rimozione, aggiornamento, ricerca e visualizazzione ordinata libro: titolo, autori, anno di pubblicazione, codice ISBN e numero di copie disponibili; implementa l'interfaccia Functionality
- * Utilizza una struttura dati per mantenere il catalogo ordinato
+ * La classe gestisce un insieme di libri attraverso le operazioni di aggiunta, rimozione, aggiornamento, ricerca e visualizazzione ordinata dei libri 
+ * Implementa l'interfaccia Functionality e utilizza una struttura dati per mantenere il catalogo ordinato e senza duplicati
  * 
  * @invariant catalogue != null
  * 
@@ -49,8 +49,9 @@ public class BookManagement implements Functionality<Book> {
     * @brief Costruttore della classe BookManagement
     * 
     * Inizializza un catologo vuoto basato su TreeSet
+    * Se esiste un file di database non vuoto, tenta di caricare i dati dal file
     * 
-    * @post L'attributo catalogue è inizializzato come TreeSet vuoto
+    * @post L'attributo catalogue è inizializzato come TreeSet (vuoto o caricato da file)
     * 
     */
     public BookManagement() {
@@ -89,12 +90,14 @@ public class BookManagement implements Functionality<Book> {
     /**
     * @brief Aggiunge un libro al catalogo
     * 
-    * @param b Libro da aggiungere
+    * Se l'ISBN è già presente, incrementa il numero di copie disponibili
+    * Altrimenti aggiunge il nuovo libro al catalogo
     * 
+    * @param b Libro da aggiungere
     * @return true se l'aggiunta va a buon fine, false atrimenti
     * 
     * @pre b != null
-    * @post Il libro risulta aggiunto al catalogo
+    * @post Il catalogo è aggiornato con il nuovo libro o con l'incremento delle copie
     * 
     */
     @Override
@@ -104,7 +107,7 @@ public class BookManagement implements Functionality<Book> {
             // esce senza aggiungere ritornando che non è andato a buon fine l'inserimento lanciando l'eccezione che specifica che l'argomento non è valido 
          }
 
-        // 1. Controlla se l'ISBN è già presente (e aggiorna le copie se lo è)
+        // Controlla se l'ISBN è già presente (e aggiorna le copie se lo è)
         for (Book bk : catalogue) {
             if (bk.getISBN().equals(b.getISBN())) {
                 // ISBN già presente, incremento solo di 1 le copie disponibili
@@ -114,7 +117,6 @@ public class BookManagement implements Functionality<Book> {
             }
         }
 
-        // 2. Se il ciclo è terminato e l'ISBN non è stato trovato, aggiunge il nuovo libro
         boolean added = catalogue.add(b);
         if (added) {
              // Se l'aggiunta ha successo, salva il file
@@ -126,13 +128,13 @@ public class BookManagement implements Functionality<Book> {
     /**
     * @brief Elimina un libro dal catalogo
     * 
-    * @param b Libro da rimuovere
+    * Se il libro è presente viene rimosso, altrimenti restituisce false
     * 
+    * @param b Libro da rimuovere
     * @return true se la rimozione va a buon fine, false atrimenti
     * 
     * @pre b != null
-    * @pre Il libro deve essere presente nel catalogo
-    * @post Il libro risulta correttamente eliminato
+    * @post Il libro risulta eliminato se presente
     * 
     */
     @Override
@@ -154,10 +156,9 @@ public class BookManagement implements Functionality<Book> {
     /**
     * @brief Aggiorna i dati di un libro presente nel catalogo
     * 
-    * Questo metodo cerca un libro nel catalogo con lo stesso ISBN di @p b1
-    * e ne aggiorna i dati utilizzando le informazioni contenute in @p b2.
-    * L'aggiornamento include titolo, autori, anno di pubblicazione e numero
-    * di copie disponibili (solo se non negativo).
+    * Cerca un libro con lo stesso ISBN di b1 e ne aggiorna titolo, autori,
+    * anno di pubblicazione e copie disponibili con i dati di b2
+    * L'ISBN non viene modificato
     * 
     * @param b1 Libro da identificare nel catalogo (tramite ISBN)
     * @param b2 Libro contenente i dati aggiornati
@@ -200,9 +201,9 @@ public class BookManagement implements Functionality<Book> {
     /**
     * @brief Visualizza in ordine i libri del catalogo
     * 
-    * Questo metodo permette la visualizzazione del catalogo dei libri ordinato alfabeticamente in base al loro titolo
+    * Se il catalogo è vuoto stampa un messaggio, altrimenti mostra i libri
+    * ordinati alfabeticamente per titolo
     * 
-    * @pre Il catalogo non deve essere vuoto
     * @post I libri sono mostrati nell'ordine corretto
     * 
     */
@@ -220,12 +221,14 @@ public class BookManagement implements Functionality<Book> {
     
 
     /**
-     * @param b
      * @brief Ricerca libri per query (Titolo, Autore o ISBN).
-     * Questo metodo permette di cercare libri nel catalogo che contengano 
-     * la stringa 'query' nel titolo, negli autori o nel codice ISBN.
-     * La ricerca è parziale (non richiede la corrispondenza esatta).
-     * @return Lista dei libri corrispondenti alla query.
+     * La ricerca per ISBN ha priorità
+     * Se non viene trovato un ISBN, la ricerca avviene per titolo (parziale) o autori (parziale).
+     * 
+     * @param b Oggetto Book
+     * @return Lista dei libri corrispondenti alla query
+     * 
+     * @pre b!=null
      */
     @Override
     public List <Book> search(Book b){

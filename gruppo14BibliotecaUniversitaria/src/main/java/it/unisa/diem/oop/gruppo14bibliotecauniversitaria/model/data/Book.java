@@ -72,7 +72,9 @@ public class Book implements Comparable<Book>,Serializable {
      * @brief Costruttore della classe Book per la ricerca parziale
      * 
      * Inizializza l'oggetto Book compilando solo il campo necessario 
-     * Gli altri campi rimangono nulli
+     * Gli altri campi rimangono nulli, tranne availableCopies che è inizializzato a 0
+     * 
+     * La logica discrimina tra ISBN (solo numeri e opzionale X finale) e titolo/autore
      * 
      * @param inputRicerca Stringa di input fornita dall'utente
      * 
@@ -246,7 +248,7 @@ public class Book implements Comparable<Book>,Serializable {
     * @param other Altro libro da confrontare con quello corrente
     * @return Un valore intero: negativo se il titolo di other precede quello corrente; zero, se sono uguali; positivo, se il titolo di other segue quello dell'oggetto corrente
     * 
-    * @pre other != null
+    * @pre other != null (se other è null viene sollevata NullPointerException)
     * @post Restituisce un valore coerente con l'ordinamento alfabetico dei titoli e degli autori
     * 
     * @see Comparable
@@ -274,7 +276,7 @@ public class Book implements Comparable<Book>,Serializable {
     * 
     * @return true se i due libri hanno lo stesso codice identificativo, false altrimenti
     * 
-    * @pre obj può essere null
+    * @pre obj può essere null (in tal caso restituisce false)
     * @post Restituisce un valore booleano coerente con l'identità del libro
     * 
     */
