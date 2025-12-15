@@ -78,7 +78,8 @@ public class UserManagement implements Functionality<User>,Serializable{
     /**
      *  @brief Metodo che aggiunge un user all'elenco 
      *  @param u L'utente da aggiungere all'elenco 
-     *  @pre u != null
+     *  @throws IllegalArgumentException se l'utente passato è `null`.
+     *  @return true se l'utente è correttamente inserito,altrimenti false
      *  @post L'user è correttamente inserito nell'HashSet
      */
     
@@ -101,7 +102,8 @@ public class UserManagement implements Functionality<User>,Serializable{
     /**
      *  @brief Metodo che rimuove un user dall'elenco 
      *  @param u L'utente da eliminare dall'elenco 
-     *  @pre u != null
+     *  @return true se l'utente è stato rimosso correttamente,altrimenti false
+     *  @throws IllegalArgumentException se l'utente passato è `null`.
      *  @post L'user è correttamente eliminato dall'HashSet
      */
     @Override
@@ -119,9 +121,11 @@ public class UserManagement implements Functionality<User>,Serializable{
     }
     /**
      *  @brief Metodo che permette di aggiornare i dati di un utente
-     *  @param u L'utente di cui bisogna modificare i dati 
-     *  @pre u != null
-     *  @post I dati dell'utente u sono correttamente aggiornati 
+     *  @param u1 L'utente di cui bisogna modificare i dati 
+     *  @param u2 L'utente creato a partire dai dati modificati di u1
+     *  @return true se l'utente u1 è stato correttamente aggiornato,altrimenti false
+     *  @throws IllegalArgumentException se anche solo uno tra gli utenti passato è  `null`.
+     *  @post I dati dell'utente u1 sono correttamente aggiornati 
      */
     @Override
     public boolean update(User u1 ,User u2){   //deve prima inserire tutri i dati dell'utente di cui vuole cambiare le informazioni
@@ -152,10 +156,10 @@ public class UserManagement implements Functionality<User>,Serializable{
     }
     /**
      *  @brief Metodo che permette di cercare un utente nell'elenco tramite cognome o matricola 
-     *  @param s  Dato utilizzato dal bibliotecario per cercare l'utente 
-     *  @pre s != null
+     *  @param u Utente creato a partire dalla stringa utilizzata per la search dal bibliotecario 
+     *  @throws IllegalArgumentException se l'utente passato è `null`.
      *  @post L'utente viene mostrato 
-     *  @return L'utente trovato
+     *  @return Lista di utenti che corrispondono ai criteri di ricerca
      */
     @Override
     public List <User> search(User u ){

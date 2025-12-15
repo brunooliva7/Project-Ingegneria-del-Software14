@@ -161,8 +161,7 @@ public class User   implements Comparable<User>,Serializable{
         return email;
     }
      /**
-      * @brief Servirà nell'elenco di utenti per ordinarlo in base a cognome e nome degli utenti ,dato che è un TreeSet questo metodo
-               verrà chiamato in automatico nel momento in cui viene creato l'elenco
+      * @brief Servirà nell'elenco di utenti per ordinarlo in base a cognome e nome degli utenti,chiamato dall'interfaccia
       * @param  other altro utente con cui comparare quello corrente per l'ordinamento 
       * @return  Valore negativo,valore positivo o 0 in base all'ordinamento
       * 
@@ -194,7 +193,7 @@ public class User   implements Comparable<User>,Serializable{
      /**
       * @brief  Metodo per controllare se due oggetti della classe User sono uguali sulla base del numeberId
       * @param  obj altro oggetto da confrontare con quello attuale 
-      * @return Valore boolean che è true se l'oggetto attuale e quello passato come parametro sono uguali,altrimenti dà false
+      * @return  true se l'oggetto attuale e quello passato come parametro sono uguali(ovvero se hanno lo stesso numberId),altrimenti ritorna false
       * 
      */
     
