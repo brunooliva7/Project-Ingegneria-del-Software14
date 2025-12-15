@@ -20,6 +20,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -59,6 +61,26 @@ public class viewBookController implements Initializable {
 
         // 2. Carica i dati all'avvio
         loadAllBooks();
+        
+        bookTableView.setOnMouseClicked((MouseEvent event) -> {
+        // Controlla se è stato un doppio click del tasto primario del mouse
+        if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+            
+            // Ottiene il libro selezionato
+            Book selectedBook = bookTableView.getSelectionModel().getSelectedItem();
+            
+            if (selectedBook != null) {
+                try {
+                    // Chiamata per la navigazione
+                    View.updateBook(); 
+                    
+                } catch (IOException e) {
+                    System.err.println("Errore: Impossibile caricare la pagina di modifica libro.");
+                    e.printStackTrace();
+                }
+            }
+        }
+    });
     }
     
     /**
@@ -75,6 +97,7 @@ public class viewBookController implements Initializable {
             // Potresti aggiungere un messaggio Label per feedback utente
         }
     }
+    
     
     /**
      * Gestisce il ritorno alla Home Page.
