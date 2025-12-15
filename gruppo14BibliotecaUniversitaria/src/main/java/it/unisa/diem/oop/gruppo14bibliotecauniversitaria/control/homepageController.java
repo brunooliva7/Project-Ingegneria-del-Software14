@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 /**
  *
  * @author bruno
@@ -50,6 +51,8 @@ public class homepageController {
     
     @FXML
     private MenuItem cercaPrestito;
+    
+    private Model model;
     
     
     @FXML

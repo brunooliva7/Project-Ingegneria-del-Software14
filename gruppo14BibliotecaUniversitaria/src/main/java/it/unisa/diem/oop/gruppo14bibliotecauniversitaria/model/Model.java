@@ -45,6 +45,10 @@ public class Model {
     }
 
     //Getter e Setter
+
+  /*  public Model(UserManagement userManagement, BookManagement bookManagement, LoanManagement loanManagement) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
     
    
     

@@ -60,6 +60,13 @@ public class viewUserController {
     
     public void setModel(Model model) {
     this.model = model;
+    
+        
+             ObservableList<User> listaDati = FXCollections.observableArrayList(model.getUserManagement().getList().stream().sorted().collect(Collectors.toList()));
+            
+            
+            userTableView.setItems(listaDati);
+        
     }
     
     @FXML
@@ -84,14 +91,6 @@ public class viewUserController {
                 return new SimpleStringProperty("");
             }
         });
-        
-        
-        
-        
-        
-        ObservableList<User> listaDati = FXCollections.observableArrayList(model.getUserManagement().getList().stream().sorted().collect(Collectors.toList()));
-            
-        userTableView.setItems(listaDati);
         userTableView.getSortOrder().clear(); // rimuovi eventuali ordinamenti così che la tableView rispetta l'ordina naturale della lista 
        
     }
