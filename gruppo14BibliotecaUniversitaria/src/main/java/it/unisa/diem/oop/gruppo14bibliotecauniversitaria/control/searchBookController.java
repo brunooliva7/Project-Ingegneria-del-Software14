@@ -31,17 +31,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
- * FXML Controller class per la ricerca di Libri con TableView.
+ * FXML Controller class
+ * 
+ * @author maramariano
  */
 public class searchBookController implements Initializable {
     
-    // Campi di Ricerca
+    // Campi di Ricerca e Controlli
     @FXML private TextField searchField;
     @FXML private Button searchButton;
     @FXML private Button backButton; // Aggiunto per coerenza con l'altro controller
     @FXML private Label labelMessage;
     
-    // NUOVI ELEMENTI: TableView e Colonne
+    // TableView e Colonne
     @FXML private TableView<Book> bookTableView;
     @FXML private TableColumn<Book, String> titleColumn;
     @FXML private TableColumn<Book, String> authorsColumn;
@@ -50,28 +52,38 @@ public class searchBookController implements Initializable {
     @FXML private TableColumn<Book, Integer> copiesColumn; // Integer per le copie
     
     // Logica interna
-    private Model model; // Riferimento al Model iniettato
+    private Model model; // Riferimento al Model 
 
-
+    /**
+     * @brief Imposta l'istanza del Model.
+     * 
+     * @param model L'istanza del Model dell'applicazione.
+     */
     public void setModel(Model model) {
         this.model = model;
     }
     
+    /**
+     * @brief Inizializza il controller.
+     * Configura le CellValueFactory per le colonne della TableView e imposta i binding
+     * per disabilitare il pulsante di ricerca se il campo è vuoto.
+     * 
+     * @param url Posizione relativa del file FXML.
+     * @param rb Risorse specifiche per la localizzazione.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // 1. NON INIZIALIZZIAMO ObservableList, la TableView sarà vuota.
-        
-        // 2. Definizione delle CellValueFactory per le colonne (omesse, restano invariate)
+        // Definizione delle CellValueFactory per le colonne
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         authorsColumn.setCellValueFactory(new PropertyValueFactory<>("authors"));
         publicationYearColumn.setCellValueFactory(new PropertyValueFactory<>("publicationYear")); 
         ISBNColumn.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
         copiesColumn.setCellValueFactory(new PropertyValueFactory<>("availableCopies"));
         
-        // 3. Disabilita il pulsante di ricerca se il campo è vuoto
+        // Disabilita il pulsante di ricerca se il campo è vuoto
         searchButton.disableProperty().bind(searchField.textProperty().isEmpty());
         
-        // 4. Imposta il messaggio iniziale e l'azione del bottone
+        // Imposta il messaggio iniziale e l'azione del bottone
         labelMessage.setText("Cerca un libro per titolo, autore o ISBN.");
         labelMessage.setStyle("-fx-text-fill: black;");
         searchButton.setOnAction(this::search);
@@ -79,11 +91,16 @@ public class searchBookController implements Initializable {
     }
     
     /**
-     * Gestisce l'azione del pulsante di ricerca, mantenendo la logica originale.
+     * @brief Gestisce l'azione del pulsante di ricerca.
+     * 
+     * * Crea un oggetto Book criterio utilizzando la query immessa (che replica la stringa
+     * in Titolo, Autori e ISBN) e delega la ricerca unificata al Model.
+     * 
+     *  @param event L'evento di azione.
      */
     @FXML
     public void search(ActionEvent event) {
-        // 1. Controllo Model
+        // Controllo Model
         if (this.model == null) {
             labelMessage.setText("Errore di sistema: Model non iniettato.");
             labelMessage.setStyle("-fx-text-fill: red;");
@@ -92,7 +109,7 @@ public class searchBookController implements Initializable {
 
         String query = searchField.getText().trim();
         
-        // Pulisce la TableView in modo diretto
+        // Pulisce la TableView in modo diretto e resetta il messaggio
         bookTableView.getItems().clear(); 
         labelMessage.setText("Cercando...");
         labelMessage.setStyle("-fx-text-fill: black;");
@@ -103,13 +120,13 @@ public class searchBookController implements Initializable {
         }
 
         try {
-            // CREA L'OGGETTO BOOK PARZIALE
+            // Crea l'oggetto Book parziale
             Book partialBook = new Book(query);
             
-            // 🚀 CHIAMATA MVC: Esegue la ricerca tramite il Model
+            // Chiamata MVC: Esegue la ricerca tramite il Model
             List<Book> results = model.getBookManagement().search(partialBook);
             
-            // 2. Imposta l'elenco osservabile DIRETTAMENTE sulla TableView
+            // Imposta l'elenco osservabile direttamente sulla TableView
             bookTableView.setItems(FXCollections.observableArrayList(results));
             
             if (results.isEmpty()) {
@@ -132,7 +149,11 @@ public class searchBookController implements Initializable {
     }
     
     /**
-     * Gestisce l'azione del pulsante Indietro.
+     * @brief Gestisce l'azione del pulsante Indietro.
+     * 
+     * Carica la Home Page (View.Homepage()).
+     * 
+     * @param event L'evento di azione.
      */
     @FXML
     public void backPage(ActionEvent event) {
