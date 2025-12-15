@@ -1,9 +1,15 @@
 <map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book.getISBN" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book.getISBN">
-<area shape="rect" id="Node000001" title="Restituisce il valore di ISBN." alt="" coords="478,71,852,111"/>
-<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#a953028734e138bdc99ea58cd284b41f7" title="Aggiunge un libro al catalogo." alt="" coords="5,5,430,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="503,68,362,49,362,44,508,67"/>
-<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#a5c459374e69c840f80d8bcf9cb5e6cf1" title="Ricerca un libro nel catalogo." alt="" coords="5,71,430,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="460,91,431,94,430,88,465,91"/>
-<area shape="rect" id="Node000004" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#af21f22dbdda14d41210dc4b7b4b201ed" title="Modifica i dati di un libro nel catalogo." alt="" coords="5,136,430,177"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="509,114,362,138,361,133,503,114"/>
+<area shape="rect" id="Node000001" title="Restituisce il valore di ISBN." alt="" coords="950,105,1324,148"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#a953028734e138bdc99ea58cd284b41f7" title="Aggiunge un libro al catalogo." alt="" coords="478,5,902,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1050,100,901,63,844,51,844,46,903,57,1055,100"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_loan.html#a9ede5654a3f30117eedceb38fd0aa608" title="Verifica l&#39;uguaglianza logica tra due prestiti." alt="" coords="503,72,877,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="932,112,878,110,877,105,937,111"/>
+<area shape="rect" id="Node000006" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#aad308def72a49f04fbe40d19a6626240" title="Cerca prestiti nell&#39;insieme in base a criteri parziali." alt="" coords="478,139,902,181"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="932,142,903,147,902,141,937,141"/>
+<area shape="rect" id="Node000007" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_book_management.html#af21f22dbdda14d41210dc4b7b4b201ed" title="Aggiorna i dati di un libro presente nel catalogo." alt="" coords="478,205,902,248"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1055,153,903,196,845,207,844,202,901,191,1050,153"/>
+<area shape="rect" id="Node000004" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#a66c9271aa992c3f201cc356091e101f6" title="Rimuove un prestito dall&#39;insieme." alt="" coords="5,39,430,81"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="485,80,430,78,430,72,490,79"/>
+<area shape="rect" id="Node000005" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#a3109767497f8da9b16066d0798b3edf1" title="Aggiorna i dati di un prestito esistente." alt="" coords="5,105,430,148"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="485,108,431,114,430,109,490,107"/>
 </map>

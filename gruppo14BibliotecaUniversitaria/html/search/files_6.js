@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['view_2ejava_0',['View.java',['../_view_8java.html',1,'']]]
+  ['searchusercontroller_2ejava_0',['searchUserController.java',['../search_user_controller_8java.html',1,'']]]
 ];

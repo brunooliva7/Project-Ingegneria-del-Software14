@@ -1,0 +1,7 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.homepageController.searchUser" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.homepageController.searchUser">
+<area shape="rect" id="Node000001" title="Gestisce il click su &quot;Cerca Utente&quot;." alt="" coords="5,5,415,48"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1view_1_1_view.html#a1d1d1fb804de457637d5bf6e6809f10c" title="Carica la schermata per la ricerca degli utenti." alt="" coords="463,5,799,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="415,24,450,27,444,27,415,29"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller.html#a9e5b3b3f6e0e3869939e08d01ad08539" title=" " alt="" coords="847,5,1235,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="799,24,834,27,829,27,799,29"/>
+</map>

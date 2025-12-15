@@ -1,0 +1,4 @@
+var classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1loan_view_controller =
+[
+    [ "setModel", "classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1loan_view_controller.html#ad4625f3a02a0d77a100b21d6bebacff6", null ]
+];

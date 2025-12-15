@@ -1,5 +1,15 @@
 <map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User.getNumberId" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User.getNumberId">
-<area shape="rect" id="Node000001" title="Restituisce la matricola dell&#39;utente." alt="" coords="478,5,852,46"/>
-<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_user_management.html#a50eb28e8f2c864d212be72774afae84a" title="Metodo che permette di cercare un utente nell&#39;elenco tramite cognome o matricola." alt="" coords="5,5,430,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="460,26,430,28,430,23,465,26"/>
+<area shape="rect" id="Node000001" title="Restituisce la matricola dell&#39;utente." alt="" coords="950,105,1324,148"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1delete_user_controller.html#abb12c34f905e5c5a3bd09d9e926a2329" title=" " alt="" coords="498,5,882,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1050,100,901,63,844,51,844,46,903,57,1055,100"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_loan.html#a9ede5654a3f30117eedceb38fd0aa608" title="Verifica l&#39;uguaglianza logica tra due prestiti." alt="" coords="503,72,877,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="932,112,878,110,877,105,937,111"/>
+<area shape="rect" id="Node000006" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#aad308def72a49f04fbe40d19a6626240" title="Cerca prestiti nell&#39;insieme in base a criteri parziali." alt="" coords="478,139,902,181"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="932,142,903,147,902,141,937,141"/>
+<area shape="rect" id="Node000007" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_user_management.html#aeafa5f9c1b53f7f5d5b3c7704ac8aa29" title="Metodo che permette di cercare un utente nell&#39;elenco tramite cognome o matricola." alt="" coords="478,205,902,248"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1055,153,903,196,845,207,844,202,901,191,1050,153"/>
+<area shape="rect" id="Node000004" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#a66c9271aa992c3f201cc356091e101f6" title="Rimuove un prestito dall&#39;insieme." alt="" coords="5,39,430,81"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="485,80,430,78,430,72,490,79"/>
+<area shape="rect" id="Node000005" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#a3109767497f8da9b16066d0798b3edf1" title="Aggiorna i dati di un prestito esistente." alt="" coords="5,105,430,148"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="485,108,431,114,430,109,490,107"/>
 </map>

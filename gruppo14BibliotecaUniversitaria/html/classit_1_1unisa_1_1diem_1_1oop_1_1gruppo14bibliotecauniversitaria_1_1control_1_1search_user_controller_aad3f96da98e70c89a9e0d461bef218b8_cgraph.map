@@ -1,0 +1,7 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchUserController.initialize" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchUserController.initialize">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,39,394,81"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_user.html#aec6b5cd44441cb4e81402cd9e20cd7df" title="Restituisce la mappa di libri&#45;dataRestituzione dell&#39;utente." alt="" coords="449,5,823,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="394,42,436,42,430,43,395,48"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1search_user_controller.html#a29b2922fdbeb503bb371d0c79ff70b4e" title=" " alt="" coords="442,72,830,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="394,72,429,77,423,77,394,78"/>
+</map>

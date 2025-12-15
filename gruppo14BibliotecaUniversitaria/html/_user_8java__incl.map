@@ -1,9 +1,9 @@
 <map id="src/main/java/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/model/data/User.java" name="src/main/java/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/model/data/User.java">
-<area shape="rect" id="Node000001" title=" " alt="" coords="67,5,327,61"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,109,136,135"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,61,102,102,99,98,155,62"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="160,109,235,135"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,59,199,95,195,92,195,63"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="259,109,396,135"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="239,59,300,100,294,100,237,64"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="67,5,327,64"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,112,136,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,64,102,105,99,101,153,65"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="160,112,235,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,62,199,97,195,95,195,66"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="259,112,396,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="240,62,299,103,294,103,239,67"/>
 </map>

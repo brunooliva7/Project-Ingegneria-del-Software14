@@ -1,0 +1,7 @@
+<map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View.viewLoan" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View.viewLoan">
+<area shape="rect" id="Node000001" title="Carica la schermata per visualizzare l&#39;elenco dei prestiti." alt="" coords="5,5,342,48"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1control_1_1loan_view_controller.html#ad4625f3a02a0d77a100b21d6bebacff6" title="Inietta il modello e popola la tabella dei prestiti." alt="" coords="390,5,763,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="342,24,377,27,372,27,342,29"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_loan_management.html#ac04fc15bf836c418b4b2f61ab7c24e21" title="Restituisce l&#39;insieme dei prestiti gestiti." alt="" coords="811,5,1235,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="763,24,798,27,793,27,763,29"/>
+</map>

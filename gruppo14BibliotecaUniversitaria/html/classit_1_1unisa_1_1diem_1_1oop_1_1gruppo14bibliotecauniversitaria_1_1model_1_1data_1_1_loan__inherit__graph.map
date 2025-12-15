@@ -1,7 +1,7 @@
 <map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan">
-<area shape="rect" id="Node000001" title="Gestisce i dati relativi al prestito di un libro ad un utente." alt="" coords="5,79,408,105"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="66,5,209,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,39,197,79,192,78,158,44"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="233,5,321,31"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="257,41,220,81,217,76,252,43"/>
+<area shape="rect" id="Node000001" title="Gestisce i dati relativi al prestito di un libro ad un utente." alt="" coords="5,80,408,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="66,5,209,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,41,197,80,192,79,158,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="233,5,321,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="257,42,220,82,217,77,252,44"/>
 </map>

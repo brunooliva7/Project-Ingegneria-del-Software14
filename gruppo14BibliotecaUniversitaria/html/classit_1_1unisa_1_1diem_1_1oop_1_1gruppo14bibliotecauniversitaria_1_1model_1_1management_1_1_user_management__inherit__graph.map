@@ -1,7 +1,7 @@
 <map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement">
-<area shape="rect" id="Node000001" title="UserManagement è una classe che si occupa essenzialmente delle funzionalità messe a disposizione per ..." alt="" coords="478,35,902,75"/>
-<area shape="rect" id="Node000002" href="$interfaceit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_functionality.html" title=" " alt="" coords="5,5,430,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="445,37,480,42,475,42,445,42"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="173,70,262,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="277,77,480,67,475,68,277,82"/>
+<area shape="rect" id="Node000001" title="UserManagement è una classe che si occupa essenzialmente delle funzionalità messe a disposizione per ..." alt="" coords="478,35,902,77"/>
+<area shape="rect" id="Node000002" href="$interfaceit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1management_1_1_functionality.html" title=" " alt="" coords="5,5,430,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="445,38,480,43,475,43,445,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="173,72,262,99"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="277,79,475,69,480,69,277,84"/>
 </map>

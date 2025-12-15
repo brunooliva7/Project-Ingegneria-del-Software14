@@ -1,15 +1,15 @@
 <map id="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement.update" name="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement.update">
-<area shape="rect" id="Node000001" title="Modifica i dati di un libro nel catalogo." alt="" coords="5,169,430,210"/>
-<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#a2d3c8c03ad60a1076447e2d8288db2c2" title="Restituisce il valore di authors." alt="" coords="487,5,861,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="251,166,350,111,412,81,477,56,510,49,505,51,479,62,414,86,352,116,254,171"/>
-<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#a55b08b07f3f5bbdc56dc3f07bd7b47ca" title="Restituisce il valore di availableCopies." alt="" coords="487,71,861,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="294,166,477,122,530,114,525,116,478,127,296,171"/>
-<area shape="rect" id="Node000004" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#a3aa6d9d0a4ac5aaf20810596c5c76e0c" title="Restituisce il valore di ISBN." alt="" coords="487,136,861,177"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="429,172,474,170,469,172,430,177"/>
-<area shape="rect" id="Node000005" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#ac0132396eb233465de3d5c2ed2629edc" title="Restituisce il valore di publicationYear." alt="" coords="487,201,861,242"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="429,202,474,207,469,208,430,207"/>
-<area shape="rect" id="Node000006" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#accfb19954586c04c242f133ee6387c31" title="Restituisce il valore di title." alt="" coords="487,267,861,307"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="297,208,478,251,530,263,525,264,477,256,297,213"/>
-<area shape="rect" id="Node000007" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager.html#abde472b5151e1a37b2b29180fbe209e4" title="Aggiorna il file sostituendo il contenuto con un nuovo Set di oggetti." alt="" coords="478,332,870,373"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="253,208,353,263,414,292,479,316,511,328,506,328,477,322,412,297,350,268,252,213"/>
+<area shape="rect" id="Node000001" title="Aggiorna i dati di un libro presente nel catalogo." alt="" coords="5,172,430,215"/>
+<area shape="rect" id="Node000002" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#a2d3c8c03ad60a1076447e2d8288db2c2" title="Restituisce il valore di authors." alt="" coords="487,5,861,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="251,169,350,113,412,83,477,57,505,51,501,54,479,63,414,88,353,118,254,174"/>
+<area shape="rect" id="Node000003" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#a55b08b07f3f5bbdc56dc3f07bd7b47ca" title="Restituisce il valore di availableCopies." alt="" coords="487,72,861,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="296,169,477,124,523,117,518,119,478,129,298,174"/>
+<area shape="rect" id="Node000004" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#a3aa6d9d0a4ac5aaf20810596c5c76e0c" title="Restituisce il valore di ISBN." alt="" coords="487,139,861,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="429,175,474,174,469,176,430,180"/>
+<area shape="rect" id="Node000005" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#ade0288c6fb77a6dcab9a095553835394" title="Restituisce il valore di publicationYear." alt="" coords="487,205,861,248"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="429,206,474,211,469,212,430,211"/>
+<area shape="rect" id="Node000006" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1data_1_1_book.html#accfb19954586c04c242f133ee6387c31" title="Restituisce il valore di title." alt="" coords="487,272,861,315"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="297,213,478,257,523,268,518,269,477,263,297,218"/>
+<area shape="rect" id="Node000007" href="$classit_1_1unisa_1_1diem_1_1oop_1_1gruppo14bibliotecauniversitaria_1_1model_1_1storage_1_1_file_manager.html#abde472b5151e1a37b2b29180fbe209e4" title="Aggiorna il file sostituendo il contenuto con un nuovo Set di oggetti." alt="" coords="478,339,870,381"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="253,213,353,269,414,299,479,324,506,334,500,334,477,329,412,304,350,274,252,218"/>
 </map>
