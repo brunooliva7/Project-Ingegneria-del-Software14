@@ -35,6 +35,9 @@ public class modifycredentialController {
     @FXML 
     private Label labelMessage;
     
+    @FXML
+    private Button backButton;
+    
     @FXML 
     public void initialize(){
         passwordModified.disableProperty().bind(pin.textProperty().isEmpty().or(usernameModified.disableProperty()));
@@ -61,5 +64,22 @@ public class modifycredentialController {
         }
         
     } 
+    
+    @FXML
+    private void handleBack() {
+        try {
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
+                getClass().getResource("/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/view/login.fxml")
+            );
+            javafx.scene.Parent root = loader.load();
+
+            // Ottieni la finestra corrente e sostituisci la scena
+            javafx.stage.Stage stage = (javafx.stage.Stage) backButton.getScene().getWindow();
+            stage.setScene(new javafx.scene.Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            labelMessage.setText("Errore nel caricamento della login page");
+        }
+    }
 }
 
