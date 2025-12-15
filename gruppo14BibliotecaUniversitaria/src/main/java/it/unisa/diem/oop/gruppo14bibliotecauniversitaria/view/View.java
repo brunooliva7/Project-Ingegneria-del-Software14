@@ -124,7 +124,7 @@ public class View extends Application {
      
      public static void modifyUser() throws IOException {
         
-        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/prova.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificautente.fxml"));
         
         Scene scene = new Scene(fxmlLoader.load());
         
@@ -155,20 +155,19 @@ public class View extends Application {
     }
      
      public static void searchUser() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/ricercautente.fxml"));
         
-            FXMLLoader loader = new FXMLLoader(View.class.getResource("/ricercautente.fxml")); 
-            Parent root = loader.load();
-
-            Stage popupStage = new Stage();
-            popupStage.setTitle("RicercaUtente");
-            popupStage.setScene(new Scene(root));
-
-
-            popupStage.initModality(Modality.APPLICATION_MODAL);
-
-            popupStage.setResizable(false);
-
-            popupStage.showAndWait();
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("VisualizzaUtenti");
+        mainStage.setScene(scene);
+        
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show(); 
+        
   }
     
     public static void viewUSers() throws IOException {

@@ -11,6 +11,7 @@
 
     <!-- Bottone Indietro -->
     <Button fx:id="backButton" text="← Indietro"
+            onAction="#backHomepage"
             AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20"
             style="-fx-background-color: #F97316; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16; -fx-background-radius: 10; -fx-padding: 8 16;">
         <effect>
@@ -39,7 +40,7 @@
                         <!-- Ricerca -->
                         <HBox spacing="10">
                             <TextField fx:id="searchField" promptText="Cerca utente per nome o matricola" HBox.hgrow="ALWAYS"/>
-                            <Button fx:id="searchButton" text="Cerca"/>
+                            <Button fx:id="searchButton" text="Cerca" onAction="#search" />
                         </HBox>
 
                         <!-- Label messaggi -->
@@ -51,6 +52,7 @@
                                 <TableColumn fx:id="nomeColumn" text="Nome" prefWidth="170"/>
                                 <TableColumn fx:id="cognomeColumn" text="Cognome" prefWidth="170"/>
                                 <TableColumn fx:id="matricolaColumn" text="Matricola" prefWidth="170"/>
+                                
                             </columns>
                         </TableView>
 
@@ -73,7 +75,7 @@
                         <TextField fx:id="surnameField" promptText="Cognome"/>
                         <TextField fx:id="emailField" promptText="Email"/>
                         <TextField fx:id="numberidField" promptText="Matricola"/>
-                        <Button fx:id="confirmButton" text="Conferma Modifica"
+                        <Button fx:id="confirmButton" text="Conferma Modifica" onAction="#confirm" 
                                 style="-fx-background-color: #FF7043; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
                     </VBox>
                 </children>

@@ -7,6 +7,8 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javafx.collections.ObservableList;
@@ -108,4 +110,9 @@ public class searchUserController {
         labelMessage.setText(""); // pulisco messaggio se ci sono risultati
     }
         }
+    
+     @FXML
+    public void backPage() throws IOException{
+        View.Homepage();
+    } 
     }

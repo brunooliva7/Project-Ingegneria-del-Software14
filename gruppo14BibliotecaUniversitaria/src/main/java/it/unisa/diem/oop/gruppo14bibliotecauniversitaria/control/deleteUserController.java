@@ -117,8 +117,23 @@ public class deleteUserController {
             labelMessage.setStyle("-fx-text-fill: red;");
             return;
         }
+            // Pulizia eventuale degli spazi
+        selectedUser.setNumberId(selectedUser.getNumberId().trim());
+        // Trova l'utente reale nella lista interna
+           User userToRemove = null;
+           for (User u : userManagement.getList()) {  // Assicurati che getAllUsers ritorni la lista interna
+            if (u.getNumberId().equals(selectedUser.getNumberId())) {
+                userToRemove = u;
+                  break;
+        }
+    }
+        if (userToRemove == null) {
+        labelMessage.setText("Errore: utente non trovato nella lista interna");
+        labelMessage.setStyle("-fx-text-fill: red;");
+        return;
+    }
 
-        boolean removed = userManagement.remove(selectedUser);
+        boolean removed = userManagement.remove(userToRemove);
 
         if (removed) {
             userTableViewricerca.getItems().remove(selectedUser);
