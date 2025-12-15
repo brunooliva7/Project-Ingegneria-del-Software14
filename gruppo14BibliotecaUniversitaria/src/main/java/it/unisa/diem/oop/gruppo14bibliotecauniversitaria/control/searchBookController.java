@@ -3,115 +3,92 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View; // Assumendo che esista
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.event.ActionEvent;
+package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
 /**
  * FXML Controller class
  *
  * @author maramariano
  */
+
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+/**
+ * FXML Controller class per la ricerca di Libri con TableView.
+ */
 public class searchBookController implements Initializable {
     
     // Campi di Ricerca
-    @FXML 
-    private TextField searchField;
-    @FXML 
-    private Button searchButton;
-
-    // Campi di Dettaglio del Libro (in lettura)
-    @FXML 
-    private TextField titleField;
-    @FXML 
-    private TextField authorsField;
-    @FXML 
-    private TextField publicationYearField; 
-    @FXML 
-    private TextField ISBNField;
-    @FXML 
-    private TextField availableCopiesField; 
+    @FXML private TextField searchField;
+    @FXML private Button searchButton;
+    @FXML private Button backButton; // Aggiunto per coerenza con l'altro controller
+    @FXML private Label labelMessage;
     
-    @FXML 
-    private Label labelMessage;
+    // NUOVI ELEMENTI: TableView e Colonne
+    @FXML private TableView<Book> bookTableView;
+    @FXML private TableColumn<Book, String> titleColumn;
+    @FXML private TableColumn<Book, String> authorsColumn;
+    @FXML private TableColumn<Book, Integer> publicationYearColumn; // Integer è più appropriato per l'anno
+    @FXML private TableColumn<Book, String> ISBNColumn;
+    @FXML private TableColumn<Book, Integer> copiesColumn; // Integer per le copie
     
     // Logica interna
     private final BookManagement bookManager = new BookManagement();
+    private ObservableList<Book> bookList; // Lista osservabile per la TableView
     
-    @FXML
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // 1. Disabilita i campi di dettaglio (sono solo in lettura)
-        setFieldsEditable(false);
         
-        // 2. Disabilita il pulsante di ricerca se il campo è vuoto
+        // 1. Inizializzazione della ObservableList
+        bookList = FXCollections.observableArrayList();
+        bookTableView.setItems(bookList);
+        
+        // 2. Definizione delle CellValueFactory per le colonne
+        // Queste stringhe devono corrispondere esattamente ai nomi dei getter (es. getTitle -> "title") nel modello Book.
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        authorsColumn.setCellValueFactory(new PropertyValueFactory<>("authors"));
+        
+        // Assicurati che il getter in Book restituisca un tipo coerente con la colonna (es. String o Integer)
+        publicationYearColumn.setCellValueFactory(new PropertyValueFactory<>("publicationYear")); 
+        ISBNColumn.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+        copiesColumn.setCellValueFactory(new PropertyValueFactory<>("availableCopies"));
+        
+        // 3. Disabilita il pulsante di ricerca se il campo è vuoto
         searchButton.disableProperty().bind(searchField.textProperty().isEmpty());
         
-        // 3. Imposta il messaggio iniziale
+        // 4. Imposta il messaggio iniziale e l'azione del bottone
         labelMessage.setText("Cerca un libro per titolo, autore o ISBN.");
         labelMessage.setStyle("-fx-text-fill: black;");
-        
-        // 4. Pulisci la vista (opzionale, se l'FXML lo richiede)
-        clearFields();
+        searchButton.setOnAction(this::search); // Collega l'azione di ricerca al bottone
     }
     
     /**
-     * Helper: Imposta lo stato di modificabilità dei campi.
-     */
-    @FXML
-    private void setFieldsEditable(boolean editable) {
-        titleField.setEditable(editable);
-        authorsField.setEditable(editable);
-        publicationYearField.setEditable(editable);
-        ISBNField.setEditable(editable);
-        availableCopiesField.setEditable(editable);
-    }
-    
-    /**
-     * Helper: Pulisce i campi di dettaglio.
-     */
-    @FXML
-    private void clearFields() {
-        titleField.clear();
-        authorsField.clear();
-        publicationYearField.clear();
-        ISBNField.clear();
-        availableCopiesField.clear();
-    }
-
-    /**
-     * Helper: Popola i campi con i dati del Libro.
-     */
-    @FXML
-    private void populateFields(Book book) {
-        titleField.setText(book.getTitle());
-        authorsField.setText(book.getAuthors());
-        publicationYearField.setText(book.getPublicationYear()); // String
-        ISBNField.setText(book.getISBN());
-        availableCopiesField.setText(String.valueOf(book.getAvailableCopies())); // Int -> String
-    }
-    
-    /**
-     * Gestisce l'azione del pulsante di ricerca.
+     * Gestisce l'azione del pulsante di ricerca, mantenendo la logica originale.
      */
     @FXML
     public void search(ActionEvent event) {
         String query = searchField.getText().trim();
         
-        // 1. Pulisce la vista prima di cercare
-        clearFields();
+        // 1. Pulisce la TableView prima di cercare
+        bookList.clear(); 
         labelMessage.setText("Cercando...");
         labelMessage.setStyle("-fx-text-fill: black;");
 
@@ -121,11 +98,11 @@ public class searchBookController implements Initializable {
         }
 
         try {
-            // 2. CREA L'OGGETTO BOOK PARZIALE (la logica di discriminazione è in Book.java)
-            Book partialBook = new Book(query); 
+            // 2. CREA L'OGGETTO BOOK PARZIALE (Logica mantenuta)
+            Book partialBook = new Book(query);
             
             // 3. Esegue la ricerca
-            List<Book> results = bookManager.search(partialBook); 
+            List<Book> results = bookManager.search(partialBook);
             
             if (results.isEmpty()) {
                 labelMessage.setText("Nessun libro trovato per la query: " + query);
@@ -133,15 +110,13 @@ public class searchBookController implements Initializable {
                 return;
             }
 
-            // 4. Popola i campi con il primo risultato trovato
-            Book foundBook = results.get(0);
-            populateFields(foundBook);
+            // 4. Popola la TableView con tutti i risultati (NUOVA LOGICA)
+            bookList.addAll(results);
             
-            labelMessage.setText("Libro trovato: " + foundBook.getTitle() + ".");
+            labelMessage.setText(results.size() + " libro(i) trovato(i).");
             labelMessage.setStyle("-fx-text-fill: green;");
             
         } catch (IllegalArgumentException e) {
-            // Questo cattura le eccezioni lanciate dal costruttore/manager se l'input è invalido (es. anno non valido)
             labelMessage.setText("Errore: " + e.getMessage());
             labelMessage.setStyle("-fx-text-fill: red;");
         } catch (Exception e) {
@@ -151,6 +126,9 @@ public class searchBookController implements Initializable {
         }
     }
     
+    /**
+     * Gestisce l'azione del pulsante Indietro.
+     */
     @FXML
     public void backPage(ActionEvent event) {
         try {
@@ -161,3 +139,4 @@ public class searchBookController implements Initializable {
         }
     }
 }
+
