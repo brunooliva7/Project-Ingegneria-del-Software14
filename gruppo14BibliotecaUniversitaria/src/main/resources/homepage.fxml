@@ -72,18 +72,11 @@
                                 <Label style="-fx-font-size: 16; -fx-font-weight: bold;" text="Libro" />
                                 <MenuButton text="Operazioni">
                                     <items>
-                                        <MenuItem text="Aggiungi" />
-                                        <MenuItem text="Modifica" />
-                                        <MenuItem text="Cancella" />
-                                        <MenuItem text="Cerca" />
-
-
-                                        <MenuItem fx:id="visualizzaElencoPrestito" text="Visualizza elenco libri" />
-                                        <MenuItem fx:id="visualizzaElencoPrestito" text="Visualizza elenco libri" />
-
-
-                                        <MenuItem fx:id="visualizzaElencoPrestito" text="Visualizza elenco libri" />
-
+                                        <MenuItem fx:id="aggiungiLibro" text="Aggiungi" onAction="#addBook"/>
+                                        <MenuItem fx:id="modificaLibro" text="Modifica" onAction="#updateBook"/>
+                                        <MenuItem fx:id="cancellaLibro" text="Cancella" onAction="#deleteBook"/>
+                                        <MenuItem fx:id="cercaLibro" text="Cerca" onAction="#searchBook"/>
+                                        <MenuItem fx:id="visualizzaElencoLibro" text="Visualizza elenco libri" onAction="#viewBooks"/>
                                     </items>
                                 </MenuButton>
                             </children>

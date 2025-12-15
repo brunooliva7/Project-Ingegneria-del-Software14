@@ -208,4 +208,28 @@ public class Loan implements Comparable<Loan>,Serializable {
     return this.user.equals(other.user) && 
            this.book.equals(other.book);
     }
+    
+    public String getName() {
+        return user.getName(); // Restituisce il nome dall'oggetto User
+    }
+
+    public String getSurname() {
+        return user.getSurname();
+    }
+
+    public String getNumberId() {
+        return user.getNumberId(); // O getMatricola() a seconda di come l'hai chiamato
+    }
+
+    public String getTitle() {
+        return book.getTitle();
+    }
+
+    public String getAuthors() {
+        return book.getAuthors();
+    }
+
+    public String getISBN() {
+        return book.getISBN();
+    }
 }

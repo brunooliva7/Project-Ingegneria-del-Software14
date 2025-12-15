@@ -9,12 +9,11 @@
  * 
  * @author maramariano
  * @date 04-12-2025
- * @version 1.0
  *  
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data;
+
 import java.io.Serializable;
-import java.time.LocalDate;
         
 /**
  * @class Book
@@ -32,17 +31,21 @@ public class Book implements Comparable<Book>,Serializable {
     
     private String title; ///< Titolo del libro
     private String authors; ///< Autore/i
-    private String publicationYear; ///< Anno di pubblicazione
+    private String publicationYear; ///< Anno di pubblicazione (formato AAAA)
     private String ISBN; ///< Codice identificativo univoco
     private int availableCopies; ///< Numero di copie disponibili
     
     /**
-    * @brief Costruttore della classe Book
+    * @brief Costruttore della classe Book per l'inizializzazione completa dei dati
+    * 
     * @param title Titolo del libro
     * @param authors Autori del libro
     * @param publicationYear Anno di pubblicazione del libro
     * @param ISBN Codice ISBN
     * @param availableCopies Numero di copie disponibili
+    * 
+    * @throws IllegalArgumentException se availableCopies è negativo o se publicationYear non è una stringa di 4 cifre
+    * 
     * @pre availableCopies >= 0
     * @post L'oggetto Book è correttamente inizializzato
     * 
@@ -65,16 +68,27 @@ public class Book implements Comparable<Book>,Serializable {
         this.availableCopies = availableCopies;
     }
     
+    /**
+     * @brief Costruttore della classe Book per la ricerca parziale
+     * 
+     * Inizializza l'oggetto Book compilando solo il campo necessario 
+     * Gli altri campi rimangono nulli
+     * 
+     * @param inputRicerca Stringa di input fornita dall'utente
+     * 
+     * @post L'oggetto Book è inizializzato con i campi necessari alla ricerca parziale
+     * 
+     */
     public Book (String inputRicerca ){  //overload del costruttore,sarà utilizzato solo ai fini della ricerca dell'utente
         
-     // 1. Inizializziamo tutto a null di default
+     // Inizializziamo tutto a null di default
         this.title = null;
         this.authors = null;
         this.publicationYear = null;
         this.ISBN = null;
         this.availableCopies = 0;
 
-    // 2. Protezione anti-crash: se la stringa è null o vuota, ci fermiamo qui.
+    // Protezione anti-crash: se la stringa è null o vuota, ci fermiamo qui
          if (inputRicerca == null || inputRicerca.trim().isEmpty()) {
             return; 
         }
@@ -85,27 +99,30 @@ public class Book implements Comparable<Book>,Serializable {
         // Usiamo una REGEX interna per non dipendere da variabili esterne
         final String isbnPattern = "^[0-9]{9,17}([Xx])?$";
         
-        // 3. Logica di Discriminazione:
-    
+        // Logica di Discriminazione:
         // Se l'input sembra un codice ISBN (solo numeri, trattini, e forse X finale)
         if (cleanInput.matches(isbnPattern)) {
-            // Se è un ISBN, inizializza SOLO il campo ISBN.
+            // Se è un ISBN, inizializza SOLO il campo ISBN
             this.ISBN = cleanInput;
 
         } else if (cleanInput.contains(" ")) {
-            // Se contiene spazi, è più probabile che sia un Titolo (o Autori).
-            // Inizializza SOLO il campo Titolo.
+            // Se contiene spazi, è più probabile che sia un Titolo (o Autori)
+            // Inizializza SOLO il campo Titolo
             this.title = cleanInput;
 
         } else {
-            // Non è un ISBN e non ha spazi. Trattalo come Titolo (parziale) o Autore.
+            // Non è un ISBN e non ha spazi. Trattalo come Titolo (parziale) o Autore
             this.title = cleanInput;
         }
     }
 
+    // --- SETTER ---
+    
     /**
     * @brief Imposta il valore del titolo
+    * 
     * @param title Nuovo titolo da assegnare
+    * 
     * @post Il titolo è aggiornato
     * 
     */
@@ -115,7 +132,9 @@ public class Book implements Comparable<Book>,Serializable {
 
     /**
     * @brief Imposta gli autori del libro
+    * 
     * @param authors Nuovi autori da assegnare
+    * 
     * @post Gli autori del libro sono aggiornati
     * 
     */
@@ -125,7 +144,9 @@ public class Book implements Comparable<Book>,Serializable {
 
     /**
     * @brief Imposta l'anno di pubblicazione del libro
+    * 
     * @param publicationYear Nuovo anno da assegnare
+    * 
     * @post La data di pubblicazione è aggiornata
     * 
     */
@@ -135,7 +156,9 @@ public class Book implements Comparable<Book>,Serializable {
 
     /**
     * @brief Imposta il codice ISBN del libro
+    * 
     * @param ISBN Nuovo codice da assegnare
+    * 
     * @post Il codice identificativo è aggiornato
     * 
     */
@@ -145,6 +168,7 @@ public class Book implements Comparable<Book>,Serializable {
 
     /**
     * @brief Imposta il numero di copie disponibili
+    * 
     * @param availableCopies Nuovo numero di copie disponibili
     * 
     * @throws IllegalArgumentException se availableCopies è negativo
@@ -161,8 +185,11 @@ public class Book implements Comparable<Book>,Serializable {
         this.availableCopies = availableCopies;
     }
 
+    // --- GETTER ---
+    
     /**
     * @brief Restituisce il valore di title
+    * 
     * @return Titolo del libro (stringa)
     * 
     */
@@ -172,6 +199,7 @@ public class Book implements Comparable<Book>,Serializable {
 
     /**
     * @brief Restituisce il valore di authors
+    * 
     * @return Autore/i del libro (stringa)
     * 
     */
@@ -181,6 +209,7 @@ public class Book implements Comparable<Book>,Serializable {
 
     /**
     * @brief Restituisce il valore di publicationYear
+    * 
     * @return Anno di pubblicazione del libro (String)
     * 
     */
@@ -190,6 +219,7 @@ public class Book implements Comparable<Book>,Serializable {
 
     /**
     * @brief Restituisce il valore di ISBN
+    * 
     * @return Codice identificativo del libro (stringa)
     * 
     */
@@ -199,6 +229,7 @@ public class Book implements Comparable<Book>,Serializable {
 
     /**
     * @brief Restituisce il valore di availableCopies
+    * 
     * @return Disponibilità di un libro nel catalogo (int)
     * 
     */
@@ -209,7 +240,7 @@ public class Book implements Comparable<Book>,Serializable {
     /**
     * @brief Confronta due libri per ordinamento alfabetico dei titoli
     * 
-    * L'ordinamento avviene in base al titolo (case-insensitive). 
+    * L'ordinamento avviene in base al titolo (case-insensitive)
     * Se i titoli sono uguali, il confronto viene effettuato sugli autori (case-insensitive)
     * 
     * @param other Altro libro da confrontare con quello corrente
@@ -240,10 +271,12 @@ public class Book implements Comparable<Book>,Serializable {
     * Due oggetti Book sono considerati uguali se hanno lo stesso codice ISBN
     * 
     * @param obj Oggetto da confrontare con quello corrente
+    * 
     * @return true se i due libri hanno lo stesso codice identificativo, false altrimenti
     * 
     * @pre obj può essere null
     * @post Restituisce un valore booleano coerente con l'identità del libro
+    * 
     */
     @Override
     public boolean equals(Object obj) {
@@ -257,7 +290,7 @@ public class Book implements Comparable<Book>,Serializable {
     /**
     * @brief Restituisce il codice hash dell'oggetto Book
     * 
-    * Il valore restituito è calcolato in base al codice ISBN, in modo coerente con il metodo equals.
+    * Il valore restituito è calcolato in base al codice ISBN
     * 
     * @return Valore intero che rappresenta l'hash del libro
     * 

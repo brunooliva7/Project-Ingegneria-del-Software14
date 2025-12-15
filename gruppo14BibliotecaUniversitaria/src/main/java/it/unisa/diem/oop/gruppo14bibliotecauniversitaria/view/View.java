@@ -226,7 +226,7 @@ public class View extends Application {
         
         Scene scene = new Scene(fxmlLoader.load());
         
-        mainStage.setTitle("Cancella Libro");
+        mainStage.setTitle("Modifica Libro");
         mainStage.setScene(scene);
         
         mainStage.setResizable(true);
@@ -243,7 +243,7 @@ public class View extends Application {
         
         Scene scene = new Scene(fxmlLoader.load());
         
-        mainStage.setTitle("Visualizzo libro");
+        mainStage.setTitle("Visualizza Libri");
         mainStage.setScene(scene);
         
         mainStage.setResizable(true);

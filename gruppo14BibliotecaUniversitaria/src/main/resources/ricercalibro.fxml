@@ -49,10 +49,10 @@
       <children>
          <Label layoutX="144.0" layoutY="14.0" prefHeight="35.0" prefWidth="161.0" style="-fx-font-size: 24; -fx-text-fill: white; -fx-font-weight: bold;" text="DATI LIBRO" />
          <TextField fx:id="titleField" layoutX="135.0" layoutY="68.0" prefHeight="29.0" prefWidth="179.0" promptText="Titolo" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
-         <TextField fx:id="authorsField" layoutX="135.0" layoutY="117.0" prefHeight="29.0" prefWidth="179.0" promptText="Cognome" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
-         <TextField fx:id="publicationYearField" layoutX="135.0" layoutY="168.0" prefHeight="29.0" prefWidth="179.0" promptText="Email" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
-         <TextField fx:id="ISBNField" layoutX="135.0" layoutY="215.0" prefHeight="29.0" prefWidth="179.0" promptText="Matricola" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
-         <TextField fx:id="availableCopiesField" layoutX="266.0" layoutY="215.0" prefHeight="29.0" prefWidth="179.0" promptText="Matricola" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
+         <TextField fx:id="authorsField" layoutX="135.0" layoutY="117.0" prefHeight="29.0" prefWidth="179.0" promptText="Autori" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
+         <TextField fx:id="publicationYearField" layoutX="135.0" layoutY="168.0" prefHeight="29.0" prefWidth="179.0" promptText="Anno di pubblicazione" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
+         <TextField fx:id="ISBNField" layoutX="135.0" layoutY="215.0" prefHeight="29.0" prefWidth="179.0" promptText="ISBN" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
+         <TextField fx:id="availableCopiesField" layoutX="266.0" layoutY="215.0" prefHeight="29.0" prefWidth="179.0" promptText="Numero di copie disponibili" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
       </children>
    </AnchorPane>
 
