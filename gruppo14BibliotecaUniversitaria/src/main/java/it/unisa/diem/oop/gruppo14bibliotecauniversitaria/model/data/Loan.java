@@ -19,13 +19,14 @@ import java.util.Objects;
 
 /**
  * @class Loan
- * @brief Gestisce i dati relativi al prestito di un libro ad un utente
+ * @brief Gestisce i dati relativi al prestito di un libro ad un utente.
  *
- * La classe Loan associa un libro ad un utente e registra la data di restituzione.
- * Implementa l'interfaccia Comparable per consentire l'ordinamento dei prestiti per data di scadenza
+ * La classe Loan associa un libro ad un utente e registra la data di restituzione prevista.
+ * Implementa l'interfaccia Comparable per consentire l'ordinamento dei prestiti in base alla data di scadenza.
+ * Implementa Serializable per la persistenza dei dati.
  * 
- * @see Comparable
- * 
+ * @see Comparable<Loan>
+ * @see Serializable
  */
 public class Loan implements Comparable<Loan>,Serializable {
     
@@ -34,19 +35,28 @@ public class Loan implements Comparable<Loan>,Serializable {
     private LocalDate dueDate; ///< Data di restituzione
     
     /**
-     * @brief Costruttore della classe Loan
-     * @param book Libro prestato
-     * @param user Utente che ha preso il libro
-     * @param dueDate Data di scadenza del prestito
-     * 
-     * @pre book != null && user != null && dueDate != null
-     * @post L'oggetto Loan è inizializzato
+     * @brief Costruttore principale della classe Loan.
+     * * @param book Libro da prestare.
+     * @param user Utente che richiede il prestito.
+     * @param dueDate Data di scadenza del prestito.
+     * * @pre book != null && user != null && dueDate != null.
+     * @post Viene creato un nuovo oggetto Loan con i dati specificati.
      */
     public Loan(Book book, User user, LocalDate dueDate) {
         this.book = book; 
         this.user = user;  
         this.dueDate = dueDate; 
     }
+    
+    /**
+     * @brief Costruttore secondario utilizzato per i filtri di ricerca.
+     * * Questo costruttore crea un oggetto Loan "parziale" o "fittizio", inizializzando
+     * User o Book solo con i dati parziali (Matricola/ISBN o Nome/Titolo) ricevuti dalle barre di ricerca.
+     * * @param inputRicerca1 Stringa di input per l'Utente (può essere Matricola o Cognome).
+     * @param inputRicerca2 Stringa di input per il Libro (può essere ISBN o Titolo).
+     * * @pre Nessuna (gli input possono essere null o vuoti).
+     * @post Viene creato un oggetto Loan configurato per il matching parziale nel metodo search().
+     */
     
     public Loan(String inputRicerca1, String inputRicerca2) {
          // 1. Inizializziamo tutto a null di default
@@ -90,11 +100,10 @@ public class Loan implements Comparable<Loan>,Serializable {
     }
     
     /**
-     * @brief Restituisce il libro associato al prestito
-     * @return Oggetto Book
-     * 
-     * @pre L'oggetto loan deve essere stato inizializzato 
-     * @post Restituisce il riferimento al libro associato
+     * @brief Restituisce il libro associato al prestito.
+     * * @return Oggetto Book associato.
+     * * @pre L'oggetto Loan deve essere istanziato.
+     * @post Ritorna il riferimento al libro.
      */
     public Book getBook() {
         return book;
@@ -191,15 +200,15 @@ public class Loan implements Comparable<Loan>,Serializable {
     }
     
     /**
-    * @brief Definisce l'uguaglianza logica tra due oggetti Loan (Prestito).
-    * * Due oggetti Loan sono considerati logicamente uguali se fanno riferimento 
-    * allo stesso Utente (User) e allo stesso Libro (Book).
-    * 
-    * * @param obj L'oggetto da confrontare con l'oggetto corrente.
-    * 
-    * @return true se l'oggetto specificato è logicamente uguale a questo oggetto Loan, 
-    * false altrimenti.
-    */
+     * @brief Verifica l'uguaglianza logica tra due prestiti.
+     * * Due prestiti sono considerati uguali se coinvolgono lo stesso Utente (identificato dalla Matricola)
+     * e lo stesso Libro (identificato dall'ISBN).
+     * * @param obj L'oggetto da confrontare.
+     * @return true se gli oggetti sono uguali, false altrimenti.
+     * * @pre Nessuna.
+     * @post Restituisce true solo se Matricola e ISBN coincidono.
+     */
+    
     @Override
    public boolean equals(Object obj) {
     if (this == obj) return true;
@@ -216,31 +225,69 @@ public class Loan implements Comparable<Loan>,Serializable {
     String thisISBN = (this.book != null) ? this.book.getISBN() : null;
     String otherISBN = (other.book != null) ? other.book.getISBN() : null;
     return Objects.equals(thisISBN, otherISBN);
-}
+    }
     
-            public String getName() {
-            return user != null ? user.getName() : "";
-        }
-
-        public String getSurname() {
-            return user != null ? user.getSurname() : "";
-        }
-
-        public String getNumberId() {
-            return user != null ? user.getNumberId() : "";
-        }
-
-        public String getTitle() {
-            return book != null ? book.getTitle() : "";
-        }
-
-        public String getAuthors() {
-            return book != null ? book.getAuthors() : "";
-        }
-
-        public String getISBN() {
-            return book != null ? book.getISBN() : "";
-        }
+   /**
+     * @brief Restituisce il nome dell'utente.
+     * @return String Nome dell'utente o stringa vuota se null.
+     * @pre Nessuna.
+     * @post Ritorna una stringa sicura per la visualizzazione in tabella.
+     */
+    
+    public String getName() {
+        return user != null ? user.getName() : "";
+    }  
+    
+    /**
+     * @brief Restituisce il cognome dell'utente.
+     * @return String Cognome dell'utente o stringa vuota.
+     * @pre Nessuna.
+     * @post Ritorna una stringa sicura.
+     */
+    public String getSurname() {
+        return user != null ? user.getSurname() : "";
+    }
+    
+    /**
+     * @brief Restituisce la matricola dell'utente.
+     * @return String Matricola o stringa vuota.
+     * @pre Nessuna.
+     * @post Ritorna una stringa sicura.
+     */
+    public String getNumberId() {
+        return user != null ? user.getNumberId() : "";
+    }
+    
+    /**
+     * @brief Restituisce il titolo del libro.
+     * @return String Titolo o stringa vuota.
+     * @pre Nessuna.
+     * @post Ritorna una stringa sicura.
+     */
+    
+    public String getTitle() {
+        return book != null ? book.getTitle() : "";
+    }
+    
+    /**
+     * @brief Restituisce gli autori del libro.
+     * @return String Autori o stringa vuota.
+     * @pre Nessuna.
+     * @post Ritorna una stringa sicura.
+     */
+    public String getAuthors() {
+         return book != null ? book.getAuthors() : "";
+    }
+    
+    /**
+     * @brief Restituisce l'ISBN del libro.
+     * @return String ISBN o stringa vuota.
+     * @pre Nessuna.
+     * @post Ritorna una stringa sicura.
+     */
+    public String getISBN() {
+        return book != null ? book.getISBN() : "";
+    }
 
 
 }

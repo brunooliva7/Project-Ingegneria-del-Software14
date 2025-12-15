@@ -16,10 +16,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
+import javafx.scene.control.TableCell;
+import javafx.collections.transformation.SortedList;
 
 /**
- *
- * @author bruno
+ * @class loanViewController
+ * @brief Gestisce la visualizzazione dell'elenco completo dei prestiti.
+ * * Questa classe controlla la vista che mostra tutti i prestiti attivi nella biblioteca.
+ * Configura la TableView per visualizzare i dettagli dei prestiti (Utente, Libro, Scadenza),
+ * gestisce l'ordinamento dinamico delle colonne  e applica uno stile visivo per evidenziare
+ * i prestiti scaduti.
  */
 public class loanViewController {
     
@@ -48,11 +55,42 @@ public class loanViewController {
     private TableColumn<Loan,LocalDate> duedateColumn;
     
     private LoanManagement loanManagement;
+    private Model model;
+    
+    /**
+     * @brief Inietta il modello e popola la tabella dei prestiti.
+     * * Questo metodo recupera l'istanza di LoanManagement dal modello principale,
+     * converte l'insieme dei prestiti in una ObservableList e la avvolge in una SortedList
+     * per abilitare l'ordinamento tramite click sulle intestazioni delle colonne.
+     * * @param model Il modello condiviso dell'applicazione.
+     * * @pre model != null.
+     * @post La TableView è popolata con i dati dei prestiti, ordinabili dall'utente.
+     */
+    
+   public void setModel(Model model) {
+        this.model = model;
+        this.loanManagement = model.getLoanManagement();
+        
+        if(this.loanManagement != null){
+            ObservableList<Loan> observableLoanList = FXCollections.observableArrayList(this.loanManagement.getLoan());
+            SortedList<Loan> sortedData = new SortedList<>(observableLoanList);
+            sortedData.comparatorProperty().bind(loanTableView.comparatorProperty());
+            loanTableView.setItems(sortedData);
+        }
+    }
+   
+   /**
+     * @brief Inietta il modello e popola la tabella dei prestiti.
+     * * Questo metodo recupera l'istanza di LoanManagement dal modello principale,
+     * converte l'insieme dei prestiti in una ObservableList e la avvolge in una SortedList
+     * per abilitare l'ordinamento tramite click sulle intestazioni delle colonne.
+     * * @param model Il modello condiviso dell'applicazione.
+     * * @pre model != null.
+     * @post La TableView è popolata con i dati dei prestiti, ordinabili dall'utente.
+     */
     
     @FXML
     private void initialize(){
-        
-        this.loanManagement = new LoanManagement();
         
          nomeColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         cognomeColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
@@ -62,9 +100,37 @@ public class loanViewController {
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
         duedateColumn.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
         
-        ObservableList<Loan> observableLoanList = FXCollections.observableArrayList(this.loanManagement.getLoan());
-            loanTableView.setItems(observableLoanList);
+        duedateColumn.setCellFactory(column -> new TableCell<Loan, LocalDate>() {
+                @Override
+                protected void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item == null || empty) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        // Mostra la data
+                        setText(item.toString());
+
+                        // Controlla se è scaduta
+                        if (item.isBefore(LocalDate.now())) {
+                            setStyle("-fx-background-color: #ffcccc; -fx-text-fill: red; -fx-font-weight: bold;");
+                        } else {
+                            setStyle("");
+                        }
+                    }
+                }
+            });
+        
+        
     }
+    
+    /**
+     * @brief Gestisce il ritorno alla pagina principale (Homepage).
+     * * @throws IOException Se si verifica un errore nel caricamento della vista Homepage.
+     * * @pre Nessuna.
+     * @post La scena attiva viene cambiata con la Homepage.
+     */
     
     @FXML
     private void backPage() throws IOException{
