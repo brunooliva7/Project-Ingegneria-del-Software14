@@ -11,6 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.auth.Librarian;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  *
@@ -68,18 +72,15 @@ public class modifycredentialController {
     @FXML
     private void handleBack() {
         try {
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
-                getClass().getResource("/login.fxml")
-            );
-            javafx.scene.Parent root = loader.load();
-
-            // Ottieni la finestra corrente e sostituisci la scena
-            javafx.stage.Stage stage = (javafx.stage.Stage) backButton.getScene().getWindow();
-            stage.setScene(new javafx.scene.Scene(root));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
+            e.printStackTrace(); // utile per debug
             labelMessage.setText("Errore nel caricamento della login page");
         }
-    }
+}   
 }
 
