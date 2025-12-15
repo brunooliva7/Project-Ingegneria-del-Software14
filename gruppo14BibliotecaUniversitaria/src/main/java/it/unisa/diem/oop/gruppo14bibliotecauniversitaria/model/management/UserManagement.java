@@ -42,7 +42,7 @@ public class UserManagement implements Functionality<User>,Serializable{
     
     
     public UserManagement(){   
-        this.list = new TreeSet<>(); 
+        this.list = new HashSet<>(); 
         
         if (userDatabase.exists() && userDatabase.length() > 0) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(userDatabase))) {
@@ -79,7 +79,7 @@ public class UserManagement implements Functionality<User>,Serializable{
      *  @brief Metodo che aggiunge un user all'elenco 
      *  @param u L'utente da aggiungere all'elenco 
      *  @pre u != null
-     *  @post L'user è correttamente inserito nel TreeSet
+     *  @post L'user è correttamente inserito nell'HashSet
      */
     
     @Override
@@ -106,7 +106,7 @@ public class UserManagement implements Functionality<User>,Serializable{
      *  @brief Metodo che rimuove un user dall'elenco 
      *  @param u L'utente da eliminare dall'elenco 
      *  @pre u != null
-     *  @post L'user è correttamente eliminato dal TreeSet
+     *  @post L'user è correttamente eliminato dall'HashSet
      */
     @Override
     public boolean remove(User u ) {
@@ -151,8 +151,8 @@ public class UserManagement implements Functionality<User>,Serializable{
         
     }
     /**
-     *  @brief Metodo che permette di visualizzare il TreeSet contenente l'elenco ordinato in base al cognome e  nome degli utenti  
-     *  @post Lelenco opportunamente ordinato è correttamente visualizzato 
+     *  @brief Metodo che permette di visualizzare l'HashSet contenente l'elenco  
+     *  @post Lelenco  è correttamente visualizzato 
      */
     
     @Override
