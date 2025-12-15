@@ -34,14 +34,14 @@
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <Label style="-fx-font-size: 16; -fx-text-fill: #374151;" text="Seleziona utente:" />
                     
-                     <ComboBox fx:id="userComboBox" editable="true" prefHeight="40" prefWidth="250" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1;" />
+                     <ComboBox fx:id="userComboBox" editable="false" prefHeight="40" prefWidth="250" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1;" />
                    
                 </HBox>
 
                 <!-- Selezione Libro -->
                 <HBox alignment="CENTER_LEFT" spacing="10">
                     <Label style="-fx-font-size: 16; -fx-text-fill: #374151;" text="Seleziona libro:" />
-                    <ComboBox fx:id="bookComboBox" editable="true" prefHeight="40" prefWidth="250" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1;" />
+                    <ComboBox fx:id="bookComboBox" editable="false" prefHeight="40" prefWidth="250" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1;" />
                 </HBox>
 
                 <!-- Data Restituzione -->

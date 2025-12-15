@@ -81,7 +81,7 @@ public class viewUserController {
         
         
         
-        ObservableList<User> listaDati = FXCollections.observableArrayList(this.userManagement.getList());
+        ObservableList<User> listaDati = FXCollections.observableArrayList(this.userManagement.getList().stream().sorted().collect(Collectors.toList()));
             
         userTableView.setItems(listaDati);
         userTableView.getSortOrder().clear(); // rimuovi eventuali ordinamenti così che la tableView rispetta l'ordina naturale della lista 

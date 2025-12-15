@@ -15,6 +15,7 @@
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * @class Loan
@@ -200,36 +201,46 @@ public class Loan implements Comparable<Loan>,Serializable {
     * false altrimenti.
     */
     @Override
-    public boolean equals(Object obj){
-       if (this == obj) return true;
+   public boolean equals(Object obj) {
+    if (this == obj) return true;
     if (obj == null || getClass() != obj.getClass()) return false;
+
+    Loan other = (Loan) obj;
+
+    // Confronto user.numberId senza chiamare User.equals()
+    String thisUserId = (this.user != null) ? this.user.getNumberId() : null;
+    String otherUserId = (other.user != null) ? other.user.getNumberId() : null;
+    if (!Objects.equals(thisUserId, otherUserId)) return false;
+
+    // Confronto book.ISBN senza chiamare Book.equals()
+    String thisISBN = (this.book != null) ? this.book.getISBN() : null;
+    String otherISBN = (other.book != null) ? other.book.getISBN() : null;
+    return Objects.equals(thisISBN, otherISBN);
+}
     
-     Loan other = (Loan) obj;
-    return this.user.equals(other.user) && 
-           this.book.equals(other.book);
-    }
-    
-    public String getName() {
-        return user.getName(); // Restituisce il nome dall'oggetto User
-    }
+            public String getName() {
+            return user != null ? user.getName() : "";
+        }
 
-    public String getSurname() {
-        return user.getSurname();
-    }
+        public String getSurname() {
+            return user != null ? user.getSurname() : "";
+        }
 
-    public String getNumberId() {
-        return user.getNumberId(); // O getMatricola() a seconda di come l'hai chiamato
-    }
+        public String getNumberId() {
+            return user != null ? user.getNumberId() : "";
+        }
 
-    public String getTitle() {
-        return book.getTitle();
-    }
+        public String getTitle() {
+            return book != null ? book.getTitle() : "";
+        }
 
-    public String getAuthors() {
-        return book.getAuthors();
-    }
+        public String getAuthors() {
+            return book != null ? book.getAuthors() : "";
+        }
 
-    public String getISBN() {
-        return book.getISBN();
-    }
+        public String getISBN() {
+            return book != null ? book.getISBN() : "";
+        }
+
+
 }
