@@ -126,7 +126,7 @@ public class LibrarianTest {
      * Ho notato che nella tua classe i campi `private String username` e `password` 
      * non vengono MAI assegnati (checkCredentials legge dal file in variabili locali).
      * Di conseguenza, getUsername() e getPassword() restituiranno sempre null.
-     * * Se è voluto, puoi lasciare così. Se è un errore, dovresti assegnare i valori
+     * Se è voluto, puoi lasciare così. Se è un errore, dovresti assegnare i valori
      * dentro checkCredentials quando il login ha successo.
      */
     @Test
