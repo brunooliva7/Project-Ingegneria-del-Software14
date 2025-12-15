@@ -89,11 +89,17 @@ public class UserManagement implements Functionality<User>,Serializable{
          { throw new IllegalArgumentException();
             // esce senza aggiungere ritornando che non è andato a buon fine l'inserimento lanciando l'eccezione che specifica che l'argomento non è valido 
          }
-    if(list.add(u)){
-      FileManager.writeToTextFileObject(list, this.userDatabase); //aggiorno il file d'archivio 
-       return true;}
-         return false;
-                        }
+          // Controlla se esiste già un user con lo stesso numberId
+         for (User existing : list) {
+           if (existing.equals(u)) {
+            return false; // già presente
+        }}
+         if(list.add(u)){
+         FileManager.writeToTextFileObject(list, this.userDatabase); //aggiorno il file d'archivio 
+         return true;}
+         
+         return false; 
+                        } 
     
     
     /**
