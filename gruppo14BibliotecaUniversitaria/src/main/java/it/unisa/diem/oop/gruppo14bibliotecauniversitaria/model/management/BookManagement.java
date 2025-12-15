@@ -221,10 +221,8 @@ public class BookManagement implements Functionality<Book> {
     
 
     /**
-     * @brief Ricerca libri per query (Titolo, Autore o ISBN).
-     * La ricerca per ISBN ha priorità
-     * Se non viene trovato un ISBN, la ricerca avviene per titolo (parziale) o autori (parziale).
-     * 
+     * @brief Ricerca libri unificata (Titolo, Autore o ISBN), parziale e case-insensitive
+     *
      * @param b Oggetto Book
      * @return Lista dei libri corrispondenti alla query
      * 
@@ -232,46 +230,35 @@ public class BookManagement implements Functionality<Book> {
      */
     @Override
     public List <Book> search(Book b){
-        List<Book> lista=new ArrayList<>();  //usiamo una lista dato che se la ricerca viene fatta per cognome possono esserci più utenti nell'elenco corrispondenti 
-         if (b == null) throw new IllegalArgumentException();
-            //esce dato che l'utente da cercare non è valido e lancia l'eccezione adeguata 
-        // 1. Ricerca per ISBN (campo unico, massima priorità)
-        if (b.getISBN() != null && !b.getISBN().isEmpty()) {
-            String isbnCercato = b.getISBN();
-            for (Book bk : catalogue) {
-                // Cerca corrispondenza esatta per l'ISBN
-                if (bk.getISBN().equalsIgnoreCase(isbnCercato)) {
-                    lista.add(bk);
-                    return lista; // L'ISBN è unico, possiamo uscire subito
-                }
-            }
-        } 
-    
-        // 2. Ricerca per TITOLO
-        else if (b.getTitle() != null && !b.getTitle().isEmpty()) {
-            String titoloCercato = b.getTitle().toLowerCase();
-            for (Book bk : catalogue) {
-                // Ricerca parziale (contains) sul Titolo
-                if (bk.getTitle().toLowerCase().contains(titoloCercato)) {
-                    lista.add(bk);
-                }
-            }
-        } 
+        if (b == null) throw new IllegalArgumentException("Il libro di ricerca non può essere nullo.");
 
-        // 3. Ricerca per AUTORI
-        else if (b.getAuthors() != null && !b.getAuthors().isEmpty()) {
-            String autoreCercato = b.getAuthors().toLowerCase();
-            for (Book bk : catalogue) {
-                // Ricerca parziale (contains) sugli Autori
-                if (bk.getAuthors().toLowerCase().contains(autoreCercato)) {
-                    lista.add(bk);
-                }
+        List<Book> lista = new ArrayList<>(); 
+
+        // 1. Estrai la query (assumiamo sia stata replicata in b.getTitle() dal costruttore)
+        String query;
+        if (b.getTitle() != null && !b.getTitle().isEmpty()) {
+            query = b.getTitle().trim().toLowerCase();
+        } else {
+            return lista; 
+        }
+
+        // 2. Itera e filtra con OR logico su tutti i campi
+        for (Book bk : catalogue) {
+
+            boolean matches = 
+                // Cerca nel titolo
+                (bk.getTitle() != null && bk.getTitle().toLowerCase().contains(query)) ||
+                // Cerca negli autori
+                (bk.getAuthors() != null && bk.getAuthors().toLowerCase().contains(query)) ||
+                // Cerca nell'ISBN
+                (bk.getISBN() != null && bk.getISBN().toLowerCase().contains(query));
+
+            if (matches) {
+                lista.add(bk);
             }
         }
 
-        // Se non è stato specificato nessun criterio valido (ISBN, Titolo, Autori)
-        // la lista sarà vuota o conterrà i risultati della ricerca.
         return lista;
     }
-    
+
 }

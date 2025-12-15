@@ -22,8 +22,9 @@ else Nuova registrazione
 	User --> UserManagement: conferma creazione
 	UserManagement --> View: Conferma iscrizione
 	View --> Bibliotecario: Utente registrato con successo
-	UserManagement -> FileManager: updateFileObject()
+	UserManagement -> FileManager: writeToTextFileObject(listaUtenti, userDatabase);
 end
 @enduml
+
 
 

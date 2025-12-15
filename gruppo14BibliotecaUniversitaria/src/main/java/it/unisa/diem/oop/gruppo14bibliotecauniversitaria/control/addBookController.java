@@ -7,12 +7,8 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
-import java.time.LocalDate;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,6 +20,7 @@ import javafx.scene.control.TextField;
  * @author maramariano
  */
 public class addBookController {
+    // Riferimenti FXML per i campi di input
     @FXML
     private TextField title;
     
@@ -39,6 +36,7 @@ public class addBookController {
     @FXML
     private TextField availableCopies;
     
+    //Riferimenti FXML per i controlli e i messaggi
     @FXML
     private Button addButton;
     
@@ -48,17 +46,26 @@ public class addBookController {
     @FXML
     private Button backButton;
     
+    // Riferimento al Model
     private Model model;
       
-    
+    /**
+     * @brief Imposta l'istanza del Model.
+     * 
+     * @param model L'istanza del Model dell'applicazione.
+     */
     public void setModel(Model model) {
     this.model = model;
     }
     
+    /**
+     * @brief Metodo di inizializzazione del Controller.
+     * 
+     * Imposta il data binding per disabilitare il pulsante di aggiunta finché 
+     * tutti i campi obbligatori (Titolo, Autori, ISBN) non sono compilati.
+     */
     @FXML
     public void initialize(){
-        // Logica per disabilitare il bottone "Aggiungi" finché i campi obbligatori non sono compilati.
-        // Ad esempio, rendiamo l'aggiunta disponibile solo se Titolo, Autori e ISBN non sono vuoti.
         addButton.disableProperty().bind(
                 title.textProperty().isEmpty()
                 .or(authors.textProperty().isEmpty())
@@ -66,6 +73,12 @@ public class addBookController {
         );
     }
     
+    
+    /**
+     * @brief Gestisce l'aggiunta di un libro al catalogo.
+     * Recupera i dati dai campi, ne valida il formato (Anno e Copie), 
+     * e chiama il Model per l'inserimento. Aggiorna la labelErrore con l'esito.
+     */
     @FXML
     public void addBook() {
         if (this.model == null) {
@@ -74,7 +87,7 @@ public class addBookController {
         return;
     }
         
-        // 1. Recupero i dati dai TextField
+        // Recupero i dati dai TextField
         String titolo = title.getText();
         String autore = authors.getText();
         String isbn = ISBN.getText();
@@ -100,7 +113,7 @@ public class addBookController {
                 return;
             }
             
-            // Conversione delle COPIE (da String a int)
+            // Conversione delle copie (da String a int)
             copieDisponibili = Integer.parseInt(availableCopies.getText());
             if (copieDisponibili < 0) {
                 labelErrore.setText("Errore: Il numero di copie disponibili non può essere negativo.");
@@ -116,32 +129,40 @@ public class addBookController {
         }
 
 
-        // 3. Creazione dell'oggetto Libro (utilizzando la data creata)
+        // Creazione dell'oggetto Libro
         Book b = new Book(titolo, autore, anno, isbn, copieDisponibili);
-
+        
+        // Controllo preliminare di duplicato basato su equals/ISBN
         if (model.getBookManagement().getCatalogue().contains(b)) {
             labelErrore.setText("Errore: Un libro con questo ISBN è già presente nel catalogo.");
             labelErrore.setStyle("-fx-text-fill: red;");
             return;
         }
         
+        // Chiama il Model per l'inserimento e gestisce il risultato
         else if (model.getBookManagement().add(b)) { 
-        labelErrore.setText("Libro inserito correttamente.");
-        labelErrore.setStyle("-fx-text-fill: green;");
+            // Inserimento avvenuto con successo
+            labelErrore.setText("Libro inserito correttamente.");
+            labelErrore.setStyle("-fx-text-fill: green;");
         
-        // Pulizia dei campi dopo l'inserimento
-        title.clear();
-        authors.clear();
-        publicationYear.clear();
-        ISBN.clear();
-        availableCopies.clear();
-    } else {
-        // Se l'add fallisce (es. ISBN duplicato), il Model ritorna false.
-        labelErrore.setText("Errore nell'inserimento del libro (es. ISBN già presente).");
-        labelErrore.setStyle("-fx-text-fill: red;");
-    }
+            // Pulizia dei campi dopo l'inserimento
+            title.clear();
+            authors.clear();
+            publicationYear.clear();
+            ISBN.clear();
+            availableCopies.clear();
+        } else {
+            // Fallimento nell'inserimento
+            labelErrore.setText("Errore nell'inserimento del libro (es. ISBN già presente).");
+            labelErrore.setStyle("-fx-text-fill: red;");
+        }
 }
-    
+    /**
+     * @brief Gestisce il ritorno alla pagina principale.
+     * Carica la Home Page (View.Homepage()).
+     * 
+     * @throws IOException se il file FXML della Homepage non può essere caricato.
+     */
     @FXML
     public void backPage() throws IOException{
         View.Homepage();

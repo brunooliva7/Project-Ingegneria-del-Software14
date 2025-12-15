@@ -16,7 +16,7 @@ Bibliotecario –> View: Inserisce matricola
  View -> Controller : rimozione utente
 Controller -> UserManagement: remove(User u )
  
-UserManagement -> UserManagement : search(String s)
+UserManagement -> UserManagement : search(Useru)
 UserManagement --> UserManagement: esito
  alt Utente NON esistente
 	UserManagement --> Controller: UtenteNonTrovato
@@ -31,7 +31,7 @@ else Utente esistente
                Controller -->View: conferma eliminazione utente 
 	View --> Bibliotecario: Utente eliminato con successo
  
-	UserManagement -> FileManager: updateFileObject()
+	UserManagement -> FileManager: updateFileObject(listaUser, userDatabase);
  
 end
 @enduml

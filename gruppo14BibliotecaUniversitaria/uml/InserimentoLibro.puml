@@ -11,7 +11,7 @@ Bibliotecario -> View : Inserisce dati del libro
 Bibliotecario -> View : Conferma
 View -> Controller : Invia dati Libro
 Controller -> BookManagement : add(Book b)
-BookManagement -> FileManager : writeToTextFileObject(Book b,String Filename) 
+BookManagement -> FileManager : writeToTextFileObject(Catologue,bookDatabase) 
 BookManagement --> Controller : returnValue
 alt [ Libro non inserito]
 Controller -> View : ErrorView("Errore nell'Inserimento")
@@ -19,4 +19,5 @@ else [ Libro inserito correttamente]
 Controller -> View : addSuccess("Libro Inserito")
 end
 @enduml
+
 

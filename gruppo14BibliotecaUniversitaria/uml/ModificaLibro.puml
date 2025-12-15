@@ -22,9 +22,9 @@ Bibliotecario -> View : Inserisci dati da modificare
 Bibliotecario -> View : Conferma
 
 View -> Controller : Invia dati da modificare
-Controller -> BookManagement : update(Book b)
+Controller -> BookManagement : update(Book oldBook, Book newBook)
 
-BookManagement -> FileManager: updateFileObject(Book B,String Filename)
+BookManagement -> FileManager: updateFileObject(Catalogue,bookDatabase)
 BookManagement --> Controller: returnValue
 
 alt [ Errore nella modifica]
@@ -35,4 +35,3 @@ else [ Modifica avvenuta con successo]
 end
 
 @enduml
-

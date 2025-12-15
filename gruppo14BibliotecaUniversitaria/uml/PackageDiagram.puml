@@ -4,38 +4,54 @@ left to right direction
 
 
 package "src"{  
-  package "model" {
-    package "data" {
-    class Book
-    class User
-    class Loan
-    }
-    
-    package "management" {
-      interface Functionality
-      class BookManagement
-      class UserManagement
-      class LoanManagement
-    }
+    package "model" {
+        package "data" {
+            class Book
+            class User
+            class Loan
+        }
 
-    package "auth" {
-      class Librarian
-    }
+        package "management" {
+            interface Functionality
+            class BookManagement
+            class UserManagement
+            class LoanManagement
+        }
 
-    package "storage" {
-      class FileManager
-    }
+        package "auth" {
+            class Librarian
+        }
 
-    class Model
+        package "storage" {
+            class FileManager
+        }
+
+        class Model
 }
 
-  package "view" {
-    class View
-  }
+    package "view" {
+        class View
+    }
 
-  package "control" {
-    class Controller
-  }
+    package "control" {
+        class LoginController
+        class addBookController
+        class addLoanController
+        class addUsaerController
+        class deleteBookController
+        class deleteLoanController
+        class deleteUserController
+        class homepageController
+        class loanViewController
+        class modifyBookController
+        class modifyUserController
+        class modifycredentialController
+        class searchBookController
+        class searchLoanController
+        class searchUserController
+        class viewBookController
+        class viewUserController
+    }
   
 ' Relazioni MVC
 view ..> control

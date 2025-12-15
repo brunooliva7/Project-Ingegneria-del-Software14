@@ -6,14 +6,13 @@ participant View
 participant Controller 
 participant BookManagement
 
-
 Bibliotecario -> View : Inserisce dati da ricercare
 Bibliotecario -> View : Conferma
 ref over Controller, BookManagement 
 Search
 end
 View -> Controller : VisualizzaDati
-Controller -> BookManagement: viewSorted("Book")
+Controller -> BookManagement: viewSorted()
 BookManagement -> View : Mostra lista libri ordinata
 @enduml
 
