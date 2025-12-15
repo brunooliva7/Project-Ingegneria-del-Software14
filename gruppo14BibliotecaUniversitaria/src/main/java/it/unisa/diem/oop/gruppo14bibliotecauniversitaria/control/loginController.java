@@ -16,7 +16,7 @@ import java.io.IOException;
  *
  * @author bruno
  */
-public class loginController {
+public class LoginController {
     
     private Librarian librarian = new Librarian();
     
@@ -56,7 +56,7 @@ public class loginController {
         
         else labelErrore.setText("Credenziali Errate");  
     }
-    //comemnto prova
+    
     @FXML
     private void modifyCredentials() throws IOException{
         View.Modify();
