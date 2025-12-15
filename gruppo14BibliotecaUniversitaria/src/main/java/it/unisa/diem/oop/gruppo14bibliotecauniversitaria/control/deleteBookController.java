@@ -5,6 +5,7 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
@@ -49,8 +50,12 @@ public class deleteBookController implements Initializable {
     @FXML private TableColumn<Book, Integer> copieColumn;
     
     // Gestione dei dati
-    private ObservableList<Book> bookList;
-    private final BookManagement bookManager = new BookManagement(); 
+    private Model model;
+      
+    
+    public void setModel(Model model) {
+    this.model = model;
+    }
 
     /**
      * Inizializza il controller.
@@ -69,9 +74,6 @@ public class deleteBookController implements Initializable {
         searchButton.setOnAction(this::handleSearchAction);
         deleteBookButton.setOnAction(this::handleDeleteAction);
         
-        // Inizializza la lista (carica tutti i libri all'avvio)
-        loadAllBooks();
-        
         // Disabilita il pulsante Elimina all'avvio
         deleteBookButton.setDisable(true);
         
@@ -85,11 +87,14 @@ public class deleteBookController implements Initializable {
      * Carica tutti i libri nella TableView all'avvio o dopo una ricerca vuota.
      */
     private void loadAllBooks() {
-        // Converte il Set (catalogue) in List usando getCatalogue()
-        List<Book> allBooks = new java.util.ArrayList<>(bookManager.getCatalogue()); 
+        if (model == null) return;
         
-        bookList = FXCollections.observableArrayList(allBooks);
-        bookTableViewricerca.setItems(bookList);
+        // 1. Ottiene la lista dei libri dal Model
+        List<Book> allBooks = new java.util.ArrayList<>(model.getBookManagement().getCatalogue()); 
+        
+        // 2. Imposta l'elenco osservabile DIRETTAMENTE sulla TableView
+        // La TableView contiene ora la sua propria lista osservabile interna.
+        bookTableViewricerca.setItems(FXCollections.observableArrayList(allBooks));
     }
     
     /**
@@ -98,6 +103,8 @@ public class deleteBookController implements Initializable {
     */
     @FXML
     private void handleSearchAction(ActionEvent event) {
+        if (model == null) return;
+        
         String query = searchField.getText().trim();
 
         if (query.isEmpty()) {
@@ -109,14 +116,17 @@ public class deleteBookController implements Initializable {
         Book partialBook = new Book(query); 
         // Devi usare il costruttore di Book appropriato per Title, Authors, Year, ISBN, Copies
 
-        // 2. CHIAMA IL TUO METODO search(Book b)
-        List<Book> results = bookManager.search(partialBook); 
+        try {
+            List<Book> results = model.getBookManagement().search(partialBook); 
 
-        bookList = FXCollections.observableArrayList(results);
-        bookTableViewricerca.setItems(bookList);
+            // Imposta i risultati DIRETTAMENTE sulla TableView
+            bookTableViewricerca.setItems(FXCollections.observableArrayList(results));
 
-        if (results.isEmpty()) {
-            showAlert("Ricerca", "Nessun libro trovato per la query: " + query, AlertType.INFORMATION);
+            if (results.isEmpty()) {
+                showAlert("Ricerca", "Nessun libro trovato per la query: " + query, AlertType.INFORMATION);
+            }
+        } catch (Exception e) {
+             showAlert("Errore di Ricerca", "Si è verificato un errore durante la ricerca.", AlertType.ERROR);
         }
     }
 
@@ -125,6 +135,8 @@ public class deleteBookController implements Initializable {
      */
     @FXML
     private void handleDeleteAction(ActionEvent event) {
+        if (model == null) return;
+        
         Book selectedBook = bookTableViewricerca.getSelectionModel().getSelectedItem();
 
         if (selectedBook == null) {
@@ -132,15 +144,16 @@ public class deleteBookController implements Initializable {
             return;
         }
 
-        // Chiama il metodo remove(Book) che aggiorna il catalogo e il file
-        if (bookManager.remove(selectedBook)) { 
+        // 1. Chiama il Model per l'eliminazione dal catalogo principale
+        if (model.getBookManagement().remove(selectedBook)) { 
             showAlert("Successo", "Libro eliminato: " + selectedBook.getTitle(), AlertType.INFORMATION);
 
-            // Aggiorna la vista rimuovendo l'elemento dalla lista locale
-            bookList.remove(selectedBook);
+            // 2. AGGIORNAMENTO VISTA: Rimuove l'elemento dalla lista osservabile
+            //    accedendo alla lista interna della TableView.
+            bookTableViewricerca.getItems().remove(selectedBook);
 
         } else {
-            showAlert("Errore", "Impossibile eliminare il libro.", AlertType.ERROR);
+            showAlert("Errore", "Impossibile eliminare il libro. Potrebbe essere in prestito.", AlertType.ERROR);
         }
     }
 

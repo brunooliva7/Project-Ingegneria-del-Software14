@@ -12,15 +12,14 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
  * @author maramariano
  */
 
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
-import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -51,22 +50,20 @@ public class searchBookController implements Initializable {
     @FXML private TableColumn<Book, Integer> copiesColumn; // Integer per le copie
     
     // Logica interna
-    private final BookManagement bookManager = new BookManagement();
-    private ObservableList<Book> bookList; // Lista osservabile per la TableView
+    private Model model; // Riferimento al Model iniettato
+
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // 1. NON INIZIALIZZIAMO ObservableList, la TableView sarà vuota.
         
-        // 1. Inizializzazione della ObservableList
-        bookList = FXCollections.observableArrayList();
-        bookTableView.setItems(bookList);
-        
-        // 2. Definizione delle CellValueFactory per le colonne
-        // Queste stringhe devono corrispondere esattamente ai nomi dei getter (es. getTitle -> "title") nel modello Book.
+        // 2. Definizione delle CellValueFactory per le colonne (omesse, restano invariate)
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         authorsColumn.setCellValueFactory(new PropertyValueFactory<>("authors"));
-        
-        // Assicurati che il getter in Book restituisca un tipo coerente con la colonna (es. String o Integer)
         publicationYearColumn.setCellValueFactory(new PropertyValueFactory<>("publicationYear")); 
         ISBNColumn.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
         copiesColumn.setCellValueFactory(new PropertyValueFactory<>("availableCopies"));
@@ -77,7 +74,8 @@ public class searchBookController implements Initializable {
         // 4. Imposta il messaggio iniziale e l'azione del bottone
         labelMessage.setText("Cerca un libro per titolo, autore o ISBN.");
         labelMessage.setStyle("-fx-text-fill: black;");
-        searchButton.setOnAction(this::search); // Collega l'azione di ricerca al bottone
+        searchButton.setOnAction(this::search);
+        
     }
     
     /**
@@ -85,10 +83,17 @@ public class searchBookController implements Initializable {
      */
     @FXML
     public void search(ActionEvent event) {
+        // 1. Controllo Model
+        if (this.model == null) {
+            labelMessage.setText("Errore di sistema: Model non iniettato.");
+            labelMessage.setStyle("-fx-text-fill: red;");
+            return;
+        }
+
         String query = searchField.getText().trim();
         
-        // 1. Pulisce la TableView prima di cercare
-        bookList.clear(); 
+        // Pulisce la TableView in modo diretto
+        bookTableView.getItems().clear(); 
         labelMessage.setText("Cercando...");
         labelMessage.setStyle("-fx-text-fill: black;");
 
@@ -98,11 +103,14 @@ public class searchBookController implements Initializable {
         }
 
         try {
-            // 2. CREA L'OGGETTO BOOK PARZIALE (Logica mantenuta)
+            // CREA L'OGGETTO BOOK PARZIALE
             Book partialBook = new Book(query);
             
-            // 3. Esegue la ricerca
-            List<Book> results = bookManager.search(partialBook);
+            // 🚀 CHIAMATA MVC: Esegue la ricerca tramite il Model
+            List<Book> results = model.getBookManagement().search(partialBook);
+            
+            // 2. Imposta l'elenco osservabile DIRETTAMENTE sulla TableView
+            bookTableView.setItems(FXCollections.observableArrayList(results));
             
             if (results.isEmpty()) {
                 labelMessage.setText("Nessun libro trovato per la query: " + query);
@@ -110,14 +118,11 @@ public class searchBookController implements Initializable {
                 return;
             }
 
-            // 4. Popola la TableView con tutti i risultati (NUOVA LOGICA)
-            bookList.addAll(results);
-            
             labelMessage.setText(results.size() + " libro(i) trovato(i).");
             labelMessage.setStyle("-fx-text-fill: green;");
             
         } catch (IllegalArgumentException e) {
-            labelMessage.setText("Errore: " + e.getMessage());
+            labelMessage.setText("Errore nel formato della ricerca: " + e.getMessage());
             labelMessage.setStyle("-fx-text-fill: red;");
         } catch (Exception e) {
             labelMessage.setText("Errore generico durante la ricerca.");

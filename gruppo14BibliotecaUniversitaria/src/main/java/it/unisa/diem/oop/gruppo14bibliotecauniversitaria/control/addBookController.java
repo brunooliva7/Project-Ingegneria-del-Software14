@@ -5,6 +5,7 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
@@ -47,6 +48,13 @@ public class addBookController {
     @FXML
     private Button backButton;
     
+    private Model model;
+      
+    
+    public void setModel(Model model) {
+    this.model = model;
+    }
+    
     @FXML
     public void initialize(){
         // Logica per disabilitare il bottone "Aggiungi" finché i campi obbligatori non sono compilati.
@@ -60,6 +68,12 @@ public class addBookController {
     
     @FXML
     public void addBook() {
+        if (this.model == null) {
+        labelErrore.setText("Errore di sistema: Model non iniettato.");
+        labelErrore.setStyle("-fx-text-fill: red;");
+        return;
+    }
+        
         // 1. Recupero i dati dai TextField
         String titolo = title.getText();
         String autore = authors.getText();
@@ -105,24 +119,28 @@ public class addBookController {
         // 3. Creazione dell'oggetto Libro (utilizzando la data creata)
         Book b = new Book(titolo, autore, anno, isbn, copieDisponibili);
 
-        // 4. Inserimento del Libro
-        BookManagement bm = new BookManagement();
-
-        if (bm.add(b)) {
-            labelErrore.setText("Libro inserito correttamente.");
-            labelErrore.setStyle("-fx-text-fill: green;");
-            
-            // Pulizia dei campi dopo l'inserimento
-            title.clear();
-            authors.clear();
-            publicationYear.clear();
-            ISBN.clear();
-            availableCopies.clear();
-        } else {
-            labelErrore.setText("Errore nell'inserimento del libro.");
+        if (model.getBookManagement().getCatalogue().contains(b)) {
+            labelErrore.setText("Errore: Un libro con questo ISBN è già presente nel catalogo.");
             labelErrore.setStyle("-fx-text-fill: red;");
+            return;
         }
+        
+        else if (model.getBookManagement().add(b)) { 
+        labelErrore.setText("Libro inserito correttamente.");
+        labelErrore.setStyle("-fx-text-fill: green;");
+        
+        // Pulizia dei campi dopo l'inserimento
+        title.clear();
+        authors.clear();
+        publicationYear.clear();
+        ISBN.clear();
+        availableCopies.clear();
+    } else {
+        // Se l'add fallisce (es. ISBN duplicato), il Model ritorna false.
+        labelErrore.setText("Errore nell'inserimento del libro (es. ISBN già presente).");
+        labelErrore.setStyle("-fx-text-fill: red;");
     }
+}
     
     @FXML
     public void backPage() throws IOException{

@@ -35,9 +35,10 @@ public class deleteUserController {
      @FXML
      private Button deleteuserButton;
      
-      @FXML
-     private Button backButton;
-       @FXML
+    @FXML
+    private Button backButton;
+    
+    @FXML
     private TableView<User> userTableViewricerca;
 
     @FXML

@@ -5,12 +5,16 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,8 +47,14 @@ public class viewBookController implements Initializable {
     @FXML private TableColumn<Book, Integer> copieDisponibiliColumn; 
 
     // Logica interna
-    private ObservableList<Book> bookList;
-    private final BookManagement bookManager = new BookManagement(); 
+    private Model model; 
+
+    // Metodo per l'iniezione del Model
+    public void setModel(Model model) {
+        this.model = model;
+        // Chiamata per caricare i dati dopo che il Model è disponibile
+        loadAllBooks();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -59,43 +69,37 @@ public class viewBookController implements Initializable {
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("ISBN")); 
         copieDisponibiliColumn.setCellValueFactory(new PropertyValueFactory<>("availableCopies")); 
 
-        // 2. Carica i dati all'avvio
-        loadAllBooks();
-        
+        // 2. Listener per il doppio click (Nessun cambiamento)
         bookTableView.setOnMouseClicked((event) -> {
-        // Controlla se è stato un doppio click del tasto primario del mouse
-        if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
-            
-            // Ottiene il libro selezionato
-            Book selectedBook = bookTableView.getSelectionModel().getSelectedItem();
-            
-            if (selectedBook != null) {
-                try {
-                    // CHIAMATA CORRETTA: Usa il metodo con il parametro Book
-                    View.updateBook(selectedBook); 
-                    
-                } catch (IOException e) {
-                    System.err.println("Errore: Impossibile caricare la pagina di modifica libro.");
-                    e.printStackTrace();
+            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+                
+                Book selectedBook = bookTableView.getSelectionModel().getSelectedItem();
+                
+                if (selectedBook != null) {
+                    try {
+                        View.updateBook(selectedBook); 
+                    } catch (IOException e) {
+                        System.err.println("Errore: Impossibile caricare la pagina di modifica libro.");
+                        e.printStackTrace();
+                    }
                 }
             }
-        }
-    });
+        });
 } // Chiusura di initialize
     
     /**
      * Carica tutti i libri dal BookManagement e popola la TableView.
      */
     private void loadAllBooks() {
-        // Usa getCatalogue() se UserManagement ha un Set<Book>
-        bookList = FXCollections.observableArrayList(bookManager.getCatalogue()); 
-        
-        bookTableView.setItems(bookList);
-        
-        if (bookList.isEmpty()) {
-            System.out.println("Nessun libro trovato nel catalogo.");
-            // Potresti aggiungere un messaggio Label per feedback utente
+        if (model == null) {
+            System.err.println("Errore: Impossibile caricare i dati. Model non è stato iniettato.");
+            return;
         }
+
+        ObservableList<Book> listaDati = FXCollections.observableArrayList(model.getBookManagement().getCatalogue().stream().sorted().collect(Collectors.toList()));
+            
+        bookTableView.setItems(listaDati);
+        bookTableView.getSortOrder().clear();
     }
     
     
