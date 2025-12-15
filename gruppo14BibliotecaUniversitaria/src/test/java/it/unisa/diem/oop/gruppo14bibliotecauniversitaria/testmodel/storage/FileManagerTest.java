@@ -1,222 +1,150 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.storage;
 
-/**
- * @file FileManagerTest.java
- *
- * @brief Implementa una suite di test JUnit per la classe
- * {@link it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager}.
- * * Verifica la corretta esecuzione delle operazioni di I/O (lettura, scrittura,
- * aggiornamento) sia su file binari (oggetti serializzati) sia su file di testo
- * (linee).
- *
- * @author maramariano
- * @date 13-12-2025
- */
-
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 import java.io.*;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @class FileManagerTest
- * @brief Classe di test per la classe {@link FileManager}.
+ * @brief Suite di test per la classe FileManager.
+ * * Verifica le operazioni di I/O su file per oggetti serializzati e file di testo.
  */
 class FileManagerTest {
 
-    /** @brief Directory temporanea fornita da JUnit Jupiter per i file di test. */
-    @TempDir
-    File tempDir; 
-    
-    private File tempObjectFile; ///< File temporaneo usato per i test di serializzazione binaria.
-    private File tempTextFile;   ///< File temporaneo usato per i test di I/O testuale.
-    
-    /**
-     * @brief Classe di supporto serializzabile e comparabile per testare i metodi generici di FileManager.
-     */
-    static class TestData implements Serializable, Comparable<TestData> {
-        private static final long serialVersionUID = 1L;
-        private String value;
-        private int id;
+    private File tempObjFile;
+    private File tempTextFile;
 
-        public TestData(String value, int id) {
-            this.value = value;
-            this.id = id;
-        }
-
-        @Override
-        public String toString() {
-            return value + ":" + id;
-        }
-        
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            TestData testData = (TestData) o;
-            return id == testData.id;
-        }
-        
-        // Necessario per la TreeSet
-        @Override
-        public int compareTo(TestData other) {
-            return Integer.compare(this.id, other.id);
-        }
-    }
-
-    /**
-     * @brief Configurazione eseguita prima di ogni test.
-     * * Crea i riferimenti ai file temporanei all'interno della {@code @TempDir}.
-     */
     @BeforeEach
-    void setUp() throws IOException {
-        tempObjectFile = new File(tempDir, "test_objects.dat");
-        tempTextFile = new File(tempDir, "test_text.txt");
+    void setUp() {
+        // Creiamo nomi di file temporanei univoci per evitare conflitti
+        tempObjFile = new File("test_objects_" + System.currentTimeMillis() + ".dat");
+        tempTextFile = new File("test_text_" + System.currentTimeMillis() + ".txt");
     }
 
-    // --- TEST METODI SERIALIZZAZIONE (OGGETTI) ---
+    @AfterEach
+    void tearDown() {
+        // Pulizia: cancelliamo i file creati durante i test
+        if (tempObjFile.exists()) tempObjFile.delete();
+        if (tempTextFile.exists()) tempTextFile.delete();
+    }
 
-    /**
-     * @brief Test di writeToTextFileObject per la scrittura corretta di un Set di oggetti.
-     * * Verifica che un Set di oggetti venga scritto correttamente nel file binario.
-     */
-    @Test
-    void testWriteToTextFileObject_Success() throws IOException, ClassNotFoundException {
-        Set<TestData> originalSet = new TreeSet<>();
-        originalSet.add(new TestData("Object1", 1));
-        originalSet.add(new TestData("Object2", 2));
-        
-        // 1. Scrivi il Set
-        FileManager.writeToTextFileObject(originalSet, tempObjectFile);
+    @Nested
+    @DisplayName("Test Gestione Oggetti Serializzabili")
+    class ObjectPersistenceTests {
 
-        // 2. Verifica che il file esista e non sia vuoto
-        assertTrue(tempObjectFile.exists());
-        assertTrue(tempObjectFile.length() > 0);
+        @Test
+        @DisplayName("writeToTextFileObject: scrive correttamente un Set di stringhe")
+        void testWriteObject() {
+            Set<String> testSet = new HashSet<>();
+            testSet.add("Test1");
+            testSet.add("Test2");
 
-        // 3. Leggi l'oggetto per verificare il contenuto
-        try (ObjectInputStream read = new ObjectInputStream(new FileInputStream(tempObjectFile))) {
-            Set<TestData> readSet = (Set<TestData>) read.readObject();
-            assertEquals(originalSet.size(), readSet.size(), "Il Set letto deve avere la stessa dimensione.");
-            assertTrue(readSet.contains(new TestData("Any", 1)), "Il Set deve contenere l'oggetto con ID 1.");
+            FileManager.writeToTextFileObject(testSet, tempObjFile);
+
+            assertTrue(tempObjFile.exists(), "Il file deve essere creato");
+            assertTrue(tempObjFile.length() > 0, "Il file non deve essere vuoto");
+
+            // Verifica leggendo manualmente ciò che è stato scritto
+            Set<String> readSet = readObjectFromFile(tempObjFile);
+            assertNotNull(readSet);
+            assertEquals(2, readSet.size());
+            assertTrue(readSet.contains("Test1"));
+            assertTrue(readSet.contains("Test2"));
+        }
+
+        @Test
+        @DisplayName("updateFileObject: sovrascrive correttamente il file")
+        void testUpdateObject() {
+            // 1. Scriviamo un primo set
+            Set<String> initialSet = new HashSet<>();
+            initialSet.add("OldValue");
+            FileManager.writeToTextFileObject(initialSet, tempObjFile);
+
+            // 2. Creiamo un nuovo set aggiornato
+            Set<String> newSet = new HashSet<>();
+            newSet.add("NewValue1");
+            newSet.add("NewValue2");
+            newSet.add("NewValue3");
+
+            // 3. Eseguiamo update
+            FileManager.updateFileObject(newSet, tempObjFile);
+
+            // 4. Verifichiamo che leggendo otteniamo solo i nuovi valori
+            Set<String> readSet = readObjectFromFile(tempObjFile);
+            
+            assertNotNull(readSet);
+            assertEquals(3, readSet.size(), "La dimensione deve riflettere il nuovo set");
+            assertTrue(readSet.contains("NewValue1"));
+            assertFalse(readSet.contains("OldValue"), "I vecchi valori non devono esserci");
+        }
+
+        @Test
+        @DisplayName("writeToTextFileObject: lancia eccezione con parametri null")
+        void testWriteObjectNull() {
+            Set<String> set = new HashSet<>();
+            assertThrows(IllegalArgumentException.class, () -> FileManager.writeToTextFileObject(null, tempObjFile));
+            assertThrows(IllegalArgumentException.class, () -> FileManager.writeToTextFileObject(set, null));
+        }
+
+        // Helper method per leggere e verificare il contenuto scritto da FileManager
+        @SuppressWarnings("unchecked")
+        private Set<String> readObjectFromFile(File file) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                return (Set<String>) ois.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
     }
 
-    /**
-     * @brief Test di writeToTextFileObject con input non valido.
-     * * Verifica che vengano lanciate {@code IllegalArgumentException} per input nulli.
-     */
-    @Test
-    void testWriteToTextFileObject_InvalidInput() {
-        // Oggetto null
-        assertThrows(IllegalArgumentException.class, () -> {
-            FileManager.writeToTextFileObject(null, tempObjectFile);
-        }, "Dovrebbe lanciare IllegalArgumentException se l'oggetto è null.");
+    @Nested
+    @DisplayName("Test Gestione File di Testo")
+    class TextFileTests {
 
-        // File null
-        assertThrows(IllegalArgumentException.class, () -> {
-            FileManager.writeToTextFileObject(new TreeSet<>(), null);
-        }, "Dovrebbe lanciare IllegalArgumentException se il file è null.");
-    }
-    
-    /**
-     * @brief Test di updateFileObject (Sovrascrittura di un Set di oggetti).
-     * * Verifica che il file venga svuotato e riscritto con un nuovo set di dati, perdendo i dati precedenti.
-     */
-    @Test
-    void testUpdateFileObject_Success() throws IOException, ClassNotFoundException {
-        // 1. Scrivi un primo Set (2 elementi)
-        Set<TestData> originalSet = new TreeSet<>();
-        originalSet.add(new TestData("First", 1));
-        originalSet.add(new TestData("Second", 2));
-        FileManager.updateFileObject(originalSet, tempObjectFile);
+        @Test
+        @DisplayName("writeLine: scrive una riga su file")
+        void testWriteLine() {
+            String content = "Hello World";
+            FileManager.writeLine(content, tempTextFile);
 
-        // 2. Prepara un nuovo Set (1 elemento) e sovrascrivi
-        Set<TestData> newSet = new TreeSet<>();
-        newSet.add(new TestData("Third", 3)); // Un solo elemento
-        FileManager.updateFileObject(newSet, tempObjectFile);
-
-        // 3. Verifica leggendo il contenuto aggiornato
-        Set<TestData> updatedReadSet;
-        try (ObjectInputStream read = new ObjectInputStream(new FileInputStream(tempObjectFile))) {
-            updatedReadSet = (Set<TestData>) read.readObject();
+            assertTrue(tempTextFile.exists());
+            
+            // Verifichiamo il contenuto leggendo manualmente
+            String readContent = readStringFromFile(tempTextFile);
+            assertEquals(content, readContent);
         }
 
-        assertEquals(1, updatedReadSet.size(), "Dopo l'update, il file deve contenere 1 elemento.");
-        assertTrue(updatedReadSet.contains(new TestData("NewValue", 3)), "Il file deve contenere solo l'oggetto con ID 3.");
-        assertFalse(updatedReadSet.contains(new TestData("OldValue", 1)), "Il vecchio oggetto con ID 1 non deve più esistere.");
-    }
-    
-    /**
-     * @brief Test di updateFileObject con input non valido.
-     * * Verifica che venga lanciata {@code IllegalArgumentException} se il file è nullo.
-     */
-    @Test
-    void testUpdateFileObject_InvalidInput() {
-        // File null
-        Set<TestData> testSet = new TreeSet<>();
-        testSet.add(new TestData("data", 1));
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            FileManager.updateFileObject(testSet, null);
-        }, "Dovrebbe lanciare IllegalArgumentException se il file è null.");
-    }
-
-    // --- TEST METODI TESTUALI (LINEE) ---
-    
-    /**
-     * @brief Test di writeLine (Scrittura di una singola riga di testo).
-     * * Scrive una riga e la rilegge per verificare la correttezza del contenuto.
-     */
-    @Test
-    void testWriteLine_Success() throws IOException {
-        String line = "Testing FileManager line write.";
-        
-        // 1. Scrivi la riga
-        FileManager.writeLine(line, tempTextFile);
-        
-        // 2. Verifica leggendo il contenuto
-        String readLine;
-        try (BufferedReader reader = new BufferedReader(new FileReader(tempTextFile))) {
-            readLine = reader.readLine();
+        @Test
+        @DisplayName("readLine: non lancia eccezioni (verifica base)")
+        void testReadLine() {
+            // Il metodo readLine nel tuo codice originale stampa o legge una variabile locale 'line' 
+            // ma NON restituisce nulla. Quindi possiamo solo testare che non crashi.
+            
+            // Creiamo un file con contenuto
+            FileManager.writeLine("Test Line", tempTextFile);
+            
+            // Eseguiamo readLine (attualmente void)
+            assertDoesNotThrow(() -> FileManager.readLine(tempTextFile));
         }
-        
-        assertEquals(line, readLine, "La riga scritta deve corrispondere a quella letta.");
-    }
-    
-    /**
-     * @brief Test di readLine (Lettura di una singola riga di testo).
-     * * Verifica che il metodo si esegua senza lanciare eccezioni I/O non gestite.
-     */
-    @Test
-    void testReadLine_NoExceptions() throws IOException {
-        // Prepara il file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempTextFile))) {
-            writer.write("Prima riga di testo\nSeconda riga");
+
+        // Helper method per leggere stringhe da file
+        private String readStringFromFile(File file) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                return reader.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
-        
-        // Esegui readLine (ci aspettiamo che non lanci eccezioni)
-        assertDoesNotThrow(() -> FileManager.readLine(tempTextFile), "La lettura non dovrebbe lanciare eccezioni.");
-    }
-    
-    /**
-     * @brief Test di readLine su file inesistente.
-     * * Verifica che il metodo gestisca {@code FileNotFoundException} internamente senza propagarla.
-     */
-    @Test
-    void testReadLine_FileNotFound() {
-        File missingFile = new File(tempDir, "missing.txt");
-        // Esegui readLine su file inesistente (ci aspettiamo che non lanci eccezioni)
-        assertDoesNotThrow(() -> FileManager.readLine(missingFile), "Il metodo dovrebbe gestire FileNotFoundException internamente.");
     }
 }

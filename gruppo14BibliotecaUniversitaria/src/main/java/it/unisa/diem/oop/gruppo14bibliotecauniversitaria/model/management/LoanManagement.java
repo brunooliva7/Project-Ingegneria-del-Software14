@@ -206,75 +206,79 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
 
    @Override
     public List<Loan> search(Loan l) {
-       if (l == null) throw new IllegalArgumentException("Il filtro di ricerca non può essere null");
+        if (l == null) throw new IllegalArgumentException("Filtro null");
 
-       List<Loan> result = new ArrayList<>();
+        List<Loan> result = new ArrayList<>();
 
-       // --- 1. Estrazione dati dal FILTRO ---
-       // User
-       User filterUser = l.getUser();
-       String fMatricola = (filterUser != null) ? filterUser.getNumberId() : null;
-       // Se la matricola è null, proviamo a vedere se c'è un nome o cognome (dipende da come User li salva)
-       String fNome = (filterUser != null) ? filterUser.getName() : null;
-       String fCognome = (filterUser != null) ? filterUser.getSurname() : null;
-       
-       // Book
-       Book filterBook = l.getBook();
-       String fIsbn = (filterBook != null) ? filterBook.getISBN() : null;
-       String fTitolo = (filterBook != null) ? filterBook.getTitle() : null;
+        // Estrazione Filtri
+        User filterUser = l.getUser();
+        Book filterBook = l.getBook();
 
-       // --- 2. Ciclo su tutti i prestiti ---
-       for (Loan current : this.loan) {
-           boolean matchUser = true;
-           boolean matchBook = true;
-           
-           // A. LOGICA MATCH UTENTE 
-           if (filterUser != null) {
-               User cUser = current.getUser();
-               // Se cerco per Matricola
-               if (fMatricola != null && !fMatricola.isEmpty()) {
-                   if (cUser.getNumberId() == null || !cUser.getNumberId().contains(fMatricola)) {
-                       matchUser = false;
-                   }
-               } 
-               // Altrimenti, se cerco per Nome/Cognome
-               else if ((fNome != null && !fNome.isEmpty()) || (fCognome != null && !fCognome.isEmpty())) {
-                   // Uniamo la stringa di ricerca (che nel costruttore User(string) finisce in nome o cognome)
-                   String searchStr = (fNome != null) ? fNome : fCognome; 
-                   
-                   // Controlliamo se questa stringa è contenuta nel nome O nel cognome dell'utente corrente
-                   boolean foundName = (cUser.getName() != null && cUser.getName().toLowerCase().contains(searchStr.toLowerCase()));
-                   boolean foundSurname = (cUser.getSurname() != null && cUser.getSurname().toLowerCase().contains(searchStr.toLowerCase()));
-                   
-                   if (!foundName && !foundSurname) {
-                       matchUser = false;
-                   }
-               }
-           }
+        for (Loan current : this.loan) {
+            boolean matchUser = true;
+            boolean matchBook = true;
 
-           // B. LOGICA MATCH LIBRO
-           if (filterBook != null) {
-               Book cBook = current.getBook();
-               // Se cerco per ISBN
-               if (fIsbn != null && !fIsbn.isEmpty()) {
-                   if (cBook.getISBN() == null || !cBook.getISBN().contains(fIsbn)) {
-                       matchBook = false;
-                   }
-               } 
-               // Altrimenti, se cerco per Titolo
-               else if (fTitolo != null && !fTitolo.isEmpty()) {
-                   if (cBook.getTitle() == null || !cBook.getTitle().toLowerCase().contains(fTitolo.toLowerCase())) {
-                       matchBook = false;
-                   }
-               }
-           }
+            // --- 1. MATCH UTENTE ---
+            if (filterUser != null) {
+                String fId = filterUser.getNumberId();
+                String fSurname = filterUser.getSurname(); // Qui finisce l'input testuale del costruttore User
+                
+                // Capiamo se c'è effettivamente un filtro attivo
+                boolean hasIdFilter = (fId != null && !fId.isEmpty());
+                boolean hasTextFilter = (fSurname != null && !fSurname.isEmpty());
+                
+                if (hasIdFilter || hasTextFilter) {
+                    boolean found = false;
+                    User target = current.getUser();
+                    
+                    // A. Controllo ID (Matricola)
+                    if (hasIdFilter) {
+                        if (target.getNumberId() != null && target.getNumberId().contains(fId)) {
+                            found = true;
+                        }
+                    }
+                    
+                    // B. Controllo Testuale (Nome O Cognome)
+                    // Se non abbiamo già trovato tramite ID, controlliamo il testo
+                    if (!found && hasTextFilter) {
+                        String query = fSurname.toLowerCase(); // Il costruttore mette la query in surname
+                        boolean inName = (target.getName() != null && target.getName().toLowerCase().contains(query));
+                        boolean inSurname = (target.getSurname() != null && target.getSurname().toLowerCase().contains(query));
+                        
+                        if (inName || inSurname) found = true;
+                    }
+                    
+                    // Se c'era un filtro ma non abbiamo trovato nulla -> Match Fallito
+                    if (!found) matchUser = false;
+                }
+            }
 
-           // Se entrambi corrispondono, aggiungi alla lista
-           if (matchUser && matchBook) {
-               result.add(current);
-           }
-       }
-       return result;
+            // --- 2. MATCH LIBRO ---
+            if (filterBook != null) {
+                // Il costruttore Book mette la query in: ISBN, Title, Authors.
+                // Ne prendiamo uno qualsiasi (es. ISBN) come "query string".
+                String query = filterBook.getISBN(); 
+                
+                if (query != null && !query.isEmpty()) {
+                    Book target = current.getBook();
+                    String qLower = query.toLowerCase();
+                    
+                    boolean inIsbn = (target.getISBN() != null && target.getISBN().toLowerCase().contains(qLower));
+                    boolean inTitle = (target.getTitle() != null && target.getTitle().toLowerCase().contains(qLower));
+                    
+                    // Se non è né nell'ISBN né nel Titolo -> Match Fallito
+                    if (!inIsbn && !inTitle) {
+                        matchBook = false;
+                    }
+                }
+            }
+
+            // Se entrambi i criteri sono soddisfatti, aggiungi
+            if (matchUser && matchBook) {
+                result.add(current);
+            }
+        }
+        return result;
     }
 
 }

@@ -1,139 +1,163 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.auth;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.auth.Librarian;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- *
- * @author bruno
+ * @class LibrarianTest
+ * @brief Suite di test per la classe Librarian.
+ * * Verifica la gestione delle credenziali (lettura, scrittura, hashing)
+ * e la gestione dei casi limite (input null).
  */
-public class LibrarianTest {
-    
+class LibrarianTest {
+
     private Librarian librarian;
+    private File realFile;
+    private File backupFile;
+
+    // Percorso hardcoded nella classe Librarian
+    private final String FILE_PATH = "src/main/resources/credentials.txt";
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         librarian = new Librarian();
         
-        // PRIMA di ogni test, impostiamo il file su credenziali note.
-        // Usiamo il metodo stesso della classe per settare uno stato pulito.
-        // Username: "admin", Password: "password123"
-        librarian.modifyCredentials("admin", "password123");
+        realFile = new File(FILE_PATH);
+        backupFile = new File(FILE_PATH + ".bak");
+
+        // Assicuriamoci che la cartella esista
+        if (realFile.getParentFile() != null) {
+            realFile.getParentFile().mkdirs();
+        }
+
+        // 1. SALVAGUARDIA: Se esiste un file reale, facciamo un backup
+        if (realFile.exists()) {
+            Files.move(realFile.toPath(), backupFile.toPath());
+        }
     }
 
     @AfterEach
-    void tearDown() {
-        // Opzionale: pulizia finale se necessaria
-    }
+    void tearDown() throws IOException {
+        // 1. PULIZIA: Eliminiamo il file creato dai test
+        if (realFile.exists()) {
+            realFile.delete();
+        }
 
-    // --- TEST CHECK CREDENTIALS ---
-
-    @Test
-    void testCheckCredentialsSuccess() {
-        // Verifica che le credenziali impostate nel setUp funzionino
-        boolean result = librarian.checkCredentials("admin", "password123");
-        assertTrue(result, "Il login dovrebbe avere successo con le credenziali corrette");
-    }
-
-    @Test
-    void testCheckCredentialsWrongUsername() {
-        // Username errato
-        boolean result = librarian.checkCredentials("sbagliato", "password123");
-        assertFalse(result, "Il login dovrebbe fallire con username errato");
+        // 2. RIPRISTINO: Se c'era un backup, lo rimettiamo al suo posto
+        if (backupFile.exists()) {
+            Files.move(backupFile.toPath(), realFile.toPath());
+        }
     }
 
     @Test
+    @DisplayName("Flusso completo: Modifica credenziali e verifica accesso con successo")
+    void testModifyAndCheckSuccess() {
+        String testUser = "adminTest";
+        String testPass = "passwordSegreta123";
+
+        // 1. Scriviamo le credenziali
+        librarian.modifyCredentials(testUser, testPass);
+
+        // 2. Verifichiamo che il file esista
+        assertTrue(realFile.exists(), "Il file delle credenziali deve essere creato");
+
+        // 3. Verifichiamo che l'accesso funzioni
+        boolean result = librarian.checkCredentials(testUser, testPass);
+        assertTrue(result, "Le credenziali dovrebbero essere valide");
+    }
+
+    @Test
+    @DisplayName("Verifica accesso fallito: Password errata")
     void testCheckCredentialsWrongPassword() {
-        // Password errata
-        boolean result = librarian.checkCredentials("admin", "sbagliata");
-        assertFalse(result, "Il login dovrebbe fallire con password errata");
-    }
+        // Setup credenziali
+        librarian.modifyCredentials("user", "passwordGiusta");
 
-    @Test
-    void testCheckCredentialsCaseSensitivity() {
-        // Verifica sensibilità maiuscole/minuscole (dipende dalla tua logica, di solito è sensibile)
-        boolean result = librarian.checkCredentials("Admin", "password123");
-        // Se il tuo sistema vuole username case-sensitive, questo deve essere False.
-        // Se storedUsername.equals(usernameInput) è usato, è case-sensitive.
-        assertFalse(result, "Il login dovrebbe fallire se il case dello username è diverso");
-    }
-
-    @Test
-    void testCheckCredentialsNullThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            librarian.checkCredentials(null, "password123");
-        }, "Dovrebbe lanciare eccezione se username è null");
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            librarian.checkCredentials("admin", null);
-        }, "Dovrebbe lanciare eccezione se password è null");
-    }
-
-    // --- TEST MODIFY CREDENTIALS ---
-
-    @Test
-    void testModifyCredentials() {
-        // 1. Modifichiamo le credenziali
-        String newUsr = "superUser";
-        String newPwd = "newSecurePassword!";
+        // Tentativo con password errata
+        boolean result = librarian.checkCredentials("user", "passwordSbagliata");
         
-        librarian.modifyCredentials(newUsr, newPwd);
-
-        // 2. Verifichiamo che le VECCHIE non funzionino più
-        boolean oldLogin = librarian.checkCredentials("admin", "password123");
-        assertFalse(oldLogin, "Le vecchie credenziali non dovrebbero più funzionare");
-
-        // 3. Verifichiamo che le NUOVE funzionino
-        boolean newLogin = librarian.checkCredentials(newUsr, newPwd);
-        assertTrue(newLogin, "Le nuove credenziali dovrebbero permettere il login");
+        assertFalse(result, "L'accesso deve essere negato con password errata");
     }
 
     @Test
-    void testModifyCredentialsNullThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            librarian.modifyCredentials(null, "pass");
-        });
+    @DisplayName("Verifica accesso fallito: Username errato")
+    void testCheckCredentialsWrongUsername() {
+        // Setup credenziali
+        librarian.modifyCredentials("userGiusto", "pass");
+
+        // Tentativo con username errato
+        boolean result = librarian.checkCredentials("userSbagliato", "pass");
         
-        assertThrows(IllegalArgumentException.class, () -> {
-            librarian.modifyCredentials("user", null);
-        });
+        assertFalse(result, "L'accesso deve essere negato con username errato");
     }
 
-    // --- TEST HASHING (Indiretto) ---
-    // Poiché hashPassword è privato, lo testiamo indirettamente vedendo se
-    // modifyCredentials e checkCredentials riescono a capirsi.
-    
     @Test
-    void testHashingConsistency() {
-        // Se l'hashing non fosse deterministico o fosse sbagliato, 
-        // salvare e rileggere fallirebbe.
-        librarian.modifyCredentials("testHash", "testPass");
-        assertTrue(librarian.checkCredentials("testHash", "testPass"));
+    @DisplayName("Sicurezza: La password non deve essere salvata in chiaro")
+    void testPasswordHashedOnDisk() throws IOException {
+        String plainPassword = "miaPasswordInChiaro";
+        librarian.modifyCredentials("testUser", plainPassword);
+
+        // Leggiamo il file fisicamente
+        List<String> lines = Files.readAllLines(realFile.toPath());
+        
+        boolean foundPlainPassword = false;
+        boolean foundHashedPassword = false;
+
+        for (String line : lines) {
+            if (line.contains(plainPassword)) {
+                foundPlainPassword = true;
+            }
+            // Controllo se c'è una stringa lunga (l'hash SHA-256 è 64 caratteri hex)
+            // La riga è tipo "password : <hash>"
+            if (line.startsWith("password") && line.length() > 60) {
+                foundHashedPassword = true;
+            }
+        }
+
+        assertFalse(foundPlainPassword, "La password in chiaro NON deve apparire nel file");
+        assertTrue(foundHashedPassword, "Deve essere presente un hash nel file");
     }
-    
-    // --- NOTA SUI GETTER ---
-    /*
-     * Ho notato che nella tua classe i campi `private String username` e `password` 
-     * non vengono MAI assegnati (checkCredentials legge dal file in variabili locali).
-     * Di conseguenza, getUsername() e getPassword() restituiranno sempre null.
-     * Se è voluto, puoi lasciare così. Se è un errore, dovresti assegnare i valori
-     * dentro checkCredentials quando il login ha successo.
-     */
+
     @Test
-    void testGettersAreNullByDefault() {
-        // Questo test conferma il comportamento attuale del codice (che restituisce null)
-        assertNull(librarian.getUsername(), "Username dovrebbe essere null se non settato esplicitamente");
-        assertNull(librarian.getPassword(), "Password dovrebbe essere null se non settato esplicitamente");
+    @DisplayName("Input Null: modifyCredentials lancia eccezione")
+    void testModifyCredentialsNull() {
+        assertThrows(IllegalArgumentException.class, () -> 
+            librarian.modifyCredentials(null, "pass"));
+        
+        assertThrows(IllegalArgumentException.class, () -> 
+            librarian.modifyCredentials("user", null));
     }
-    
+
+    @Test
+    @DisplayName("Input Null: checkCredentials lancia eccezione")
+    void testCheckCredentialsNull() {
+        assertThrows(IllegalArgumentException.class, () -> 
+            librarian.checkCredentials(null, "pass"));
+        
+        assertThrows(IllegalArgumentException.class, () -> 
+            librarian.checkCredentials("user", null));
+    }
+
+    @Test
+    @DisplayName("File Mancante: checkCredentials restituisce false (gestione eccezione)")
+    void testCheckCredentialsMissingFile() {
+        // Assicuriamoci che il file non esista
+        if(realFile.exists()) realFile.delete();
+
+        // Se il file non c'è, il metodo cattura FileNotFoundException e ritorna false
+        boolean result = librarian.checkCredentials("admin", "admin");
+        
+        assertFalse(result, "Senza file credenziali, l'accesso deve fallire");
+    }
 }

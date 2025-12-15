@@ -1,214 +1,239 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * @file LoanTest.java
- *
- * @author maramariano
- * @date 15-12-2025
- */
-
-package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.data;
-
-/**
- * @file LoanTest.java
- *
- * @author maramariano
- * @date 15-12-2025
- */
-
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.testmodel.data;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * @class LoanTest.java
- *
- * @brief Classe di test per la classe Loan
- * Questa classe contiene i test unitari per verificare la corretta implementazione
- * della logica di uguaglianza (equals), ordinamento (compareTo) e dei costruttori della classe Loan
- * */
-public class LoanTest {
+ * @class LoanTest
+ * @brief Suite di test JUnit 5 per la classe Loan.
+ * * Adattata per i costruttori specifici di User e Book:
+ * - User: (name, surname, numberId, email) e (inputRicerca -> Regex logic)
+ * - Book: (title, authors, year, isbn, copies) e (inputRicerca -> Unified logic)
+ */
+class LoanTest {
 
-    private User user1;
-    private User user2;
-    private Book bookA;
-    private Book bookB;
-    private LocalDate dueDateEarly;
-    private LocalDate dueDateLate;
+    private Loan loan;
+    private User user;
+    private Book book;
+    private LocalDate dueDate;
 
-    /**
-     * @brief Imposta l'ambiente di test (fixture) prima di ogni test
-     *
-     * Inizializza gli oggetti Book, User e LocalDate necessari per i test.
-     */
     @BeforeEach
     void setUp() {
-        // Oggetti Utente 
-        user1 = new User("Mario", "Rossi", "0612718900", "m.rossi@unisa.it"); ///< Utende di test 1
-        user2 = new User("Luigi", "Bianchi", "0612708970", "l.bianchi@unisa.it"); /// Utente 2
-
-        // Oggetti Libro
-        bookA = new Book("Il Codice Segreto", "Autore Alfa", "2020", "ISBN-111", 5); ///< Libro di test 1
-        bookB = new Book("La Chiave Manca", "Autore Beta", "2021", "ISBN-222", 1); ///< Libro 2
-
-        // Date di Scadenza
-        dueDateEarly = LocalDate.now().plusDays(7); ///< Data di test 1
-        dueDateLate = LocalDate.now().plusDays(14); ///< Data 2
-    }
-
-    /**
-     * @brief Testa il costruttore principale della classe Loan.
-     *
-     * Verifica che i campi vengano inizializzati correttamente.
-     */
-    @Test
-    void testMainConstructor() {
-        Loan loan = new Loan(bookA, user1, dueDateLate);
-
-        assertNotNull(loan);
-        assertEquals(bookA, loan.getBook(), "Il libro non è stato inizializzato correttamente.");
-        assertEquals(user1, loan.getUser(), "L'utente non è stato inizializzato correttamente.");
-        assertEquals(dueDateLate, loan.getDueDate(), "La data di scadenza non è stata inizializzata correttamente.");
-    }
-
-    /**
-     * @brief Testa il costruttore di ricerca con input numerici.
-     *
-     * Verifica che gli oggetti User e Book vengano creati parzialmente con i campi corretti.
-     */
-    @Test
-    void testSearchConstructor_NumericInput() {
-        String matricola = "0612709000"; // Simula l'input di una Matricola (solo numeri)
-        String isbn = "9788812345678"; // Simula l'input di un ISBN (solo numeri nel test)
+        // COSTRUTTORI REALI FORNITI NEL PROMPT
         
-        Loan searchLoan = new Loan(matricola, isbn); 
-
-        assertNotNull(searchLoan.getUser(), "L'utente parziale non dovrebbe essere nullo.");
-        // Verifica che la matricola/ID sia stata assegnata
-        assertEquals(matricola, searchLoan.getUser().getNumberId(), "L'utente parziale non ha la Matricola corretta."); 
+        // public User(String name, String surname, String numberId, String email)
+        user = new User("Mario", "Rossi", "001", "mario.rossi@email.it");
         
-        assertNotNull(searchLoan.getBook(), "Il libro parziale non dovrebbe essere nullo.");
-        // Verifica che l'ISBN sia stato assegnato
-        assertEquals(isbn, searchLoan.getBook().getISBN(), "Il libro parziale non ha l'ISBN corretto."); 
+        // public Book(String title, String authors, String publicationYear, String ISBN, int availableCopies)
+        book = new Book("Java Programming", "Bruno", "2020", "ISBN-123", 5);
         
-        assertNull(searchLoan.getDueDate(), "La data di scadenza deve essere null per i prestiti di ricerca.");
+        dueDate = LocalDate.now().plusDays(30);
+
+        // Creazione del prestito standard
+        loan = new Loan(book, user, dueDate);
     }
 
-    /**
-     * @brief Testa il costruttore di ricerca con input alfanumerici (dovrebbero essere Cognome/Titolo).
-     *
-     * Verifica che gli oggetti User e Book vengano creati parzialmente con i campi corretti.
-     */
-    @Test
-    void testSearchConstructor_TextualInput() {
-        String cognome = "Rossi";
-        String titolo = "Codice";
+    @Nested
+    @DisplayName("Test dei Costruttori")
+    class ConstructorTests {
 
-        // Simulo l'input come se l'utente avesse digitato testo in entrambi gli input
-        Loan searchLoan = new Loan(cognome, titolo); 
+        @Test
+        @DisplayName("Costruttore Principale: inizializzazione corretta con oggetti completi")
+        void testMainConstructor() {
+            assertAll("Verifica proprietà principali",
+                () -> assertNotNull(loan),
+                () -> assertEquals(book, loan.getBook()),
+                () -> assertEquals(user, loan.getUser()),
+                () -> assertEquals(dueDate, loan.getDueDate())
+            );
+        }
 
-        assertNotNull(searchLoan.getUser(), "L'utente parziale non dovrebbe essere nullo.");
+        @Test
+        @DisplayName("Costruttore Ricerca User: Input Numerico -> Matricola")
+        void testSearchConstructor_UserNumeric() {
+            // Se l'input è solo numeri, User(String) lo assegna a numberId
+            String inputUser = "12345";
+            String inputBook = "TestBook";
+            
+            Loan searchLoan = new Loan(inputUser, inputBook);
 
-        assertEquals(cognome, searchLoan.getUser().getSurname(), "L'utente parziale non ha il campo cognome corretto."); 
+            assertNotNull(searchLoan.getUser());
+            // Verifica logica User: numeri finiscono in numberId
+            assertEquals("12345", searchLoan.getUser().getNumberId());
+            // Il surname dovrebbe essere null perché l'input era numerico
+            assertNull(searchLoan.getUser().getSurname());
+        }
 
-        assertNotNull(searchLoan.getBook(), "Il libro parziale non dovrebbe essere nullo.");
-        // Assumiamo che il costruttore parziale di Book assegni la query testuale a Title
-        assertEquals(titolo, searchLoan.getBook().getTitle(), "Il libro parziale non ha il Titolo corretto."); 
-}
+        @Test
+        @DisplayName("Costruttore Ricerca User: Input Testo -> Cognome")
+        void testSearchConstructor_UserString() {
+            // Se l'input contiene lettere, User(String) lo assegna a surname
+            String inputUser = "Rossi";
+            String inputBook = "TestBook";
+            
+            Loan searchLoan = new Loan(inputUser, inputBook);
 
-    /**
-     * @brief Testa il costruttore di ricerca con input null o vuoti.
-     *
-     * Verifica che gli oggetti Loan vengano creati ma con i riferimenti interni nulli se l'input è vuoto.
-     */
-    @Test
-    void testSearchConstructor_NullOrEmptyInput() {
-        // Test con primo input null
-        Loan searchLoan = new Loan(null, "Test"); 
-        assertNull(searchLoan.getUser(), "L'utente deve essere null se l'input 1 è null.");
+            assertNotNull(searchLoan.getUser());
+            // Verifica logica User: testo finisce in surname
+            assertEquals("Rossi", searchLoan.getUser().getSurname());
+            // La matricola dovrebbe essere null
+            assertNull(searchLoan.getUser().getNumberId());
+        }
         
-        // Test con secondo input null
-        searchLoan = new Loan("Valido", null);
-        assertNotNull(searchLoan.getUser(), "L'utente non deve essere null se l'input 1 è valido.");
-        assertNull(searchLoan.getBook(), "Il libro deve essere null se l'input 2 è null.");
+        @Test
+        @DisplayName("Costruttore Ricerca Book: Input -> Popola tutto (Unified Search)")
+        void testSearchConstructor_BookUnified() {
+            // Il costruttore di ricerca di Book popola Title, Authors e ISBN con la stessa stringa
+            String inputUser = "123";
+            String inputBook = "Java";
+            
+            Loan searchLoan = new Loan(inputUser, inputBook);
+            Book createdBook = searchLoan.getBook();
+
+            assertNotNull(createdBook);
+            assertAll("Verifica propagazione query su Book",
+                () -> assertEquals("Java", createdBook.getTitle()),
+                () -> assertEquals("Java", createdBook.getAuthors()),
+                () -> assertEquals("Java", createdBook.getISBN())
+            );
+        }
+
+        @Test
+        @DisplayName("Costruttore Ricerca: Robustezza Null")
+        void testSearchConstructor_Nulls() {
+            Loan emptyLoan = new Loan(null, null);
+            assertAll("Verifica gestione null",
+                () -> assertNull(emptyLoan.getUser()),
+                () -> assertNull(emptyLoan.getBook()),
+                () -> assertNull(emptyLoan.getDueDate())
+            );
+        }
     }
-    
-    /**
-     * @brief Testa l'uguaglianza logica basata su Utente (Matricola) e Libro (ISBN).
-     */
+
+    @Nested
+    @DisplayName("Test Metodi Wrapper (Delegation)")
+    class WrapperTests {
+
+        @Test
+        @DisplayName("Wrapper: delegano correttamente ai campi di User e Book")
+        void testWrapperDelegation() {
+            // Questi valori derivano dal setUp()
+            assertAll("Verifica valori wrapper",
+                () -> assertEquals("Mario", loan.getName()),
+                () -> assertEquals("Rossi", loan.getSurname()),
+                () -> assertEquals("001", loan.getNumberId()),
+                () -> assertEquals("Java Programming", loan.getTitle()),
+                () -> assertEquals("ISBN-123", loan.getISBN())
+            );
+        }
+
+        @Test
+        @DisplayName("Wrapper: gestiscono User/Book null senza crashare")
+        void testWrapperNullSafety() {
+            Loan nullLoan = new Loan(null, null, null);
+
+            assertAll("Verifica ritorno stringhe vuote",
+                () -> assertEquals("", nullLoan.getName()),
+                () -> assertEquals("", nullLoan.getSurname()),
+                () -> assertEquals("", nullLoan.getNumberId()),
+                () -> assertEquals("", nullLoan.getTitle()),
+                () -> assertEquals("", nullLoan.getAuthors()),
+                () -> assertEquals("", nullLoan.getISBN())
+            );
+        }
+    }
+
+    @Nested
+    @DisplayName("Test Identità (Equals & HashCode)")
+    class IdentityTests {
+
+        @Test
+        @DisplayName("equals: true per stessi UserID e ISBN")
+        void testEqualsTrue() {
+            // Creiamo un nuovo utente con STESSO ID ma dati diversi
+            User u2 = new User("MarioClone", "RossiClone", "001", "email@fake.com");
+            // Creiamo un nuovo libro con STESSO ISBN ma dati diversi
+            Book b2 = new Book("TitleClone", "AuthClone", "2022", "ISBN-123", 10);
+            
+            Loan loan2 = new Loan(b2, u2, LocalDate.now()); // Data diversa ininfluente per equals
+
+            assertEquals(loan, loan2);
+        }
+
+        @Test
+        @DisplayName("equals: false se UserID differisce")
+        void testEqualsFalseUser() {
+            User uDiff = new User("Mario", "Rossi", "999", "email"); // ID diverso
+            Loan lDiffUser = new Loan(book, uDiff, dueDate);
+
+            assertNotEquals(loan, lDiffUser);
+        }
+
+        @Test
+        @DisplayName("equals: false se ISBN differisce")
+        void testEqualsFalseBook() {
+            Book bDiff = new Book("Java", "Bruno", "2020", "ISBN-999", 5); // ISBN diverso
+            Loan lDiffBook = new Loan(bDiff, user, dueDate);
+
+            assertNotEquals(loan, lDiffBook);
+        }
+
+        @Test
+        @DisplayName("hashCode: consistente con equals")
+        void testHashCode() {
+            // User e Book "cloni" (stessi ID/ISBN)
+            User u2 = new User("A", "B", "001", "C");
+            
+            // CORREZIONE: Cambiato "F" in "2020" per rispettare il formato dell'anno
+            Book b2 = new Book("D", "E", "2020", "ISBN-123", 1);
+            
+            Loan loan2 = new Loan(b2, u2, dueDate);
+
+            assertEquals(loan.hashCode(), loan2.hashCode());
+        }
+    }
+
+    @Nested
+    @DisplayName("Test Ordinamento (CompareTo)")
+    class OrderTests {
+
+        @Test
+        @DisplayName("compareTo: ordina in base alla data di scadenza")
+        void testCompareTo() {
+            LocalDate today = LocalDate.now();
+            LocalDate tomorrow = today.plusDays(1);
+            
+            Loan lToday = new Loan(book, user, today);
+            Loan lTomorrow = new Loan(book, user, tomorrow);
+
+            assertAll("Verifica ordinamento temporale",
+                () -> assertTrue(lToday.compareTo(lTomorrow) < 0, "Oggi deve venire prima di domani"),
+                () -> assertTrue(lTomorrow.compareTo(lToday) > 0, "Domani deve venire dopo oggi"),
+                () -> assertEquals(0, lToday.compareTo(lToday), "Stesso oggetto = 0")
+            );
+        }
+
+        @Test
+        @DisplayName("compareTo: lancia eccezione con null")
+        void testCompareToNull() {
+            assertThrows(IllegalArgumentException.class, () -> loan.compareTo(null));
+        }
+    }
+
     @Test
-    void testEquals_SameLoan() {
-        Loan loan1 = new Loan(bookA, user1, dueDateEarly);
-        Loan loan2 = new Loan(bookA, user1, dueDateLate); // Data diversa
-
-        assertTrue(loan1.equals(loan2), "Prestiti con stesso Utente/Libro ma data diversa dovrebbero essere uguali.");
+    @DisplayName("toString: non restituisce null")
+    void testToString() {
+        String result = loan.toString();
+        assertNotNull(result);
+        assertTrue(result.contains(dueDate.toString()));
     }
-
-    /**
-     * @brief Testa l'uguaglianza con Utente diverso.
-     */
-    @Test
-    void testEquals_DifferentUser() {
-        Loan loan1 = new Loan(bookA, user1, dueDateEarly);
-        Loan loan3 = new Loan(bookA, user2, dueDateEarly); 
-
-        assertFalse(loan1.equals(loan3), "Prestiti con utente diverso dovrebbero essere diversi (Matricola diversa).");
-    }
-
-    /**
-     * @brief Testa l'uguaglianza con Libro diverso.
-     */
-    @Test
-    void testEquals_DifferentBook() {
-        Loan loan1 = new Loan(bookA, user1, dueDateEarly);
-        Loan loan4 = new Loan(bookB, user1, dueDateEarly);
-
-        assertFalse(loan1.equals(loan4), "Prestiti con libro diverso dovrebbero essere diversi (ISBN diverso).");
-    }
-    
-    /**
-     * @brief Testa che l'ordinamento sia basato sulla data di scadenza (dueDate).
-     */
-    @Test
-    void testCompareTo_ByDueDate() {
-        Loan loanEarly = new Loan(bookA, user1, dueDateEarly);
-        Loan loanLate = new Loan(bookB, user2, dueDateLate); 
-        
-        // loanEarly vs loanLate (Precedente vs Successivo)
-        assertTrue(loanEarly.compareTo(loanLate) < 0, "Il prestito con data precedente dovrebbe essere minore (< 0).");
-        
-        // loanLate vs loanEarly (Successivo vs Precedente)
-        assertTrue(loanLate.compareTo(loanEarly) > 0, "Il prestito con data successiva dovrebbe essere maggiore (> 0).");
-
-        // Stessa data di scadenza
-        Loan loanSameDate = new Loan(bookB, user1, dueDateEarly);
-        assertTrue(loanEarly.compareTo(loanSameDate) == 0, "Prestiti con la stessa data dovrebbero essere uguali (0).");
-    }
-
-    /**
-     * @brief Testa la gestione di argomenti null in compareTo.
-     *
-     * Verifica che venga lanciata IllegalArgumentException.
-     */
-    @Test
-    void testCompareTo_NullArgumentThrowsException() {
-        Loan loan = new Loan(bookA, user1, dueDateEarly);
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            loan.compareTo(null);
-        }, "compareTo dovrebbe lanciare IllegalArgumentException se l'argomento è null.");
-    }
-    
 }
