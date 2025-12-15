@@ -5,6 +5,7 @@
  */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
@@ -50,8 +51,12 @@ public class deleteUserController {
     @FXML
     private Label labelMessage;
 
-    private UserManagement userManagement;
-     
+    private Model model;
+      
+    
+    public void setModel(Model model) {
+    this.model = model;
+    }
    
      @FXML
      public void initialize(){
@@ -59,7 +64,7 @@ public class deleteUserController {
          
          deleteuserButton.setDisable(true);
          
-         this.userManagement = new UserManagement();
+         
          // Configurazione colonne
         nomeColumn.setCellValueFactory(data -> 
             new javafx.beans.property.SimpleStringProperty(data.getValue().getName())
@@ -91,7 +96,7 @@ public class deleteUserController {
         
          User userSonda = new User(input); //usando il secondo costruttore creo un nuovo utente fittizio che mi serve solo da passare al metodo search()
         
-        List<User> risultati = userManagement.search(userSonda);
+        List<User> risultati = model.getUserManagement().search(userSonda);
         //l'observable list mi serve per "aggiornare" l'interfaccia in modo live rispetto ai risultati ottenuti dalla search()
         ObservableList<User> datiTabella = FXCollections.observableArrayList(risultati);
         //aggiorno la tableView con i dati contenuti nella ObservableList 
@@ -121,7 +126,7 @@ public class deleteUserController {
         selectedUser.setNumberId(selectedUser.getNumberId().trim());
         
 
-        boolean removed = userManagement.remove(selectedUser);
+        boolean removed = model.getUserManagement().remove(selectedUser);
 
         if (removed) {
             userTableViewricerca.getItems().remove(selectedUser);
