@@ -12,59 +12,65 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FDE68A 0%, #F59E0B 100%);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.modifycredentialController">
-    
-    <children>
-        <!-- Bottone Indietro -->
-        <Button fx:id="backButton" text="← Indietro"
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.modifycredentialController"
+            style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FDE68A 0%, #F59E0B 100%);">
+
+    <!-- Bottone Indietro -->
+    <Button fx:id="backButton" text="← Indietro"
             AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20"
+            onAction="#handleBack"
             style="-fx-background-color: #F97316; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16; -fx-background-radius: 10; -fx-padding: 8 16;">
+        <effect>
+            <DropShadow color="#00000040" radius="8" offsetY="2"/>
+        </effect>
+    </Button>
+
+    <!-- Contenuto centrale -->
+    <VBox alignment="CENTER" maxHeight="800" maxWidth="800" prefHeight="500" prefWidth="450" spacing="0"
+          AnchorPane.topAnchor="60" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+
+        <!-- HEADER CARD -->
+        <VBox alignment="CENTER" spacing="5"
+              style="-fx-background-color: #f57c3c; -fx-background-radius: 16 16 0 0; -fx-padding: 25 20 25 20;">
+            <children>
+                <Label style="-fx-font-size: 24; -fx-text-fill: white; -fx-font-weight: bold;" text="📚 Biblioteca UNISA" />
+                <Label style="-fx-font-size: 14; -fx-text-fill: #ffe0b2;" text="Area Riservata Bibliotecario" />
+            </children>
+        </VBox>
+
+        <!-- CARD CENTRALE LOGIN -->
+        <VBox alignment="CENTER" spacing="20"
+              style="-fx-background-color: white; -fx-background-radius: 0 0 16 16; -fx-padding: 40;">
             <effect>
-                <DropShadow color="#00000040" radius="8" offsetY="2"/>
+                <DropShadow color="#00000033" offsetY="4" radius="20" />
             </effect>
-        </Button>
-   
-       <VBox alignment="CENTER" maxHeight="800" maxWidth="800" prefHeight="500" prefWidth="450" spacing="0">
-      <children>
-      
-              <!-- HEADER CARD -->
-              <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f57c3c;                       -fx-background-radius: 16 16 0 0;                      -fx-padding: 25 20 25 20;">
-                  <children>
-                      <Label style="-fx-font-size: 24; -fx-text-fill: white; -fx-font-weight: bold;" text="📚 Biblioteca UNISA" />
-                      <Label style="-fx-font-size: 14; -fx-text-fill: #ffe0b2;" text="Area Riservata Bibliotecario" />
-                  </children>
-              </VBox>
-      
-              <!-- CARD CENTRALE LOGIN -->
-              <VBox alignment="CENTER" spacing="20" style="-fx-background-color: white;                       -fx-background-radius: 0 0 16 16;                       -fx-padding: 40;">
-                  <effect>
-                      <DropShadow color="#00000033" offsetY="4" radius="20" />
-                  </effect>
-                  <children>
-                    
-                      <!-- PIN UNIVERSITA'-->
-                      <TextField fx:id="pin" maxWidth="250" prefWidth="250" promptText="Pin dell'università di Salerno" style="-fx-background-radius: 8;                                    -fx-border-radius: 8;                                    -fx-border-color: #FF7043;                                    -fx-border-width: 1;                                    -fx-padding: 5;" />
-      
-                      <!-- Username -->
-                      <TextField fx:id="usernameModified" maxWidth="250" prefWidth="250" promptText="Username" style="-fx-background-radius: 8;                                    -fx-border-radius: 8;                                    -fx-border-color: #FF7043;                                    -fx-border-width: 1;                                    -fx-padding: 5;" />
-      
-                      <!-- Password -->
-                      <PasswordField fx:id="passwordModified" maxWidth="250" prefWidth="250" promptText="Password" style="-fx-background-radius: 8;                                        -fx-border-radius: 8;                                        -fx-border-color: #FF7043;                                        -fx-border-width: 1;                                        -fx-padding: 5;" />
-      
-                      <!-- Bottone Login -->
-                      <Button fx:id="confirmModified" maxWidth="250" onAction="#handleModify" prefWidth="250" style="-fx-background-color: #FF7043;                                 -fx-text-fill: white;                                 -fx-font-weight: bold;                                 -fx-background-radius: 8;                                 -fx-font-size: 14;" text="Conferma">
-                          <effect>
-                              <DropShadow color="#00000033" radius="5" />
-                          </effect>
-                      </Button>
-      
-                      <!-- Footer -->
-                      <Label fx:id="labelMessage" style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
-      
-                  </children>
-              </VBox>
-      </children>
-   
-       </VBox>
-   </children>
-</StackPane>
+            <children>
+                <TextField fx:id="pin" maxWidth="250" prefWidth="250" promptText="Pin dell'università di Salerno"
+                           style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
+
+                <TextField fx:id="usernameModified" maxWidth="250" prefWidth="250" promptText="Username"
+                           style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
+
+                <PasswordField fx:id="passwordModified" maxWidth="250" prefWidth="250" promptText="Password"
+                               style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
+
+                <Button fx:id="confirmModified" maxWidth="250" prefWidth="250" text="Conferma"
+                        onAction="#handleModify"
+                        style="-fx-background-color: #FF7043; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-font-size: 14;">
+                    <effect>
+                        <DropShadow color="#00000033" radius="5" />
+                    </effect>
+                </Button>
+
+                <Label fx:id="labelMessage" style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
+            </children>
+        </VBox>
+    </VBox>
+</AnchorPane>
