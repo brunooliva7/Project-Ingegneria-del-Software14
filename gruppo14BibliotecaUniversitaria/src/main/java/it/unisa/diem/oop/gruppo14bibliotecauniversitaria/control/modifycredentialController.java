@@ -69,7 +69,7 @@ public class modifycredentialController {
     private void handleBack() {
         try {
             javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
-                getClass().getResource("/it/unisa/diem/oop/gruppo14bibliotecauniversitaria/view/login.fxml")
+                getClass().getResource("/login.fxml")
             );
             javafx.scene.Parent root = loader.load();
 
