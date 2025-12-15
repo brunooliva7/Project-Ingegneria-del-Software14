@@ -15,6 +15,8 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserMa
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -48,6 +50,14 @@ public class addUserController {
     public void setModel(Model model) {
     this.model = model;
     }
+    public boolean isValidEmail(String email) {
+    String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+    Pattern pattern = Pattern.compile(emailRegex);
+    Matcher matcher = pattern.matcher(email);
+    return matcher.matches();
+}
+    
+    
     
     @FXML
     public void initialize(){
@@ -64,6 +74,11 @@ public class addUserController {
         String cognome = surname.getText();
         String mail = email.getText();
         String matricola = numberID.getText();
+        if (!isValidEmail(mail)) {
+         labelErrore.setText("Email non valida");
+         labelErrore.setStyle("-fx-text-fill: red;");
+         return;
+                 }
         
         User u = new User(nome,cognome,matricola,mail);
       
