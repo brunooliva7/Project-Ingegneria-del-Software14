@@ -20,7 +20,7 @@ alt Prestito trovato
     Controller -> LoanManagement: remove(Loan l)
     LoanManagement -> Book: Incrementa copie disponibili
     LoanManagement -> User: Aggiorna lista prestiti utente
-    LoanManagement -> FileManager: updateFileObject(Loan l, String filename)
+    LoanManagement -> FileManager: updateFileObject(listaLoan, loanDatabase)
     Controller -> View: Conferma restituzione registrata
     View -> Bibliotecario: Restituzione completata
 else Prestito non trovato
@@ -28,3 +28,5 @@ else Prestito non trovato
     View -> Bibliotecario: Restituzione non consentita
 end
 @enduml
+
+

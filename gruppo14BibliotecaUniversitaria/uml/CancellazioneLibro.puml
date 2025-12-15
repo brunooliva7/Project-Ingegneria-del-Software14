@@ -15,7 +15,7 @@ end
 Bibliotecario -> View : Elimina
 View -> Controller : Invia dati da eliminare
 Controller -> BookManagement : remove(Book b)
-BookManagement -> FileManager : removeFromFileObject(Book b,String filename)
+BookManagement -> FileManager : updateFileObject(Catalogue,bookDatabase)
 BookManagement --> Controller : returnValue
 alt [Errore_nella_rimozione]
 Controller -> View : ErrorView("Rimozione non avvenuta")

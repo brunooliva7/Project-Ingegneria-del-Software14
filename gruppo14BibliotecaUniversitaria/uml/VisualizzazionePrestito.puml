@@ -12,8 +12,6 @@ View -> Controller: Mostra operazioni disponibili
 Bibliotecario -> View: Seleziona "Visualizzazione prestiti attivi"
 View -> Controller: Richiesta elenco prestiti
 Controller -> LoanManagement: viewSorted()
-LoanManagement -> FileManager: Lettura archivio prestiti
-FileManager --> LoanManagement: Restituisce dati prestiti
 LoanManagement --> Controller: Elenco prestiti ordinato
 
 alt Prestiti attivi presenti
