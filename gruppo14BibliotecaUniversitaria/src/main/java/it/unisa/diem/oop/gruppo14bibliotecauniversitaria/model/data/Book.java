@@ -69,18 +69,15 @@ public class Book implements Comparable<Book>,Serializable {
     }
     
     /**
-     * @brief Costruttore della classe Book per la ricerca parziale
-     * 
-     * Inizializza l'oggetto Book compilando solo il campo necessario 
-     * Gli altri campi rimangono nulli, tranne availableCopies che è inizializzato a 0
-     * 
-     * La logica discrimina tra ISBN (solo numeri e opzionale X finale) e titolo/autore
-     * 
-     * @param inputRicerca Stringa di input fornita dall'utente
-     * 
-     * @post L'oggetto Book è inizializzato con i campi necessari alla ricerca parziale
-     * 
-     */
+    * @brief Costruttore della classe Book per la ricerca parziale
+    * 
+    * *Inizializza l'oggetto Book compilando i campi Titolo, Autori e ISBN
+    * con la stessa stringa di input.
+    * Gli altri campi (anno, copie) sono inizializzati ai valori di default (null/0)
+    * 
+    * @param inputRicerca Stringa di input fornita dall'utente (la query di ricerca)
+    * @post L'oggetto Book è inizializzato con la stringa di ricerca replicata nei campi Title, Authors e ISBN, fungendo da criterio di ricerca
+    */
     public Book (String inputRicerca ){  //overload del costruttore,sarà utilizzato solo ai fini della ricerca dell'utente
         
      // Inizializziamo tutto a null di default
@@ -97,25 +94,15 @@ public class Book implements Comparable<Book>,Serializable {
 
         String cleanInput = inputRicerca.trim();
 
-        // Pattern per ISBN: numeri, trattini e opzionalmente 'X' alla fine
-        // Usiamo una REGEX interna per non dipendere da variabili esterne
-        final String isbnPattern = "^[0-9]{9,17}([Xx])?$";
-        
-        // Logica di Discriminazione:
-        // Se l'input sembra un codice ISBN (solo numeri, trattini, e forse X finale)
-        if (cleanInput.matches(isbnPattern)) {
-            // Se è un ISBN, inizializza SOLO il campo ISBN
-            this.ISBN = cleanInput;
-
-        } else if (cleanInput.contains(" ")) {
-            // Se contiene spazi, è più probabile che sia un Titolo (o Autori)
-            // Inizializza SOLO il campo Titolo
-            this.title = cleanInput;
-
-        } else {
-            // Non è un ISBN e non ha spazi. Trattalo come Titolo (parziale) o Autore
-            this.title = cleanInput;
+        if (inputRicerca == null || inputRicerca.trim().isEmpty()) {
+            return; 
         }
+
+        // PER LA RICERCA UNIFICATA, SETTIAMO LA QUERY SU TITOLO, AUTORI E ISBN.
+        // Il metodo search farà l'OR logico su tutti e tre i campi.
+        this.title = cleanInput;
+        this.authors = cleanInput;
+        this.ISBN = cleanInput;
     }
 
     // --- SETTER ---
