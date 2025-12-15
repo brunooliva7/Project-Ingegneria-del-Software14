@@ -51,75 +51,66 @@ public class addLoanController {
     private User user = null;
     private LocalDate duedate = null;
     private Loan loan = null;
-    private LoanManagement loanManagement = null;
+    private LoanManagement loanManagement;
     
     @FXML
     private void initialize(){
         
         this.userManagement = new UserManagement();
         this.bookManagement = new BookManagement();
+        this.loanManagement = new LoanManagement();
         
-        ObservableList<User> userList = FXCollections.observableArrayList(userManagement.getList());
-        ObservableList<Book> bookList = FXCollections.observableArrayList(bookManagement.getCatalogue());
-        
-        userComboBox.setItems(userList);
-        bookComboBox.setItems(bookList);
+        userComboBox.setItems(FXCollections.observableArrayList(userManagement.getList()));
+        bookComboBox.setItems(FXCollections.observableArrayList(bookManagement.getCatalogue()));
         
         registerButton.disableProperty().bind(userComboBox.valueProperty().isNull().or(bookComboBox.valueProperty().isNull().or(dueDatePicker.valueProperty().isNull())));
     }
     
     @FXML
-    private void registerLoan(){
-        
-        this.loanManagement = new LoanManagement();
-        
-         book = bookComboBox.getValue();
-         user = userComboBox.getValue();
-         duedate = dueDatePicker.getValue();
+    private void registerLoan(){     
          
-         loan = new Loan(book,user,duedate);
-         
-         if(user.getBooksOnloan().size() <= 3){
-             if(book.getAvailableCopies() > 0){
-                 if(this.duedate.compareTo(LocalDate.now()) > 0){
-                    if(loanManagement.add(loan)){
-                        labelMessage.setText("Modifica Riuscita");
-                        labelMessage.setStyle("-fx-text-fill: green;");
-                        book.setAvailableCopies(book.getAvailableCopies() - 1);
-                    }
+    user = userComboBox.getValue();
+    book = bookComboBox.getValue();
+    duedate = dueDatePicker.getValue();
 
-                    else{
-                        labelMessage.setText("Modifica Riuscita");
-                        labelMessage.setStyle("-fx-text-fill: green;");
-                    }
-                }
-                else{
-                    Alert alert = new Alert(AlertType.INFORMATION);
+    if (duedate.isBefore(LocalDate.now())) {
+        Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("ERRORE");
                     alert.setHeaderText("Data di Restituzione");
                     alert.setContentText("La data di restituzione inserita non è corretta");
 
                     alert.showAndWait(); 
-                 }
-            }
-             
-             else{
-                  Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("ERRORE");
-            alert.setHeaderText("Numero di copie");
-            alert.setContentText("Non ci sono numero di copie per libro selezionato");
+    }
 
-            alert.showAndWait();
-             }
-         }
-         else{
-             Alert alert = new Alert(AlertType.INFORMATION);
+    if (user.getBooksOnloan().size() >= 3) {
+        Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("ERRORE");
             alert.setHeaderText("Numero di Prestiti");
             alert.setContentText("Hai raggiunto il numero di prestiti massimo");
 
             alert.showAndWait();
-         }
+    }
+
+    if (book.getAvailableCopies() <= 0) {
+       Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("ERRORE");
+            alert.setHeaderText("Numero di Prestiti");
+            alert.setContentText("Hai raggiunto il numero di prestiti massimo");
+
+            alert.showAndWait();
+    }
+
+    loan = new Loan(book, user, duedate);
+
+    if (loanManagement.add(loan)) {
+        book.setAvailableCopies(book.getAvailableCopies() - 1);
+
+        labelMessage.setText("Prestito aggiunto con successo");
+        labelMessage.setStyle("-fx-text-fill: green;");
+    } else {
+        labelMessage.setText("Errore durante il salvataggio");
+        labelMessage.setStyle("-fx-text-fill: red;");
+    }
     }
     
     @FXML

@@ -82,6 +82,7 @@ public class deleteLoanController {
     private void initialize(){
         
         this.loanManagement = new LoanManagement();
+        this.bookManagement = new BookManagement();
         
         confirmButton.disableProperty().bind(bookSearchField.textProperty().isEmpty());
         bookSearchField.disableProperty().bind(userSearchField.textProperty().isEmpty());
@@ -112,6 +113,9 @@ public class deleteLoanController {
                
                this.bookManagement.update(this.loanSelezionato.getBook(), this.loanSelezionato.getBook());
                
+               loanTableView.setItems(FXCollections.observableArrayList(this.loanManagement.getLoan()));
+                loanTableView.refresh();
+               
                labelMessage.setText("Prestito rimosso");
                 labelMessage.setStyle("-fx-text-fill: green;");
            }
@@ -129,24 +133,24 @@ public class deleteLoanController {
     @FXML
     private void search(){
         
-        this.loanManagement = new LoanManagement();
-        
-         userInput = userSearchField.getText();
-         bookInput = bookSearchField.getText();
-         
-         loan = new Loan(userInput,bookInput);
-         
-         loanList = loanManagement.search(loan);
-         
-         if(loanList != null){
-              ObservableList<Loan> observableLoanList = FXCollections.observableArrayList(this.loanList);
+        userInput = userSearchField.getText();
+        bookInput = bookSearchField.getText();
+
+        // Creo oggetti User/Book parziali solo con ID o ISBN
+        Loan filterLoan = new Loan(userInput, bookInput);
+
+        loanList = loanManagement.search(filterLoan);
+
+        if (loanList != null && !loanList.isEmpty()) {
+            ObservableList<Loan> observableLoanList = FXCollections.observableArrayList(loanList);
             loanTableView.setItems(observableLoanList);
-         }
-         
-         else{
-                labelMessage.setText("Prestito non trovato");
-                labelMessage.setStyle("-fx-text-fill: red;");
-         }    
+            labelMessage.setText("Trovati " + loanList.size() + " prestiti.");
+            labelMessage.setStyle("-fx-text-fill: green;");
+        } else {
+            labelMessage.setText("Nessun prestito trovato.");
+            labelMessage.setStyle("-fx-text-fill: red;");
+            loanTableView.setItems(FXCollections.observableArrayList());
+        }       
     }
     
     @FXML

@@ -39,7 +39,7 @@ import java.time.LocalDate;
 public class LoanManagement implements Functionality<Loan>,Serializable{
    private Set <Loan> loan; ///< insieme dei prestiti da gestire 2
    
-   private final File loanDatabase = new File("loanDatabase.dat"); //<file database dei prestiti
+   private final File loanDatabase = new File("loan_Database.dat"); //<file database dei prestiti
    
    
    
@@ -61,7 +61,7 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
                 Object letto = ois.readObject();
                 
                 if (letto instanceof Set) {
-                    this.loan = (Set<Loan>) loan;
+                    this.loan = (Set<Loan>) letto;
                     System.out.println("Caricamento riuscito: " + loan.size() + " prestiti.");
                 } else {
                     System.err.println("ERRORE FILE: Il file contiene un oggetto " + letto.getClass().getName() + " invece di un Set. Il file verrà sovrascritto al prossimo salvataggio.");
@@ -204,17 +204,28 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
     @Override
     public List<Loan> search(Loan l){
         
-        List<Loan> list = new ArrayList<>();
-        
-       if( l == null ) throw new IllegalArgumentException();
-       
-        for (Loan currentLoan : loan) {
-            if (currentLoan.equals(l)) {
-               list.add(l);
-            }
+       if (l == null) throw new IllegalArgumentException();
+
+    List<Loan> result = new ArrayList<>();
+    
+    String searchUserId = (l.getUser() != null) ? l.getUser().getNumberId() : null;
+    String searchBookISBN = (l.getBook() != null) ? l.getBook().getISBN() : null;
+
+    for (Loan l1 : this.loan) { // loanList = tutti i prestiti caricati
+        String currentUserId = (l1.getUser() != null) ? l1.getUser().getNumberId() : null;
+        String currentISBN = (l1.getBook() != null) ? l1.getBook().getISBN() : null;
+
+        boolean matchUser = searchUserId == null || searchUserId.isEmpty() ||
+                            (currentUserId != null && currentUserId.contains(searchUserId));
+        boolean matchBook = searchBookISBN == null || searchBookISBN.isEmpty() ||
+                            (currentISBN != null && currentISBN.contains(searchBookISBN));
+
+        if (matchUser && matchBook) {
+            result.add(l1);
         }
-      
-      return list;
+    }
+    return result;
+
     }
 
 }
