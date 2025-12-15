@@ -45,6 +45,10 @@ public class addUserController {
     
     private Model model;
     
+    public void setModel(Model model) {
+    this.model = model;
+    }
+    
     @FXML
     public void initialize(){
       

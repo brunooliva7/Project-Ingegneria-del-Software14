@@ -9,6 +9,27 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view;
  *  
  */
 
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.LoginController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addBookController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addLoanController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.addUserController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.deleteBookController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.deleteLoanController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.deleteUserController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.homepageController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.loanViewController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.modifyBookController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.modifyUserController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.modifycredentialController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchBookController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchLoanController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchUserController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.viewBookController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.viewUserController;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.LoanManagement;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
 import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -40,7 +61,7 @@ import javafx.stage.Modality;
  * Segue il pattern MVC
  */
 public class View extends Application {
-    
+    private static Model model; // variabile statica del modello
     private static Stage mainStage;
     /** 
      * @brief Metodo di avvio dell'applicazione JavaFX.
@@ -58,9 +79,12 @@ public class View extends Application {
     public void start(Stage stage) throws IOException {
 
         mainStage=stage;
+        model=new Model(new BookManagement(),new UserManagement(),new LoanManagement());
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/login.fxml"));
-        
+          // Passaggio del modello al controller
+         LoginController controller = fxmlLoader.getController();
+         controller.setModel(model);
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Login");
         stage.setScene(scene);
@@ -74,7 +98,9 @@ public class View extends Application {
         
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/homepage.fxml"));
-        
+            // Ottengo il controller per la homepage e passo il modello
+        homepageController controller = fxmlLoader.getController();
+        controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("HomePage!");
@@ -91,6 +117,10 @@ public class View extends Application {
     public static void Modify() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modifyPage.fxml"));
+             // Ottengo il controller e passo il modello
+        modifycredentialController controller = fxmlLoader.getController();
+        controller.setModel(model);  // Usa il modello già creato in start()
+        
         
         Scene scene = new Scene(fxmlLoader.load());
         
@@ -108,7 +138,9 @@ public class View extends Application {
      public static void addUser() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/aggiungiutente.fxml"));
-        
+            // Ottengo il controller  e passo il modello
+           addUserController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("Aggiungi utente");
@@ -125,7 +157,9 @@ public class View extends Application {
      public static void modifyUser() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificautente.fxml"));
-        
+        // Ottengo il controller  e passo il modello
+           modifyUserController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("Aggiungi utente");
@@ -141,7 +175,9 @@ public class View extends Application {
      public static void deleteUser() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/cancellautente.fxml"));
-        
+        // Ottengo il controller  e passo il modello
+           deleteUserController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("EliminaUtente");
@@ -156,7 +192,9 @@ public class View extends Application {
      
      public static void searchUser() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/ricercautente.fxml"));
-        
+        // Ottengo il controller  e passo il modello
+           searchUserController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("RicercaUtente");
@@ -173,7 +211,9 @@ public class View extends Application {
     public static void viewUSers() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/visualizzaelencoutente.fxml"));
-        
+        // Ottengo il controller  e passo il modello
+           viewUserController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("VisualizzaUtenti");
@@ -189,7 +229,9 @@ public class View extends Application {
     public static void addBook() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/aggiungilibro.fxml"));
-        
+        // Ottengo il controller  e passo il modello
+           addBookController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("Aggiungi Libro");
@@ -206,7 +248,9 @@ public class View extends Application {
     public static void deleteBook() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/cancellalibro.fxml"));
-        
+        // Ottengo il controller  e passo il modello
+           deleteBookController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("Cancella Libro");
@@ -223,7 +267,9 @@ public class View extends Application {
     public static void updateBook() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificalibro.fxml"));
-        
+        // Ottengo il controller  e passo il modello
+           modifyBookController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("Modifica Libro");
@@ -240,7 +286,9 @@ public class View extends Application {
     public static void viewBooks() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/visualizzaelencolibro.fxml"));
-        
+        // Ottengo il controller  e passo il modello
+           viewBookController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("Visualizza Libri");
@@ -257,7 +305,9 @@ public class View extends Application {
     public static void searchBook() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/ricercalibro.fxml"));
-        
+        // Ottengo il controller  e passo il modello
+           searchBookController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("Cerca libro");
@@ -274,7 +324,9 @@ public class View extends Application {
     public static void searchLoan() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/cercaprestito.fxml"));
-        
+        // Ottengo il controller  e passo il modello
+           searchLoanController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("Cerca Prestito");
@@ -291,7 +343,9 @@ public class View extends Application {
     public static void addLoan() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/aggiungiprestito.fxml"));
-        
+        // Ottengo il controller  e passo il modello
+           addLoanController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("Aggiungi Prestito");
@@ -308,7 +362,9 @@ public class View extends Application {
     public static void deleteLoan() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/eliminaprestito.fxml"));
-        
+        // Ottengo il controller  e passo il modello
+           deleteLoanController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("Elimino Prestito");
@@ -325,7 +381,9 @@ public class View extends Application {
     public static void viewLoan() throws IOException {
         
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/visualizzaelencoprestiti.fxml"));
-        
+        // Ottengo il controller  e passo il modello
+           loanViewController controller = fxmlLoader.getController();
+           controller.setModel(model);  // Usa il modello già creato in start()
         Scene scene = new Scene(fxmlLoader.load());
         
         mainStage.setTitle("Visualizza Prestiti");
