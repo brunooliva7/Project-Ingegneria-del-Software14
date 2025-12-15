@@ -33,23 +33,21 @@ import java.time.LocalDate;
  * La classe LoanManagement implementa l'interfaccia Functionality per i prestiti,
  * consentendo operazioni di aggiunta, rimozione, aggiornamento, ricerca e visualizzazione
  * ordinata. Utilizza una struttura Set (TreeSet) per mantenere i prestiti ordinati
- * secondo il criterio definito nella classe Loan.
+ * secondo il criterio temporale definito nella classe Loan.
  */
 
 public class LoanManagement implements Functionality<Loan>,Serializable{
-   private Set <Loan> loan; ///< insieme dei prestiti da gestire 2
+   private Set <Loan> loan; ///< insieme dei prestiti da gestire 
    
    private final File loanDatabase = new File("loan_Database.dat"); //<file database dei prestiti
-   
-   
-   
-    
-    
-    /**
+  
+   /**
      * @brief Costruttore della classe LoanManagement.
+     * * Inizializza la struttura dati. Se il file database esiste e non è vuoto,
+     * carica i prestiti salvati, altrimenti inizializza un insieme vuoto.
      *
-     * @pre Nessuna
-     * @post L'insieme dei prestiti è inizializzato come TreeSet vuoto
+     * @pre Nessuna.
+     * @post L'insieme dei prestiti è inizializzato (vuoto o con dati caricati).
      */
 
     public LoanManagement(){
@@ -74,11 +72,13 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
             System.out.println("File database non trovato o vuoto. Avvio con lista vuota.");
         }
     }
-      /**
-     * @brief Getter dell'elenco loan 
+    
+    /**
+     * @brief Restituisce l'insieme dei prestiti gestiti.
      *
-     * @pre esiste un elenco loan
-     * @return elenco dei presiti 
+     * @return Set<Loan> L'insieme dei prestiti correnti.
+     * * @pre L'oggetto LoanManagement deve essere istanziato.
+     * @post Viene restituito il riferimento all'insieme dei prestiti.
      */
     
     public Set<Loan> getLoan() {
@@ -87,13 +87,12 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
     
     
     /**
-     * @brief Aggiunge un prestito all'insieme.
-     * @param l Prestito da aggiungere 
-     * @return true se il prestito è stato aggiunto, false altrimenti
+     * @brief Aggiunge un nuovo prestito all'insieme.
+     * * @param l Il prestito da aggiungere.
+     * @return true se l'aggiunta ha successo, false se il prestito esiste già.
      *
-     * @pre l != null
-     * @post Il prestito è aggiunto all'insieme se non già presente e se le condizioni
-     *       di disponibilità dei libri e del numero massimo consentito per utente sono rispettate
+     * @pre l != null.
+     * @post Se l non è presente, viene aggiunto all'insieme e il database viene aggiornato.
      */
     
     @Override
@@ -107,13 +106,13 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
         else return false;
     } 
        
-     /**
+    /**
      * @brief Rimuove un prestito dall'insieme.
-     * @param l Prestito da rimuovere 
-     * @return true se il prestito è stato rimosso, false altrimenti
+     * * @param l Il prestito da rimuovere.
+     * @return true se la rimozione ha successo, false se il prestito non viene trovato.
      *
-     * @pre l != null
-     * @post Il prestito è rimosso dall'insieme se presente
+     * @pre l != null.
+     * @post Se l è presente, viene rimosso dall'insieme e il database viene aggiornato.
      */
 
     @Override
@@ -140,14 +139,13 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
     }
     
     /**
-     * @brief Aggiorna i dati di un prestito.
-     * @param newL Prestito aggiornato
-     * @param oldL prestito da aggiornare
-     * 
-     * @return true se l'aggiornamento è avvenuto con successo, false altrimenti
+     * @brief Aggiorna i dati di un prestito esistente.
+     * * @param newL Il nuovo oggetto prestito con i dati aggiornati.
+     * @param oldL Il vecchio oggetto prestito da sostituire.
+     * @return true se l'aggiornamento ha successo, false se oldL non viene trovato.
      *
-     * @pre oldL != null && newL != null
-     * @post I dati dell'utente e del libro associati al prestito sono aggiornati
+     * @pre newL != null && oldL != null.
+     * @post Se oldL esiste, viene sostituito da newL e il database viene aggiornato.
      */
 
    @Override
@@ -176,11 +174,13 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
      return false;
     }
     
-    /**
-     * @brief Visualizza i prestiti ordinati.
+   /**
+     * @brief Visualizza i prestiti in ordine.
+     * * Costruisce una stringa contenente la rappresentazione di tutti i prestiti,
+     * ordinati secondo il criterio definito in Loan (data di scadenza).
      *
-     * @pre L'insieme dei prestiti deve essere stato inizializzato
-     * @post I prestiti vengono mostrati secondo l'ordinamento definito in Loan
+     * @pre L'insieme dei prestiti deve essere inizializzato.
+     * @post Viene generata (ma attualmente non stampata/ritornata nel codice originale) la lista ordinata.
      */
 
     @Override
@@ -193,12 +193,14 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
     }
     
     /**
-     * @brief Cerca un prestito nell'insieme.
-     * @param l Prestito da cercare (non deve essere null)
-     * @return Il prestito trovato, oppure null se non presente
+     * @brief Cerca prestiti nell'insieme in base a criteri parziali.
+     * * La ricerca avviene verificando se la matricola dell'utente o l'ISBN del libro
+     * contengono le stringhe specificate nel prestito filtro.
+     * * @param l Oggetto Loan usato come filtro (contiene matricola e/o ISBN da cercare).
+     * @return List<Loan> Una lista contenente tutti i prestiti che soddisfano i criteri.
      *
-     * @pre l != null
-     * @post Restituisce il prestito corrispondente se presente, altrimenti null
+     * @pre l != null.
+     * @post Restituisce una lista (eventualmente vuota) di prestiti trovati, senza modificare l'archivio.
      */
 
     @Override

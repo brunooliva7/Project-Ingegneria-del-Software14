@@ -23,11 +23,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import javafx.scene.control.TableCell;
+import javafx.collections.transformation.SortedList;
 
 /**
- *
- * @author bruno
+ * @class searchLoanController
+ * @brief Gestisce la logica dell'interfaccia per la ricerca dei prestiti.
+ * * Questa classe permette all'utente di cercare prestiti attivi filtrando per dati dell'utente
+ * (matricola o cognome) o del libro (ISBN o titolo). I risultati vengono visualizzati in una
+ * TableView ordinabile, con evidenziazione visiva per i prestiti scaduti.
  */
+
 public class searchLoanController {
     
     @FXML
@@ -77,11 +82,27 @@ public class searchLoanController {
      private List<Loan> loanList;
      
      private Loan loan = null;
+     
+     /**
+     * @brief Collega il modello principale nel controller.
+     * * @param model Il modello condiviso dell'applicazione.
+     * * @pre model != null.
+     * @post Le istanze di Model e LoanManagement interne sono inizializzate.
+     */
     
      public void setModel(Model model) {
         this.model = model;
         this.loanManagement = model.getLoanManagement();     
     }
+     
+     /**
+     * @brief Inizializza il controller e configura la TableView.
+     * * Configura le colonne della tabella, imposta i binding per disabilitare/abilitare
+     * i campi di ricerca in modo mutuamente esclusivo o sequenziale, e definisce
+     * una CellFactory per la colonna delle date per evidenziare in rosso i prestiti scaduti.
+     * * @pre Gli elementi FXML devono essere stati caricati correttamente.
+     * @post La tabella è configurata e pronta per visualizzare i dati.
+     */
     
     @FXML
     private void initialize(){
@@ -121,6 +142,14 @@ public class searchLoanController {
         
     }
     
+    /**
+     * @brief Esegue la ricerca dei prestiti in base ai filtri inseriti.
+     * * Recupera i testi inseriti dall'utente, crea un oggetto Loan "filtro" e interroga
+     * il LoanManagement. I risultati vengono avvolti in una SortedList per permettere
+     * l'ordinamento dinamico tramite click sulle colonne della tabella.
+     * * @pre loanManagement deve essere stato inizializzato tramite setModel.
+     * @post La TableView viene aggiornata con i risultati della ricerca (ordinabili).
+     */
     @FXML
     private void search(){
         
@@ -134,7 +163,12 @@ public class searchLoanController {
 
         if (loanList != null && !loanList.isEmpty()) {
             ObservableList<Loan> observableLoanList = FXCollections.observableArrayList(loanList);
-            loanTableView.setItems(observableLoanList);
+            
+            SortedList<Loan> sortedData = new SortedList<>(observableLoanList);
+            
+            sortedData.comparatorProperty().bind(loanTableView.comparatorProperty());
+            
+            loanTableView.setItems(sortedData);
             labelMessage.setText("Trovati " + loanList.size() + " prestiti.");
             labelMessage.setStyle("-fx-text-fill: green;");
         } else {
@@ -144,6 +178,12 @@ public class searchLoanController {
         }    
     }
     
+    /**
+     * @brief Gestisce il ritorno alla pagina principale (Homepage).
+     * * @throws IOException Se si verifica un errore nel caricamento della vista Homepage.
+     * * @pre Nessuna.
+     * @post La scena attiva viene cambiata con la Homepage.
+     */
     @FXML
     private void backPage() throws IOException{
         View.Homepage();
