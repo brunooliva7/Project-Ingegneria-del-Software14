@@ -108,7 +108,7 @@ public class UserManagement implements Functionality<User>,Serializable{
          { throw new IllegalArgumentException();
             // esce senza rimuovere ritornando che non è andato a buon fine l'operazione lanciando l'eccezione che specifica che l'argomento non è valido 
          } 
-        Iterator<User> iter = list.iterator(); 
+         Iterator<User> iter = list.iterator(); 
          while(iter.hasNext()) {  //scorro la lista di utenti
          User utente = iter.next();
          if(utente.equals(u)) {  //il controllo dell'uguaglianza va fatto sulla matricola(campo univoco dell'user) quindi uso direttamente equals() di User dato che è implementato in questo modo 
