@@ -37,12 +37,12 @@ public class UserManagement implements Functionality<User>,Serializable{
     /**
      *  @brief Costruttore UserManagement 
      * 
-     *  @post Il TreeSet(scelto così che potrà mantenere l'ordinamento definito da compareTo nella classe User) che conterrà la lista di utenti è correttamente inizializzato 
+     *  @post L'HashSet che conterrà la lista di utenti è correttamente inizializzato 
      */
     
     
     public UserManagement(){   
-        this.list = new TreeSet<>(); 
+        this.list = new HashSet<>(); 
         
         if (userDatabase.exists() && userDatabase.length() > 0) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(userDatabase))) {
@@ -79,7 +79,7 @@ public class UserManagement implements Functionality<User>,Serializable{
      *  @brief Metodo che aggiunge un user all'elenco 
      *  @param u L'utente da aggiungere all'elenco 
      *  @pre u != null
-     *  @post L'user è correttamente inserito nel TreeSet
+     *  @post L'user è correttamente inserito nell'HashSet
      */
     
     @Override
@@ -89,11 +89,7 @@ public class UserManagement implements Functionality<User>,Serializable{
          { throw new IllegalArgumentException();
             // esce senza aggiungere ritornando che non è andato a buon fine l'inserimento lanciando l'eccezione che specifica che l'argomento non è valido 
          }
-          // Controlla se esiste già un user con lo stesso numberId
-         for (User existing : list) {
-           if (existing.equals(u)) {
-            return false; // già presente
-        }}
+         //l'hashset usa equals() e hashCode() per l'inserimento quindi non permetterà di aggiungere un nuovo utente se la sua matricola è già presente 
          if(list.add(u)){
          FileManager.writeToTextFileObject(list, this.userDatabase); //aggiorno il file d'archivio 
          return true;}
@@ -106,7 +102,7 @@ public class UserManagement implements Functionality<User>,Serializable{
      *  @brief Metodo che rimuove un user dall'elenco 
      *  @param u L'utente da eliminare dall'elenco 
      *  @pre u != null
-     *  @post L'user è correttamente eliminato dal TreeSet
+     *  @post L'user è correttamente eliminato dall'HashSet
      */
     @Override
     public boolean remove(User u ) {
@@ -114,15 +110,12 @@ public class UserManagement implements Functionality<User>,Serializable{
          { throw new IllegalArgumentException();
             // esce senza rimuovere ritornando che non è andato a buon fine l'operazione lanciando l'eccezione che specifica che l'argomento non è valido 
          } 
-         Iterator<User> iter = list.iterator(); 
-         while(iter.hasNext()) {  //scorro la lista di utenti
-         User utente = iter.next();
-         if(utente.equals(u)) {  //il controllo dell'uguaglianza va fatto sulla matricola(campo univoco dell'user) quindi uso direttamente equals() di User dato che è implementato in questo modo 
-         iter.remove();  // rimuove in sicurezza durante l'iterazione
+         boolean removed = list.remove(u); // O(1)
+         if(removed){
          FileManager.updateFileObject(list, this.userDatabase);  //aggiorno il file
          return true;
     }
-    } return false; //se arruva qui significs che non ha trovato l'utente da rimuovere 
+     return removed; //se arruva qui significs che non ha trovato l'utente da rimuovere 
     }
     /**
      *  @brief Metodo che permette di aggiornare i dati di un utente
@@ -132,27 +125,23 @@ public class UserManagement implements Functionality<User>,Serializable{
      */
     @Override
     public boolean update(User u1 ,User u2){   //deve prima inserire tutri i dati dell'utente di cui vuole cambiare le informazioni
-       if (u1 == null) 
+       if (u1 == null || u2==null) 
          { throw new IllegalArgumentException();
             // esce senza aggiornare ritornando che non è andato a buon fine l'operazione lanciando l'eccezione che specifica che l'argomento non è valido 
          } 
         
         boolean delate=false;
         if(u1==null) return false;
-        else{
-            for(User u: list){
-                if(u.equals(u1)){
-                    delate=remove(u1);  //rimuovo l'utente di cui saranno cambiati i dati
+        else if(remove(u1)){
+          //rimuovo l'utente di cui saranno cambiati i dati
                   FileManager.updateFileObject(list, this.userDatabase);
-                    return add(u2);  //aggiunge l'utente con i nuovi dati 
-                }}
-        } return false; //se arrivo a questo punto significa che non abbiamo trovato l'utente di cui volevamo aggiornare 
-        
-        
-    }
+                  return add(u2);  //aggiunge l'utente con i nuovi dati 
+                }
+         return false; //se arrivo a questo punto significa che non abbiamo trovato l'utente di cui volevamo aggiornare 
+         }
     /**
-     *  @brief Metodo che permette di visualizzare il TreeSet contenente l'elenco ordinato in base al cognome e  nome degli utenti  
-     *  @post Lelenco opportunamente ordinato è correttamente visualizzato 
+     *  @brief Metodo che permette di visualizzare l'HashSet contenente l'elenco  
+     *  @post Lelenco  è correttamente stampato
      */
     
     @Override
