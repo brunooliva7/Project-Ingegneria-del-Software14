@@ -79,6 +79,11 @@ public class addBookController {
             
             // Conversione delle COPIE (da String a int)
             copieDisponibili = Integer.parseInt(availableCopies.getText());
+            if (copieDisponibili < 0) {
+                labelErrore.setText("Errore: Il numero di copie disponibili non può essere negativo.");
+                labelErrore.setStyle("-fx-text-fill: red;");
+                return; // Ferma l'esecuzione se le copie sono negative
+            }
             
         } catch (NumberFormatException e) {
             // Questo gestisce l'errore se availableCopies non è un numero
