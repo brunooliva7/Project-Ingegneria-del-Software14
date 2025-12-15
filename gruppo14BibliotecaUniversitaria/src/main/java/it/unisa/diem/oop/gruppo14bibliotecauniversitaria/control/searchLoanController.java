@@ -90,15 +90,6 @@ public class searchLoanController {
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
         duedateColumn.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
         
-        
-        
-        loanTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue,newValue) -> {
-            if(newValue != null){
-                /*view aprire pagina di visualizzazione dati*/
-            }
-        });
-        
-        loanTableView.getSelectionModel().clearSelection();
     }
     
     @FXML
