@@ -37,7 +37,7 @@ public class Model {
      * @pre bookManagement != null && userManagement != null && loanManagement != null && librarian != null
      * @post Oggetto pronto all'uso
      */
-    public Model(BookManagement bookManagement, UserManagement userManagement, LoanManagement loanManagement, Librarian librarian) {
+    public Model(BookManagement bookManagement, UserManagement userManagement, LoanManagement loanManagement) {
         this.bookManagement =  bookManagement;
         this.userManagement =  userManagement;
         this.loanManagement = loanManagement;
