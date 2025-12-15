@@ -317,6 +317,7 @@ public class View extends Application {
 
         modifyBookController controller = fxmlLoader.getController();
         if (controller != null) {
+            controller.setModel(model);
             controller.initData(bookToModify); 
         }
 
@@ -341,6 +342,9 @@ public class View extends Application {
     public static void updateBook() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificalibro.fxml"));
         Parent root = fxmlLoader.load();
+        
+        modifyBookController controller = fxmlLoader.getController();
+        controller.setModel(model);
         
         Scene scene = new Scene(root);
         
