@@ -32,7 +32,7 @@ public class Book implements Comparable<Book>,Serializable {
     
     private String title; ///< Titolo del libro
     private String authors; ///< Autore/i
-    private LocalDate publicationYear; ///< Anno di pubblicazione
+    private String publicationYear; ///< Anno di pubblicazione
     private String ISBN; ///< Codice identificativo univoco
     private int availableCopies; ///< Numero di copie disponibili
     
@@ -47,15 +47,60 @@ public class Book implements Comparable<Book>,Serializable {
     * @post L'oggetto Book è correttamente inizializzato
     * 
     */
-    public Book(String title, String authors, LocalDate publicationYear, String ISBN, int availableCopies) {
+    public Book(String title, String authors, String publicationYear, String ISBN, int availableCopies) {
         if (availableCopies < 0) {
             throw new IllegalArgumentException("Il numero iniziale di copie disponibili non può essere negativo: " + availableCopies);
         }
+        
+        if (publicationYear != null && !publicationYear.isEmpty()) {
+            if (!publicationYear.matches("\\d{4}")) { // Forziamo 4 cifre per l'anno
+                throw new IllegalArgumentException("L'anno di pubblicazione deve essere una stringa contenente esattamente 4 cifre");
+            }
+        }
+        
         this.title = title;
         this.authors = authors;
         this.publicationYear = publicationYear;
         this.ISBN = ISBN;
         this.availableCopies = availableCopies;
+    }
+    
+    public Book (String inputRicerca ){  //overload del costruttore,sarà utilizzato solo ai fini della ricerca dell'utente
+        
+     // 1. Inizializziamo tutto a null di default
+        this.title = null;
+        this.authors = null;
+        this.publicationYear = null;
+        this.ISBN = null;
+        this.availableCopies = 0;
+
+    // 2. Protezione anti-crash: se la stringa è null o vuota, ci fermiamo qui.
+         if (inputRicerca == null || inputRicerca.trim().isEmpty()) {
+            return; 
+        }
+
+        String cleanInput = inputRicerca.trim();
+
+        // Pattern per ISBN: numeri, trattini e opzionalmente 'X' alla fine
+        // Usiamo una REGEX interna per non dipendere da variabili esterne
+        final String isbnPattern = "^[0-9]{9,17}([Xx])?$";
+        
+        // 3. Logica di Discriminazione:
+    
+        // Se l'input sembra un codice ISBN (solo numeri, trattini, e forse X finale)
+        if (cleanInput.matches(isbnPattern)) {
+            // Se è un ISBN, inizializza SOLO il campo ISBN.
+            this.ISBN = cleanInput;
+
+        } else if (cleanInput.contains(" ")) {
+            // Se contiene spazi, è più probabile che sia un Titolo (o Autori).
+            // Inizializza SOLO il campo Titolo.
+            this.title = cleanInput;
+
+        } else {
+            // Non è un ISBN e non ha spazi. Trattalo come Titolo (parziale) o Autore.
+            this.title = cleanInput;
+        }
     }
 
     /**
@@ -84,7 +129,7 @@ public class Book implements Comparable<Book>,Serializable {
     * @post La data di pubblicazione è aggiornata
     * 
     */
-    public void setPublicationYear(LocalDate publicationYear) {
+    public void setPublicationYear(String publicationYear) {
         this.publicationYear = publicationYear;
     }
 
@@ -136,10 +181,10 @@ public class Book implements Comparable<Book>,Serializable {
 
     /**
     * @brief Restituisce il valore di publicationYear
-    * @return Anno di pubblicazione del libro (LocalDate)
+    * @return Anno di pubblicazione del libro (String)
     * 
     */
-    public LocalDate getPublicationYear() {
+    public String getPublicationYear() {
         return publicationYear;
     }
 

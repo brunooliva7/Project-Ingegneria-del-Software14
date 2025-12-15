@@ -10,7 +10,6 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookMa
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate; // Necessario per la colonna della data/anno
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -29,63 +28,43 @@ import javafx.scene.control.Alert.AlertType;
 
 
 /**
- * FXML Controller class per la schermata di eliminazione libro.
+ * FXML Controller class
  *
  * @author maramariano
  */
 public class deleteBookController implements Initializable {
 
     // Campi FXML dal layout
-    @FXML
-    private Button backButton;
-
-    @FXML
-    private TextField searchField;
-
-    @FXML
-    private Button searchButton;
-    
-    @FXML
-    private Button deleteBookButton; // Bottone "Elimina libro"
-
-    @FXML
-    private TableView<Book> bookTableViewricerca; // La TableView principale
+    @FXML private Button backButton;
+    @FXML private TextField searchField;
+    @FXML private Button searchButton;
+    @FXML private Button deleteBookButton;
+    @FXML private TableView<Book> bookTableViewricerca; 
 
     // Colonne della TableView
-    @FXML
-    private TableColumn<Book, String> titoloColumn;
-    
-    @FXML
-    private TableColumn<Book, String> autoriColumn;
-    
-    @FXML
-    private TableColumn<Book, LocalDate> dataColumn; // Usiamo LocalDate
-    
-    @FXML
-    private TableColumn<Book, String> isbnColumn;
-    
-    @FXML
-    private TableColumn<Book, Integer> copieColumn;
+    @FXML private TableColumn<Book, String> titoloColumn;
+    @FXML private TableColumn<Book, String> autoriColumn;
+    @FXML private TableColumn<Book, String> dataColumn; 
+    @FXML private TableColumn<Book, String> isbnColumn;
+    @FXML private TableColumn<Book, Integer> copieColumn;
     
     // Gestione dei dati
     private ObservableList<Book> bookList;
-    private final BookManagement bookManager = new BookManagement(); // Istanza di BookManagement
+    private final BookManagement bookManager = new BookManagement(); 
 
     /**
      * Inizializza il controller.
-     * @param url
-     * @param rb
      */
-    @Override
+    @FXML
     public void initialize(URL url, ResourceBundle rb) {
-        // 1. Configurazione delle colonne della TableView
-        titoloColumn.setCellValueFactory(new PropertyValueFactory<>("title")); // Assumendo campo 'title' in Book
-        autoriColumn.setCellValueFactory(new PropertyValueFactory<>("authors")); // Assumendo campo 'authors' in Book
-        dataColumn.setCellValueFactory(new PropertyValueFactory<>("publicationDate")); // Assumendo campo 'publicationDate' in Book
-        isbnColumn.setCellValueFactory(new PropertyValueFactory<>("ISBN")); // Assumendo campo 'ISBN' in Book
-        copieColumn.setCellValueFactory(new PropertyValueFactory<>("availableCopies")); // Assumendo campo 'availableCopies' in Book
+        // Configurazione delle colonne della TableView
+        titoloColumn.setCellValueFactory(new PropertyValueFactory<>("title")); 
+        autoriColumn.setCellValueFactory(new PropertyValueFactory<>("authors")); 
+        dataColumn.setCellValueFactory(new PropertyValueFactory<>("publicationDate")); 
+        isbnColumn.setCellValueFactory(new PropertyValueFactory<>("ISBN")); 
+        copieColumn.setCellValueFactory(new PropertyValueFactory<>("availableCopies")); 
 
-        // 2. Associa i metodi ai pulsanti
+        // Associa i metodi ai pulsanti tramite riferimento (this::metodo)
         backButton.setOnAction(this::backPage);
         searchButton.setOnAction(this::handleSearchAction);
         deleteBookButton.setOnAction(this::handleDeleteAction);
@@ -93,29 +72,31 @@ public class deleteBookController implements Initializable {
         // Inizializza la lista (carica tutti i libri all'avvio)
         loadAllBooks();
         
-        // Disabilita il pulsante Elimina all'avvio (si abiliterà alla selezione)
+        // Disabilita il pulsante Elimina all'avvio
         deleteBookButton.setDisable(true);
         
-        // 3. Ascolta la selezione della riga per abilitare il pulsante Elimina
+        // Ascolta la selezione della riga per abilitare il pulsante Elimina
         bookTableViewricerca.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             deleteBookButton.setDisable(newSelection == null);
         });
     }
 
     /**
-     * Carica tutti i libri nella TableView (ad esempio, all'avvio).
+     * Carica tutti i libri nella TableView all'avvio o dopo una ricerca vuota.
      */
     private void loadAllBooks() {
-    // Converte il Set (catalogue) in List
-    List<Book> allBooks = new java.util.ArrayList<>(bookManager.getCatalogue());
-    
-    bookList = FXCollections.observableArrayList(allBooks);
-    bookTableViewricerca.setItems(bookList);
-}
+        // Converte il Set (catalogue) in List usando getCatalogue()
+        List<Book> allBooks = new java.util.ArrayList<>(bookManager.getCatalogue()); 
+        
+        bookList = FXCollections.observableArrayList(allBooks);
+        bookTableViewricerca.setItems(bookList);
+    }
     
     /**
-     * Gestisce l'azione del pulsante di ricerca.
-     */
+    * Gestisce l'azione del pulsante di ricerca.
+    * Ora utilizza il metodo search(Book b) di BookManagement.
+    */
+    @FXML
     private void handleSearchAction(ActionEvent event) {
         String query = searchField.getText().trim();
 
@@ -124,8 +105,13 @@ public class deleteBookController implements Initializable {
             return;
         }
 
-        // Chiama il metodo corretto che esegue la ricerca parziale su stringa
-        List<Book> results = bookManager.searchBooks(query); 
+        // CREA UN OGGETTO BOOK PARZIALE
+        Book partialBook = new Book(query); 
+        // Devi usare il costruttore di Book appropriato per Title, Authors, Year, ISBN, Copies
+
+        // 2. CHIAMA IL TUO METODO search(Book b)
+        List<Book> results = bookManager.search(partialBook); 
+
         bookList = FXCollections.observableArrayList(results);
         bookTableViewricerca.setItems(bookList);
 
@@ -137,6 +123,7 @@ public class deleteBookController implements Initializable {
     /**
      * Gestisce l'azione di eliminazione del libro selezionato.
      */
+    @FXML
     private void handleDeleteAction(ActionEvent event) {
         Book selectedBook = bookTableViewricerca.getSelectionModel().getSelectedItem();
 
@@ -145,11 +132,11 @@ public class deleteBookController implements Initializable {
             return;
         }
 
-        // ORA: Chiama il metodo remove() che hai in BookManagement
+        // Chiama il metodo remove(Book) che aggiorna il catalogo e il file
         if (bookManager.remove(selectedBook)) { 
             showAlert("Successo", "Libro eliminato: " + selectedBook.getTitle(), AlertType.INFORMATION);
 
-            // Rimuove l'elemento dalla lista visualizzata
+            // Aggiorna la vista rimuovendo l'elemento dalla lista locale
             bookList.remove(selectedBook);
 
         } else {
@@ -159,20 +146,21 @@ public class deleteBookController implements Initializable {
 
     /**
      * Gestisce il ritorno alla Home Page.
-     * @param event
+     * Deve gestire l'IOException internamente perché associato tramite setOnAction.
      */
     @FXML
-    public void backPage(ActionEvent event){
+    private void backPage(ActionEvent event){ 
         try {
             View.Homepage(); 
         } catch (IOException e) {
             showAlert("Errore di Caricamento", "Impossibile caricare la pagina iniziale.", AlertType.ERROR);
         }
-    } 
+    }
     
     /**
      * Metodo helper per mostrare gli alert.
      */
+    @FXML
     private void showAlert(String title, String message, AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(title);

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FDE68A 0%, #F59E0B 100%);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.viewBookController">
+
+    <!-- BOTTONE INDIETRO -->
+    <Button fx:id="backButton" onAction="#backPage" style="-fx-background-color: #FF7043; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-font-size: 18;" text="Indietro" AnchorPane.leftAnchor="30" AnchorPane.topAnchor="30">
+        <effect>
+            <DropShadow color="#00000075" />
+        </effect>
+    </Button>
+
+    <!-- LAYOUT CENTRALE -->
+    <VBox alignment="CENTER" maxHeight="1000" maxWidth="800" prefHeight="500" prefWidth="500" spacing="10" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="100">
+        <children>
+            <!-- HEADER CARD -->
+            <VBox alignment="CENTER" maxWidth="450" prefWidth="450" spacing="10" style="-fx-background-color: #f57c3c; -fx-background-radius: 16 16 0 0; -fx-padding: 10 30 0 30;">
+                <children>
+                    <Label style="-fx-font-size: 24; -fx-text-fill: white; -fx-font-weight: bold;" text="📚 Biblioteca UNISA" />
+                    <Label style="-fx-font-size: 14; -fx-text-fill: #ffe0b2;" text="Elenco utenti " />
+                </children>
+            </VBox>
+
+            <!-- TABLEVIEW FOR BOOKS -->
+            <TableView fx:id="bookTableView" maxHeight="250" maxWidth="450" style="-fx-background-color: #ffff99ff; -fx-pref-width: 450; -fx-pref-height: 250;" AnchorPane.bottomAnchor="150" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="60">
+                <columns>
+                    <TableColumn fx:id="titoloColumn" prefWidth="150" text="Titolo" />
+                    <TableColumn fx:id="autoriColumn" prefWidth="150" text="Autori" />
+                    <TableColumn fx:id="annoPubblicazioneColumn" prefWidth="150" text="Anno di pubblicazione" />
+                    <TableColumn fx:id="isbnColumn" prefWidth="150" text="ISBN" />
+                    <TableColumn fx:id="copieDisponibiliColumn" prefWidth="150" text="Numero di copie disponibili" />
+                </columns>
+            </TableView>
+
+            <!-- Footer -->
+            <Label style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
+        </children>
+    </VBox>
+
+</AnchorPane>

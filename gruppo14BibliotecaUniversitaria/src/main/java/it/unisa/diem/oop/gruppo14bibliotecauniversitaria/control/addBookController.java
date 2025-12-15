@@ -1,0 +1,117 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
+
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.BookManagement;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
+import java.io.IOException;
+import java.time.LocalDate;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+/**
+ * FXML Controller class
+ * 
+ * @author maramariano
+ */
+public class addBookController {
+    @FXML
+    private TextField title;
+    
+    @FXML
+    private TextField authors;
+    
+    @FXML
+    private TextField publicationYear;
+    
+    @FXML
+    private TextField ISBN;
+    
+    @FXML
+    private TextField availableCopies;
+    
+    @FXML
+    private Button addButton;
+    
+    @FXML 
+    private Label labelErrore;
+    
+    @FXML
+    private Button backButton;
+    
+    @FXML
+    public void initialize(){
+        // Logica per disabilitare il bottone "Aggiungi" finché i campi obbligatori non sono compilati.
+        // Ad esempio, rendiamo l'aggiunta disponibile solo se Titolo, Autori e ISBN non sono vuoti.
+        addButton.disableProperty().bind(
+                title.textProperty().isEmpty()
+                .or(authors.textProperty().isEmpty())
+                .or(ISBN.textProperty().isEmpty())
+        );
+    }
+    
+    @FXML
+    public void addBook() {
+        // 1. Recupero i dati dai TextField
+        String titolo = title.getText();
+        String autore = authors.getText();
+        String isbn = ISBN.getText();
+        String anno = publicationYear.getText();
+        
+
+        int copieDisponibili;
+
+        //Verifica che l'anno sia composto da soli numeri
+        try {
+            if (!anno.matches("\\d{4}")) { 
+                labelErrore.setText("Errore: Anno di pubblicazione deve essere composto esattamente da 4 cifre.");
+                labelErrore.setStyle("-fx-text-fill: red;");
+                return;
+            }
+            
+            // Conversione delle COPIE (da String a int)
+            copieDisponibili = Integer.parseInt(availableCopies.getText());
+            
+        } catch (NumberFormatException e) {
+            // Questo gestisce l'errore se availableCopies non è un numero
+            labelErrore.setText("Errore: Copie disponibili deve essere un numero intero.");
+            labelErrore.setStyle("-fx-text-fill: red;");
+            return;
+        }
+
+
+        // 3. Creazione dell'oggetto Libro (utilizzando la data creata)
+        Book b = new Book(titolo, autore, anno, isbn, copieDisponibili);
+
+        // 4. Inserimento del Libro
+        BookManagement bm = new BookManagement();
+
+        if (bm.add(b)) {
+            labelErrore.setText("Libro inserito correttamente.");
+            labelErrore.setStyle("-fx-text-fill: green;");
+            
+            // Pulizia dei campi dopo l'inserimento
+            title.clear();
+            authors.clear();
+            publicationYear.clear();
+            ISBN.clear();
+            availableCopies.clear();
+        } else {
+            labelErrore.setText("Errore nell'inserimento del libro.");
+            labelErrore.setStyle("-fx-text-fill: red;");
+        }
+    }
+    
+    @FXML
+    public void backPage() throws IOException{
+        View.Homepage();
+    }
+}

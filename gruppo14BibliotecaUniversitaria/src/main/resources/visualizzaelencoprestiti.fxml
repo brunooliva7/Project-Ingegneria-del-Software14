@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FDE68A 0%, #F59E0B 100%);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.loanViewController">
+
+    <!-- BOTTONE INDIETRO -->
+    <Button fx:id="backButton" onAction="#backPage" style="                 -fx-background-color: #F97316;                 -fx-text-fill: white;                 -fx-font-weight: bold;                 -fx-font-size: 16;                 -fx-background-radius: 10;                 -fx-padding: 8 16;" text="← Indietro" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
+        <effect>
+            <DropShadow color="#00000040" offsetY="2" radius="8" />
+        </effect>
+    </Button>
+
+    <!-- CONTENITORE CENTRALE -->
+    <StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="100">
+
+        <!-- CARD BIANCA -->
+        <VBox alignment="TOP_CENTER" maxHeight="600" maxWidth="1150" prefHeight="600" prefWidth="1150" spacing="15" style="                 -fx-background-color: white;                 -fx-background-radius: 20;                 -fx-padding: 20;">
+
+            <effect>
+                <DropShadow color="#00000035" offsetY="5" radius="20" />
+            </effect>
+
+            <!-- HEADER -->
+            <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f57c3c;                          -fx-background-radius: 16 16 0 0;                          -fx-padding: 15;">
+
+                <Label style="-fx-font-size: 24;                               -fx-text-fill: white;                               -fx-font-weight: bold;" text="📚 Biblioteca UNISA" />
+
+                <Label style="-fx-font-size: 14;                               -fx-text-fill: #ffe0b2;" text="Elenco prestiti" />
+            </VBox>
+
+            <!-- TABLEVIEW -->
+            <TableView fx:id="loanTableView" maxHeight="400" maxWidth="1100" prefHeight="400" prefWidth="1100" style="                             -fx-background-radius: 10;                             -fx-border-radius: 10;                             -fx-border-color: #E5E7EB;                             -fx-font-size: 13;">
+
+                <columns>
+                    <TableColumn fx:id="nomeColumn" prefWidth="150" text="Nome utente" />
+                    <TableColumn fx:id="cognomeColumn" prefWidth="150" text="Cognome utente" />
+                    <TableColumn fx:id="matricolaColumn" prefWidth="150" text="Matricola utente" />
+                    <TableColumn fx:id="titoloColumn" prefWidth="150" text="Titolo libro" />
+                    <TableColumn fx:id="autoriColumn" prefWidth="150" text="Autori libro" />
+                    <TableColumn fx:id="isbnColumn" prefWidth="150" text="ISBN libro" />
+                    <TableColumn fx:id="duedateColumn" prefWidth="150" text="Data restituzione" />
+                </columns>
+            </TableView>
+
+            <!-- FOOTER -->
+            <Label style="-fx-font-size: 12;                           -fx-text-fill: #9CA3AF;" text="Università degli Studi di Salerno" />
+
+        </VBox>
+    </StackPane>
+
+</AnchorPane>

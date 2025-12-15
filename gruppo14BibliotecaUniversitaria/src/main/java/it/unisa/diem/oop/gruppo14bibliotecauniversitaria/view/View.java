@@ -193,7 +193,7 @@ public class View extends Application {
         
         Scene scene = new Scene(fxmlLoader.load());
         
-        mainStage.setTitle("AggiungiLibro");
+        mainStage.setTitle("Aggiungi Libro");
         mainStage.setScene(scene);
         
         mainStage.setResizable(true);
@@ -210,7 +210,126 @@ public class View extends Application {
         
         Scene scene = new Scene(fxmlLoader.load());
         
-        mainStage.setTitle("CancellaLibro");
+        mainStage.setTitle("Cancella Libro");
+        mainStage.setScene(scene);
+        
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
+        
+    }
+    
+    public static void updateBook() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/modificalibro.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("Cancella Libro");
+        mainStage.setScene(scene);
+        
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
+        
+    }
+    
+    public static void viewBooks() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/visualizzaelencolibro.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("Visualizzo libro");
+        mainStage.setScene(scene);
+        
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
+        
+    }
+    
+    public static void searchBook() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/ricercalibro.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("Cerca libro");
+        mainStage.setScene(scene);
+        
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
+        
+    }
+    
+    public static void searchLoan() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/cercaprestito.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("Cerca Prestito");
+        mainStage.setScene(scene);
+        
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
+        
+    }
+    
+    public static void addLoan() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/aggiungiprestito.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("Aggiungi Prestito");
+        mainStage.setScene(scene);
+        
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
+        
+    }
+    
+    public static void deleteLoan() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/eliminaprestito.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("Elimino Prestito");
+        mainStage.setScene(scene);
+        
+        mainStage.setResizable(true);
+        mainStage.setMaximized(false); 
+        mainStage.setMaximized(true);
+        
+        mainStage.show();  
+        
+    }
+    
+    public static void viewLoan() throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("/visualizzaelencoprestiti.fxml"));
+        
+        Scene scene = new Scene(fxmlLoader.load());
+        
+        mainStage.setTitle("Visualizza Prestiti");
         mainStage.setScene(scene);
         
         mainStage.setResizable(true);
