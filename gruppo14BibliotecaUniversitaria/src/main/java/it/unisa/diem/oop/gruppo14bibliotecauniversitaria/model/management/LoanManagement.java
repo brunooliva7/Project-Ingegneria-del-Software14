@@ -17,6 +17,7 @@ package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Book;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.Loan;
+import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.storage.FileManager;
 import java.io.File;
 import java.io.FileInputStream;
@@ -203,31 +204,77 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
      * @post Restituisce una lista (eventualmente vuota) di prestiti trovati, senza modificare l'archivio.
      */
 
-    @Override
-    public List<Loan> search(Loan l){
-        
-       if (l == null) throw new IllegalArgumentException();
+   @Override
+    public List<Loan> search(Loan l) {
+       if (l == null) throw new IllegalArgumentException("Il filtro di ricerca non può essere null");
 
-    List<Loan> result = new ArrayList<>();
-    
-    String searchUserId = (l.getUser() != null) ? l.getUser().getNumberId() : null;
-    String searchBookISBN = (l.getBook() != null) ? l.getBook().getISBN() : null;
+       List<Loan> result = new ArrayList<>();
 
-    for (Loan l1 : this.loan) { // loanList = tutti i prestiti caricati
-        String currentUserId = (l1.getUser() != null) ? l1.getUser().getNumberId() : null;
-        String currentISBN = (l1.getBook() != null) ? l1.getBook().getISBN() : null;
+       // --- 1. Estrazione dati dal FILTRO ---
+       // User
+       User filterUser = l.getUser();
+       String fMatricola = (filterUser != null) ? filterUser.getNumberId() : null;
+       // Se la matricola è null, proviamo a vedere se c'è un nome o cognome (dipende da come User li salva)
+       String fNome = (filterUser != null) ? filterUser.getName() : null;
+       String fCognome = (filterUser != null) ? filterUser.getSurname() : null;
+       
+       // Book
+       Book filterBook = l.getBook();
+       String fIsbn = (filterBook != null) ? filterBook.getISBN() : null;
+       String fTitolo = (filterBook != null) ? filterBook.getTitle() : null;
 
-        boolean matchUser = searchUserId == null || searchUserId.isEmpty() ||
-                            (currentUserId != null && currentUserId.contains(searchUserId));
-        boolean matchBook = searchBookISBN == null || searchBookISBN.isEmpty() ||
-                            (currentISBN != null && currentISBN.contains(searchBookISBN));
+       // --- 2. Ciclo su tutti i prestiti ---
+       for (Loan current : this.loan) {
+           boolean matchUser = true;
+           boolean matchBook = true;
+           
+           // A. LOGICA MATCH UTENTE 
+           if (filterUser != null) {
+               User cUser = current.getUser();
+               // Se cerco per Matricola
+               if (fMatricola != null && !fMatricola.isEmpty()) {
+                   if (cUser.getNumberId() == null || !cUser.getNumberId().contains(fMatricola)) {
+                       matchUser = false;
+                   }
+               } 
+               // Altrimenti, se cerco per Nome/Cognome
+               else if ((fNome != null && !fNome.isEmpty()) || (fCognome != null && !fCognome.isEmpty())) {
+                   // Uniamo la stringa di ricerca (che nel costruttore User(string) finisce in nome o cognome)
+                   String searchStr = (fNome != null) ? fNome : fCognome; 
+                   
+                   // Controlliamo se questa stringa è contenuta nel nome O nel cognome dell'utente corrente
+                   boolean foundName = (cUser.getName() != null && cUser.getName().toLowerCase().contains(searchStr.toLowerCase()));
+                   boolean foundSurname = (cUser.getSurname() != null && cUser.getSurname().toLowerCase().contains(searchStr.toLowerCase()));
+                   
+                   if (!foundName && !foundSurname) {
+                       matchUser = false;
+                   }
+               }
+           }
 
-        if (matchUser && matchBook) {
-            result.add(l1);
-        }
-    }
-    return result;
+           // B. LOGICA MATCH LIBRO
+           if (filterBook != null) {
+               Book cBook = current.getBook();
+               // Se cerco per ISBN
+               if (fIsbn != null && !fIsbn.isEmpty()) {
+                   if (cBook.getISBN() == null || !cBook.getISBN().contains(fIsbn)) {
+                       matchBook = false;
+                   }
+               } 
+               // Altrimenti, se cerco per Titolo
+               else if (fTitolo != null && !fTitolo.isEmpty()) {
+                   if (cBook.getTitle() == null || !cBook.getTitle().toLowerCase().contains(fTitolo.toLowerCase())) {
+                       matchBook = false;
+                   }
+               }
+           }
 
+           // Se entrambi corrispondono, aggiungi alla lista
+           if (matchUser && matchBook) {
+               result.add(current);
+           }
+       }
+       return result;
     }
 
 }
