@@ -16,11 +16,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  *
- * @author bruno
+ * @author elisa
  */
 public class viewUserController {
     
@@ -53,10 +59,13 @@ public class viewUserController {
         ObservableList<User> listaDati = FXCollections.observableArrayList(this.userManagemente.getList());
         
         userTableView.setItems(listaDati);
+       
     }
     
       @FXML
     public void backPage() throws IOException{
         View.Homepage();
     } 
+
+    
 }

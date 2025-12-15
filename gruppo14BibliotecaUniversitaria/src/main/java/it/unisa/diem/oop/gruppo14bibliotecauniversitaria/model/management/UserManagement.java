@@ -154,7 +154,7 @@ public class UserManagement implements Functionality<User>,Serializable{
           }
     }
     /**
-     *  @brief Metodo che permette di cercare un utente nell'elenco tramite cognome o matricola
+     *  @brief Metodo che permette di cercare un utente nell'elenco tramite cognome o matricola 
      *  @param s  Dato utilizzato dal bibliotecario per cercare l'utente 
      *  @pre s != null
      *  @post L'utente viene mostrato 
@@ -163,7 +163,7 @@ public class UserManagement implements Functionality<User>,Serializable{
     @Override
     public List <User> search(User u ){
         List<User> lista=new ArrayList<>();  //usiamo una lista dato che se la ricerca viene fatta per cognome possono esserci più utenti nell'elenco corrispondenti 
-         if (u == null) throw new IllegalArgumentException();
+         if (u == null ) throw new IllegalArgumentException();
             //esce dato che l'utente da cercare non è valido e lancia l'eccezione adeguata 
         if (u.getNumberId() != null) {  //se l'utente è stato cercato tramite matricola solo quel campo non sarà nullo grazie all'utilizzo del secondo costruttore 
             for (User us : list) {

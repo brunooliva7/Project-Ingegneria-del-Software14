@@ -3,55 +3,52 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.modifyUserController"
+            fx:controller="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.popUpController"
             style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FDE68A 0%, #F59E0B 100%);">
 
     <!-- BOTTONE INDIETRO -->
-    <Button fx:id="backButtonelencoutenti" text="Indietro"
-            style="-fx-background-color: #FF7043; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-font-size: 18;"
-            AnchorPane.topAnchor="30" AnchorPane.leftAnchor="30">
+    <Button fx:id="backButton"
+            text="← Indietro"
+            AnchorPane.leftAnchor="20"
+            AnchorPane.topAnchor="20"
+            style="-fx-background-color: #F97316; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16; -fx-background-radius: 10; -fx-padding: 8 16;">
         <effect>
-            <DropShadow color="#00000075"/>
+            <DropShadow color="#00000040" radius="8" offsetY="2"/>
         </effect>
     </Button>
 
     <!-- LAYOUT CENTRALE -->
-    <VBox alignment="CENTER" spacing="10"  maxWidth="1000" prefHeight="800" prefWidth="800"
-          AnchorPane.topAnchor="100" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
-        <children>
-            <!-- HEADER CARD -->
-            <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #f57c3c; -fx-background-radius: 16 16 0 0; -fx-padding: 10 30 0 30;" maxWidth="1000" prefWidth="1000">
-                <children>
-                    <Label style="-fx-font-size: 24; -fx-text-fill: white; -fx-font-weight: bold;" text="📚 Biblioteca UNISA"/>
-                    <Label style="-fx-font-size: 14; -fx-text-fill: #ffe0b2;" text="Prestiti relativi all'utente"/>
-                    <Label fx:id="matricolapopup" style="-fx-font-size: 14; -fx-text-fill: #ffe0b2;" text=""/>
-                </children>
-            </VBox>
+    <VBox alignment="TOP_CENTER" spacing="10" AnchorPane.topAnchor="100" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
 
-            <!-- TABLEVIEW WRAPPED IN SCROLLPANE -->
-            <ScrollPane fx:id="scrollPane" AnchorPane.topAnchor="120" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="150" maxWidth="1000" prefWidth="1000">
-                <content>
-                    <!-- TABLEVIEW FOR USERS -->
-                    <TableView fx:id="userTableView" maxWidth="1000" prefWidth="1000" style="-fx-background-color: #ffff99ff;">
-                        <columns>
-                            <TableColumn fx:id="titoloColumn" text="Titolo del libro" prefWidth="150"/>
-                            <TableColumn fx:id="autoriColumn" text="Autori del libro" prefWidth="150"/>
-                            <TableColumn fx:id="annopubblicazioneColumn" text="Anno di pubblicazione" prefWidth="150"/>
-                            <TableColumn fx:id="ISBNColumn" text="ISBN Libro" prefWidth="150"/>
-                            <TableColumn fx:id="copiedisponibiliColumn" text="Copie disponibili" prefWidth="150"/>
-                            <TableColumn fx:id="datarestituzioneColumn" text="Data di restituzione" prefWidth="150"/>
-                        </columns>
-                    </TableView>
-                </content>
-            </ScrollPane>
+        <!-- HEADER CARD -->
+        <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #f57c3c; -fx-background-radius: 16 16 0 0; -fx-padding: 10 30 10 30;" maxWidth="1000">
+            <children>
+                <Label style="-fx-font-size: 24; -fx-text-fill: white; -fx-font-weight: bold;" text="📚 Biblioteca UNISA"/>
+                <Label style="-fx-font-size: 14; -fx-text-fill: #ffe0b2;" text="Prestiti relativi all'utente"/>
+                <Label fx:id="matricolapopup" style="-fx-font-size: 14; -fx-text-fill: #ffe0b2;" text=""/>
+            </children>
+        </VBox>
 
-            <!-- Footer -->
-            <Label style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno"/>
-        </children>
+        <!-- CARD BIANCA PER TABLEVIEW -->
+        <VBox alignment="CENTER" spacing="10" style="-fx-background-color: white; -fx-background-radius: 16; -fx-padding: 15; -fx-border-radius: 16; -fx-border-color: #E5E7EB; -fx-border-width: 1;" maxWidth="1000" VBox.vgrow="ALWAYS">
+            <children>
+                <TableView fx:id="userTableViewricerca" style="-fx-font-size: 13;" prefHeight="400" prefWidth="1200">
+                    <columns>
+                        <TableColumn fx:id="titoloColumn" text="Titolo del libro"/>
+                        <TableColumn fx:id="autoriColumn" text="Autori del libro"/>
+                        <TableColumn fx:id="annopubblicazioneColumn" text="Anno di pubblicazione"/>
+                        <TableColumn fx:id="ISBNColumn" text="ISBN Libro"/>
+                        <TableColumn fx:id="copiedisponibiliColumn" text="Copie disponibili"/>
+                        <TableColumn fx:id="datarestituzioneColumn" text="Data di restituzione"/>
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+
+        <!-- FOOTER -->
+        <Label style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno"/>
     </VBox>
-
 </AnchorPane>

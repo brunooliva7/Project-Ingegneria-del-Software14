@@ -7,37 +7,100 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.collections.ObservableList?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 
 <AnchorPane prefHeight="393.0" prefWidth="450.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #FDE68A 0%, #F59E0B 100%);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control.searchUserController">
 
- 
-
-    <!-- LAYOUT CENTRALE -->
-    <VBox alignment="TOP_CENTER" maxHeight="800" maxWidth="800" prefHeight="500" prefWidth="450" spacing="20" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="200">
-
-        <children>
-            <!-- Barra di ricerca  -->
-            <HBox alignment="CENTER" spacing="10" />
-        </children>
-
-    </VBox>
-        <TextField fx:id="searchField" layoutX="27.0" layoutY="49.0" maxWidth="500" prefHeight="35.0" prefWidth="345.0" promptText="Cerca studente per cognome o matricola..." style="-fx-background-radius: 8;                                        -fx-border-radius: 8;                                        -fx-border-color: #FF7043;                                        -fx-border-width: 1;                                        -fx-padding: 5;" />
-        <Button fx:id="searchButton" layoutX="398.0" layoutY="49.0" maxWidth="700" onAction="#search" prefHeight="35.0" prefWidth="28.0" style="-fx-background-color: #FF7043;                                     -fx-text-fill: white;                                     -fx-font-weight: bold;                                     -fx-background-radius: 8;" text="🔍">
+    <children>
+   
+       <!-- BOTTONE INDIETRO posizionato in alto a sinistra con margine -->
+        <Button fx:id="backButton"
+                text="← Indietro"
+                AnchorPane.leftAnchor="20"
+                AnchorPane.topAnchor="20"
+                style="
+                    -fx-background-color: #F97316;
+                    -fx-text-fill: white;
+                    -fx-font-weight: bold;
+                    -fx-font-size: 16;
+                    -fx-background-radius: 10;
+                    -fx-padding: 8 16;">
             <effect>
-                <DropShadow color="#00000033" radius="3" />
+                <DropShadow color="#00000040" radius="8" offsetY="2"/>
             </effect>
         </Button>
 
-      <!-- Footer -->
-      <Label fx:id="labelMessage" layoutX="140.0" layoutY="97.0" style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
-   <AnchorPane layoutX="2.0" layoutY="138.0" prefHeight="275.0" prefWidth="450.0">
-      <children>
-         <Label layoutX="144.0" layoutY="14.0" prefHeight="35.0" prefWidth="161.0" style="-fx-font-size: 24; -fx-text-fill: white; -fx-font-weight: bold;" text="DATI UTENTE" />
-         <TextField fx:id="nameField" layoutX="135.0" layoutY="68.0" prefHeight="29.0" prefWidth="179.0" promptText="Nome" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
-         <TextField fx:id="surnameField" layoutX="135.0" layoutY="117.0" prefHeight="29.0" prefWidth="179.0" promptText="Cognome" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
-         <TextField fx:id="emailField" layoutX="135.0" layoutY="168.0" prefHeight="29.0" prefWidth="179.0" promptText="Email" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
-         <TextField fx:id="numberidField" layoutX="135.0" layoutY="215.0" prefHeight="29.0" prefWidth="179.0" promptText="Matricola" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #FF7043; -fx-border-width: 1; -fx-padding: 5;" />
-      </children>
-   </AnchorPane>
+       <!-- LAYOUT CENTRALE -->
+       <VBox alignment="TOP_CENTER" spacing="20" 
+       maxHeight="500" maxWidth="500" prefHeight="500" prefWidth="450"  
+      AnchorPane.leftAnchor="200" AnchorPane.rightAnchor="200" AnchorPane.topAnchor="100" AnchorPane.bottomAnchor="20" 
+      style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 25;">
+
+            <effect>
+                <DropShadow color="#00000035" radius="20" offsetY="5"/>
+            </effect>
+   
+           <children>
+               <!-- TITOLO -->
+                <Label text="Ricerca studente"
+                       style="
+                        -fx-font-size: 22;
+                        -fx-font-weight: bold;
+                        -fx-text-fill: #374151;"/>
+               <!-- Barra di ricerca  -->
+               <HBox alignment="CENTER" spacing="10">
+                   <children>
+                       <TextField fx:id="searchField" maxWidth="500" prefHeight="50" prefWidth="300" promptText="Cerca studente..." style="-fx-background-radius: 8;                                        -fx-border-radius: 8;                                        -fx-border-color: #FF7043;                                        -fx-border-width: 1;                                        -fx-padding: 5;" HBox.hgrow="ALWAYS" />
+                       <Button fx:id="searchButtonu" maxWidth="700" prefHeight="50" style="-fx-background-color: #FF7043;                                     -fx-text-fill: white;                                     -fx-font-weight: bold;     -fx-background-radius: 10;" text="🔍" HBox.hgrow="NEVER">
+                           <effect>
+                               <DropShadow color="#00000030" radius="6" />
+                           </effect>
+                       </Button>
+                          
+                       
+                   </children>
+               </HBox>
+               
+               <!-- Footer -->
+               <Label style="-fx-font-size: 12; -fx-text-fill: #777;" text="Università degli Studi di Salerno" />
+   
+   
+                      <HBox alignment="CENTER" prefWidth="450" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="400" />
+                    <Label fx:id="labelMessage"
+                            text=""
+                            style="-fx-font-size: 14; -fx-font-weight: bold;" />
+         
+           <!-- TABLEVIEW FOR USERS -->
+            <TableView fx:id="userTableViewricerca" 
+                       AnchorPane.topAnchor="60" 
+                       AnchorPane.leftAnchor="10" 
+                       AnchorPane.rightAnchor="10" 
+                       AnchorPane.bottomAnchor="150" 
+                       maxWidth="1000"
+                       maxHeight="1000"
+                       style="
+                            -fx-background-radius: 10;
+                            -fx-border-radius: 10;
+                            -fx-border-color: #E5E7EB;
+                            -fx-border-width: 1;
+                            -fx-font-size: 13;">
+                       
+                <columns>
+                   <TableColumn fx:id="nomeColumn" text="Nome" prefWidth="150"/>
+                    <TableColumn fx:id="cognomeColumn" text="Cognome" prefWidth="150"/>
+                    <TableColumn fx:id="matricolaColumn" text="Matricola" prefWidth="150"/>
+                    <TableColumn fx:id="emailColumn" text="Email" prefWidth="150"/>
+                     <TableColumn fx:id="mapColumn" text="Prestiti" prefWidth="150"/>
+                </columns>
+            </TableView>
+           </children>
+   
+       </VBox>
+   </children>
 
 </AnchorPane>
+
+    

@@ -13,6 +13,7 @@ import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserMa
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.data.User;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.view.View;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -85,9 +86,11 @@ public class modifyUserController {
      private User risultato = null;
      
      List <User> list;
+     private ObservableList<User> observableList;
      
      @FXML
      public void initialize(){
+         this.userManagement = new UserManagement();
          
          modifyPane.setVisible(false);
          modifyPane.setManaged(false);
@@ -99,11 +102,13 @@ public class modifyUserController {
          nomeColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         cognomeColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         matricolaColumn.setCellValueFactory(new PropertyValueFactory<>("numberId"));
-        
+        // ObservableList persistente
+        observableList = FXCollections.observableArrayList();
+        userTableView.setItems(observableList);
          
         searchButton.disableProperty().bind(searchField.textProperty().isEmpty());  
          
-         list = new LinkedList<>();
+         list = new ArrayList<>();
          
         
         userTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue,newValue) -> {
@@ -118,21 +123,22 @@ public class modifyUserController {
      @FXML
      public void search() {
        
-    this.userManagement = new UserManagement(); 
+    
     String input = searchField.getText();
     User userSonda = new User(input);
     this.list = userManagement.search(userSonda);
 
-    if (risultato != null) {
+    if (!list.isEmpty()) {
        
         nomeColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         cognomeColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         matricolaColumn.setCellValueFactory(new PropertyValueFactory<>("numberId"));
         
-        ObservableList<User> listaDati = FXCollections.observableArrayList(this.list);
+        observableList= FXCollections.observableArrayList(this.list);
         
-         userTableView.setItems(listaDati);
+         userTableView.setItems(observableList);
     } else {
+        observableList.clear();
         labelMessageSearch.setText("Utente non trovato.");
         labelMessageSearch.setStyle("-fx-text-fill: red;");
     }
@@ -161,6 +167,13 @@ public class modifyUserController {
             if(userManagement.update(risultato, newUser)){
                 labelMessageModify.setText("Modifica Riuscita");
                 labelMessageModify.setStyle("-fx-text-fill: green;");
+                  // Aggiorno la TableView in automatico
+            int index = observableList.indexOf(risultato);
+            if (index >= 0) {
+                observableList.set(index, newUser);
+            }
+
+            risultato = newUser; // aggiorno riferimento
             }
             
             else{ labelMessageModify.setText("Modifica non riuscita");
