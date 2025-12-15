@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.management.UserManagement;
+import javafx.scene.control.TableCell;
 /**
  *
  * @author bruno
@@ -83,14 +84,16 @@ public class deleteLoanController {
     
     public void setModel(Model model) {
         this.model = model;
+        
+        this.bookManagement = model.getBookManagement();
+        this.loanManagement = model.getLoanManagement();
     }
     
     
     @FXML
     private void initialize(){
         
-        this.bookManagement = model.getBookManagement();
-        this.loanManagement = model.getLoanManagement();
+        
         
         confirmButton.disableProperty().bind(bookSearchField.textProperty().isEmpty());
         bookSearchField.disableProperty().bind(userSearchField.textProperty().isEmpty());
@@ -134,6 +137,27 @@ public class deleteLoanController {
            }
         }
     });
+        duedateColumn.setCellFactory(column -> new TableCell<Loan, LocalDate>() {
+                @Override
+                protected void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item == null || empty) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        // Mostra la data
+                        setText(item.toString());
+
+                        // Controlla se è scaduta
+                        if (item.isBefore(LocalDate.now())) {
+                            setStyle("-fx-background-color: #ffcccc; -fx-text-fill: red; -fx-font-weight: bold;");
+                        } else {
+                            setStyle("");
+                        }
+                    }
+                }
+            });
         
         loanTableView.getSelectionModel().clearSelection();
     }

@@ -58,17 +58,18 @@ public class addLoanController {
     
     public void setModel(Model model) {
         this.model = model;
-    }
-    
-    @FXML
-    private void initialize(){
         
         this.userManagement = model.getUserManagement();
         this.bookManagement = model.getBookManagement();
         this.loanManagement = model.getLoanManagement();
         
+        if(userManagement != null && bookManagement!=null){
         userComboBox.setItems(FXCollections.observableArrayList(userManagement.getList()));
-        bookComboBox.setItems(FXCollections.observableArrayList(bookManagement.getCatalogue()));
+        bookComboBox.setItems(FXCollections.observableArrayList(bookManagement.getCatalogue()));}
+    }
+    
+    @FXML
+    private void initialize(){
         
         registerButton.disableProperty().bind(userComboBox.valueProperty().isNull().or(bookComboBox.valueProperty().isNull().or(dueDatePicker.valueProperty().isNull())));
     }
@@ -87,6 +88,7 @@ public class addLoanController {
                     alert.setContentText("La data di restituzione inserita non è corretta");
 
                     alert.showAndWait(); 
+                    return;
     }
 
     if (user.getBooksOnloan().size() >= 3) {
@@ -96,6 +98,7 @@ public class addLoanController {
             alert.setContentText("Hai raggiunto il numero di prestiti massimo");
 
             alert.showAndWait();
+            return;
     }
 
     if (book.getAvailableCopies() <= 0) {
@@ -105,12 +108,15 @@ public class addLoanController {
             alert.setContentText("Hai raggiunto il numero di prestiti massimo");
 
             alert.showAndWait();
+            return;
     }
 
     loan = new Loan(book, user, duedate);
 
     if (loanManagement.add(loan)) {
         book.setAvailableCopies(book.getAvailableCopies() - 1);
+        
+        bookManagement.update(book, book);
 
         labelMessage.setText("Prestito aggiunto con successo");
         labelMessage.setStyle("-fx-text-fill: green;");
