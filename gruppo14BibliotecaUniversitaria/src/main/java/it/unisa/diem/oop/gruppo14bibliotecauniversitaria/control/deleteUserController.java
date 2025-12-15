@@ -3,6 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/**
+ * @file deleteUserController.java
+ * @brief Controller per la gestione della cancellazione degli utenti.
+ * 
+ * La classe `deleteUserController` gestisce l'interfaccia utente per la ricerca
+ * e la cancellazione degli utenti. Consente di cercare un utente per nome, cognome 
+ * o matricola, visualizzando i risultati in una `TableView`. Se l'utente è selezionato, 
+ * il bottone di eliminazione viene abilitato per procedere con la cancellazione.
+ * 
+ * @author elisa
+ * @date 04-12-2025
+ * @version 1.0
+ */
 package it.unisa.diem.oop.gruppo14bibliotecauniversitaria.control;
 
 import it.unisa.diem.oop.gruppo14bibliotecauniversitaria.model.Model;
@@ -21,52 +34,97 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 /**
- *
- * @author elisa
+ * @class deleteUserController
+ * @brief Gestisce la ricerca e la cancellazione degli utenti.
+ * 
+ * La classe `deleteUserController` si occupa della gestione dell'interfaccia 
+ * utente per la ricerca e l'eliminazione di un utente dalla lista degli utenti.
+ * Consente al bibliotecario di cercare un utente in base al nome, cognome o 
+ * matricola e di eliminarlo dal sistema.
  */
 public class deleteUserController {
-    
-     @FXML
+
+    /**
+     * Campo di testo per la ricerca dell'utente.
+     */
+    @FXML
     private TextField searchField;
-    
-     @FXML
+
+    /**
+     * Pulsante per avviare la ricerca dell'utente.
+     */
+    @FXML
     private Button searchButtonu;
-     
-     @FXML
-     private Button deleteuserButton;
-     
+
+    /**
+     * Pulsante per eliminare l'utente selezionato.
+     */
+    @FXML
+    private Button deleteuserButton;
+
+    /**
+     * Pulsante per tornare alla pagina precedente.
+     */
     @FXML
     private Button backButton;
-    
+
+    /**
+     * Tabella che visualizza i risultati della ricerca degli utenti.
+     */
     @FXML
     private TableView<User> userTableViewricerca;
 
+    /**
+     * Colonna per visualizzare il nome dell'utente.
+     */
     @FXML
     private TableColumn<User, String> nomeColumn;
 
+    /**
+     * Colonna per visualizzare il cognome dell'utente.
+     */
     @FXML
     private TableColumn<User, String> cognomeColumn;
 
+    /**
+     * Colonna per visualizzare la matricola dell'utente.
+     */
     @FXML
     private TableColumn<User, String> matricolaColumn;
+
+    /**
+     * Etichetta per visualizzare messaggi di errore o conferma.
+     */
     @FXML
     private Label labelMessage;
 
+    /**
+     * Riferimento al modello dell'applicazione che gestisce i dati.
+     */
     private Model model;
-      
-    
+
+    /**
+     * Imposta il modello dell'applicazione.
+     * 
+     * @param model Il modello dell'applicazione da impostare.
+     */
     public void setModel(Model model) {
-    this.model = model;
+        this.model = model;
     }
-   
-     @FXML
-     public void initialize(){
-         searchButtonu.disableProperty().bind(searchField.textProperty().isEmpty());
-         
-         deleteuserButton.setDisable(true);
-         
-         
-         // Configurazione colonne
+
+    /**
+     * Metodo chiamato all'inizializzazione del controller.
+     * 
+     * Configura la visibilità dei pulsanti in base allo stato della ricerca
+     * e abilita il pulsante di eliminazione solo quando un utente è selezionato.
+     * Configura anche le colonne della `TableView` per mostrare le informazioni dell'utente.
+     */
+    @FXML
+    public void initialize() {
+        searchButtonu.disableProperty().bind(searchField.textProperty().isEmpty());
+        deleteuserButton.setDisable(true);
+
+        // Configurazione delle colonne della TableView
         nomeColumn.setCellValueFactory(data -> 
             new javafx.beans.property.SimpleStringProperty(data.getValue().getName())
         );
@@ -77,33 +135,42 @@ public class deleteUserController {
             new javafx.beans.property.SimpleStringProperty(data.getValue().getNumberId())
         );
 
-        // Abilita bottone di elimina solo se selezioni una riga
-        userTableViewricerca.getSelectionModel() .selectedItemProperty().addListener((obs, oldSel, newSel) -> {
-                    deleteuserButton.setDisable(newSel == null);
+        // Abilita il pulsante di eliminazione solo se un utente è selezionato
+        userTableViewricerca.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+            deleteuserButton.setDisable(newSel == null);
             if (newSel != null) {
-                        labelMessage.setText("Utente selezionato");
-                        labelMessage.setStyle("-fx-text-fill: #374151;");
-                    }        
-                });
-     }
-     
-     @FXML
-     public void search(){
-          
+                labelMessage.setText("Utente selezionato");
+                labelMessage.setStyle("-fx-text-fill: #374151;");
+            }
+        });
+    }
+
+    /**
+     * Metodo chiamato quando il bibliotecario clicca sul pulsante di ricerca.
+     * 
+     * Esegue la ricerca dell'utente in base al valore inserito nel campo di ricerca.
+     * Se non vengono trovati risultati, visualizza un messaggio di errore.
+     * 
+     * @post I risultati della ricerca vengono visualizzati nella `TableView`.
+     */
+    @FXML
+    public void search() {
         labelMessage.setText("");
-         
-           //assegno a input la stringa che usa il bibliotecario per cercare l'user 
-         String input = searchField.getText();
-        
-         User userSonda = new User(input); //usando il secondo costruttore creo un nuovo utente fittizio che mi serve solo da passare al metodo search()
-        
+
+        // Ottieni l'input di ricerca
+        String input = searchField.getText();
+
+        // Crea un oggetto User fittizio per la ricerca
+        User userSonda = new User(input);
+
+        // Esegui la ricerca
         List<User> risultati = model.getUserManagement().search(userSonda);
-        //l'observable list mi serve per "aggiornare" l'interfaccia in modo live rispetto ai risultati ottenuti dalla search()
+        
+        // Aggiorna la TableView con i risultati
         ObservableList<User> datiTabella = FXCollections.observableArrayList(risultati);
-        //aggiorno la tableView con i dati contenuti nella ObservableList 
         userTableViewricerca.setItems(datiTabella);
 
-        // Se non trovo nulla, svuoto selezione,rimango disabilitato il bottone di elimina e faccio comparire una label che notifica l'assenza di studenti
+        // Se non vengono trovati utenti, mostra un messaggio di errore
         if (risultati.isEmpty()) {
             deleteuserButton.setDisable(true);
             userTableViewricerca.getItems().clear();
@@ -111,11 +178,18 @@ public class deleteUserController {
             labelMessage.setStyle("-fx-text-fill: red;");
             return;
         }
-       
     }
-     
-     @FXML
-     public void delete(){
+
+    /**
+     * Metodo chiamato quando il bibliotecario clicca sul pulsante di eliminazione.
+     * 
+     * Elimina l'utente selezionato dalla `TableView` e aggiorna il modello.
+     * Se l'utente non è selezionato o c'è un errore, mostra un messaggio di errore.
+     * 
+     * @post L'utente viene eliminato dal sistema e dalla `TableView`.
+     */
+    @FXML
+    public void delete() {
         User selectedUser = userTableViewricerca.getSelectionModel().getSelectedItem();
 
         if (selectedUser == null) {
@@ -123,29 +197,33 @@ public class deleteUserController {
             labelMessage.setStyle("-fx-text-fill: red;");
             return;
         }
-            // Pulizia eventuale degli spazi
-        selectedUser.setNumberId(selectedUser.getNumberId().trim());
-        
 
+        // Pulizia eventuale degli spazi
+        selectedUser.setNumberId(selectedUser.getNumberId().trim());
+
+        // Rimuovi l'utente dal modello
         boolean removed = model.getUserManagement().remove(selectedUser);
 
         if (removed) {
+            // Rimuovi l'utente dalla TableView e disabilita il pulsante di eliminazione
             userTableViewricerca.getItems().remove(selectedUser);
             deleteuserButton.setDisable(true);
-            labelMessage.setText("Utente eliminato Correttamente");
+            labelMessage.setText("Utente eliminato correttamente");
             labelMessage.setStyle("-fx-text-fill: green;");
-        }
-        else {
-              labelMessage.setText("Errore durante l'eliminazione");
+        } else {
+            labelMessage.setText("Errore durante l'eliminazione");
             labelMessage.setStyle("-fx-text-fill: red;");
         }
-         
-        
-     }
-     
-     @FXML
-    public void backPage() throws IOException{
+    }
+
+    /**
+     * Metodo chiamato quando il bibliotecario clicca sul pulsante "Indietro".
+     * Torna alla pagina della homepage.
+     * 
+     * @throws IOException Se c'è un errore nel caricamento della homepage.
+     */
+    @FXML
+    public void backPage() throws IOException {
         View.Homepage();
-    } 
-     
+    }
 }
