@@ -162,6 +162,7 @@ public class searchUserController {
         // Inizializza la lista osservabile
         userList = FXCollections.observableArrayList();
         userTableViewricerca.setItems(userList);
+       
 
         // Aggiungo un'azione al pulsante di ricerca
         searchButtonu.setOnAction(e -> search());
@@ -197,6 +198,7 @@ public class searchUserController {
         // Converte i risultati in una lista osservabile per la TableView
         ObservableList<User> datiTabella = FXCollections.observableArrayList(risultati);
         userTableViewricerca.setItems(datiTabella);
+        userTableViewricerca.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         // Se non ci sono risultati, mostra un messaggio di errore
         if (risultati.isEmpty()) {

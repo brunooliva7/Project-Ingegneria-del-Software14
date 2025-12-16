@@ -169,6 +169,7 @@ public class deleteUserController {
         // Aggiorna la TableView con i risultati
         ObservableList<User> datiTabella = FXCollections.observableArrayList(risultati);
         userTableViewricerca.setItems(datiTabella);
+        userTableViewricerca.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         // Se non vengono trovati utenti, mostra un messaggio di errore
         if (risultati.isEmpty()) {

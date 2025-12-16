@@ -236,6 +236,7 @@ public class modifyUserController {
         
             observableList = FXCollections.observableArrayList(this.list);
             userTableView.setItems(observableList);
+            userTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         } else {
             observableList.clear();
             labelMessageSearch.setText("Utente non trovato.");

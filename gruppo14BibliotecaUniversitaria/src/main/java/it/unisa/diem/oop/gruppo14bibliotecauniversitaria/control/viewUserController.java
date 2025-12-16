@@ -111,6 +111,7 @@ public class viewUserController {
         
         // Imposta la lista nella TableView
         userTableView.setItems(listaDati);
+        userTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
     
     /**
