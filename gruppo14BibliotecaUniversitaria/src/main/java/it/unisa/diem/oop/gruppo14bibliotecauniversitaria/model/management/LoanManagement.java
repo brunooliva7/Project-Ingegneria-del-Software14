@@ -101,6 +101,7 @@ public class LoanManagement implements Functionality<Loan>,Serializable{
         if( l == null ) throw new IllegalArgumentException();
         
         if(loan.add(l)) {
+            l.getUser().findLoans(l.getBook(), l.getDueDate());
             FileManager.writeToTextFileObject(loan, this.loanDatabase);
             return true;
         }

@@ -149,7 +149,7 @@ public class addLoanController {
         if (loanManagement.add(loan)) {
             book.setAvailableCopies(book.getAvailableCopies() - 1);
             
-            user.findLoans(book, duedate);
+            
             
             // Aggiornamento persistente delle copie del libro
             bookManagement.update(book, book);
